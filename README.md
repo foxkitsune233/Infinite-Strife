@@ -4,6 +4,14 @@ Android 单人远征与卡牌构筑游戏。
 
 仓库：https://github.com/foxkitsune233/Infinite-Strife
 
+## 项目方向
+
+当前 Android 版是可提交的课程设计版本，后续仍会继续修复问题、平衡数值和补充内容。
+
+项目将并行推进一个 Godot 原创设定版本：先完成 Windows 与 Android 原生运行的战斗闭环，再逐步替代 Android 专属界面与运行时。Godot 版不会直接搬运第三方角色、美术或名称；它以原创角色、世界观、卡图和音画资产为前提。完整范围、阶段门槛和迁移条件见 [Godot 过渡路线图](docs/ROADMAP.md)。
+
+原生 iOS 包不在当前承诺范围内。未来只有在具备合规 macOS/Xcode 环境与真实 iPhone 验收设备后才启动。网页导出属于 Godot 版完成后的可选分发渠道，不是迁移前置条件。
+
 ## 开发
 
 - 工程模块：`app`（Android）与 `shared`（共享规则）。
