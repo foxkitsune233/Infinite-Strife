@@ -18,6 +18,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DouQiuQiu"
+rootProject.name = "Infinite-Strife"
 include(":app")
 include(":shared")

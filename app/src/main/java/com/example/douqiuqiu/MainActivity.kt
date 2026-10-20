@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val loaded = repo.load()
         val state = loaded.state
         val run = state.progress.run
-        val shell = GameUi.screen(this, "远征营地", "电子斗蛐蛐  ·  单人远征", listOf(
+        val shell = GameUi.screen(this, "远征营地", "Infinite Strife  ·  单人远征", listOf(
             GameUi.Navigation("远征") { open(JourneyActivity::class.java) },
             GameUi.Navigation("整备") { open(InventoryActivity::class.java) },
             GameUi.Navigation("营地", true) { }

@@ -106,7 +106,7 @@ class SettingsActivity : AppCompatActivity() {
         body.addView(GameUi.button(this, "查看全部物品图标") { startActivity(android.content.Intent(this, IconGalleryActivity::class.java)) })
         body.addView(GameUi.button(this, "制作与素材来源") {
             AlertDialog.Builder(this).setTitle("制作与素材来源")
-                .setMessage("斗蛐蛐 · Android单人远征课设\n\n角色、卡面、彩色物品和场景：项目内AI辅助美术，保留提示词与源图。\n状态 / Buff / DOT：Game-icons.net，Lorc和Delapouite，CC BY 3.0；已转换格式、移除底色并着色。逐图来源见开源图标许可。\n界面边框：项目内矢量绘制。\n参考：Dota 2英雄、装备与电子斗蛐蛐玩法。\n\n音效和胜负短乐：Kenney — Interface Sounds、Music Jingles（CC0 1.0）。\n背景音乐：Once Upon a Time (loop)，TAD，CC0 1.0；WAV转OGG，使用原循环长度。\nhttps://opengameart.org/content/once-upon-a-time-loop\nhttps://creativecommons.org/publicdomain/zero/1.0/\nhttps://kenney.nl/assets/interface-sounds\nhttps://kenney.nl/assets/music-jingles")
+                .setMessage("Infinite Strife · Android单人远征课设\n\n角色、卡面、彩色物品和场景：项目内AI辅助美术，保留提示词与源图。\n状态 / Buff / DOT：Game-icons.net，Lorc和Delapouite，CC BY 3.0；已转换格式、移除底色并着色。逐图来源见开源图标许可。\n界面边框：项目内矢量绘制。\n参考：Dota 2英雄、装备与电子斗蛐蛐玩法。\n\n音效和胜负短乐：Kenney — Interface Sounds、Music Jingles（CC0 1.0）。\n背景音乐：Once Upon a Time (loop)，TAD，CC0 1.0；WAV转OGG，使用原循环长度。\nhttps://opengameart.org/content/once-upon-a-time-loop\nhttps://creativecommons.org/publicdomain/zero/1.0/\nhttps://kenney.nl/assets/interface-sounds\nhttps://kenney.nl/assets/music-jingles")
                 .setPositiveButton("关闭", null).show()
         })
         body.addView(GameUi.button(this, "开源图标作者与许可") {
