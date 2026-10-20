@@ -1,0 +1,355 @@
+{
+  "definitions": [
+    {
+      "id": "A1",
+      "name": "迅击训练",
+      "kind": "CARD",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 100,
+      "shopStock": 3,
+      "shopShelf": "ROTATING"
+    },
+    {
+      "id": "A2",
+      "name": "精准打击",
+      "kind": "CARD",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 100,
+      "shopStock": 3,
+      "shopShelf": "ROTATING"
+    },
+    {
+      "id": "S1",
+      "name": "备战护盾",
+      "kind": "CARD",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 100,
+      "shopStock": 3,
+      "shopShelf": "ROTATING"
+    },
+    {
+      "id": "R1",
+      "name": "生机",
+      "kind": "CARD",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 100,
+      "shopStock": 3,
+      "shopShelf": "ROTATING"
+    },
+    {
+      "id": "iron_branch",
+      "name": "铁树枝干",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 20,
+      "shopStock": 3,
+      "stats": {
+        "strength": 1,
+        "agility": 1,
+        "intelligence": 1
+      }
+    },
+    {
+      "id": "gauntlets",
+      "name": "力量手套",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 50,
+      "shopStock": 3,
+      "stats": {
+        "strength": 3
+      }
+    },
+    {
+      "id": "slippers",
+      "name": "敏捷便鞋",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 50,
+      "shopStock": 3,
+      "stats": {
+        "agility": 3
+      }
+    },
+    {
+      "id": "mantle",
+      "name": "智力斗篷",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 50,
+      "shopStock": 3,
+      "stats": {
+        "intelligence": 3
+      }
+    },
+    {
+      "id": "circlet",
+      "name": "贵族圆环",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 80,
+      "shopStock": 3,
+      "stats": {
+        "strength": 2,
+        "agility": 2,
+        "intelligence": 2
+      }
+    },
+    {
+      "id": "broadsword",
+      "name": "阔剑",
+      "kind": "EQUIPMENT",
+      "width": 2,
+      "height": 1,
+      "quality": "白",
+      "price": 180,
+      "shopStock": 3,
+      "stats": {
+        "attack": 15
+      }
+    },
+    {
+      "id": "bracer",
+      "name": "护腕",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 180,
+      "shopStock": 1,
+      "stats": {
+        "strength": 5,
+        "agility": 2,
+        "intelligence": 2,
+        "health": 50,
+        "healthRegen": 0.75
+      },
+      "shopShelf": "ROTATING"
+    },
+    {
+      "id": "wraith_band",
+      "name": "怨灵系带",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 180,
+      "shopStock": 1,
+      "stats": {
+        "strength": 2,
+        "agility": 5,
+        "intelligence": 2,
+        "armor": 1.75,
+        "attackSpeed": 6
+      },
+      "shopShelf": "ROTATING"
+    },
+    {
+      "id": "null_talisman",
+      "name": "空灵挂件",
+      "kind": "EQUIPMENT",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 180,
+      "shopStock": 1,
+      "stats": {
+        "strength": 2,
+        "agility": 2,
+        "intelligence": 5,
+        "manaPercent": 3,
+        "manaRegen": 1
+      },
+      "shopShelf": "ROTATING"
+    },
+    {
+      "id": "recipe_bracer",
+      "name": "护腕卷轴",
+      "kind": "SCROLL",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 50,
+      "shopStock": 1
+    },
+    {
+      "id": "recipe_wraith_band",
+      "name": "怨灵系带卷轴",
+      "kind": "SCROLL",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 50,
+      "shopStock": 1
+    },
+    {
+      "id": "recipe_null_talisman",
+      "name": "空灵挂件卷轴",
+      "kind": "SCROLL",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 50,
+      "shopStock": 1
+    },
+    {
+      "id": "salve",
+      "name": "治疗药膏",
+      "kind": "CONSUMABLE",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 30,
+      "shopStock": 3,
+      "maxStack": 3
+    },
+    {
+      "id": "tango",
+      "name": "树之祭祀",
+      "kind": "CONSUMABLE",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 15,
+      "shopStock": 3,
+      "maxStack": 3
+    },
+    {
+      "id": "faerie_fire",
+      "name": "仙灵之火",
+      "kind": "CONSUMABLE",
+      "width": 1,
+      "height": 1,
+      "quality": "白",
+      "price": 35,
+      "shopStock": 3,
+      "combatUsable": true,
+      "stats": {
+        "attack": 2
+      }
+    },
+    {
+      "id": "cheese",
+      "name": "奶酪",
+      "kind": "CONSUMABLE",
+      "width": 1,
+      "height": 1,
+      "quality": "金",
+      "price": 250,
+      "combatUsable": true,
+      "shopShelf": "RARE",
+      "minimumShopClears": 3,
+      "shopStock": 1
+    },
+    {
+      "id": "essence",
+      "name": "残存精华",
+      "kind": "MATERIAL",
+      "width": 1,
+      "height": 1,
+      "quality": "蓝",
+      "price": 60
+    },
+    {
+      "id": "backpack_fabric",
+      "name": "背包织件",
+      "kind": "MATERIAL",
+      "width": 1,
+      "height": 2,
+      "quality": "蓝",
+      "price": 80,
+      "boundOnAcquire": true
+    },
+    {
+      "id": "skill_shard",
+      "name": "技能刻片",
+      "kind": "MATERIAL",
+      "width": 1,
+      "height": 1,
+      "quality": "紫",
+      "price": 120,
+      "minimumDropClears": 1,
+      "boundOnAcquire": true
+    },
+    {
+      "id": "safe_lock",
+      "name": "安全箱锁芯",
+      "kind": "MATERIAL",
+      "width": 3,
+      "height": 2,
+      "quality": "紫",
+      "price": 200,
+      "boundOnAcquire": true
+    },
+    {
+      "id": "safe_frame",
+      "name": "高级安全箱框架",
+      "kind": "MATERIAL",
+      "width": 3,
+      "height": 3,
+      "quality": "金",
+      "price": 300,
+      "minimumDropClears": 3,
+      "boundOnAcquire": true
+    }
+  ],
+  "recipes": [
+    {
+      "id": "bracer",
+      "outputId": "bracer",
+      "ingredients": {
+        "gauntlets": 1,
+        "circlet": 1,
+        "recipe_bracer": 1
+      }
+    },
+    {
+      "id": "wraith_band",
+      "outputId": "wraith_band",
+      "ingredients": {
+        "slippers": 1,
+        "circlet": 1,
+        "recipe_wraith_band": 1
+      }
+    },
+    {
+      "id": "null_talisman",
+      "outputId": "null_talisman",
+      "ingredients": {
+        "mantle": 1,
+        "circlet": 1,
+        "recipe_null_talisman": 1
+      }
+    }
+  ],
+  "initialGold": 600,
+  "starterItems": [
+    "A1",
+    "A2",
+    "S1",
+    "R1",
+    "iron_branch",
+    "iron_branch",
+    "gauntlets",
+    "slippers",
+    "mantle"
+  ]
+}

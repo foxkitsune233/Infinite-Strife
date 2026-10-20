@@ -1,0 +1,185 @@
+{
+  "tickMs": 100,
+  "maxTicks": 900,
+  "armorK": 0.06,
+  "damageVariance": 0.1,
+  "baseCrit": 5,
+  "defaultCritDmg": 200,
+  "shieldPerStack": 60,
+  "enemyScale": {
+    "hp": 0.8,
+    "attack": 0.75,
+    "armor": 0.5,
+    "magicResist": 0.6,
+    "attackSpeed": 0.85
+  },
+  "skills": [
+    {
+      "id": "pl_ult",
+      "hero": "phantom_lancer",
+      "slot": "ult",
+      "name": "灵魂之矛",
+      "kind": "multi_hit",
+      "hits": 3,
+      "dmgPct": 55,
+      "cooldownTicks": 70,
+      "text": "{src} 投出灵魂之矛，幻影分身齐射！"
+    },
+    {
+      "id": "pl_passive",
+      "hero": "phantom_lancer",
+      "slot": "passive",
+      "name": "并列",
+      "kind": "onhit_extra",
+      "chance": 25,
+      "dmgPct": 45,
+      "text": "{src} 的攻击唤出了并列幻象"
+    },
+    {
+      "id": "axe_ult",
+      "hero": "axe",
+      "slot": "ult",
+      "name": "淘汰之刃",
+      "kind": "execute",
+      "thresholdPct": 20,
+      "dmgPct": 190,
+      "cooldownTicks": 80,
+      "text": "{src} 高高跃起，挥出淘汰之刃！"
+    },
+    {
+      "id": "axe_passive",
+      "hero": "axe",
+      "slot": "passive",
+      "name": "反击螺旋",
+      "kind": "onhit_counter",
+      "chance": 20,
+      "dmgPct": 65,
+      "text": "{src} 触发反击螺旋"
+    },
+    {
+      "id": "lc_ult",
+      "hero": "legion_commander",
+      "slot": "ult",
+      "name": "决斗",
+      "kind": "buff_atk",
+      "buffValue": 30,
+      "buffTicks": 110,
+      "dmgPct": 120,
+      "cooldownTicks": 90,
+      "text": "{src} 强制发起决斗，攻击力大涨！"
+    },
+    {
+      "id": "lc_passive",
+      "hero": "legion_commander",
+      "slot": "passive",
+      "name": "勇气之霎",
+      "kind": "onhit_heal",
+      "chance": 28,
+      "healPct": 4,
+      "text": "{src} 凭借勇气之霎回复了生命"
+    },
+    {
+      "id": "pa_ult",
+      "hero": "phantom_assassin",
+      "slot": "ult",
+      "name": "模糊",
+      "kind": "buff_evasion",
+      "buffValue": 25,
+      "buffTicks": 110,
+      "cooldownTicks": 100,
+      "text": "{src} 融入模糊的阴影，难以命中"
+    },
+    {
+      "id": "pa_passive",
+      "hero": "phantom_assassin",
+      "slot": "passive",
+      "name": "恩赐解脱",
+      "kind": "onhit_crit",
+      "chance": 30,
+      "critDmgPct": 260,
+      "text": "{src} 的恩赐解脱找到了破绽！"
+    },
+    {
+      "id": "necro_ult",
+      "hero": "necrolyte",
+      "slot": "ult",
+      "name": "死亡镰刀",
+      "kind": "stun_damage",
+      "dmgPct": 210,
+      "stunTicks": 12,
+      "cooldownTicks": 95,
+      "text": "{src} 举起死亡镰刀！"
+    },
+    {
+      "id": "necro_passive",
+      "hero": "necrolyte",
+      "slot": "passive",
+      "name": "死亡脉冲",
+      "kind": "dot",
+      "dotPct": 0.35,
+      "text": "{src} 的死亡脉冲持续灼烧对手"
+    },
+    {
+      "id": "huskar_ult",
+      "hero": "huskar",
+      "slot": "ult",
+      "name": "牺牲",
+      "kind": "damage",
+      "dmgPct": 240,
+      "selfDamagePct": 4,
+      "cooldownTicks": 75,
+      "text": "{src} 以自身鲜血为代价冲撞！"
+    },
+    {
+      "id": "huskar_passive",
+      "hero": "huskar",
+      "slot": "passive",
+      "name": "沸血之矛",
+      "kind": "aspd_lowhp",
+      "maxBonusPct": 70,
+      "text": "{src} 血流得越多，长矛越快"
+    },
+    {
+      "id": "mag_ult",
+      "hero": "magnataur",
+      "slot": "ult",
+      "name": "两极反转",
+      "kind": "stun_damage",
+      "dmgPct": 150,
+      "stunTicks": 14,
+      "cooldownTicks": 85,
+      "text": "{src} 引发两极反转！"
+    },
+    {
+      "id": "mag_passive",
+      "hero": "magnataur",
+      "slot": "passive",
+      "name": "授予力量",
+      "kind": "onhit_splash",
+      "chance": 30,
+      "dmgPct": 55,
+      "text": "{src} 的攻击溅射开来"
+    },
+    {
+      "id": "ss_ult",
+      "hero": "shadow_shaman",
+      "slot": "ult",
+      "name": "裂地沟壑",
+      "kind": "stun_damage",
+      "dmgPct": 175,
+      "stunTicks": 16,
+      "cooldownTicks": 90,
+      "text": "{src} 撕裂大地！"
+    },
+    {
+      "id": "ss_passive",
+      "hero": "shadow_shaman",
+      "slot": "passive",
+      "name": "妖术",
+      "kind": "onhit_stun",
+      "chance": 12,
+      "stunTicks": 8,
+      "text": "{src} 把对手变成了小动物！"
+    }
+  ]
+}

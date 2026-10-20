@@ -1,0 +1,29 @@
+{
+  "initialGold": 300,
+  "incomePerRound": 250,
+  "interestPer100": 10,
+  "interestCap": 100,
+  "winBase": 50,
+  "winStreakBonus": 20,
+  "winStreakCap": 100,
+  "losePerHp": 15,
+  "loseStreakBonus": 15,
+  "loseStreakCap": 60,
+  "intelCost": 80,
+  "maxIntelPerRound": 3,
+  "cheerPerBattle": 3,
+  "schoolExpThresholds": [
+    4,
+    10,
+    20,
+    40
+  ],
+  "starHpBonus": [
+    80,
+    120,
+    200,
+    400
+  ],
+  "initialPlayerHp": 100,
+  "courierDamageBase": 6
+}

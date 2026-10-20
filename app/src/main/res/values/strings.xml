@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">电子斗蛐蛐</string>
+    <string name="btn_new_run">开始新挑战</string>
+    <string name="btn_continue">继续挑战</string>
+    <string name="btn_codex">图鉴</string>
+    <string name="btn_settings">设置</string>
+    <string name="hero_select_title">选择你的蛐蛐</string>
+</resources>

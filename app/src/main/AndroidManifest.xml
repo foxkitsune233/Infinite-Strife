@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:name=".DouQiuQiuApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.DouQiuQiu">
+
+        <activity android:name=".ui.SettingsActivity" android:exported="false" />
+        <activity android:name=".ui.IconGalleryActivity" android:exported="false" />
+        <activity android:name=".ui.InventoryActivity" android:exported="false" />
+        <activity android:name=".ui.JourneyActivity" android:exported="false" />
+
+        <activity
+            android:name=".HeroSelectActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.BattleActivity"
+            android:exported="false"
+            android:label="战斗" />
+
+        <activity
+            android:name=".MapActivity"
+            android:exported="false"
+            android:label="闯关地图" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

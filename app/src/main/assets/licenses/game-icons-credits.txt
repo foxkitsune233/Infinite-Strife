@@ -1,0 +1,197 @@
+Game-icons.net item icons — CC BY 3.0
+Icons made by Lorc and Delapouite.
+Lorc: http://lorcblog.blogspot.com
+Delapouite: http://delapouite.com
+License: https://creativecommons.org/licenses/by/3.0/
+Source: https://github.com/game-icons/icons/tree/82d948812bfe3f269ef8f731dcdb07b08160edc4
+Changes: removed black background; converted SVG paths to Android VectorDrawable; runtime recoloring and recipe compositing.
+Only the selected SVGs and generated resources are used by the game.
+
+bow-arrow — Delapouite
+https://game-icons.net/1x1/delapouite/bow-arrow.html
+
+bracer — Delapouite
+https://game-icons.net/1x1/delapouite/bracer.html
+
+coffee-cup — Delapouite
+https://game-icons.net/1x1/delapouite/coffee-cup.html
+
+colombian-statue — Delapouite
+https://game-icons.net/1x1/delapouite/colombian-statue.html
+
+cuckoo-clock — Delapouite
+https://game-icons.net/1x1/delapouite/cuckoo-clock.html
+
+devil-mask — Delapouite
+https://game-icons.net/1x1/delapouite/devil-mask.html
+
+easter-egg — Delapouite
+https://game-icons.net/1x1/delapouite/easter-egg.html
+
+gauntlet — Delapouite
+https://game-icons.net/1x1/delapouite/gauntlet.html
+
+health-potion — Delapouite
+https://game-icons.net/1x1/delapouite/health-potion.html
+
+magic-axe — Delapouite
+https://game-icons.net/1x1/delapouite/magic-axe.html
+
+porcelain-vase — Delapouite
+https://game-icons.net/1x1/delapouite/porcelain-vase.html
+
+red-carpet — Delapouite
+https://game-icons.net/1x1/delapouite/red-carpet.html
+
+ring — Delapouite
+https://game-icons.net/1x1/delapouite/ring.html
+
+rolled-cloth — Delapouite
+https://game-icons.net/1x1/delapouite/rolled-cloth.html
+
+smoking-pipe — Delapouite
+https://game-icons.net/1x1/delapouite/smoking-pipe.html
+
+thor-hammer — Delapouite
+https://game-icons.net/1x1/delapouite/thor-hammer.html
+
+trophy-cup — Delapouite
+https://game-icons.net/1x1/delapouite/trophy-cup.html
+
+wood-frame — Delapouite
+https://game-icons.net/1x1/delapouite/wood-frame.html
+
+wooden-crate — Delapouite
+https://game-icons.net/1x1/delapouite/wooden-crate.html
+
+barbed-spear — Lorc
+https://game-icons.net/1x1/lorc/barbed-spear.html
+
+battle-axe — Lorc
+https://game-icons.net/1x1/lorc/battle-axe.html
+
+boots — Lorc
+https://game-icons.net/1x1/lorc/boots.html
+
+bordered-shield — Lorc
+https://game-icons.net/1x1/lorc/bordered-shield.html
+
+broadsword — Lorc
+https://game-icons.net/1x1/lorc/broadsword.html
+
+butterfly — Lorc
+https://game-icons.net/1x1/lorc/butterfly.html
+
+cheese-wedge — Lorc
+https://game-icons.net/1x1/lorc/cheese-wedge.html
+
+crested-helmet — Lorc
+https://game-icons.net/1x1/lorc/crested-helmet.html
+
+cross-flare — Lorc
+https://game-icons.net/1x1/lorc/cross-flare.html
+
+cross-mark — Lorc
+https://game-icons.net/1x1/lorc/cross-mark.html
+
+crossed-chains — Lorc
+https://game-icons.net/1x1/lorc/crossed-chains.html
+
+crossed-claws — Lorc
+https://game-icons.net/1x1/lorc/crossed-claws.html
+
+crossed-swords — Lorc
+https://game-icons.net/1x1/lorc/crossed-swords.html
+
+crown-coin — Lorc
+https://game-icons.net/1x1/lorc/crown-coin.html
+
+crown — Lorc
+https://game-icons.net/1x1/lorc/crown.html
+
+crystal-ball — Lorc
+https://game-icons.net/1x1/lorc/crystal-ball.html
+
+crystal-cluster — Lorc
+https://game-icons.net/1x1/lorc/crystal-cluster.html
+
+crystal-wand — Lorc
+https://game-icons.net/1x1/lorc/crystal-wand.html
+
+diamond-hard — Lorc
+https://game-icons.net/1x1/lorc/diamond-hard.html
+
+divided-spiral — Lorc
+https://game-icons.net/1x1/lorc/divided-spiral.html
+
+dripping-sword — Lorc
+https://game-icons.net/1x1/lorc/dripping-sword.html
+
+drop — Lorc
+https://game-icons.net/1x1/lorc/drop.html
+
+eyeball — Lorc
+https://game-icons.net/1x1/lorc/eyeball.html
+
+flat-hammer — Lorc
+https://game-icons.net/1x1/lorc/flat-hammer.html
+
+gear-hammer — Lorc
+https://game-icons.net/1x1/lorc/gear-hammer.html
+
+gem-necklace — Lorc
+https://game-icons.net/1x1/lorc/gem-necklace.html
+
+gem-pendant — Lorc
+https://game-icons.net/1x1/lorc/gem-pendant.html
+
+gems — Lorc
+https://game-icons.net/1x1/lorc/gems.html
+
+heart-organ — Lorc
+https://game-icons.net/1x1/lorc/heart-organ.html
+
+iron-mask — Lorc
+https://game-icons.net/1x1/lorc/iron-mask.html
+
+lightning-bow — Lorc
+https://game-icons.net/1x1/lorc/lightning-bow.html
+
+linden-leaf — Lorc
+https://game-icons.net/1x1/lorc/linden-leaf.html
+
+padlock — Lorc
+https://game-icons.net/1x1/lorc/padlock.html
+
+rainbow-star — Lorc
+https://game-icons.net/1x1/lorc/rainbow-star.html
+
+scroll-unfurled — Lorc
+https://game-icons.net/1x1/lorc/scroll-unfurled.html
+
+skull-mask — Lorc
+https://game-icons.net/1x1/lorc/skull-mask.html
+
+small-fire — Lorc
+https://game-icons.net/1x1/lorc/small-fire.html
+
+snake-bite — Lorc
+https://game-icons.net/1x1/lorc/snake-bite.html
+
+snowflake-2 — Lorc
+https://game-icons.net/1x1/lorc/snowflake-2.html
+
+spotted-mushroom — Lorc
+https://game-icons.net/1x1/lorc/spotted-mushroom.html
+
+sword-array — Lorc
+https://game-icons.net/1x1/lorc/sword-array.html
+
+tribal-mask — Lorc
+https://game-icons.net/1x1/lorc/tribal-mask.html
+
+wing-cloak — Lorc
+https://game-icons.net/1x1/lorc/wing-cloak.html
+
+wizard-staff — Lorc
+https://game-icons.net/1x1/lorc/wizard-staff.html

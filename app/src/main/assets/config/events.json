@@ -1,0 +1,179 @@
+{
+  "events": [
+    {
+      "id": "coin_pouch",
+      "name": "遗失的钱袋",
+      "emoji": "💰",
+      "kind": "gold_add",
+      "value": 120,
+      "valueMax": 260,
+      "weight": 5,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "路边捡到一个沉甸甸的钱袋，金币 +{v}"
+    },
+    {
+      "id": "chest",
+      "name": "野外宝箱",
+      "emoji": "📦",
+      "kind": "weapon_gain",
+      "weight": 3,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "宝箱里躺着一件武器：{v}"
+    },
+    {
+      "id": "mentor",
+      "name": "前辈指点",
+      "emoji": "📖",
+      "kind": "card_gain",
+      "weight": 3,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "一位老蛐蛐送你一张卡：{v}"
+    },
+    {
+      "id": "spring",
+      "name": "清泉",
+      "emoji": "💧",
+      "kind": "hp_heal",
+      "value": 30,
+      "valueMax": 50,
+      "weight": 4,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "饮下清泉，生命 +{v}"
+    },
+    {
+      "id": "whetstone",
+      "name": "磨刀石",
+      "emoji": "⚒️",
+      "kind": "buff_atk",
+      "value": 15,
+      "weight": 3,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "磨利了武器，下一场攻击 +{v}%"
+    },
+    {
+      "id": "armorsmith",
+      "name": "护甲匠",
+      "emoji": "🛡️",
+      "kind": "buff_armor",
+      "value": 15,
+      "weight": 3,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "加固了护甲，下一场护甲 +{v}"
+    },
+    {
+      "id": "dojo",
+      "name": "修炼场",
+      "emoji": "🏋️",
+      "kind": "school_exp",
+      "value": 3,
+      "weight": 3,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "闭关修炼，{v} 流派经验 +3"
+    },
+    {
+      "id": "trap",
+      "name": "陷阱",
+      "emoji": "🕳️",
+      "kind": "hp_lose",
+      "value": 15,
+      "valueMax": 35,
+      "weight": 3,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "踩中了陷阱，生命 -{v}"
+    },
+    {
+      "id": "pickpocket",
+      "name": "扒手",
+      "emoji": "🥷",
+      "kind": "weapon_lose",
+      "weight": 2,
+      "nodes": [
+        2,
+        3,
+        4
+      ],
+      "text": "扒手偷走了你的 {v}"
+    },
+    {
+      "id": "gambler",
+      "name": "赌神",
+      "emoji": "🎲",
+      "kind": "gamble_gold",
+      "weight": 2,
+      "nodes": [
+        2,
+        3,
+        4
+      ],
+      "text": "赌了一把：{v}"
+    },
+    {
+      "id": "stall",
+      "name": "破旧摊位",
+      "emoji": "🧺",
+      "kind": "gold_lose",
+      "value": 80,
+      "weight": 2,
+      "nodes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "text": "被摊主讹了一笔，金币 -{v}"
+    },
+    {
+      "id": "oracle",
+      "name": "神谕",
+      "emoji": "🔮",
+      "kind": "reveal_next",
+      "weight": 2,
+      "nodes": [
+        1,
+        2,
+        3
+      ],
+      "text": "神谕揭示了下一场仓库中的 1 件物品"
+    }
+  ]
+}

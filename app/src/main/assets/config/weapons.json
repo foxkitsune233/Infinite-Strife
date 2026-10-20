@@ -1,0 +1,97 @@
+{
+  "weapons": [
+    {
+      "id": "branch",
+      "name": "树枝",
+      "emoji": "🌿",
+      "quality": "白",
+      "value": 20,
+      "price": 50,
+      "stats": {
+        "all": 1
+      }
+    },
+    {
+      "id": "circlet",
+      "name": "圆环",
+      "emoji": "🔴",
+      "quality": "白",
+      "value": 40,
+      "price": 155,
+      "stats": {
+        "all": 2
+      }
+    },
+    {
+      "id": "yasha",
+      "name": "夜叉",
+      "emoji": "🌪️",
+      "quality": "蓝",
+      "value": 200,
+      "price": 2050,
+      "stats": {
+        "agi": 16,
+        "atkSpeedPct": 15
+      }
+    },
+    {
+      "id": "sange",
+      "name": "散华",
+      "emoji": "🩸",
+      "quality": "蓝",
+      "value": 200,
+      "price": 2050,
+      "stats": {
+        "str": 16,
+        "lifesteal": 15
+      }
+    },
+    {
+      "id": "daedalus",
+      "name": "代达罗斯之殇",
+      "emoji": "🎯",
+      "quality": "紫",
+      "value": 600,
+      "price": 5150,
+      "stats": {
+        "attack": 81,
+        "crit": 30
+      }
+    },
+    {
+      "id": "butterfly",
+      "name": "蝴蝶",
+      "emoji": "🦋",
+      "quality": "紫",
+      "value": 600,
+      "price": 5475,
+      "stats": {
+        "agi": 35,
+        "evasion": 35
+      }
+    },
+    {
+      "id": "aegis",
+      "name": "圣剑",
+      "emoji": "⚔️",
+      "quality": "金",
+      "value": 1200,
+      "price": 6200,
+      "stats": {
+        "attack": 200
+      }
+    },
+    {
+      "id": "heart",
+      "name": "龙心",
+      "emoji": "💖",
+      "quality": "金",
+      "value": 1200,
+      "price": 5200,
+      "stats": {
+        "str": 45,
+        "hp": 250
+      }
+    }
+  ]
+}

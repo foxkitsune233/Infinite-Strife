@@ -1,0 +1,138 @@
+{
+  "schools": [
+    {
+      "id": "basic",
+      "name": "普攻流",
+      "emoji": "⚔️",
+      "effects": [
+        {
+          "atkSpeedPct": 10,
+          "attack": 3
+        },
+        {
+          "atkSpeedPct": 20,
+          "attack": 6
+        },
+        {
+          "atkSpeedPct": 30,
+          "attack": 9
+        },
+        {
+          "atkSpeedPct": 50,
+          "attack": 15
+        }
+      ]
+    },
+    {
+      "id": "ultimate",
+      "name": "大招流",
+      "emoji": "💥",
+      "effects": [
+        {
+          "ultPct": 20,
+          "manaRegen": 2
+        },
+        {
+          "ultPct": 40,
+          "manaRegen": 4
+        },
+        {
+          "ultPct": 60,
+          "manaRegen": 6
+        },
+        {
+          "ultPct": 100,
+          "manaRegen": 8
+        }
+      ]
+    },
+    {
+      "id": "life",
+      "name": "生命流",
+      "emoji": "❤️",
+      "effects": [
+        {
+          "magicResistPct": 5,
+          "hpPct": 3
+        },
+        {
+          "magicResistPct": 10,
+          "hpPct": 6
+        },
+        {
+          "magicResistPct": 15,
+          "hpPct": 9
+        },
+        {
+          "magicResistPct": 25,
+          "hpPct": 15
+        }
+      ]
+    },
+    {
+      "id": "shield",
+      "name": "护盾流",
+      "emoji": "🛡️",
+      "effects": [
+        {
+          "shieldStack": 2
+        },
+        {
+          "shieldStack": 4
+        },
+        {
+          "shieldStack": 6
+        },
+        {
+          "shieldStack": 10
+        }
+      ]
+    },
+    {
+      "id": "crit",
+      "name": "暴击流",
+      "emoji": "🎯",
+      "effects": [
+        {
+          "critDmgPct": 20,
+          "crit": 2
+        },
+        {
+          "critDmgPct": 40,
+          "crit": 4
+        },
+        {
+          "critDmgPct": 60,
+          "crit": 6
+        },
+        {
+          "critDmgPct": 100,
+          "crit": 10
+        }
+      ]
+    },
+    {
+      "id": "evade",
+      "name": "闪避流",
+      "emoji": "💨",
+      "effects": [
+        {
+          "physResistPct": 5,
+          "evasion": 2
+        },
+        {
+          "physResistPct": 10,
+          "evasion": 4
+        },
+        {
+          "physResistPct": 15,
+          "evasion": 6
+        },
+        {
+          "physResistPct": 25,
+          "evasion": 10
+        }
+      ]
+    }
+  ]
+}

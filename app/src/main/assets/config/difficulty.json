@@ -1,0 +1,15 @@
+{
+  "baseCoef": 1.0,
+  "growthPerRound": 0.16,
+  "hpCoef": 1.0,
+  "attackCoef": 1.0,
+  "armorCoef": 0.6,
+  "maxRound": 5,
+  "roundCoefs": [
+    1.0,
+    1.1,
+    1.25,
+    1.45,
+    1.7
+  ]
+}

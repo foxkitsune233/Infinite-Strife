@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DouQiuQiu" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">#0C667E</item>
+        <item name="colorPrimaryDark">#051F2F</item>
+        <item name="colorAccent">#FFCA3F</item>
+        <item name="android:windowBackground">#09394C</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+    </style>
+</resources>

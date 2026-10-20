@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_orange">#FF6D00</color>
+    <color name="brand_gold">#FFCA3F</color>
+    <color name="bg_dark">#051F2F</color>
+    <color name="bg_card">#09394C</color>
+    <color name="bg_card_selected">#0C667E</color>
+    <color name="text_primary">#FFF4CC</color>
+    <color name="text_secondary">#B4DBE1</color>
+    <color name="danger">#E53935</color>
+    <color name="success">#43A047</color>
+</resources>

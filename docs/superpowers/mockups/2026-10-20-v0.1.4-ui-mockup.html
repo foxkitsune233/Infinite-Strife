@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0.1.4 UI 稿 · 一键放入背包 + 角色属性详情</title>
+<style>
+  :root{
+    --background:#051F2F; --surface:#09394C; --raised:#0C667E; --line:#30A7C7;
+    --ink:#FFF4CC; --muted:#B4DBE1; --gold:#FFCA3F; --green:#64E580; --danger:#FF6C42;
+    --q-gold:#FFCA3F; --q-purple:#C068FF; --q-blue:#41C0FF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#EEF3F6;color:#1a2b33;font-family:"Microsoft YaHei","PingFang SC",sans-serif;padding:28px 22px 60px}
+  h1{font-size:21px;margin-bottom:6px;color:#0b2a38}
+  .sub{font-size:13px;color:#5b7a88;margin-bottom:22px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#5b7a88;margin-bottom:20px;
+          background:#fff;border:1px solid #d5e2e8;padding:10px 14px;border-radius:8px}
+  .legend b{color:#0b2a38}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:4px;border:1px solid rgba(0,0,0,.15)}
+  .stage{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+  .col{width:352px}
+  .cap{font-size:13px;font-weight:bold;color:#0b2a38;margin-bottom:8px}
+  .note{font-size:11.5px;color:#5b7a88;line-height:1.65;margin-top:8px}
+  .note code{background:#e2ebef;padding:1px 4px;border-radius:3px;font-size:11px;color:#0b2a38}
+
+  /* ---- phone frame (mirrors GameUi.screen) ---- */
+  .phone{border-radius:26px;overflow:hidden;box-shadow:0 8px 26px rgba(6,32,48,.22);border:1px solid #c9d8e0;background:var(--background)}
+  .hdr{background:var(--surface);border-bottom:2px solid var(--line);padding:8px 14px 8px}
+  .hdr-top{display:flex;align-items:center;gap:10px}
+  .hdr-title{font-size:21px;font-weight:bold;color:var(--gold);flex:1}
+  .hdr-btn{background:var(--raised);border:1.5px solid var(--line);color:var(--ink);
+           font-size:12px;padding:5px 12px;border-radius:5px;font-weight:bold}
+  .hdr-sub{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .dbg{font-size:10.5px;color:var(--danger);font-weight:bold;margin-top:3px}
+
+  .body{padding:10px 12px 14px}
+  .tabs{display:flex;gap:3px;margin-bottom:8px}
+  .tab{flex:1;text-align:center;font-size:12px;padding:7px 2px;border-radius:5px;font-weight:bold;
+       background:var(--raised);border:1.5px solid var(--line);color:var(--ink)}
+  .tab.on{background:var(--gold);color:var(--background);border-color:#FFEB9A}
+  .tab.small{flex:0 0 48px}
+
+  .modes{display:flex;gap:3px;margin-bottom:8px}
+  .mode{flex:1;text-align:center;font-size:11.5px;padding:6px 2px;border-radius:5px;font-weight:bold;
+        background:var(--raised);border:1.5px solid var(--line);color:var(--ink)}
+  .mode.on{background:var(--gold);color:var(--background);border-color:#FFEB9A}
+
+  /* NodeLootHeaderView */
+  .loot{display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--line);
+        border-radius:6px;padding:8px;margin-bottom:8px}
+  .chest{width:40px;height:40px;flex:0 0 40px;border-radius:5px;background:linear-gradient(160deg,#7a4a12,#3d2408);
+         border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:19px}
+  .loot-txt{flex:1}
+  .loot-lbl{font-size:11.5px;color:var(--gold);font-weight:bold}
+  .bar{height:5px;background:var(--line);border-radius:3px;margin-top:6px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:var(--gold);border-radius:3px}
+
+  .btn{display:block;width:100%;text-align:center;font-weight:bold;border-radius:6px;
+       background:var(--raised);border:1.5px solid var(--line);color:var(--ink);font-size:13px;padding:11px 8px}
+  .btn.pri{background:var(--gold);color:var(--background);border-color:#FFEB9A}
+  .btn.sm{font-size:11.5px;padding:7px 2px}
+
+  /* NEW marker */
+  .new{position:relative;border:2px dashed var(--gold)!important}
+  .new::after{content:"新增";position:absolute;top:-9px;right:7px;background:var(--gold);color:var(--background);
+              font-size:9.5px;font-weight:bold;padding:1px 5px;border-radius:3px;letter-spacing:.5px}
+
+  .panel{background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:13px 14px;margin-bottom:10px}
+  .panel.sel{background:var(--raised);border-color:var(--gold)}
+  .sec{background:var(--raised);border:1.5px solid var(--line);border-radius:6px;padding:7px 14px;
+       font-size:16px;font-weight:bold;color:var(--gold)}
+  .hint{font-size:11.5px;color:var(--muted);margin-top:5px}
+  .lbl{font-size:13.5px;color:var(--ink)}
+  .lbl.mut{font-size:11.5px;color:var(--muted)}
+
+  /* grid cells */
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+  .cell{aspect-ratio:1;border:1.5px solid var(--line);border-radius:4px;background:var(--surface);
+        display:flex;align-items:center;justify-content:center;font-size:16px}
+  .cell.f{border-style:dashed;opacity:.5}
+  .cell.b2{grid-column:span 2}
+  .cell.h2{grid-row:span 2;aspect-ratio:auto}
+  .q-gold{box-shadow:inset 0 0 0 1.5px var(--q-gold)}
+  .q-purple{box-shadow:inset 0 0 0 1.5px var(--q-purple)}
+  .q-blue{box-shadow:inset 0 0 0 1.5px var(--q-blue)}
+  .badge{position:relative}
+  .badge::after{content:attr(data-b);position:absolute;bottom:1px;left:1px;right:1px;background:rgba(5,31,47,.82);
+                color:var(--gold);font-size:8px;text-align:center;border-radius:0 0 3px 3px;padding:1px 0}
+
+  /* hero row */
+  .herorow{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}
+  .portrait{width:80px;flex:0 0 80px;text-align:center}
+  .avatar{width:80px;height:80px;border-radius:6px;background:linear-gradient(180deg,#1b5f7a,#0a3murky);
+          background:linear-gradient(180deg,#1b5f7a,#0a3550);border:1.5px solid var(--gold);
+          display:flex;align-items:center;justify-content:center;font-size:34px}
+  .gear{flex:1}
+  .chips{display:flex;gap:3px;margin-bottom:4px}
+  .chip{flex:1;text-align:center;font-size:10.5px;padding:5px 0;border-radius:4px;font-weight:bold;
+        background:var(--surface);border:1.5px solid var(--line);color:var(--muted)}
+  .chip.on{background:var(--gold);color:var(--background);border-color:#FFEB9A}
+
+  /* stat sheet */
+  .stat{border-bottom:1px solid rgba(48,167,199,.28);padding:9px 0}
+  .stat:last-child{border-bottom:none}
+  .stat-top{display:flex;align-items:baseline;gap:8px}
+  .stat-name{font-size:13.5px;color:var(--ink);font-weight:bold}
+  .stat-val{margin-left:auto;font-size:16px;color:var(--gold);font-weight:bold}
+  .src{font-size:10.5px;color:var(--muted);margin-top:3px;display:flex;gap:7px;flex-wrap:wrap}
+  .src span{white-space:nowrap}
+  .src .tot{color:var(--danger)}
+
+  .tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:3px;font-weight:bold;
+       background:var(--raised);border:1px solid var(--line);color:var(--ink)}
+  .tag.warn{background:rgba(255,108,66,.16);border-color:var(--danger);color:var(--danger)}
+
+  .toast{margin-top:9px;background:var(--surface);border:1.5px solid var(--gold);border-radius:6px;
+         padding:9px 12px;font-size:12px;color:var(--ink)}
+  .toast b{color:var(--gold)}
+  .toast.g{border-color:var(--green)}
+  .toast.g b{color:var(--green)}
+  .toast.d{border-color:var(--danger)}
+  .toast.d b{color:var(--danger)}
+  hr{border:none;border-top:1px dashed rgba(48,167,199,.4);margin:11px 0}
+</style>
+</head>
+<body>
+
+<h1>0.1.4 UI 稿 — 待评审</h1>
+<div class="sub">严格沿用现有风格：深蓝底 #051F2F · 面板 #09394C · 凸起 #0C667E · 描边 #30A7C7 · 金色强调 #FFCA3F。金色虚线框 + “新增” 标签为本次新增内容。</div>
+
+<div class="legend">
+  <span><b>色板：</b>
+    <i class="swatch" style="background:#051F2F"></i>底
+    <i class="swatch" style="background:#09394C"></i>面板
+    <i class="swatch" style="background:#0C667E"></i>凸起/按钮
+    <i class="swatch" style="background:#30A7C7"></i>描边
+    <i class="swatch" style="background:#FFCA3F"></i>金
+  </span>
+  <span><b>品质：</b>
+    <i class="swatch" style="background:#FFCA3F"></i>金
+    <i class="swatch" style="background:#C068FF"></i>紫
+    <i class="swatch" style="background:#41C0FF"></i>蓝
+  </span>
+</div>
+
+<div class="stage">
+
+  <!-- ============ 1. 掉落区 ============ -->
+  <div class="col">
+    <div class="cap">① 掉落区 · 待拾取模式（新增一键放入）</div>
+    <div class="phone">
+      <div class="hdr">
+        <div class="hdr-top"><span class="hdr-title">整备</span><span class="hdr-btn">设置</span></div>
+        <div class="hdr-sub">第三战 · 目标：秘银宝箱 · 已鉴定 2 / 3</div>
+        <div class="dbg">调试存档 · 测试模式</div>
+      </div>
+      <div class="body">
+        <div class="tabs">
+          <span class="tab on">配装</span><span class="tab">技能 8/8</span><span class="tab">物资</span><span class="tab small">更多</span>
+        </div>
+        <div class="modes">
+          <span class="mode on">待拾取 3</span><span class="mode">随身物品</span>
+        </div>
+
+        <div class="loot">
+          <div class="chest">🗝️</div>
+          <div class="loot-txt">
+            <div class="loot-lbl">鉴定 2 / 3 · 不可跳过</div>
+            <div class="bar"><i style="width:66%"></i></div>
+          </div>
+        </div>
+
+        <div class="btn pri new" style="margin-bottom:8px">一键放入背包</div>
+
+        <div class="grid">
+          <div class="cell b2 q-blue badge" data-b="阔剑 2×1">⚔️</div>
+          <div class="cell q-gold badge" data-b="治疗指环">💍</div>
+          <div class="cell f" style="color:var(--muted)">?</div>
+        </div>
+        <div class="hint">拖入后获得 · 离开节点会丢弃剩余物品</div>
+        <hr>
+        <div class="hint" style="color:var(--muted)">6列真实占格 · 每格与随身容器等大</div>
+      </div>
+      <div class="hdr-btn" style="border-radius:0;text-align:center;background:var(--surface);border-top:1.5px solid var(--gold);padding:11px">返回远征 · 保留待拾取物品</div>
+    </div>
+    <div class="note">
+      按钮位置：鉴定进度条下方、物品货架上方，占满一行。<br>
+      沿用 <code>GameUi.button(primary=true)</code> 金色主按钮样式，与“一键整理”“批量出售”同级。
+    </div>
+  </div>
+
+  <!-- ============ 2. 配装页 ============ -->
+  <div class="col">
+    <div class="cap">② 配装页 · 英雄区新增属性入口</div>
+    <div class="phone">
+      <div class="hdr">
+        <div class="hdr-top"><span class="hdr-title">整备</span><span class="hdr-btn">设置</span></div>
+        <div class="hdr-sub">挑战准备 · 点击头像可切换英雄</div>
+      </div>
+      <div class="body">
+        <div class="tabs">
+          <span class="tab on">配装</span><span class="tab">技能 8/8</span><span class="tab">物资</span><span class="tab small">更多</span>
+        </div>
+
+        <div class="herorow">
+          <div class="portrait">
+            <div class="avatar">🗡️</div>
+            <div class="lbl mut" style="margin-top:3px">点击切换</div>
+            <div class="btn sm new" style="margin-top:5px">属性</div>
+          </div>
+          <div class="gear">
+            <div class="chips">
+              <span class="chip on">①</span><span class="chip">②</span><span class="chip">③</span><span class="chip">④</span>
+            </div>
+            <div class="grid">
+              <div class="cell q-gold badge" data-b="2×2">🪓</div>
+              <div class="cell q-purple badge" data-b="护甲">🛡️</div>
+              <div class="cell f"></div><div class="cell f"></div>
+              <div class="cell f"></div><div class="cell f"></div>
+              <div class="cell f"></div><div class="cell f"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sec" style="margin-top:10px">随身物品 · 局外仓库封存</div>
+        <div class="grid" style="margin-top:8px">
+          <div class="cell q-blue badge" data-b="×2">🧪</div>
+          <div class="cell f"></div><div class="cell f"></div>
+          <div class="cell f"></div><div class="cell f"></div><div class="cell f"></div>
+        </div>
+      </div>
+    </div>
+    <div class="note">
+      按钮位置：英雄头像正下方（与“点击切换”同一列），宽度跟随头像列 80dp，紧凑按钮样式。<br>
+      <code>chooseHero()</code> 入口保持不变，两者互不遮挡。
+    </div>
+  </div>
+
+  <!-- ============ 3. 属性详情 ============ -->
+  <div class="col">
+    <div class="cap">③ 属性二级详情页（点击“属性”进入）</div>
+    <div class="phone">
+      <div class="hdr">
+        <div class="hdr-top"><span class="hdr-title">属性总览</span><span class="hdr-btn">返回</span></div>
+        <div class="hdr-sub">主宰 · 当前配装 · 局外数值</div>
+      </div>
+      <div class="body">
+
+        <div class="panel">
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">生命</span><span class="stat-val">1250</span></div>
+            <div class="src"><span>基础 1028</span><span>装备 +200</span><span>卡牌 +22</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">魔法</span><span class="stat-val">480</span></div>
+            <div class="src"><span>基础 363</span><span>装备 +117</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">攻击</span><span class="stat-val">78</span></div>
+            <div class="src"><span>基础 35</span><span>主属性 +26</span><span>装备 +17</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">护甲</span><span class="stat-val">12.3</span></div>
+            <div class="src"><span>基础 1</span><span>敏捷 +4.3</span><span>装备 +7</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">魔抗</span><span class="stat-val">28%</span></div>
+            <div class="src"><span class="tot">总值</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">攻速</span><span class="stat-val">126</span></div>
+            <div class="src"><span>基础 100</span><span>敏捷 +26</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">回血</span><span class="stat-val">4.2/s</span></div>
+            <div class="src"><span>基础 0.5</span><span>力量 +2.4</span><span>装备 +1.3</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">回蓝</span><span class="stat-val">2.1/s</span></div>
+            <div class="src"><span>基础 1.5</span><span>智力 +0.6</span></div>
+          </div>
+        </div>
+
+        <div class="btn new">展开更多：吸血 / 冷却缩减 / 状态抗性</div>
+
+        <div class="panel" style="margin-top:8px;border-style:dashed">
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">吸血</span><span class="stat-val">12%</span></div>
+            <div class="src"><span>卡牌 +12%</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">冷却缩减</span><span class="stat-val">0%</span></div>
+            <div class="src"><span class="tot">总值</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-name">状态抗性</span><span class="stat-val">0%</span></div>
+            <div class="src"><span class="tot">总值</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="note">
+      数值来源全部读取 shared 层 <code>JourneyRules.fighter()</code> 的拆分结果，UI 不另写公式。<br>
+      无法拆分来源的字段标 <code>总值</code>（红色），不伪造精确贡献。完整表可滚动。
+    </div>
+  </div>
+
+</div>
+
+<div class="legend" style="margin-top:26px">
+  <span><b>结果文案（4 种状态，区分“空间不足”与“仍待鉴定”）：</b></span>
+</div>
+<div class="stage">
+  <div class="col" style="width:100%">
+    <div class="toast g">已放入 <b>3</b> 件，剩余 <b>0</b> 件。</div>
+    <div class="toast g">已放入 <b>2</b> 件，剩余 <b>1</b> 件。</div>
+    <div class="toast d">背包空间不足，已放入 <b>0</b> 件，剩余 <b>3</b> 件。</div>
+    <div class="toast d">还有 <b>2</b> 件正在鉴定，请稍候。</div>
+  </div>
+</div>
+
+</body>
+</html>

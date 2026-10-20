@@ -1,0 +1,27 @@
+{
+  "mode": "built-in image_gen",
+  "purpose": "Final prompts and provenance for three skill poses; transparent PNG originals preserved.",
+  "poses": [
+    {
+      "hero": "abaddon",
+      "file": "app/src/main/assets/art/heroes/abaddon-cast-v1.png",
+      "reference": "app/src/main/assets/art/heroes/abaddon-idle-v1.png",
+      "prompt": "Use case: identity-preserve. Edit target: reference character sprite. Make ONE new full-body casting pose of the SAME armored knight, in exactly the same flat faceted cartoon paper-cut style, armor, helmet, cape, colors and proportions. Raise the sword UPRIGHT overhead with his RIGHT hand (screen LEFT). Keep spectral shield on his LEFT hand (screen RIGHT). Keep both boots completely visible, standing on the same baseline. Full sword and raised tip inside image, transparent padding. Do not add background, shadow, UI, text, duplicates or magic particles. True transparent alpha background.",
+      "sourceFilename": "exec-c6b524d6-dfd2-47ac-a128-1ae8df34201b.png"
+    },
+    {
+      "hero": "skywrath",
+      "file": "app/src/main/assets/art/heroes/skywrath-cast-v1.png",
+      "reference": "app/src/main/assets/art/heroes/skywrath-idle-v1.png",
+      "prompt": "Use case: identity-preserve. Edit target: the reference winged mage. One full-body transparent 2D game sprite, same exact person, face, white hair, gold crown, blue-white wings, robes, faceted flat paper-cut style. Change her arms into a TWO-HANDED staff planting pose. The SAME staff remains on screen RIGHT, her anatomical LEFT side. Her LEFT hand grips its upper shaft; her RIGHT hand reaches across her body to grip lower on the SAME shaft. Both hands visibly distinct, natural gripping fingers. Staff vertical, its bottom tip planted on the ground by her feet, torso leaning forward slightly. Preserve full wings and entire staff star inside image. No additional staff, no swapped sides, no beams, no scene, no floor, no shadow, no text. True transparent background. One figure only.",
+      "sourceFilename": "exec-cb83e3d5-7ae4-4c6c-9266-407a6c3566b4.png"
+    },
+    {
+      "hero": "viper",
+      "file": "app/src/main/assets/art/heroes/viper-charge-v1.png",
+      "reference": "app/src/main/assets/art/heroes/viper-idle-v1.png",
+      "prompt": "Use case: identity-preserve. Edit target: reference green venom dragon. One full-body transparent 2D game sprite in exactly the same angular flat paper-cut style, same green scales, horns, wings, tail, claws and ivory belly. Change ONLY the neck/head to prepare spitting: head pulled backward slightly, throat inflated, jaws nearly closed with a small contained lime-green glow inside. Eyes gaze toward screen RIGHT. Keep limbs and foot baseline unchanged. No emitted projectile or spit stream yet. Keep all wings, feet and tail completely visible. True transparent alpha background, no floor, no shadow, no text, no extra figure.",
+      "sourceFilename": "exec-3ec165e5-d1b1-4e63-8f34-fd736fa8bab2.png"
+    }
+  ]
+}

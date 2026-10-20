@@ -1,0 +1,117 @@
+{
+  "crateSize": [
+    4,
+    6
+  ],
+  "revealCount": 2,
+  "tiers": [
+    {
+      "roundFrom": 1,
+      "roundTo": 4,
+      "items": [
+        {
+          "type": "gold",
+          "min": 120,
+          "max": 260,
+          "weight": 5
+        },
+        {
+          "type": "card",
+          "quality": "蓝",
+          "weight": 4
+        },
+        {
+          "type": "weapon",
+          "quality": "白",
+          "weight": 3
+        }
+      ]
+    },
+    {
+      "roundFrom": 5,
+      "roundTo": 9,
+      "items": [
+        {
+          "type": "gold",
+          "min": 260,
+          "max": 520,
+          "weight": 5
+        },
+        {
+          "type": "card",
+          "quality": "蓝",
+          "weight": 3
+        },
+        {
+          "type": "card",
+          "quality": "紫",
+          "weight": 2
+        },
+        {
+          "type": "weapon",
+          "quality": "蓝",
+          "weight": 3
+        }
+      ]
+    },
+    {
+      "roundFrom": 10,
+      "roundTo": 14,
+      "items": [
+        {
+          "type": "gold",
+          "min": 520,
+          "max": 900,
+          "weight": 4
+        },
+        {
+          "type": "card",
+          "quality": "紫",
+          "weight": 3
+        },
+        {
+          "type": "weapon",
+          "quality": "紫",
+          "weight": 3
+        },
+        {
+          "type": "artifact",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "roundFrom": 15,
+      "roundTo": 99,
+      "items": [
+        {
+          "type": "gold",
+          "min": 900,
+          "max": 1600,
+          "weight": 4
+        },
+        {
+          "type": "card",
+          "quality": "金",
+          "weight": 3
+        },
+        {
+          "type": "weapon",
+          "quality": "金",
+          "weight": 3
+        },
+        {
+          "type": "artifact",
+          "weight": 2
+        }
+      ]
+    }
+  ],
+  "milestoneRounds": [
+    3,
+    6,
+    9,
+    12,
+    15
+  ]
+}

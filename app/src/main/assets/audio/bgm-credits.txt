@@ -1,0 +1,14 @@
+Background music: Once Upon a Time (loop)
+Author: TAD
+Source: https://opengameart.org/content/once-upon-a-time-loop
+License: CC0 1.0 Universal
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Downloaded: 2026-10-19
+Original file: https://opengameart.org/sites/default/files/once_upon_a_time_loop.wav
+Original WAV SHA256: 66ABCB1D02C143DF7867E555FC093EC04C8CF7894A8963FE522572EBAC4A7A24
+Bundled file: audio/bgm.ogg
+Conversion: FFmpeg, libvorbis quality 4, 44100Hz stereo. No trimming, remixing, or loop-length changes.
+Duration: 57.595397 seconds
+Volume: applied by the player, not baked into the source recording.
+OGG SHA256: 57A6360943FBF201F8B37495F6BF6BCD31F65EA53CC1C05319DBD3C72D25C682
+Original source-page snapshot and WAV are retained in art-source/audio/once-upon-a-time/.

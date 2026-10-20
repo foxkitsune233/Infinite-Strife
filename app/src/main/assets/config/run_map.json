@@ -1,0 +1,83 @@
+{
+  "totalBattles": 5,
+  "nodes": [
+    {
+      "index": 0,
+      "kind": "battle",
+      "battleRound": 1,
+      "label": "第 1 场",
+      "emoji": "⚔️"
+    },
+    {
+      "index": 1,
+      "kind": "event",
+      "nodeOrder": 1,
+      "label": "事件",
+      "emoji": "❓"
+    },
+    {
+      "index": 2,
+      "kind": "battle",
+      "battleRound": 2,
+      "label": "第 2 场",
+      "emoji": "⚔️"
+    },
+    {
+      "index": 3,
+      "kind": "event",
+      "nodeOrder": 2,
+      "label": "事件",
+      "emoji": "❓"
+    },
+    {
+      "index": 4,
+      "kind": "battle",
+      "battleRound": 3,
+      "label": "第 3 场",
+      "emoji": "⚔️"
+    },
+    {
+      "index": 5,
+      "kind": "rest_exit",
+      "nodeOrder": 3,
+      "label": "返回 / 休息",
+      "emoji": "🏕️"
+    },
+    {
+      "index": 6,
+      "kind": "battle",
+      "battleRound": 4,
+      "label": "第 4 场",
+      "emoji": "⚔️"
+    },
+    {
+      "index": 7,
+      "kind": "event",
+      "nodeOrder": 4,
+      "label": "事件",
+      "emoji": "❓"
+    },
+    {
+      "index": 8,
+      "kind": "battle",
+      "battleRound": 5,
+      "label": "第 5 场 · 终局",
+      "emoji": "🏆"
+    }
+  ],
+  "battleVictoryHealPct": 15,
+  "restNode": {
+    "healPct": 40,
+    "bonusGold": 100,
+    "clearDebuff": true,
+    "clearBonusMultiplier": 1.5
+  },
+  "endings": {
+    "clearTitle": "🏆 通关",
+    "clearDesc": "五场全胜，你带着满仓战利品离开了蛐蛐罐。",
+    "deadTitle": "💀 阵亡",
+    "deadDesc": "蛐蛐倒下了，带进去的卡与武器全部掉落。",
+    "extractTitle": "🚪 安全撤离",
+    "extractDesc": "见好就收，战利品全部落袋为安。"
+  }
+}

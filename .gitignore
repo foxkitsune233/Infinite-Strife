@@ -1,0 +1,53 @@
+# ===== 构建产物 =====
+.gradle/
+.kotlin/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ===== 本地环境配置 =====
+local.properties
+.idea/
+*.iml
+.DS_Store
+
+# ===== 缓存 / 工具中间产物 =====
+.firecrawl/
+.planning/
+
+# ===== 截图与分发产物（二进制大文件，不入库）=====
+shots/
+dist/
+art-generation/
+art-source/
+
+# ===== 游戏美术资源（含第三方版权素材，不随源码分发；获取方式见 docs/ART-ASSETS.md）=====
+app/src/main/assets/art/
+
+# ===== 测试运行日志（docs/testing 下的大 jsonl）=====
+docs/testing/results/
+
+# ===== 过程笔记（非项目源码）=====
+findings.md
+progress.md
+task_plan.md
+build_accept*.log
+
+# ===== 临时诊断测试（已废弃，待手动删除）=====
+app/src/test/java/com/example/douqiuqiu/inventory/TempSeedDiagTest.kt
+
+# ===== tools 下的临时/调试产物（脚本 .py/.kt/.ps1/.cjs/.tsv 保留）=====
+tools/__pycache__/
+tools/*.pyc
+tools/*.txt
+tools/*.xml
+tools/*.dat
+tools/*.zip
+tools/*.tmp
+tools/*.log
+tools/*.jsonl
+tools/*.bak
+tools/*.moved
+tools/f0?_*

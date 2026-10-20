@@ -1,0 +1,10 @@
+Control items artwork, 2026-10-18
+
+Generated using Aliyun Bailian qwen-image-3.0 after explicit user authorization.
+Source sheet, manifest and preserved previous illustrations:
+art-source/control-items-v1/
+
+Six new item illustrations and three revised illustrations were mechanically
+sliced and resized from a generated sheet. These are AI-generated artwork,
+not Kenney or Game-icons resources; no CC0 or CC BY license is asserted here.
+Use is subject to the model provider's applicable service terms.

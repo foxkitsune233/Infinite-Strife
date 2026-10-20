@@ -1,0 +1,178 @@
+{
+  "cards": [
+    {
+      "id": "basic_blue",
+      "school": "basic",
+      "quality": "蓝",
+      "exp": 1,
+      "price": 100,
+      "name": "普攻流·蓝",
+      "desc": "普攻流经验 +1"
+    },
+    {
+      "id": "basic_purple",
+      "school": "basic",
+      "quality": "紫",
+      "exp": 2,
+      "price": 200,
+      "name": "普攻流·紫",
+      "desc": "普攻流经验 +2",
+      "requireStar": 2
+    },
+    {
+      "id": "basic_gold",
+      "school": "basic",
+      "quality": "金",
+      "exp": 4,
+      "price": 300,
+      "name": "普攻流·金",
+      "desc": "普攻流经验 +4",
+      "requireStar": 3
+    },
+    {
+      "id": "ultimate_blue",
+      "school": "ultimate",
+      "quality": "蓝",
+      "exp": 1,
+      "price": 100,
+      "name": "大招流·蓝",
+      "desc": "大招流经验 +1"
+    },
+    {
+      "id": "ultimate_purple",
+      "school": "ultimate",
+      "quality": "紫",
+      "exp": 2,
+      "price": 200,
+      "name": "大招流·紫",
+      "desc": "大招流经验 +2",
+      "requireStar": 2
+    },
+    {
+      "id": "ultimate_gold",
+      "school": "ultimate",
+      "quality": "金",
+      "exp": 4,
+      "price": 300,
+      "name": "大招流·金",
+      "desc": "大招流经验 +4",
+      "requireStar": 3
+    },
+    {
+      "id": "life_blue",
+      "school": "life",
+      "quality": "蓝",
+      "exp": 1,
+      "price": 100,
+      "name": "生命流·蓝",
+      "desc": "生命流经验 +1"
+    },
+    {
+      "id": "life_purple",
+      "school": "life",
+      "quality": "紫",
+      "exp": 2,
+      "price": 200,
+      "name": "生命流·紫",
+      "desc": "生命流经验 +2",
+      "requireStar": 2
+    },
+    {
+      "id": "life_gold",
+      "school": "life",
+      "quality": "金",
+      "exp": 4,
+      "price": 300,
+      "name": "生命流·金",
+      "desc": "生命流经验 +4",
+      "requireStar": 3
+    },
+    {
+      "id": "shield_blue",
+      "school": "shield",
+      "quality": "蓝",
+      "exp": 1,
+      "price": 100,
+      "name": "护盾流·蓝",
+      "desc": "护盾流经验 +1"
+    },
+    {
+      "id": "shield_purple",
+      "school": "shield",
+      "quality": "紫",
+      "exp": 2,
+      "price": 200,
+      "name": "护盾流·紫",
+      "desc": "护盾流经验 +2",
+      "requireStar": 2
+    },
+    {
+      "id": "shield_gold",
+      "school": "shield",
+      "quality": "金",
+      "exp": 4,
+      "price": 300,
+      "name": "护盾流·金",
+      "desc": "护盾流经验 +4",
+      "requireStar": 3
+    },
+    {
+      "id": "crit_blue",
+      "school": "crit",
+      "quality": "蓝",
+      "exp": 1,
+      "price": 100,
+      "name": "暴击流·蓝",
+      "desc": "暴击流经验 +1"
+    },
+    {
+      "id": "crit_purple",
+      "school": "crit",
+      "quality": "紫",
+      "exp": 2,
+      "price": 200,
+      "name": "暴击流·紫",
+      "desc": "暴击流经验 +2",
+      "requireStar": 2
+    },
+    {
+      "id": "crit_gold",
+      "school": "crit",
+      "quality": "金",
+      "exp": 4,
+      "price": 300,
+      "name": "暴击流·金",
+      "desc": "暴击流经验 +4",
+      "requireStar": 3
+    },
+    {
+      "id": "evade_blue",
+      "school": "evade",
+      "quality": "蓝",
+      "exp": 1,
+      "price": 100,
+      "name": "闪避流·蓝",
+      "desc": "闪避流经验 +1"
+    },
+    {
+      "id": "evade_purple",
+      "school": "evade",
+      "quality": "紫",
+      "exp": 2,
+      "price": 200,
+      "name": "闪避流·紫",
+      "desc": "闪避流经验 +2",
+      "requireStar": 2
+    },
+    {
+      "id": "evade_gold",
+      "school": "evade",
+      "quality": "金",
+      "exp": 4,
+      "price": 300,
+      "name": "闪避流·金",
+      "desc": "闪避流经验 +4",
+      "requireStar": 3
+    }
+  ]
+}
