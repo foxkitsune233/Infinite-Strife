@@ -111,6 +111,9 @@ object ItemIconCatalog {
         putAll("skill_shard", IconGlyph.SHARD, BLUE)
         putAll("safe_lock", IconGlyph.LOCK, GOLD)
         putAll("safe_frame", IconGlyph.FRAME, GOLD)
+        // 0.1.6 护芯：复用已有 glyph + 变体配色，零新增素材
+        putAll("equipment_guard_core", IconGlyph.SHIELD, GOLD, 1)
+        putAll("skill_guard_core", IconGlyph.SHARD, PURPLE, 1)
         putAll("loot_copper_coin", IconGlyph.COIN, 0xFFC78C58.toInt())
         putAll("loot_silver_coin", IconGlyph.COIN, 0xFFBDD0DA.toInt())
         putAll("loot_tin_cup", IconGlyph.CUP, 0xFF96A6A6.toInt())

@@ -54,6 +54,8 @@ class JourneyRules(val inventory: InventoryRules) {
 
     fun fighter(state: InventoryState, heroId: String): Fighter {
         val hero = FirstRunContent.hero(heroId)
+        // 0.1.6 英雄等级：局外提升的永久属性在此一次性写入，战斗内不再读等级（回放可复现）。
+        val level = com.example.douqiuqiu.hero.HeroLevelRules.level(state, heroId)
         val equipped = state.items.filter { it.place.container == Container.EQUIPMENT && it.place.x < 6 }.map { defs.getValue(it.definitionId).stats }
         val cards = state.items.filter { it.place.container == Container.SKILLS }
         val gear = EquipmentBattleState(items = state.items.filter { it.place.container == Container.EQUIPMENT && it.place.x < 6 && it.definitionId in EquipmentCombat.definitions }
@@ -66,13 +68,17 @@ class JourneyRules(val inventory: InventoryRules) {
         val str = hero.strength + equipped.sumOf { it.strength } + stat("strength")
         val agi = hero.agility + equipped.sumOf { it.agility } + stat("agility")
         val int = hero.intelligence + equipped.sumOf { it.intelligence } + stat("intelligence")
-        val hp = 500 + 22 * str + equipped.sumOf { it.health } + stat("health")
+        val hp = (500 + 22 * str + equipped.sumOf { it.health } + stat("health")) *
+            com.example.douqiuqiu.hero.HeroLevelRules.healthMultiplier(level)
         val mana = (75 + 12 * int + stat("manaFlat")) * (1 + equipped.sumOf { it.manaPercent } / 100)
         val main = when (heroId) { "abaddon" -> (str + agi + int) * .45; "skywrath", "necrophos" -> int; else -> agi }
         val fighter = Fighter(heroId, hp, hp, minOf(mana, 30.0 + CardCombat.initialManaBonus(cardState)), mana,
-            hero.baseAttack + main + equipped.sumOf { it.attack } + stat("attack"),
+            (hero.baseAttack + main + equipped.sumOf { it.attack } + stat("attack")) *
+                com.example.douqiuqiu.hero.HeroLevelRules.attackMultiplier(level),
             (100 + agi + equipped.sumOf { it.attackSpeed } + stat("attackSpeed")) * (1 + stat("attackSpeedPercent")),
-            hero.bat, hero.baseArmor + agi / 6 + equipped.sumOf { it.armor } + stat("armor"), .25 + int * .001,
+            hero.bat, hero.baseArmor + agi / 6 + equipped.sumOf { it.armor } + stat("armor") +
+                com.example.douqiuqiu.hero.HeroLevelRules.armorBonus(level),
+            .25 + int * .001 + com.example.douqiuqiu.hero.HeroLevelRules.magicResistBonus(level) / 100,
             hero.regen + str * .1 + equipped.sumOf { it.healthRegen } + stat("healthRegen"),
             hero.manaRegen + int * .05 + equipped.sumOf { it.manaRegen } + CardCombat.passive(cardState, EffectKind.MANA_REGEN, "amount") + EquipmentCombat.passive(gear, EffectKind.MANA_REGEN, "amount"), cardState = cardState, equipment = gear)
         val shields = CardCombat.initialShields(cardState)

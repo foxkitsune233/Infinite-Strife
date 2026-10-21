@@ -10,7 +10,18 @@ class GrowthRules(private val inventory: InventoryRules) {
     fun status(s: InventoryState, id: String): GrowthStatus {
         if (s.phase != InventoryPhase.HOME || s.progress.run != null) return GrowthStatus(false, "仅局外可购买成长")
         val u = GrowthContent.upgrades.find { it.id == id } ?: return GrowthStatus(false, "成长项目不存在")
-        if (u.kind == GrowthKind.HERO && u.heroId in s.progress.unlockedHeroes) return GrowthStatus(false, "英雄已解锁")
+        if (u.kind == GrowthKind.HERO) {
+            if (u.heroId in s.progress.unlockedHeroes) return GrowthStatus(false, "英雄已解锁")
+            // 0.1.6：配了 questId 的英雄改走任务通道（领取任务即解锁，不再要求金币与材料）；
+            // 未配 questId 时沿用原金币+材料判定（任务内容补齐后逐英雄切换）。
+            val questId = u.questId
+            if (questId != null) {
+                val quest = com.example.douqiuqiu.quest.QuestContent.byId(questId)
+                    ?: return GrowthStatus(false, "英雄解锁配置缺失")
+                if (questId !in s.progress.claimedQuests) return GrowthStatus(false, "需完成任务「${quest.name}」")
+                return GrowthStatus(true, "资格与资源充足")
+            }
+        }
         if (u.kind != GrowthKind.HERO && GrowthContent.level(s, u.kind) != u.level - 1) return GrowthStatus(false, "需按顺序升级，不能重复购买或跳档")
         if (u.materials.any { (material, _) -> inventory.definitions[material]?.kind != ItemKind.MATERIAL }) return GrowthStatus(false, "成长材料配置缺失")
         val available = s.items.filter { it.place.container == Container.WAREHOUSE && inventory.definitions.getValue(it.definitionId).kind == ItemKind.MATERIAL }
@@ -44,6 +55,8 @@ class GrowthRules(private val inventory: InventoryRules) {
             GrowthKind.SKILLS -> next.copy(skillSlots = 4 + u.level)
             GrowthKind.BACKPACK -> GrowthContent.backpackSizes[u.level].let { next.copy(backpackWidth = it.first, backpackHeight = it.second) }
             GrowthKind.SAFE -> GrowthContent.safeSizes[u.level].let { next.copy(safeWidth = it.first, safeHeight = it.second) }
+            GrowthKind.EQUIPMENT_GUARD -> next.copy(progress = next.progress.copy(equipmentGuardLevel = u.level))
+            GrowthKind.SKILL_GUARD -> next.copy(progress = next.progress.copy(skillGuardLevel = u.level))
         }
         return inventory.validate(next)?.let { InventoryResult(s, it) } ?: InventoryResult(next)
     }

@@ -43,7 +43,21 @@ data class CampaignProgress(
     /** Last explicitly saved or applied preset per hero, used by hero switching. */
     val loadoutSelections: Map<String, Int> = emptyMap(),
     /** Instance locks prevent sale and crafting consumption, but never death losses. Stale IDs are allowed. */
-    val lockedItems: Set<String> = emptySet()
+    val lockedItems: Set<String> = emptySet(),
+    /** Per-hero levels for the 0.1.6 hero level system. Missing heroes default to level 1. */
+    val heroLevels: Map<String, Int> = emptyMap(),
+    /** Quest counters: questId -> progress value. One-shot quests keep their final value after claiming. */
+    val questCounters: Map<String, Int> = emptyMap(),
+    /** Quests whose rewards have been claimed. */
+    val claimedQuests: Set<String> = emptySet(),
+    /** Equipment guard level 0..3: how many equipped items survive death. */
+    val equipmentGuardLevel: Int = 0,
+    /** Skill guard level 0..4: how many skill cards survive death. */
+    val skillGuardLevel: Int = 0,
+    /** Permanently protected equipment instance IDs until manually unguarded. Stale IDs are allowed. */
+    val guardedEquipment: Set<String> = emptySet(),
+    /** Permanently protected skill card instance IDs until manually unguarded. Stale IDs are allowed. */
+    val guardedSkills: Set<String> = emptySet()
 )
 
 /** Platform-neutral persisted counters. Recovery calculations use the supplied clock in the adapter. */

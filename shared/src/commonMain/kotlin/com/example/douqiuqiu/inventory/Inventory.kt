@@ -90,7 +90,52 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
             }
         }
         validateLoadouts(state)?.let { return it }
+        validateGuards(state)?.let { return it }
         return com.example.douqiuqiu.journey.JourneyValidation.check(state.progress, definitions)
+    }
+
+    /**
+     * 0.1.6 保护槽校验：只校验档位范围与数量上限。
+     * 保护标记是**死亡白名单**，不约束物品当前位置（玩家可把受保护装备卸回仓库；
+     * 物品被消耗后留下的陈旧 ID 同样容忍，与 lockedItems 的既有约定一致）。
+     */
+    private fun validateGuards(state: InventoryState): String? {
+        val p = state.progress
+        if (p.equipmentGuardLevel !in 0..3) return "装备保护档位无效"
+        if (p.skillGuardLevel !in 0..4) return "技能保护档位无效"
+        if (p.guardedEquipment.size > p.equipmentGuardLevel) return "装备保护数量超过档位"
+        if (p.guardedSkills.size > p.skillGuardLevel) return "技能保护数量超过档位"
+        return null
+    }
+
+    /**
+     * 0.1.6 设置/取消死亡保护。保护为**永久有效直到手动取消**，不随死亡释放。
+     * 装备与技能分别受 [CampaignProgress.equipmentGuardLevel] /
+     * [CampaignProgress.skillGuardLevel] 的档位上限约束。
+     */
+    fun setGuard(s: InventoryState, instanceId: String, guarded: Boolean): InventoryResult {
+        validate(s)?.let { return InventoryResult(s, it) }
+        if (s.phase == InventoryPhase.BATTLE) return InventoryResult(s, "战斗中不能调整保护")
+        val item = s.items.singleOrNull { it.instanceId == instanceId } ?: return InventoryResult(s, "找不到物品")
+        val isEquipment = item.place.container == Container.EQUIPMENT
+        val isSkill = item.place.container == Container.SKILLS
+        if (!isEquipment && !isSkill) return InventoryResult(s, "只能保护装备栏或技能栏内的物品")
+        val next = if (isEquipment) {
+            if (guarded) {
+                if (instanceId in s.progress.guardedEquipment) return InventoryResult(s, "该装备已受保护")
+                if (s.progress.guardedEquipment.size >= s.progress.equipmentGuardLevel)
+                    return InventoryResult(s, "装备保护槽已满（${s.progress.equipmentGuardLevel}格），请升级装备栏强化")
+                s.copy(progress = s.progress.copy(guardedEquipment = s.progress.guardedEquipment + instanceId))
+            } else s.copy(progress = s.progress.copy(guardedEquipment = s.progress.guardedEquipment - instanceId))
+        } else {
+            if (guarded) {
+                if (instanceId in s.progress.guardedSkills) return InventoryResult(s, "该技能卡已受保护")
+                if (s.progress.guardedSkills.size >= s.progress.skillGuardLevel)
+                    return InventoryResult(s, "技能保护槽已满（${s.progress.skillGuardLevel}格），请升级技能栏强化")
+                s.copy(progress = s.progress.copy(guardedSkills = s.progress.guardedSkills + instanceId))
+            } else s.copy(progress = s.progress.copy(guardedSkills = s.progress.guardedSkills - instanceId))
+        }
+        return checked(s, next)
     }
 
     fun move(state: InventoryState, id: String, target: ItemPlace): InventoryResult {
@@ -184,8 +229,12 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
         if (state.phase != InventoryPhase.PREPARATION) return InventoryResult(state, "当前阶段不能结算挑战")
         if (survived && state.gold.toLong() + state.runGold > Int.MAX_VALUE) return InventoryResult(state, "金币超出上限")
         val retained = if (survived) state.items.map { it.copy(place = ItemPlace(Container.WAREHOUSE)) }
-            else state.items.filter { it.place.container == Container.WAREHOUSE || it.place.container == Container.SAFE }
-                .map { it.copy(place = ItemPlace(Container.WAREHOUSE)) }
+            else {
+                // 0.1.6：仓库与安全箱照旧全保留；受保护装备/技能卡按档位保留（保护为永久标记，不随死亡释放）。
+                val keep = state.progress.guardedEquipment + state.progress.guardedSkills
+                state.items.filter { it.place.container == Container.WAREHOUSE || it.place.container == Container.SAFE || it.instanceId in keep }
+                    .map { it.copy(place = ItemPlace(Container.WAREHOUSE)) }
+            }
         return checked(state, state.copy(gold = state.gold + if (survived) state.runGold else 0,
             runGold = 0, phase = InventoryPhase.HOME, items = retained))
     }

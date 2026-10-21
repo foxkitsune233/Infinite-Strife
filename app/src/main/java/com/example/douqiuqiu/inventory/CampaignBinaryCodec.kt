@@ -72,6 +72,15 @@ internal object CampaignBinaryCodec {
         out.writeInt(p.loadoutSelections.size)
         p.loadoutSelections.toSortedMap().forEach { (hero, slot) -> out.writeUTF(hero); out.writeInt(slot) }
         out.writeInt(p.lockedItems.size); p.lockedItems.sorted().forEach(out::writeUTF)
+        // 0.1.6 新增字段（v15）：英雄等级、任务进度、栏位强化。全部带默认值，旧档缺失即默认。
+        out.writeInt(p.heroLevels.size)
+        p.heroLevels.toSortedMap().forEach { (hero, level) -> out.writeUTF(hero); out.writeInt(level) }
+        out.writeInt(p.questCounters.size)
+        p.questCounters.toSortedMap().forEach { (id, value) -> out.writeUTF(id); out.writeInt(value) }
+        out.writeInt(p.claimedQuests.size); p.claimedQuests.sorted().forEach(out::writeUTF)
+        out.writeInt(p.equipmentGuardLevel); out.writeInt(p.skillGuardLevel)
+        out.writeInt(p.guardedEquipment.size); p.guardedEquipment.sorted().forEach(out::writeUTF)
+        out.writeInt(p.guardedSkills.size); p.guardedSkills.sorted().forEach(out::writeUTF)
     }
     fun read(input: DataInputStream, version: Int): CampaignProgress {
         val seed = input.readLong(); val batch = input.readInt(); val clears = input.readInt(); val extracted = input.readBoolean()
@@ -140,8 +149,33 @@ internal object CampaignBinaryCodec {
         val locks = if (version >= 13) List(count(input, 10000)) { input.readUTF() }.also {
             if (it.distinct().size != it.size) throw IOException("物品锁定记录重复")
         }.toSet() else emptySet()
+        // 0.1.6 字段（v15 起）：缺失时取默认值，旧档零迁移。
+        val heroLevels = if (version >= 15) buildMap {
+            repeat(count(input, FirstRunContent.heroes.size)) {
+                val hero = input.readUTF(); val level = input.readInt()
+                if (put(hero, level) != null) throw IOException("英雄等级记录重复")
+            }
+        } else emptyMap()
+        val questCounters = if (version >= 15) buildMap {
+            repeat(count(input, 1000)) {
+                val id = input.readUTF(); val value = input.readInt()
+                if (put(id, value) != null) throw IOException("任务进度记录重复")
+            }
+        } else emptyMap()
+        val claimedQuests = if (version >= 15) List(count(input, 1000)) { input.readUTF() }.also {
+            if (it.distinct().size != it.size) throw IOException("任务领取记录重复")
+        }.toSet() else emptySet()
+        val equipmentGuardLevel = if (version >= 15) input.readInt() else 0
+        val skillGuardLevel = if (version >= 15) input.readInt() else 0
+        val guardedEquipment = if (version >= 15) List(count(input, 3)) { input.readUTF() }.also {
+            if (it.distinct().size != it.size) throw IOException("装备保护记录重复")
+        }.toSet() else emptySet()
+        val guardedSkills = if (version >= 15) List(count(input, 4)) { input.readUTF() }.also {
+            if (it.distinct().size != it.size) throw IOException("技能保护记录重复")
+        }.toSet() else emptySet()
         return CampaignProgress(seed, batch, boxes, run, clears, extracted, ending, stock, cycle, seen, manual, economy, shop, heroes,
-            MaterialPityState(pity), activeHero, loadouts, selections, locks)
+            MaterialPityState(pity), activeHero, loadouts, selections, locks, heroLevels, questCounters, claimedQuests,
+            equipmentGuardLevel, skillGuardLevel, guardedEquipment, guardedSkills)
     }
     private fun chest(out: DataOutputStream, c: TargetChest) {
         out.writeUTF(c.id); out.writeUTF(c.quality); out.writeInt(c.difficulty); out.writeInt(c.ticket); out.writeInt(c.appraisals)

@@ -159,8 +159,8 @@ class InventoryActivity : AppCompatActivity() {
             }, LinearLayout.LayoutParams(0, dp(36), 1f).apply { setMargins(dp(1), 0, dp(1), 0) })
         }
         tabs.addView(compactButton("更多") {
-            GameUi.sheet(this, "整备工具", "${state.gold}金币", listOf("补给商店", "装备合成", "永久成长", "补齐空装备与技能栏")) { index ->
-                when (index) { 0 -> shop(); 1 -> crafting(); 2 -> growth(); 3 -> if (state.phase == InventoryPhase.HOME) autoEquip() else message("挑战中不能访问仓库") }
+            GameUi.sheet(this, "整备工具", "${state.gold}金币", listOf("补给商店", "装备合成", "永久成长", "委托任务", "英雄等级", "补齐空装备与技能栏")) { index ->
+                when (index) { 0 -> shop(); 1 -> crafting(); 2 -> growth(); 3 -> quests(); 4 -> heroLevels(); 5 -> if (state.phase == InventoryPhase.HOME) autoEquip() else message("挑战中不能访问仓库") }
             }
         }, LinearLayout.LayoutParams(dp(48), dp(36)))
         fixed.addView(tabs)
@@ -644,30 +644,38 @@ class InventoryActivity : AppCompatActivity() {
 
     private fun edit(item: StoredItem) {
         if (item.place.container == Container.WAREHOUSE && state.phase != InventoryPhase.HOME) { message("挑战中不能访问局外仓库"); return }
-        val choices = listOf("移动物品", "旋转 90°", "卡牌升星（三张同名同星卡）", "查看属性", "使用恢复品", "出售（绑定不可售）", "丢弃物品")
+        val guardable = item.place.container == Container.EQUIPMENT || item.place.container == Container.SKILLS
+        val guarded = item.instanceId in state.progress.guardedEquipment || item.instanceId in state.progress.guardedSkills
+        val guardIndex = if (guardable) 1 else -1
+        val choices = buildList {
+            add("移动物品")
+            if (guardable) add(if (guarded) "取消死亡保护" else "设为死亡保护")
+            add("旋转 90°"); add("卡牌升星（三张同名同星卡）"); add("查看属性"); add("使用恢复品"); add("出售（绑定不可售）"); add("丢弃物品")
+        }
         GameUi.sheet(this, rules.definitions.getValue(item.definitionId).name,
-            "${position(item)} · ${if (item.bound) "绑定，不可出售" else "可出售"}", choices) { which ->
-                when (which) {
-                    0 -> AlertDialog.Builder(this).setTitle("移至")
-                        .setItems(Container.entries.map(::label).toTypedArray()) { _, target -> choosePosition(item, Container.entries[target]) }.show()
-                    1 -> {
-                        if (item.place.container != Container.BACKPACK && item.place.container != Container.SAFE) message("请先放入背包或安全箱再旋转")
-                        else commit(rules.move(state, item.instanceId, item.place.copy(rotated = !item.place.rotated)))
-                    }
-                    2 -> merge(item)
-                    3 -> AlertDialog.Builder(this).setTitle(rules.definitions.getValue(item.definitionId).name)
-                        .setIcon(PaintedItemIcons.drawable(this, rules.definitions.getValue(item.definitionId)))
-                        .setMessage(description(rules.definitions.getValue(item.definitionId))).setPositiveButton("关闭", null).show()
-                    4 -> commit(repository.journey.useConsumable(state, item.instanceId))
-                    5 -> AlertDialog.Builder(this).setTitle("出售物品？").setMessage("以基础价格40%回收；升星卡按3/9份成本计。绑定物不可出售。")
-                        .setNegativeButton("取消", null).setPositiveButton("出售") { _, _ -> commit(SupplyRules(rules).sell(state, item.instanceId)) }.show()
-                    6 -> {
-                        if (state.phase == InventoryPhase.BATTLE) message("战斗中不能丢弃")
-                        else AlertDialog.Builder(this).setTitle("永久丢弃？").setMessage("${rules.definitions.getValue(item.definitionId).name}无法找回。")
-                            .setNegativeButton("取消", null).setPositiveButton("丢弃") { _, _ -> commit(InventoryResult(state.copy(items = state.items.filterNot { it.instanceId == item.instanceId }))) }.show()
-                    }
+            "${position(item)} · ${if (item.bound) "绑定，不可出售" else "可出售"}${if (guarded && guardable) " · 已受死亡保护" else ""}", choices) { which ->
+            when {
+                which == 0 -> AlertDialog.Builder(this).setTitle("移至")
+                    .setItems(Container.entries.map(::label).toTypedArray()) { _, target -> choosePosition(item, Container.entries[target]) }.show()
+                which == guardIndex -> commit(rules.setGuard(state, item.instanceId, !guarded))
+                which == guardIndex + 1 -> {
+                    if (item.place.container != Container.BACKPACK && item.place.container != Container.SAFE) message("请先放入背包或安全箱再旋转")
+                    else commit(rules.move(state, item.instanceId, item.place.copy(rotated = !item.place.rotated)))
+                }
+                which == guardIndex + 2 -> merge(item)
+                which == guardIndex + 3 -> AlertDialog.Builder(this).setTitle(rules.definitions.getValue(item.definitionId).name)
+                    .setIcon(PaintedItemIcons.drawable(this, rules.definitions.getValue(item.definitionId)))
+                    .setMessage(description(rules.definitions.getValue(item.definitionId))).setPositiveButton("关闭", null).show()
+                which == guardIndex + 4 -> commit(repository.journey.useConsumable(state, item.instanceId))
+                which == guardIndex + 5 -> AlertDialog.Builder(this).setTitle("出售物品？").setMessage("以基础价格40%回收；升星卡按3/9份成本计。绑定物不可出售。")
+                    .setNegativeButton("取消", null).setPositiveButton("出售") { _, _ -> commit(SupplyRules(rules).sell(state, item.instanceId)) }.show()
+                which == guardIndex + 6 -> {
+                    if (state.phase == InventoryPhase.BATTLE) message("战斗中不能丢弃")
+                    else AlertDialog.Builder(this).setTitle("永久丢弃？").setMessage("${rules.definitions.getValue(item.definitionId).name}无法找回。")
+                        .setNegativeButton("取消", null).setPositiveButton("丢弃") { _, _ -> commit(InventoryResult(state.copy(items = state.items.filterNot { it.instanceId == item.instanceId }))) }.show()
                 }
             }
+        }
     }
 
     private fun choosePosition(item: StoredItem, container: Container) {
@@ -861,6 +869,110 @@ class InventoryActivity : AppCompatActivity() {
         }
         sheet.show()
     }
+    /** 0.1.6 任务面板：引导/挑战/转化三类分组；内容表为空时显示暂无任务。 */
+    private fun quests() {
+        if (state.phase != InventoryPhase.HOME) { message("挑战中不能查看任务"); return }
+        val sheet = GameCatalogSheet(this, "委托任务", "${state.gold}金币 · 完成任务获取英雄与材料")
+        val quests = com.example.douqiuqiu.quest.QuestContent.all
+        if (quests.isEmpty()) {
+            sheet.body.addView(GameUi.label(this, "暂无任务", 16, GameUi.gold, true))
+            sheet.body.addView(GameUi.label(this, "任务内容正在补充中。完成任务可解锁新英雄、获得技能刻片与护芯。", 12, GameUi.muted))
+            sheet.show(); return
+        }
+        val claimable = com.example.douqiuqiu.quest.QuestTracker.claimable(state).map { it.id }.toSet()
+        val convertible = com.example.douqiuqiu.quest.QuestTracker.convertible(state).map { it.id }.toSet()
+        val groups = listOf(
+            "引导" to com.example.douqiuqiu.quest.QuestKind.GUIDE,
+            "挑战" to com.example.douqiuqiu.quest.QuestKind.CHALLENGE,
+            "转化" to com.example.douqiuqiu.quest.QuestKind.CONVERSION
+        )
+        groups.forEach { (title, kind) ->
+            val list = quests.filter { it.kind == kind }
+            if (list.isEmpty()) return@forEach
+            GameUi.section(sheet.body, title)
+            list.forEach { quest ->
+                val tile = GameUi.panel(this)
+                val done = quest.id in state.progress.claimedQuests
+                val ready = quest.id in claimable || quest.id in convertible
+                tile.addView(GameUi.label(this, quest.name, 16, if (done) GameUi.muted else GameUi.gold, true))
+                tile.addView(GameUi.label(this, quest.description, 12))
+                val progress = when {
+                    done -> "已领取"
+                    quest.kind == com.example.douqiuqiu.quest.QuestKind.CONVERSION ->
+                        if (quest.id in convertible) "材料足够，可兑换" else "材料不足：${quest.cost.entries.joinToString("、") { (id, n) -> "${rules.definitions.getValue(id).name}×$n" }}"
+                    else -> "进度 ${com.example.douqiuqiu.quest.QuestTracker.progressText(state, quest)}" +
+                        if (state.progress.clears < quest.minClears) " · 还需通关${quest.minClears - state.progress.clears}次" else ""
+                }
+                tile.addView(GameUi.label(this, progress, 12, if (ready) GameUi.green else GameUi.muted))
+                val rewardText = quest.rewards.joinToString("、") { r ->
+                    when (r.type) {
+                        com.example.douqiuqiu.quest.RewardType.GOLD -> "${r.amount}金币"
+                        com.example.douqiuqiu.quest.RewardType.HERO_UNLOCK -> "解锁英雄"
+                        com.example.douqiuqiu.quest.RewardType.MATERIAL -> "${rules.definitions.getValue(r.materialId!!).name}×${r.amount}"
+                        com.example.douqiuqiu.quest.RewardType.GUARD_CORE -> "${rules.definitions.getValue(r.materialId!!).name}×${r.amount}"
+                        com.example.douqiuqiu.quest.RewardType.HERO_LEVEL_UP -> "英雄等级+1"
+                    }
+                }
+                if (rewardText.isNotEmpty()) tile.addView(GameUi.label(this, "奖励：$rewardText", 12, GameUi.gold))
+                val buttonLabel = when {
+                    done -> "已完成"
+                    quest.kind == com.example.douqiuqiu.quest.QuestKind.CONVERSION -> "兑换"
+                    quest.id in claimable -> "领取奖励"
+                    else -> "进行中"
+                }
+                tile.addView(GameUi.button(this, buttonLabel) {
+                    val result = if (quest.kind == com.example.douqiuqiu.quest.QuestKind.CONVERSION)
+                        com.example.douqiuqiu.quest.QuestTracker.convert(state, quest.id, rules)
+                    else com.example.douqiuqiu.quest.QuestTracker.claim(state, quest.id, rules)
+                    if (!result.ok) message(result.error ?: "操作失败")
+                    else { commit(result); message("已获得${quest.name}的奖励"); quests() }
+                }.apply { isEnabled = ready && !done })
+                sheet.body.addView(tile)
+            }
+        }
+        sheet.show()
+    }
+
+    /** 0.1.6 英雄等级面板：金币升级，每英雄独立；显示当前等级加成与下一级费用。 */
+    private fun heroLevels() {
+        if (state.phase != InventoryPhase.HOME) { message("挑战中不能升级英雄"); return }
+        val sheet = GameCatalogSheet(this, "英雄等级", "${state.gold}金币 · 上限${com.example.douqiuqiu.hero.HeroLevelRules.LEVEL_CAP}级 · 提升永久战斗属性")
+        com.example.douqiuqiu.journey.FirstRunContent.heroes.filter { it.id in state.progress.unlockedHeroes }.forEach { hero ->
+            val level = com.example.douqiuqiu.hero.HeroLevelRules.level(state, hero.id)
+            val capped = com.example.douqiuqiu.hero.HeroLevelRules.isCapped(level)
+            val cost = com.example.douqiuqiu.hero.HeroLevelRules.upgradeCost(level)
+            val tile = GameUi.panel(this)
+            val row = LinearLayout(this).apply { gravity = android.view.Gravity.CENTER_VERTICAL }
+            GameArt.hero(this, hero.id)?.let {
+                row.addView(GameArt.image(this, it, hero.name).apply { scaleType = ImageView.ScaleType.FIT_CENTER }, LinearLayout.LayoutParams(dp(56), dp(68)))
+            }
+            row.addView(LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                addView(GameUi.label(this@InventoryActivity, hero.name, 16, GameUi.gold, true))
+                addView(GameUi.label(this@InventoryActivity, "等级 $level / ${com.example.douqiuqiu.hero.HeroLevelRules.LEVEL_CAP}", 14))
+            }, LinearLayout.LayoutParams(0, -2, 1f))
+            tile.addView(row)
+            val bonus = buildList {
+                val atk = (com.example.douqiuqiu.hero.HeroLevelRules.attackMultiplier(level) - 1) * 100
+                val hp = (com.example.douqiuqiu.hero.HeroLevelRules.healthMultiplier(level) - 1) * 100
+                add("攻击 +${"%.1f".format(atk)}% · 生命 +${"%.1f".format(hp)}%")
+                add("护甲 +${com.example.douqiuqiu.hero.HeroLevelRules.armorBonus(level)} · 魔法抗性 +${com.example.douqiuqiu.hero.HeroLevelRules.magicResistBonus(level)}%")
+            }
+            tile.addView(GameUi.label(this, bonus.joinToString("\n"), 12, GameUi.muted))
+            tile.addView(GameUi.button(this, when {
+                capped -> "已达版本上限"
+                state.gold < cost -> "升级需${cost}金币（不足）"
+                else -> "花费${cost}金币升级"
+            }) {
+                val result = com.example.douqiuqiu.hero.HeroLevelRules.upgrade(state, hero.id, rules)
+                if (!result.ok) message(result.error ?: "升级失败")
+                else { commit(result); message("${hero.name}升至${level + 1}级"); heroLevels() }
+            }.apply { isEnabled = !capped && state.gold >= cost })
+            sheet.body.addView(tile)
+        }
+        sheet.show()
+    }
+
     private fun crafting() {
         if (state.phase != InventoryPhase.HOME) { message("仅局外可合成"); return }
         com.example.douqiuqiu.ui.components.CraftingSheet(this, rules.definitions,

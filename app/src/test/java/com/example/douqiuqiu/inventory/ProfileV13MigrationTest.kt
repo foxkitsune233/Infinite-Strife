@@ -28,7 +28,10 @@ class ProfileV13MigrationTest {
 
     @Test fun v12ProfileMigratesWithEmptyLocksAndPreservesAllExistingFields() {
         val store = store()
-        val payload = store.exportBackup().copyOfRange(20, store.exportBackup().size - 4)
+        // v15 在 lockedItems 之后追加了 7 个字段（heroLevels/questCounters/claimedQuests/
+        // equipmentGuardLevel/skillGuardLevel/guardedEquipment/guardedSkills，默认值各写 4 字节）；
+        // v12 路径不读 lockedItems 及其后所有内容，故按旧版长度截断。
+        val payload = store.exportBackup().copyOfRange(20, store.exportBackup().size - 32)
         val legacy = envelope(12, payload)
         assertEquals(state, store.readBackup(legacy))
         temp.root.resolve("profile.dat").writeBytes(legacy)
@@ -45,7 +48,8 @@ class ProfileV13MigrationTest {
             assertEquals(state, store.load().state)
         }
         val bytes = store.exportBackup()
-        val legacyPayload = bytes.copyOfRange(20, bytes.size - 4)
+        // v13 格式 = 当前 payload 剥掉 v15 追加的 7 个字段（28 字节），保留 lockedItems。
+        val legacyPayload = bytes.copyOfRange(20, bytes.size - 28)
         val tail = ByteArrayOutputStream().also { buffer ->
             DataOutputStream(buffer).use { out -> out.writeInt(2); out.writeUTF("owned"); out.writeUTF("owned") }
         }.toByteArray()
