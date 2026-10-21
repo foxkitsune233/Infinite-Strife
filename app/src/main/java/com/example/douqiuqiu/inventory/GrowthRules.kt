@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.inventory
 
+import com.example.douqiuqiu.quest.*
+
 import com.example.douqiuqiu.growth.*
 import com.example.douqiuqiu.system.*
 
@@ -58,6 +60,6 @@ class GrowthRules(private val inventory: InventoryRules) {
             GrowthKind.EQUIPMENT_GUARD -> next.copy(progress = next.progress.copy(equipmentGuardLevel = u.level))
             GrowthKind.SKILL_GUARD -> next.copy(progress = next.progress.copy(skillGuardLevel = u.level))
         }
-        return inventory.validate(next)?.let { InventoryResult(s, it) } ?: InventoryResult(next)
+        return inventory.validate(next)?.let { InventoryResult(s, it) } ?: InventoryResult(QuestTracker.observe(next))
     }
 }

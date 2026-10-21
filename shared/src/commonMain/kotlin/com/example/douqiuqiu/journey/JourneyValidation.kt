@@ -4,6 +4,10 @@ import com.example.douqiuqiu.inventory.ItemDefinition
 
 object JourneyValidation {
     fun check(p: CampaignProgress, defs: Map<String, ItemDefinition>): String? {
+        if (p.questCounters.size > 1000 || p.questCounters.any { (id, value) -> id.isBlank() || id.length > 128 || value < 0 } ||
+            p.claimedQuests.size > 1000 || p.claimedQuests.any { it.isBlank() || it.length > 128 }) return "任务进度无效"
+        val claimed = com.example.douqiuqiu.quest.QuestContent.all.filter { it.id in p.claimedQuests }
+        if (claimed.groupBy { it.node }.any { (_, quests) -> quests.size > 1 }) return "任务节点重复领奖"
         if (p.lockedItems.size > 10000 || p.lockedItems.any { it.isBlank() || it.length > 128 }) return "物品锁定资料无效"
         val invalidPity = p.materialPity.counters.any { (category, counter) ->
             val threshold = MaterialProgression.policy.thresholds[category]

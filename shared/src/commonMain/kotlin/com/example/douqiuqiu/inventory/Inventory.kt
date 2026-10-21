@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.inventory
 
+import com.example.douqiuqiu.quest.*
+
 enum class ItemKind { EQUIPMENT, CARD, MATERIAL, SCROLL, CONSUMABLE, LOOT }
 enum class Container { WAREHOUSE, BACKPACK, SAFE, EQUIPMENT, SKILLS }
 enum class InventoryPhase { HOME, PREPARATION, BATTLE }
@@ -158,13 +160,13 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
             val origins = if (gridSource) listOf(item.place, item.place.copy(rotated = !item.place.rotated)) else listOf(item.place)
             for (origin in origins) {
                 val next = candidate(origin)
-                if (validate(next) == null) return InventoryResult(next)
+                if (validate(next) == null) return InventoryResult(QuestTracker.observe(next))
             }
             if (gridSource) {
                 // Only the ordinary backpack is a fallback: never silently move an item into protection.
                 for (y in 0 until state.backpackHeight) for (x in 0 until state.backpackWidth) for (rotated in listOf(false, true)) {
                     val next = candidate(ItemPlace(Container.BACKPACK, x, y, rotated))
-                    if (validate(next) == null) return InventoryResult(next)
+                    if (validate(next) == null) return InventoryResult(QuestTracker.observe(next))
                 }
             }
             return InventoryResult(state, "无法替换：旧物无法放回原位置，普通背包也没有可用空间")
@@ -240,7 +242,7 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
     }
 
     private fun checked(original: InventoryState, next: InventoryState): InventoryResult =
-        validate(next)?.let { InventoryResult(original, it) } ?: InventoryResult(next)
+        validate(next)?.let { InventoryResult(original, it) } ?: InventoryResult(QuestTracker.observe(next))
 
     private fun validateLoadouts(state: InventoryState): String? {
         val progress = state.progress

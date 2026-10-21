@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.inventory
 
+import com.example.douqiuqiu.quest.*
+
 data class CraftingRecipe(val id: String, val outputId: String, val ingredients: Map<String, Int>)
 
 class CraftingRules(private val inventory: InventoryRules, recipes: List<CraftingRecipe>) {
@@ -26,7 +28,7 @@ class CraftingRules(private val inventory: InventoryRules, recipes: List<Craftin
         if (selected.groupingBy { it.definitionId }.eachCount() != recipe.ingredients) return fail("组件或卷轴不匹配")
         val output = StoredItem(outputInstanceId, recipe.outputId, ItemPlace(Container.WAREHOUSE), bound = selected.any { it.bound })
         val next = state.copy(items = state.items.filterNot { it.instanceId in ingredientInstanceIds } + output)
-        return inventory.validate(next)?.let { fail(it) } ?: InventoryResult(next)
+        return inventory.validate(next)?.let { fail(it) } ?: InventoryResult(QuestTracker.record(next, QuestEvent.Crafted))
     }
 }
 

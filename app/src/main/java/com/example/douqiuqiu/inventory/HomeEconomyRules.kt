@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.inventory
 
+import com.example.douqiuqiu.quest.*
+
 import com.example.douqiuqiu.journey.*
 import com.example.douqiuqiu.system.*
 import com.example.douqiuqiu.shop.ShopRules
@@ -96,7 +98,7 @@ class HomeEconomyRules(private val inventory: InventoryRules) {
         }
         val result = SupplyRules(inventory).buy(current, id, instanceId)
         // 同批次内的失败（售罄/未上架/金币不足）也带上恢复后的快照，避免界面停留在过期数字上。
-        return if (result.ok) checked(s, result.state) else InventoryResult(s, result.error, refreshed = current)
+        return if (result.ok) checked(s, QuestTracker.record(result.state, QuestEvent.ShopPurchase)) else InventoryResult(s, result.error, refreshed = current)
     }
 
     fun refreshCountdown(s: InventoryState, nowMs: Long): Long? = ChargeRecovery.recover(

@@ -12,7 +12,9 @@ class HomeEconomyTest {
     ).associateBy { it.id })
     private val journey = JourneyRules(rules)
     private val economy = HomeEconomyRules(rules)
-    private fun home(gold: Int = 1200): InventoryState = economy.recover(journey.ensureBatch(InventoryState(gold = gold)), 1_000)
+    private fun home(gold: Int = 1200): InventoryState = economy.recover(journey.ensureBatch(InventoryState(gold = gold, progress = CampaignProgress(
+        // Economy fixtures retain their original four difficulty tiers; quest gates are tested separately.
+        claimedQuests = com.example.douqiuqiu.quest.QuestContent.all.filter { it.node <= 16 }.groupBy { it.node }.values.map { it.first().id }.toSet()))), 1_000)
 
     @Test fun refreshReplacesOnlySelectedChestAndResetsAppraisalWithoutRefund() {
         val initial = home()

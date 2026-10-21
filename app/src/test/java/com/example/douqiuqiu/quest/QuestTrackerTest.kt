@@ -12,8 +12,7 @@ import org.junit.Assert.*
 import org.junit.Test
 
 /**
- * 0.1.6 任务系统框架验收。任务列表由测试注入（QuestContent 生产表为空，
- * 具体条目由维护者补充），验证记录、领取、兑换三类行为与原子性。
+ * 0.1.6 任务系统框架验收。任务列表由测试注入（独立于 QuestContent 生产表），验证记录、领取、兑换三类行为与原子性。
  */
 class QuestTrackerTest {
 
@@ -161,7 +160,7 @@ class QuestTrackerTest {
 
     @Test fun emptyContentTableRecordsNothing() {
         val s = InventoryState()
-        val after = QuestTracker.record(s, QuestEvent.BattleWon("juggernaut", 1))
+        val after = QuestTracker.record(s, QuestEvent.BattleWon("juggernaut", 1), emptyList())
         assertEquals(s, after)
     }
 

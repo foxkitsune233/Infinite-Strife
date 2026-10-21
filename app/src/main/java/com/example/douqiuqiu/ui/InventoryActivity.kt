@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.ui
 
+import com.example.douqiuqiu.quest.*
+
 import android.graphics.Color
 import android.graphics.Typeface
 import android.content.ClipData
@@ -869,64 +871,45 @@ class InventoryActivity : AppCompatActivity() {
         }
         sheet.show()
     }
-    /** 0.1.6 任务面板：引导/挑战/转化三类分组；内容表为空时显示暂无任务。 */
+    /** 顺序节点与三选一分支使用同一规则层判定，面板不直接推进进度。 */
     private fun quests() {
         if (state.phase != InventoryPhase.HOME) { message("挑战中不能查看任务"); return }
-        val sheet = GameCatalogSheet(this, "委托任务", "${state.gold}金币 · 完成任务获取英雄与材料")
-        val quests = com.example.douqiuqiu.quest.QuestContent.all
-        if (quests.isEmpty()) {
-            sheet.body.addView(GameUi.label(this, "暂无任务", 16, GameUi.gold, true))
-            sheet.body.addView(GameUi.label(this, "任务内容正在补充中。完成任务可解锁新英雄、获得技能刻片与护芯。", 12, GameUi.muted))
-            sheet.show(); return
-        }
-        val claimable = com.example.douqiuqiu.quest.QuestTracker.claimable(state).map { it.id }.toSet()
-        val convertible = com.example.douqiuqiu.quest.QuestTracker.convertible(state).map { it.id }.toSet()
-        val groups = listOf(
-            "引导" to com.example.douqiuqiu.quest.QuestKind.GUIDE,
-            "挑战" to com.example.douqiuqiu.quest.QuestKind.CHALLENGE,
-            "转化" to com.example.douqiuqiu.quest.QuestKind.CONVERSION
-        )
-        groups.forEach { (title, kind) ->
-            val list = quests.filter { it.kind == kind }
-            if (list.isEmpty()) return@forEach
-            GameUi.section(sheet.body, title)
-            list.forEach { quest ->
+        val sheet = GameCatalogSheet(this, "委托任务", "已领取 ${QuestProgression.completedNodes(state)}/24 个节点 · ${state.gold}金币")
+        sheet.body.addView(GameUi.label(this, "按节点顺序领奖；目标从开始游戏起累计。三选一节点仅能领取一项，奖励相同。", 12))
+        sheet.body.addView(GameUi.label(this, "副本门槛：简单0 · 普通6 · 困难12 · 精英16 · 大师20 · 噩梦23。解锁后下一批宝箱可出现新难度。", 12, GameUi.gold))
+        val claimable = QuestTracker.claimable(state).map { it.id }.toSet()
+        QuestContent.all.groupBy { it.node }.forEach { (node, choices) ->
+            GameUi.section(sheet.body, "节点 $node / 24" + if (choices.size == 3) " · 三选一" else " · 引导")
+            choices.forEach { quest ->
                 val tile = GameUi.panel(this)
                 val done = quest.id in state.progress.claimedQuests
-                val ready = quest.id in claimable || quest.id in convertible
-                tile.addView(GameUi.label(this, quest.name, 16, if (done) GameUi.muted else GameUi.gold, true))
+                val closed = QuestTracker.nodeClaimed(state, quest) && !done
+                val available = QuestTracker.nodeAvailable(state, quest)
+                val ready = quest.id in claimable
+                tile.addView(GameUi.label(this, quest.name, 16, if (done || closed) GameUi.muted else GameUi.gold, true))
                 tile.addView(GameUi.label(this, quest.description, 12))
                 val progress = when {
-                    done -> "已领取"
-                    quest.kind == com.example.douqiuqiu.quest.QuestKind.CONVERSION ->
-                        if (quest.id in convertible) "材料足够，可兑换" else "材料不足：${quest.cost.entries.joinToString("、") { (id, n) -> "${rules.definitions.getValue(id).name}×$n" }}"
-                    else -> "进度 ${com.example.douqiuqiu.quest.QuestTracker.progressText(state, quest)}" +
-                        if (state.progress.clears < quest.minClears) " · 还需通关${quest.minClears - state.progress.clears}次" else ""
+                    done -> "已完成并领奖"
+                    closed -> "已选择本节点其他任务"
+                    !available -> "需先领取前一节点 · 进度 ${QuestTracker.progressText(state, quest)}"
+                    ready -> "目标已达成，可领取奖励"
+                    else -> "进度 ${QuestTracker.progressText(state, quest)}"
                 }
                 tile.addView(GameUi.label(this, progress, 12, if (ready) GameUi.green else GameUi.muted))
                 val rewardText = quest.rewards.joinToString("、") { r ->
                     when (r.type) {
-                        com.example.douqiuqiu.quest.RewardType.GOLD -> "${r.amount}金币"
-                        com.example.douqiuqiu.quest.RewardType.HERO_UNLOCK -> "解锁英雄"
-                        com.example.douqiuqiu.quest.RewardType.MATERIAL -> "${rules.definitions.getValue(r.materialId!!).name}×${r.amount}"
-                        com.example.douqiuqiu.quest.RewardType.GUARD_CORE -> "${rules.definitions.getValue(r.materialId!!).name}×${r.amount}"
-                        com.example.douqiuqiu.quest.RewardType.HERO_LEVEL_UP -> "英雄等级+1"
+                        RewardType.GOLD -> "${r.amount}金币"
+                        RewardType.HERO_UNLOCK -> "${FirstRunContent.hero(r.heroId!!).name}（已拥有则${r.amount}金币）"
+                        RewardType.ITEM, RewardType.MATERIAL, RewardType.GUARD_CORE -> "${rules.definitions.getValue(r.materialId!!).name}×${r.amount}"
+                        RewardType.HERO_LEVEL_UP -> "英雄等级+1"
                     }
                 }
-                if (rewardText.isNotEmpty()) tile.addView(GameUi.label(this, "奖励：$rewardText", 12, GameUi.gold))
-                val buttonLabel = when {
-                    done -> "已完成"
-                    quest.kind == com.example.douqiuqiu.quest.QuestKind.CONVERSION -> "兑换"
-                    quest.id in claimable -> "领取奖励"
-                    else -> "进行中"
-                }
-                tile.addView(GameUi.button(this, buttonLabel) {
-                    val result = if (quest.kind == com.example.douqiuqiu.quest.QuestKind.CONVERSION)
-                        com.example.douqiuqiu.quest.QuestTracker.convert(state, quest.id, rules)
-                    else com.example.douqiuqiu.quest.QuestTracker.claim(state, quest.id, rules)
+                tile.addView(GameUi.label(this, "奖励：$rewardText", 12, GameUi.gold))
+                tile.addView(GameUi.button(this, if (ready) "领取奖励" else progress) {
+                    val result = QuestTracker.claim(state, quest.id, rules)
                     if (!result.ok) message(result.error ?: "操作失败")
-                    else { commit(result); message("已获得${quest.name}的奖励"); quests() }
-                }.apply { isEnabled = ready && !done })
+                    else if (commit(result)) { sheet.dialog.dismiss(); message("已获得${quest.name}的奖励"); quests() }
+                }.apply { isEnabled = ready })
                 sheet.body.addView(tile)
             }
         }

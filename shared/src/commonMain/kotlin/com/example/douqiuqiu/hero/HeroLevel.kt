@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.hero
 
+import com.example.douqiuqiu.quest.*
+
 import com.example.douqiuqiu.inventory.InventoryResult
 import com.example.douqiuqiu.inventory.InventoryRules
 import com.example.douqiuqiu.inventory.InventoryState
@@ -59,6 +61,9 @@ object HeroLevelRules {
      * 存档校验失败均不产生任何变更。
      */
     fun upgrade(s: InventoryState, heroId: String, rules: InventoryRules): InventoryResult {
+        rules.validate(s)?.let { return InventoryResult(s, it) }
+        if (s.phase != com.example.douqiuqiu.inventory.InventoryPhase.HOME || s.progress.run != null) return InventoryResult(s, "仅营地可升级英雄")
+        if (heroId !in s.progress.unlockedHeroes) return InventoryResult(s, "英雄尚未解锁")
         if (heroId.isBlank()) return InventoryResult(s, "英雄资料无效")
         val current = level(s, heroId)
         if (isCapped(current)) return InventoryResult(s, "英雄等级已达当前版本上限（$LEVEL_CAP 级）")
@@ -68,6 +73,6 @@ object HeroLevelRules {
             gold = s.gold - cost,
             progress = s.progress.copy(heroLevels = s.progress.heroLevels + (heroId to current + 1))
         )
-        return rules.validate(next)?.let { InventoryResult(s, it) } ?: InventoryResult(next)
+        return rules.validate(next)?.let { InventoryResult(s, it) } ?: InventoryResult(QuestTracker.record(next, QuestEvent.HeroLevelChanged(heroId, current + 1)))
     }
 }

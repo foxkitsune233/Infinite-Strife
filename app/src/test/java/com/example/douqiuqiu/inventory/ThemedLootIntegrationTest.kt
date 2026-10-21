@@ -30,6 +30,9 @@ class ThemedLootIntegrationTest {
     )
     private val inventory = InventoryRules(definitions)
     private val journey = JourneyRules(inventory)
+    // These fixtures test material eligibility, independent of the new quest entry gate.
+    private fun unlockedNodes(nodes: Int = 23) = com.example.douqiuqiu.quest.QuestContent.all.filter { it.node <= nodes }
+        .groupBy { it.node }.values.map { it.first().id }.toSet()
 
     private fun pity(vararg pairs: Pair<String, MaterialPityCounter>) = MaterialPityState(mapOf(*pairs))
 
@@ -84,7 +87,7 @@ class ThemedLootIntegrationTest {
 
     @Test fun l01BatchSizeFollowsClearsAndKeepsFiveFights() {
         for ((clears, count) in listOf(0 to 4, 2 to 4, 3 to 6, 9 to 6, 10 to 8)) {
-            val s = InventoryState(gold = 100000, progress = CampaignProgress(clears = clears))
+            val s = InventoryState(gold = 100000, progress = CampaignProgress(claimedQuests = unlockedNodes(if (clears < 3) 16 else 23), clears = clears))
             val batch = journey.ensureBatch(s)
             val boxes = batch.progress.chests
             assertEquals("clears=$clears 箱数", count, boxes.size)
@@ -300,7 +303,7 @@ class ThemedLootIntegrationTest {
     }
 
     @Test fun l14SkillsAndSafeGuaranteeConsumeTheirOwnCategoryOnly() {
-        val base = InventoryState(gold = 100000, progress = CampaignProgress(clears = 3, extracted = true))
+        val base = InventoryState(gold = 100000, progress = CampaignProgress(claimedQuests = unlockedNodes(), clears = 3, extracted = true))
             .copy(skillSlots = 6)
         val batch = journey.ensureBatch(base)
         val skillsBox = batch.progress.chests.single { it.theme == ChestTheme.SKILLS }
@@ -376,7 +379,7 @@ class ThemedLootIntegrationTest {
     // ---------------- 终局计数 ----------------
 
     @Test fun l17QualifiedClearMissAccumulatesToThreshold() {
-        var s = InventoryState(gold = 100000, progress = CampaignProgress(clears = 1, extracted = true))
+        var s = InventoryState(gold = 100000, progress = CampaignProgress(claimedQuests = unlockedNodes(), clears = 1, extracted = true))
         repeat(4) { s = clearTarget(s, box("box-b$it", ChestTheme.BACKPACK, 0, 60)) }
         assertEquals(MaterialPityCounter(4, true), s.progress.materialPity.counters["backpack"])
         // 非对应主题不加
@@ -387,11 +390,11 @@ class ThemedLootIntegrationTest {
         s = clearTarget(s, box("box-sf0", ChestTheme.SAFE, 0, 60))
         assertEquals(frozen, s.progress.materialPity)
         // safe 6 次 -> pending
-        var t = InventoryState(gold = 100000, progress = CampaignProgress(clears = 1, extracted = true))
+        var t = InventoryState(gold = 100000, progress = CampaignProgress(claimedQuests = unlockedNodes(), clears = 1, extracted = true))
         repeat(6) { t = clearTarget(t, box("box-sf$it", ChestTheme.SAFE, 1, 150)) }
         assertEquals(MaterialPityCounter(6, true), t.progress.materialPity.counters["safe"])
         // skills 4 次 -> pending
-        var u = InventoryState(gold = 100000, progress = CampaignProgress(clears = 3, extracted = true))
+        var u = InventoryState(gold = 100000, progress = CampaignProgress(claimedQuests = unlockedNodes(), clears = 3, extracted = true))
             .copy(skillSlots = 6)
         repeat(4) { u = clearTarget(u, box("box-sk$it", ChestTheme.SKILLS, 1, 150)) }
         assertEquals(MaterialPityCounter(4, true), u.progress.materialPity.counters["skills"])
@@ -532,7 +535,7 @@ class ThemedLootIntegrationTest {
     }
 
     @Test fun l25SoleSafeNeedStillGetsDifficultyOneBoxAndCheapEntry() {
-        val s = InventoryState(gold = 100000, progress = CampaignProgress(clears = 6, extracted = true))
+        val s = InventoryState(gold = 100000, progress = CampaignProgress(claimedQuests = unlockedNodes(), clears = 6, extracted = true))
             .copy(backpackWidth = 6, backpackHeight = 4, skillSlots = 8, safeWidth = 3, safeHeight = 2)
         val batch = journey.ensureBatch(s)
         val boxes = batch.progress.chests
