@@ -194,4 +194,33 @@ class QuestTrackerTest {
         s = QuestTracker.record(s, QuestEvent.RunCleared("juggernaut", 5), listOf(hard))
         assertEquals(1, s.progress.questCounters["hard"])
     }
+
+    // 面板只渲染当前节点的行为（0.1.6 入口改版）：已完成与未到的节点一律不可见。
+    @Test fun visibleQuestsShowsOnlyFirstUnclaimedNode() {
+        var s = InventoryState()
+        assertEquals(listOf("journey.1"), QuestTracker.visibleQuests(s).map { it.id })
+        s = s.copy(progress = s.progress.copy(claimedQuests = setOf("journey.1")))
+        assertEquals(listOf("journey.2"), QuestTracker.visibleQuests(s).map { it.id })
+    }
+
+    @Test fun visibleQuestsShowsAllOptionsOfChoiceNode() {
+        // 领取节点 1..12（全为单任务）后，节点 13（三选一）成为当前节点。
+        val claimed = (1..12).map { "journey.$it" }.toSet()
+        val s = InventoryState(progress = CampaignProgress(claimedQuests = claimed))
+        val vis = QuestTracker.visibleQuests(s)
+        assertEquals(13, vis.first().node)
+        assertEquals(3, vis.size)
+    }
+
+    @Test fun choiceNodeCompletingAdvancesToNextNode() {
+        val claimed = (1..12).map { "journey.$it" }.toSet() + setOf("journey.13.1")
+        val s = InventoryState(progress = CampaignProgress(claimedQuests = claimed))
+        assertEquals(listOf("journey.14"), QuestTracker.visibleQuests(s).map { it.id })
+    }
+
+    @Test fun visibleQuestsEmptyWhenAllClaimed() {
+        val claimed = QuestContent.all.map { it.id }.toSet()
+        val s = InventoryState(progress = CampaignProgress(claimedQuests = claimed))
+        assertTrue(QuestTracker.visibleQuests(s).isEmpty())
+    }
 }

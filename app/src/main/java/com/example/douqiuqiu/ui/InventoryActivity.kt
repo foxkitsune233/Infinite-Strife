@@ -875,27 +875,27 @@ class InventoryActivity : AppCompatActivity() {
         }
         sheet.show()
     }
-    /** 顺序节点与三选一分支使用同一规则层判定，面板不直接推进进度。 */
+    /** 顺序节点与三选一分支使用同一规则层判定，面板不直接推进进度。只渲染当前节点。 */
     private fun quests() {
         if (state.phase != InventoryPhase.HOME) { message("挑战中不能查看任务"); return }
         val sheet = GameCatalogSheet(this, "委托任务", "已领取 ${QuestProgression.completedNodes(state)}/24 个节点 · ${state.gold}金币")
-        sheet.body.addView(GameUi.label(this, "按节点顺序领奖；目标从开始游戏起累计。三选一节点仅能领取一项，奖励相同。", 12))
+        sheet.body.addView(GameUi.label(this, "按顺序完成当前节点即可领取奖励；三选一节点仅能领取一项。目标从开始游戏起累计。", 12))
         sheet.body.addView(GameUi.label(this, "副本门槛：简单0 · 普通6 · 困难12 · 精英16 · 大师20 · 噩梦23。解锁后下一批宝箱可出现新难度。", 12, GameUi.gold))
+        val visible = QuestTracker.visibleQuests(state)
         val claimable = QuestTracker.claimable(state).map { it.id }.toSet()
-        QuestContent.all.groupBy { it.node }.forEach { (node, choices) ->
-            GameUi.section(sheet.body, "节点 $node / 24" + if (choices.size == 3) " · 三选一" else " · 引导")
-            choices.forEach { quest ->
+        if (visible.isEmpty()) {
+            sheet.body.addView(GameUi.label(this, "全部 24 个任务节点已完成！", 16, GameUi.green, true))
+        } else {
+            val node = visible.first().node
+            GameUi.section(sheet.body, "当前节点 $node / 24" + if (visible.size == 3) " · 三选一" else " · 引导")
+            visible.forEach { quest ->
                 val tile = GameUi.panel(this)
                 val done = quest.id in state.progress.claimedQuests
-                val closed = QuestTracker.nodeClaimed(state, quest) && !done
-                val available = QuestTracker.nodeAvailable(state, quest)
                 val ready = quest.id in claimable
-                tile.addView(GameUi.label(this, quest.name, 16, if (done || closed) GameUi.muted else GameUi.gold, true))
+                tile.addView(GameUi.label(this, quest.name, 16, if (done) GameUi.muted else GameUi.gold, true))
                 tile.addView(GameUi.label(this, quest.description, 12))
                 val progress = when {
                     done -> "已完成并领奖"
-                    closed -> "已选择本节点其他任务"
-                    !available -> "需先领取前一节点 · 进度 ${QuestTracker.progressText(state, quest)}"
                     ready -> "目标已达成，可领取奖励"
                     else -> "进度 ${QuestTracker.progressText(state, quest)}"
                 }
@@ -916,6 +916,7 @@ class InventoryActivity : AppCompatActivity() {
                 }.apply { isEnabled = ready })
                 sheet.body.addView(tile)
             }
+            sheet.body.addView(GameUi.label(this, "完成当前节点后，下一个节点会自动出现。", 12, GameUi.muted))
         }
         sheet.show()
     }

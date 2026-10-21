@@ -111,6 +111,18 @@ object QuestTracker {
             q.cost.all { (id, need) -> warehouseCount(s, id) >= need }
     }
 
+    /**
+     * 当前可见任务：只暴露「第一个未完成节点」内的全部选项；已领取节点与尚未解锁的
+     * 后续节点均不返回（面板据此只渲染一项，完成一件后自动移出、下一件接着出现）。
+     * 一个节点被视为「已完成」当且仅当该节点内任一任务已被领取（三选一节点领取任一项即完成）。
+     */
+    fun visibleQuests(s: InventoryState, quests: List<Quest> = QuestContent.all): List<Quest> {
+        val byNode = quests.filter { it.node > 0 }.groupBy { it.node }
+        val done = byNode.filter { (_, qs) -> qs.any { it.id in s.progress.claimedQuests } }.keys
+        val current = byNode.keys.sorted().firstOrNull { it !in done } ?: return emptyList()
+        return byNode[current]!!
+    }
+
     /** 领取一次性任务奖励。前置未满足 / 未达目标 / 重复领取均拒绝。 */
     fun claim(s: InventoryState, questId: String, rules: InventoryRules, quests: List<Quest> = QuestContent.all): InventoryResult {
         rules.validate(s)?.let { return InventoryResult(s, it) }
