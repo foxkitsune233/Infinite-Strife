@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.journey
 
+import com.example.douqiuqiu.quest.*
+
 import com.example.douqiuqiu.inventory.*
 import com.example.douqiuqiu.grid.*
 import com.example.douqiuqiu.loot.*
@@ -16,14 +18,18 @@ class ChestFactory(private val inventory: InventoryRules) {
         if (s.progress.run != null || s.progress.chests.isNotEmpty()) return s
         require(s.phase == InventoryPhase.HOME) { "仅局外生成宝箱" }
         // 初始 4 箱，累计 3 次通关扩至 6 箱，10 次扩至 8 箱（design/economy-progression.md）。
-        val count = when { s.progress.clears >= 10 -> 8; s.progress.clears >= 3 -> 6; else -> 4 }
+        val count = maxOf(QuestProgression.maxDifficulty(s) + 1, when { s.progress.clears >= 10 -> 8; s.progress.clears >= 3 -> 6; else -> 4 })
         val needed = MaterialProgression.eligible(s, definitions).sorted().map(MaterialProgression::theme)
         val themes = (listOf(ChestTheme.SUPPLIES) + needed + ChestTheme.entries).distinct()
         var next = s
         val boxes = mutableListOf<TargetChest>()
         repeat(count) { index ->
             val theme = themes[index % themes.size]
-            val difficulty = index % ChallengeBalance.COUNT
+            // 首箱始终简单；所有可进入难度均可在新批次出现，包括少通关但多任务的玩家。
+            val unlocked = QuestProgression.maxDifficulty(s)
+            val cycledDifficulty = index % (unlocked + 1)
+            // 安全箱材料保底要求普通或以上；不能因循环到简单档而失去旧档保底路径。
+            val difficulty = if (theme == ChestTheme.SAFE && unlocked >= 1) maxOf(1, cycledDifficulty) else cycledDifficulty
             val quality = listOf("白", "蓝", "紫", "紫", "金", "金")[difficulty]
             val ticket = EconomyBalance.ticket(quality, difficulty)
             val generated = generate(next, theme, difficulty, quality, ticket)

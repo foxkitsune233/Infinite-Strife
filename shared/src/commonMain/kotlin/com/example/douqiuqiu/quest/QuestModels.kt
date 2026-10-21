@@ -12,6 +12,8 @@ enum class QuestKind { GUIDE, CHALLENGE, CONVERSION }
 
 /** 目标类型。全部挂在现有结算函数上，由 [QuestTracker] 推进。 */
 enum class ObjectiveType {
+    EQUIP_ITEM, SLOT_CARD, STORE_SAFE, ENTER_RUN, PICKUP_LOOT,
+    BACKPACK_LEVEL, SAFE_LEVEL, SKILL_LEVEL,
     WIN_BATTLES,        // 战斗胜利累计场次
     CLEAR_COUNT,        // 通关次数
     CLEAR_DIFFICULTY,   // 指定及以上难度通关次数
@@ -37,8 +39,9 @@ data class QuestObjective(
 
 /** 奖励类型。 */
 enum class RewardType {
+    ITEM,           // 装备、卡牌、消耗品与组件，沿用仓库实例规则
     GOLD,           // 营地金币
-    HERO_UNLOCK,    // 解锁英雄（替代原金币购买通道）
+    HERO_UNLOCK,    // 解锁英雄；已拥有时按 amount 补偿金币，保留原购买通道
     MATERIAL,       // 指定材料（如 skill_shard）
     GUARD_CORE,     // 装备护芯 / 技能护芯（由 materialId 区分）
     HERO_LEVEL_UP   // 直接提升一级指定英雄等级（消耗金币走 HeroLevelRules，此处仅作目标奖励）
@@ -63,11 +66,15 @@ data class Quest(
     val minClears: Int = 0,
     val repeatable: Boolean = false,
     /** CONVERSION 专用：上缴材料 definitionId → 数量。发放前从仓库原子扣除。 */
-    val cost: Map<String, Int> = emptyMap()
+    val cost: Map<String, Int> = emptyMap(),
+    /** 1..24 为主线节点，同节点任意一个任务领奖即永久关闭其他选项；0 为独立任务。 */
+    val node: Int = 0
 )
 
 /** 推进事件。每个事件对应现有代码里一个已存在的结算点。 */
 sealed class QuestEvent {
+    data object Entered : QuestEvent()
+    data object LootPicked : QuestEvent()
     /** 战斗胜利。 [heroId] 出战英雄，[difficulty] 本场难度。 */
     data class BattleWon(val heroId: String, val difficulty: Int) : QuestEvent()
 

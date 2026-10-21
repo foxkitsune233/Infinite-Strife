@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.ui
 
+import com.example.douqiuqiu.quest.*
+
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -271,6 +273,7 @@ class JourneyActivity : AppCompatActivity() {
             inventoryButton(); return
         }
         text("选择目标宝箱", 20)
+        text("任务节点 ${QuestProgression.completedNodes(state)}/24 · 已开放至${ChallengeBalance.name(QuestProgression.maxDifficulty(state))}，在整备工具中领取任务奖励", 13, GameUi.gold)
         if (state.progress.chests.none { it.id == selectedChest }) selectedChest = state.progress.chests.minByOrNull { it.ticket }?.id
         val strip = LinearLayout(this).apply { gravity = Gravity.CENTER_VERTICAL }
         state.progress.chests.forEach { chest ->
@@ -308,7 +311,9 @@ class JourneyActivity : AppCompatActivity() {
             button("目标管理 · 更换宝箱与补给  ›") { showSupplyGuide(chest) }
             val subsidy = if (state.progress.economy.vouchers > 0 && EconomyBalance.subsidized(chest)) minOf(EconomyBalance.RELIEF_SUBSIDY, chest.ticket) else 0
             text("出战：${FirstRunContent.hero(state.progress.activeHeroId).name} · 出发时确认英雄与配置", 13, GameUi.muted)
-            primaryAction("进入挑战 · 共${chest.ticket.toLong() - subsidy + carryGold}金币") {
+            val locked = QuestProgression.lockedReason(state, chest.difficulty)
+            if (locked != null) text(locked + "；请先完成整备工具中的委托任务。", 14, GameUi.gold)
+            else primaryAction("进入挑战 · 共${chest.ticket.toLong() - subsidy + carryGold}金币") {
                 departure(chest, subsidy)
             }
     }

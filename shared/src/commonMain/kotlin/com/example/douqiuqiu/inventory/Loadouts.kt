@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.inventory
 
+import com.example.douqiuqiu.quest.*
+
 import com.example.douqiuqiu.journey.FirstRunContent
 
 /** References existing item instances only; it never duplicates items or their stars/bindings. */
@@ -98,5 +100,5 @@ class LoadoutRules(private val inventory: InventoryRules) {
         heroId in state.progress.unlockedHeroes && FirstRunContent.heroes.any { it.id == heroId }
 
     private fun checked(original: InventoryState, next: InventoryState) =
-        inventory.validate(next)?.let { InventoryResult(original, it) } ?: InventoryResult(next)
+        inventory.validate(next)?.let { InventoryResult(original, it) } ?: InventoryResult(QuestTracker.observe(next))
 }

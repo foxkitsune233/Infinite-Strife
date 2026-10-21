@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.journey
 
+import com.example.douqiuqiu.quest.*
+
 import com.example.douqiuqiu.inventory.*
 import com.example.douqiuqiu.combat.CombatMath
 import com.example.douqiuqiu.status.CombatAction
@@ -89,14 +91,16 @@ class JourneyRules(val inventory: InventoryRules) {
         if (s.phase != InventoryPhase.HOME || s.progress.run != null) return InventoryResult(s, "已有挑战")
         if (heroId !in s.progress.unlockedHeroes) return InventoryResult(s, "英雄尚未解锁")
         val box = s.progress.chests.find { it.id == chestId } ?: return InventoryResult(s, "宝箱不存在")
+        QuestProgression.lockedReason(s, box.difficulty)?.let { return InventoryResult(s, it) }
         val subsidized = EconomyBalance.subsidized(box) && s.progress.economy.vouchers > 0
         val price = box.ticket - if (subsidized) min(EconomyBalance.RELIEF_SUBSIDY, box.ticket) else 0
         if (carryGold < 0 || s.gold.toLong() < price.toLong() + carryGold) return InventoryResult(s, "金币不足以支付门票和携入资金")
         val fighter = fighter(s, heroId)
         val run = JourneyState("run-${box.id}", heroId, box, s.progress.seed, fighter.maxHp, fighter.maxHp)
-        return InventoryResult(s.copy(gold = s.gold - price - carryGold, runGold = carryGold, phase = InventoryPhase.PREPARATION,
+        val next = s.copy(gold = s.gold - price - carryGold, runGold = carryGold, phase = InventoryPhase.PREPARATION,
             progress = s.progress.copy(chests = emptyList(), run = run, lastEnding = "",
-                economy = s.progress.economy.copy(vouchers = s.progress.economy.vouchers - if (subsidized) 1 else 0))))
+                economy = s.progress.economy.copy(vouchers = s.progress.economy.vouchers - if (subsidized) 1 else 0)))
+        return InventoryResult(QuestTracker.record(QuestTracker.observe(next), QuestEvent.Entered))
     }
 
     fun startBattle(s: InventoryState): InventoryResult {
@@ -161,7 +165,8 @@ class JourneyRules(val inventory: InventoryRules) {
         val (loot, random) = NodeLootRules.generate(s, defs, NodeLootSource.BATTLE, r.rng)
         val gold = minOf(EconomyBalance.goldReward(r.target.difficulty, r.round, r.rewardVersion),
             (Int.MAX_VALUE.toLong() - s.gold - s.runGold).coerceAtLeast(0).toInt())
-        return s.copy(runGold = s.runGold + gold, progress = s.progress.copy(run = r.copy(rng = random, nodeLoot = loot.copy(goldAwarded = gold))))
+        return QuestTracker.record(s.copy(runGold = s.runGold + gold, progress = s.progress.copy(run = r.copy(rng = random, nodeLoot = loot.copy(goldAwarded = gold)))),
+            QuestEvent.BattleWon(r.heroId, r.target.difficulty))
     }
 
     fun finishLoot(s: InventoryState, discardRemaining: Boolean = false): InventoryResult {
@@ -189,8 +194,9 @@ class JourneyRules(val inventory: InventoryRules) {
     fun event(s: InventoryState, optionId: String, selection: com.example.douqiuqiu.event.EventItemSelection? = null): InventoryResult {
         val result = JourneyEvents.resolve(s, inventory, optionId, selection)
         if (!result.ok) return result
-        if ((result.state.progress.run?.hp ?: 1.0) <= 0) return abandon(result.state)
-        return InventoryResult(syncLoadout(result.state))
+        val recorded = QuestTracker.record(result.state, QuestEvent.EventChosen)
+        if ((recorded.progress.run?.hp ?: 1.0) <= 0) return abandon(recorded)
+        return InventoryResult(syncLoadout(recorded))
     }
 
     fun useEquipment(s: InventoryState, instanceId: String): InventoryResult {
@@ -207,12 +213,12 @@ class JourneyRules(val inventory: InventoryRules) {
         val r = s.progress.run ?: return InventoryResult(s, "没有挑战")
         if (r.stage != JourneyStage.EVENT) return InventoryResult(s, "当前没有事件")
         if (r.nodeEvent != null) return InventoryResult(s, "请按当前事件的具体选项结算")
-        var next = s
+        val next = QuestTracker.record(s, QuestEvent.EventChosen)
         var hp = r.hp
         if (search) {
             if (r.eventRoll < 70) {
                 val (drops, seed) = NodeLootRules.generate(s, defs, NodeLootSource.EVENT, r.rng, listOf(r.pendingItem))
-                return InventoryResult(s.copy(progress = s.progress.copy(run = r.copy(stage = JourneyStage.REWARD,
+                return InventoryResult(next.copy(progress = next.progress.copy(run = r.copy(stage = JourneyStage.REWARD,
                     fight = null, nodeLoot = drops, rng = seed))))
             } else hp -= r.maxHp * .1
         }
@@ -243,7 +249,7 @@ class JourneyRules(val inventory: InventoryRules) {
             attack = actor.attack - inventory.definitions.getValue(item.definitionId).stats.attack)
         val items = s.items.mapNotNull { if (it.instanceId != instanceId) it else if (it.count > 1) it.copy(count = it.count - 1) else null }
         val fight = if (fighting) r.fight!!.copy(player = com.example.douqiuqiu.cards.CardEffectRuntime.recordHealing(updated, healed - actor.hp), log = (r.fight.log + "使用${inventory.definitions.getValue(item.definitionId).name}").takeLast(LOG_CAP)) else r.fight
-        return InventoryResult(s.copy(items = items, progress = s.progress.copy(run = r.copy(hp = healed, maxHp = actor.maxHp, fight = fight))))
+        return InventoryResult(QuestTracker.record(s.copy(items = items, progress = s.progress.copy(run = r.copy(hp = healed, maxHp = actor.maxHp, fight = fight))), QuestEvent.ConsumableUsed))
     }
     fun extract(s: InventoryState): InventoryResult {
         if (s.progress.run?.stage != JourneyStage.REST) return InventoryResult(s, "只能在第三战后的节点撤离")
@@ -265,8 +271,15 @@ class JourneyRules(val inventory: InventoryRules) {
         val result = inventory.settle(s, survived)
         if (!result.ok) return result
         val pity = MaterialProgression.record(s, result.state, defs, cleared)
-        return InventoryResult(result.state.copy(progress = s.progress.copy(run = null, seed = FirstRunContent.next(s.progress.run!!.rng), materialPity = pity,
-            clears = s.progress.clears + if (cleared) 1 else 0, extracted = s.progress.extracted || survived, lastEnding = text)))
+        val run = s.progress.run!!
+        var next = result.state.copy(progress = result.state.progress.copy(run = null, seed = FirstRunContent.next(run.rng), materialPity = pity,
+            clears = s.progress.clears + if (cleared) 1 else 0, extracted = s.progress.extracted || survived, lastEnding = text))
+        if (cleared) next = QuestTracker.record(next, QuestEvent.RunCleared(run.heroId, run.target.difficulty))
+        else if (survived) next = QuestTracker.record(next, QuestEvent.Extracted)
+        if (!survived && s.items.any { it.place.container != Container.WAREHOUSE &&
+                it.instanceId in (s.progress.guardedEquipment + s.progress.guardedSkills) })
+            next = QuestTracker.record(next, QuestEvent.GuardedDeath)
+        return InventoryResult(QuestTracker.observe(next))
     }
     private fun grant(s: InventoryState, defId: String, id: String, direct: Boolean): InventoryResult {
         if (direct) return InventoryResult(s.copy(items = s.items + StoredItem(id, defId, ItemPlace(Container.WAREHOUSE), bound = defs.getValue(defId).boundOnAcquire)))

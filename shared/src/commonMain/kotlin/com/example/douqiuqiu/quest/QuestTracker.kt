@@ -9,25 +9,6 @@ import com.example.douqiuqiu.inventory.ItemPlace
 import com.example.douqiuqiu.inventory.StoredItem
 
 /**
- * 任务内容表（0.1.6）。
- *
- * **当前为空表**：框架与全部机制已就绪，具体任务条目由维护者审阅设计稿后
- * 补充（初稿 40 条见 `docs/superpowers/plans/016-quest-list-issue.md`）。
- * 空表时任务面板显示"暂无任务"，其余系统不受影响。
- *
- * 配置约束（补充时遵循）：
- * - GUIDE / CHALLENGE 用 [QuestObjective] 描述目标，由 [QuestTracker.record] 推进；
- * - CONVERSION 用 [Quest.cost] 描述上缴材料，由 [QuestTracker.convert] 手动兑换；
- * - 奖励只允许 [QuestReward] 已声明的类型，不新增类型；
- * - ID 命名：`guide.<英雄>` / `challenge.<序号>` / `convert.<序号>`。
- */
-object QuestContent {
-    val all: List<Quest> = emptyList()
-
-    fun byId(id: String): Quest? = all.firstOrNull { it.id == id }
-}
-
-/**
  * 任务推进器（0.1.6）。纯函数快照事务，风格对齐
  * [com.example.douqiuqiu.inventory.GrowthRules]：被拒时返回操作前快照。
  *
@@ -40,7 +21,7 @@ object QuestTracker {
 
     /** 推进所有未领取任务中匹配该事件的计数器。 */
     fun record(s: InventoryState, event: QuestEvent, quests: List<Quest> = QuestContent.all): InventoryState {
-        val active = quests.filter { it.kind != QuestKind.CONVERSION && it.id !in s.progress.claimedQuests }
+        val active = quests.filter { it.kind != QuestKind.CONVERSION && it.id !in s.progress.claimedQuests && !nodeClaimed(s, it, quests) }
         if (active.isEmpty()) return s
         val next = s.progress.questCounters.toMutableMap()
         var changed = false
@@ -51,6 +32,8 @@ object QuestTracker {
             // HERO_LEVEL 是「达到即满」型目标：满足条件时直接把计数器推到目标值，
             // 其余目标按事件次数累加。
             val delta = when (event) {
+                QuestEvent.Entered -> if (o.type == ObjectiveType.ENTER_RUN) 1 else 0
+                QuestEvent.LootPicked -> if (o.type == ObjectiveType.PICKUP_LOOT) 1 else 0
                 is QuestEvent.BattleWon -> when (o.type) {
                     ObjectiveType.WIN_BATTLES -> 1
                     ObjectiveType.HERO_WINS -> if (o.heroId == event.heroId) 1 else 0
@@ -76,18 +59,48 @@ object QuestTracker {
                 QuestEvent.GuardedDeath -> if (o.type == ObjectiveType.GUARDED_DEATH) 1 else 0
             }
             if (delta <= 0) continue
-            next[quest.id] = minOf(before + delta, o.target)
+            next[quest.id] = minOf(before.toLong() + delta, o.target.toLong()).toInt()
             changed = true
         }
         if (!changed) return s
         return s.copy(progress = s.progress.copy(questCounters = next))
     }
 
+    /** 可验证的状态里程碑只增不减；旧档已有成长无需重买，卸下/消耗物品不会撤销。 */
+    fun observe(s: InventoryState, quests: List<Quest> = QuestContent.all): InventoryState {
+        val counters = s.progress.questCounters.toMutableMap()
+        for (q in quests) {
+            if (q.id in s.progress.claimedQuests || nodeClaimed(s, q, quests)) continue
+            val value = when (q.objective.type) {
+                ObjectiveType.EQUIP_ITEM -> if (s.items.any { it.place.container == Container.EQUIPMENT && it.place.x < 6 }) 1 else 0
+                ObjectiveType.SLOT_CARD -> if (s.items.any { it.place.container == Container.SKILLS }) 1 else 0
+                ObjectiveType.STORE_SAFE -> if (s.items.any { it.place.container == Container.SAFE }) 1 else 0
+                ObjectiveType.BACKPACK_LEVEL -> com.example.douqiuqiu.growth.GrowthContent.backpackSizes.indexOf(s.backpackWidth to s.backpackHeight)
+                ObjectiveType.SAFE_LEVEL -> com.example.douqiuqiu.growth.GrowthContent.safeSizes.indexOf(s.safeWidth to s.safeHeight)
+                ObjectiveType.SKILL_LEVEL -> s.skillSlots - 4
+                ObjectiveType.CLEAR_COUNT -> s.progress.clears
+                ObjectiveType.HERO_LEVEL -> q.objective.heroId?.let { s.progress.heroLevels[it] ?: 1 }
+                    ?: (s.progress.heroLevels.values.maxOrNull() ?: 1)
+                else -> 0
+            }.coerceAtMost(q.objective.target)
+            if (value > (counters[q.id] ?: 0)) counters[q.id] = value
+        }
+        return if (counters == s.progress.questCounters) s else s.copy(progress = s.progress.copy(questCounters = counters))
+    }
+
+    fun nodeClaimed(s: InventoryState, quest: Quest, quests: List<Quest> = QuestContent.all): Boolean =
+        quest.node > 0 && quests.any { it.node == quest.node && it.id in s.progress.claimedQuests }
+
+    fun nodeAvailable(s: InventoryState, quest: Quest, quests: List<Quest> = QuestContent.all): Boolean =
+        quest.node <= 1 || (1 until quest.node).all { node ->
+            quests.any { it.node == node && it.id in s.progress.claimedQuests }
+        }
+
     /** 可领取的任务（已达目标、前置已完成、未领取），按配置顺序。 */
     fun claimable(s: InventoryState, quests: List<Quest> = QuestContent.all): List<Quest> = quests.filter { q ->
         q.kind != QuestKind.CONVERSION &&
-            q.id !in s.progress.claimedQuests &&
-            (s.progress.questCounters[q.id] ?: 0) >= q.objective.target &&
+            q.id !in s.progress.claimedQuests && !nodeClaimed(s, q, quests) && nodeAvailable(s, q, quests) &&
+            (observe(s, quests).progress.questCounters[q.id] ?: 0) >= q.objective.target &&
             s.progress.clears >= q.minClears &&
             q.prerequisiteQuestIds.all { it in s.progress.claimedQuests }
     }
@@ -100,14 +113,19 @@ object QuestTracker {
 
     /** 领取一次性任务奖励。前置未满足 / 未达目标 / 重复领取均拒绝。 */
     fun claim(s: InventoryState, questId: String, rules: InventoryRules, quests: List<Quest> = QuestContent.all): InventoryResult {
+        rules.validate(s)?.let { return InventoryResult(s, it) }
+        if (s.phase != com.example.douqiuqiu.inventory.InventoryPhase.HOME || s.progress.run != null) return InventoryResult(s, "仅营地可领取任务奖励")
         val quest = quests.firstOrNull { it.id == questId } ?: return InventoryResult(s, "任务不存在")
         if (quest.kind == QuestKind.CONVERSION) return InventoryResult(s, "转化任务请用兑换入口")
         if (questId in s.progress.claimedQuests) return InventoryResult(s, "任务奖励已领取")
-        if ((s.progress.questCounters[questId] ?: 0) < quest.objective.target) return InventoryResult(s, "任务尚未完成")
+        if (nodeClaimed(s, quest, quests)) return InventoryResult(s, "本节点已选择其他任务并领取奖励")
+        if (!nodeAvailable(s, quest, quests)) return InventoryResult(s, "请先领取前一节点奖励")
+        val observed = observe(s, quests)
+        if ((observed.progress.questCounters[questId] ?: 0) < quest.objective.target) return InventoryResult(s, "任务尚未完成")
         if (s.progress.clears < quest.minClears) return InventoryResult(s, "还需通关${quest.minClears - s.progress.clears}次")
         if (!quest.prerequisiteQuestIds.all { it in s.progress.claimedQuests }) return InventoryResult(s, "前置任务未完成")
-        val granted = grantRewards(s, quest, rules)
-        if (!granted.ok) return granted
+        val granted = grantRewards(observed, quest, rules)
+        if (!granted.ok) return InventoryResult(s, granted.error)
         return InventoryResult(
             granted.state.copy(progress = granted.state.progress.copy(claimedQuests = granted.state.progress.claimedQuests + questId))
         )
@@ -137,7 +155,7 @@ object QuestTracker {
 
     /** 任务面板进度文本，如 "3/5"。 */
     fun progressText(s: InventoryState, quest: Quest): String =
-        "${s.progress.questCounters[quest.id] ?: 0}/${quest.objective.target}"
+        "${observe(s).progress.questCounters[quest.id] ?: 0}/${quest.objective.target}"
 
     private fun warehouseCount(s: InventoryState, definitionId: String): Int =
         s.items.filter { it.definitionId == definitionId && it.place.container == Container.WAREHOUSE }.sumOf { it.count }
@@ -154,6 +172,9 @@ object QuestTracker {
                     val heroId = reward.heroId ?: return InventoryResult(s, "任务奖励配置缺失")
                     if (heroId !in next.progress.unlockedHeroes) {
                         next = next.copy(progress = next.progress.copy(unlockedHeroes = next.progress.unlockedHeroes + heroId))
+                    } else {
+                        if (next.gold.toLong() + reward.amount > Int.MAX_VALUE) return InventoryResult(s, "金币超出上限")
+                        next = next.copy(gold = next.gold + reward.amount)
                     }
                 }
                 RewardType.HERO_LEVEL_UP -> {
@@ -162,7 +183,7 @@ object QuestTracker {
                     if (!result.ok) return InventoryResult(s, result.error ?: "等级提升失败")
                     next = result.state
                 }
-                RewardType.MATERIAL, RewardType.GUARD_CORE -> {
+                RewardType.ITEM, RewardType.MATERIAL, RewardType.GUARD_CORE -> {
                     val id = reward.materialId ?: return InventoryResult(s, "任务奖励配置缺失")
                     val definition = rules.definitions[id] ?: return InventoryResult(s, "奖励物品配置缺失")
                     val created = (0 until reward.amount).map { index ->

@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.journey
 
+import com.example.douqiuqiu.quest.*
+
 import com.example.douqiuqiu.inventory.*
 
 enum class NodeLootSource { BATTLE, EVENT }
@@ -91,7 +93,8 @@ object NodeLootRules {
         val activeLoot = activeRun.nodeLoot!!
         val next = base.copy(items = base.items + item.copy(place = target), progress = base.progress.copy(run = activeRun.copy(
             nodeLoot = if (fromPutDown) activeLoot else activeLoot.copy(picked = activeLoot.picked + id))))
-        return inventory.validate(next)?.let(::fail) ?: InventoryResult(next)
+        return inventory.validate(next)?.let(::fail) ?: InventoryResult(QuestTracker.observe(
+            if (fromPutDown) next else QuestTracker.record(next, QuestEvent.LootPicked)))
     }
 
     /**
