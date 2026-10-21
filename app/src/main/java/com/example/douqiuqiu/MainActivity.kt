@@ -68,6 +68,15 @@ class MainActivity : AppCompatActivity() {
             guide.show()
         }, LinearLayout.LayoutParams(0, -2, 1f).apply { setMargins(GameUi.dp(this@MainActivity, 3), 0, 0, 0) })
         body.addView(shortcuts)
+        // 成长入口提级：任务与英雄等级原先藏在 整备→更多 第三层，营地位置充裕故直接前置。
+        val growth = LinearLayout(this)
+        growth.addView(GameUi.button(this, "委托任务") {
+            startActivity(Intent(this, InventoryActivity::class.java).putExtra("openSheet", 3))
+        }, LinearLayout.LayoutParams(0, -2, 1f).apply { setMargins(0, 0, GameUi.dp(this@MainActivity, 3), 0) })
+        growth.addView(GameUi.button(this, "英雄等级") {
+            startActivity(Intent(this, InventoryActivity::class.java).putExtra("openSheet", 4))
+        }, LinearLayout.LayoutParams(0, -2, 1f).apply { setMargins(GameUi.dp(this@MainActivity, 3), 0, 0, 0) })
+        body.addView(growth)
         if (loaded.recoveredFromBackup) AlertDialog.Builder(this).setTitle("已恢复有效备份").setMessage("主存档读取失败，现已恢复备份。请核对物品与挑战进度，原文件保留。")
             .setPositiveButton("知道了", null).show()
         window.decorView.post { com.example.douqiuqiu.ui.VersionLog.showIfUnread(this) }

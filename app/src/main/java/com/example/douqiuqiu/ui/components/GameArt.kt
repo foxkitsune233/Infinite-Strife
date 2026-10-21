@@ -7,7 +7,8 @@ import android.widget.ImageView
 
 /** Sampled UI artwork; the cache is bounded by decoded bytes, not source file count. */
 object GameArt {
-    private val cache = object : LruCache<String, Bitmap>(12 * 1024 * 1024) {
+    // 64MB：整仓物品 + 卡牌 + 场景的工作集需全部驻留，否则 LRU 挤爆会引发主线程反复解码（曾致 ANR）。
+    private val cache = object : LruCache<String, Bitmap>(64 * 1024 * 1024) {
         override fun sizeOf(key: String, value: Bitmap) = value.allocationByteCount
     }
     private val missing = mutableSetOf<String>()
@@ -29,7 +30,8 @@ object GameArt {
     fun hero(c: Context, id: String): Bitmap? = pose(c, id, "idle")
     fun portrait(c: Context, id: String): Bitmap? = if (id in setOf("antimage", "anti_mage", "axe", "faceless_void", "legion_commander"))
         load(c, "art/heroes/v0.1.5/${if (id == "anti_mage") "antimage" else id}-portrait.png", 256) else hero(c, id)
-    fun item(c: Context, id: String) = load(c, "art/items/illustrated-v1/$id.png", 256)
+    // 160 ≥ 最大显示尺寸（格位约 147px@420dpi），避免按 256 解码浪费一半主线程时间。
+    fun item(c: Context, id: String) = load(c, "art/items/illustrated-v1/$id.png", 160)
     fun backdrop(c: Context) = load(c, "art/scenes/ruins-menu-v2.jpg", 1024)
     fun scene(c: Context, kind: SceneKind) = load(c, if (kind == SceneKind.CAMP || kind == SceneKind.ARENA)
         "art/scenes/camp-v2.jpg" else "art/scenes/${kind.name.lowercase()}-v1.jpg", 768)

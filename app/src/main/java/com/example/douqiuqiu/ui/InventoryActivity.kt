@@ -88,6 +88,10 @@ class InventoryActivity : AppCompatActivity() {
             state = loaded.state
             if (savedInstanceState == null && state.progress.run?.nodeLoot != null) preparationTab = 2
             render()
+            // 营地快捷入口直达：3=委托任务 4=英雄等级（与"更多"弹层索引一致）。
+            if (savedInstanceState == null) when (intent.getIntExtra("openSheet", -1)) {
+                3 -> quests(); 4 -> heroLevels()
+            }
             if (loaded.recoveredFromBackup) AlertDialog.Builder(this).setTitle("已恢复备份")
                 .setMessage("主存档读取失败，已恢复上一次有效存档。请检查物品，原文件仍保留。")
                 .setPositiveButton("知道了", null).show()
