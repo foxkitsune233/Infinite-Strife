@@ -3,6 +3,7 @@ package com.example.douqiuqiu.tower
 import com.example.douqiuqiu.inventory.InventoryRules
 import com.example.douqiuqiu.inventory.InventoryState
 import com.example.douqiuqiu.journey.CampaignProgress
+import com.example.douqiuqiu.journey.ChallengeBalance
 import com.example.douqiuqiu.journey.JourneyRules
 import com.example.douqiuqiu.quest.QuestContent
 import org.junit.Assert.*
@@ -47,6 +48,11 @@ class TowerRulesTest {
         assertEquals(95, TowerRules.capAfterFloor(18))
         assertEquals(100, TowerRules.capAfterFloor(19))
         assertEquals(100, TowerRules.capAfterFloor(20))
+    }
+
+    @Test fun infernoIsTheSeventhDifficultyAfterNightmare() {
+        assertEquals("炼狱", ChallengeBalance.name(6))
+        assertTrue(6 in ChallengeBalance.difficulties)
     }
 
     @Test fun towerStaysLockedUntilEveryQuestNodeIsClaimed() {
