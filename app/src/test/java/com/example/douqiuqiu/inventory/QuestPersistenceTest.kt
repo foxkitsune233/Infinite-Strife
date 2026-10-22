@@ -108,6 +108,22 @@ class QuestPersistenceTest {
         assertEquals(s.gold, loaded.gold)
     }
 
+    @Test fun v18PendingRewardPoolRoundTripsAndV17SavesFallBackToDefaults() {
+        val s = InventoryState(gold = 500, progress = CampaignProgress(
+            towerShard = setOf("juggernaut"),
+            pendingShardHeroes = listOf("viper", "viper"), pendingAghanimHeroes = listOf("abaddon")))
+        store().save(s)
+        val bytes = store().exportBackup()
+        assertEquals(s, store().readBackup(bytes))
+        // v17 旧档没有待授予池 → 回退空列表，已授予集合保持。
+        val legacy = LegacyQuestSaveFixture.envelope(17, LegacyQuestSaveFixture.payloadThrough(bytes, 17))
+        val loaded = store().readBackup(legacy)
+        assertTrue(loaded.progress.pendingShardHeroes.isEmpty())
+        assertTrue(loaded.progress.pendingAghanimHeroes.isEmpty())
+        assertEquals(setOf("juggernaut"), loaded.progress.towerShard)
+        assertEquals(s.gold, loaded.gold)
+    }
+
     @Test fun malformedCountersAndMultipleChoicesCannotReplaceSave() {
         val store = store()
         val good = InventoryState()

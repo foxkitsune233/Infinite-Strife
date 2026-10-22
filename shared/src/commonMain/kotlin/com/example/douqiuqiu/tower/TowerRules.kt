@@ -24,6 +24,8 @@ import kotlin.math.roundToInt
  * - **塔内死亡**：本轮战利品按 `Σ价值 × min(100%, 已完成层数 × 10%)` 卖出，轮次清除；
  * - **上限/历史最高层/已解锁奖励持久保留**，不因死亡归零；
  * - 楼层奖励：第 5 层魔晶、第 11–20 层每层转生道具、第 15 层神杖、第 20 层通关圣剑；
+ * - 魔晶/神杖通关后先进入**待授予池**（`pendingShardHeroes` / `pendingAghanimHeroes`），
+ *   由营地「转生授予」面板手动授予对应英雄后生效；授予一次性，重复奖励仅消耗不叠加；
  * - **通关第 20 层 = 胜利态**：战利品按 100% 结算，发放圣剑，不再转生。
  */
 object TowerRules {
@@ -178,8 +180,9 @@ class TowerFlow(val journey: JourneyRules) {
         // 里程碑奖励只在**胜利通关该层**时发放（死亡不发）：魔晶/神杖绑定本轮英雄。
         if (won) {
             for (reward in TowerRules.rewardsForFloor(t.floor)) when (reward) {
-                TowerReward.SHARD -> progress = progress.copy(towerShard = progress.towerShard + t.heroId)
-                TowerReward.AGHANIM -> progress = progress.copy(towerAghs = progress.towerAghs + t.heroId)
+                // 魔晶/神杖先进待授予池，由营地「转生授予」面板手动授予（一次性）。
+                TowerReward.SHARD -> progress = progress.copy(pendingShardHeroes = progress.pendingShardHeroes + t.heroId)
+                TowerReward.AGHANIM -> progress = progress.copy(pendingAghanimHeroes = progress.pendingAghanimHeroes + t.heroId)
                 TowerReward.REBIRTH_ITEM -> progress = progress.copy(pendingRebirthItems = progress.pendingRebirthItems + "rebirth_item")
                 TowerReward.RAPIER -> progress = progress.copy(towerRapier = true)
             }

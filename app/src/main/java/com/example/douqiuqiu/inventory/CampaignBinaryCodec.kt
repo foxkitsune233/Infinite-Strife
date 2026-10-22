@@ -95,6 +95,9 @@ internal object CampaignBinaryCodec {
             out.writeUTF(t.heroId); out.writeInt(t.floor); out.writeLong(t.rng); out.writeInt(t.clearedFloors)
             out.writeInt(t.loot.size); t.loot.forEach { out.writeUTF(it.definitionId); out.writeInt(it.star); out.writeInt(it.value) }
         }
+        // 0.1.7 待授予奖励池（v18 起）：魔晶/神杖先进池，由营地「转生授予」面板手动授予（一次性）。
+        out.writeInt(p.pendingShardHeroes.size); p.pendingShardHeroes.forEach(out::writeUTF)
+        out.writeInt(p.pendingAghanimHeroes.size); p.pendingAghanimHeroes.forEach(out::writeUTF)
     }
     fun read(input: DataInputStream, version: Int): CampaignProgress {
         val seed = input.readLong(); val batch = input.readInt(); val clears = input.readInt(); val extracted = input.readBoolean()
@@ -203,10 +206,12 @@ internal object CampaignBinaryCodec {
             val loot = List(count(input, 64)) { TowerLoot(input.readUTF(), input.readInt(), input.readInt()) }
             TowerRunState(floor, hero, rng, cleared, loot)
         } else null
+        val pendingShardHeroes = if (version >= 18) List(count(input, FirstRunContent.heroes.size)) { input.readUTF() }.toList() else emptyList()
+        val pendingAghanimHeroes = if (version >= 18) List(count(input, FirstRunContent.heroes.size)) { input.readUTF() }.toList() else emptyList()
         return CampaignProgress(seed, batch, boxes, run, clears, extracted, ending, stock, cycle, seen, manual, economy, shop, heroes,
             MaterialPityState(pity), activeHero, loadouts, selections, locks, heroLevels, questCounters, claimedQuests,
             equipmentGuardLevel, skillGuardLevel, guardedEquipment, guardedSkills,
-            levelCap, towerHighestFloor, towerShard, towerAghs, towerRapier, pendingRebirthItems, towerRun)
+            levelCap, towerHighestFloor, towerShard, towerAghs, towerRapier, pendingRebirthItems, pendingShardHeroes, pendingAghanimHeroes, towerRun)
     }
     private fun chest(out: DataOutputStream, c: TargetChest) {
         out.writeUTF(c.id); out.writeUTF(c.quality); out.writeInt(c.difficulty); out.writeInt(c.ticket); out.writeInt(c.appraisals)

@@ -107,7 +107,9 @@ class TowerRulesTest {
 
     @Test fun floorFiveGrantsShardBoundToRunHero() {
         val r = flow.resolve(inTower(floor = 5, cleared = 4), won = true)
-        assertEquals(setOf("juggernaut"), r.state.progress.towerShard)
+        // 魔晶先进待授予池，由营地「转生授予」面板手动授予（一次性）。
+        assertEquals(listOf("juggernaut"), r.state.progress.pendingShardHeroes)
+        assertTrue(r.state.progress.towerShard.isEmpty())
         assertTrue(r.state.progress.towerAghs.isEmpty())
         assertTrue(r.state.progress.pendingRebirthItems.isEmpty())
     }
@@ -124,7 +126,8 @@ class TowerRulesTest {
 
     @Test fun floorFifteenGrantsAghanimWithoutShard() {
         val r = flow.resolve(inTower(floor = 15, cleared = 14), won = true)
-        assertEquals(setOf("juggernaut"), r.state.progress.towerAghs)
+        assertEquals(listOf("juggernaut"), r.state.progress.pendingAghanimHeroes)
+        assertTrue(r.state.progress.towerAghs.isEmpty())
         assertTrue(r.state.progress.towerShard.isEmpty())
     }
 

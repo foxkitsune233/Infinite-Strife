@@ -72,6 +72,10 @@ data class CampaignProgress(
     val towerRapier: Boolean = false,
     /** 0.1.7 转生爬塔：待使用的转生道具（第 11–20 层每层一个；使用后使一张技能卡星级直满）。 */
     val pendingRebirthItems: List<String> = emptyList(),
+    /** 0.1.7 转生爬塔：待授予魔晶的英雄 id 列表；营地「转生授予」面板手动授予后移入 [towerShard]（一次性）。 */
+    val pendingShardHeroes: List<String> = emptyList(),
+    /** 0.1.7 转生爬塔：待授予神杖的英雄 id 列表；营地「转生授予」面板手动授予后移入 [towerAghs]（一次性）。 */
+    val pendingAghanimHeroes: List<String> = emptyList(),
     /** 0.1.7 转生爬塔：进行中的塔轮次（null = 不在塔中）。随存档持久化。 */
     val towerRun: TowerRunState? = null
 )

@@ -116,7 +116,7 @@ class InventoryStore(
 
     companion object {
         private const val MAGIC = 0x44515131
-        const val VERSION = 17
+        const val VERSION = 18
         private const val MAX_BYTES = 1024 * 1024
     }
 }

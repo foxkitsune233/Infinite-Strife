@@ -122,6 +122,7 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
         val heroCount = com.example.douqiuqiu.journey.FirstRunContent.heroes.size
         if (p.towerShard.size > heroCount || p.towerAghs.size > heroCount) return "英雄强化解锁数量无效"
         if (p.pendingRebirthItems.size > 10) return "转生道具数量无效"
+        if (p.pendingShardHeroes.size > heroCount || p.pendingAghanimHeroes.size > heroCount) return "待授予奖励数量无效"
         p.towerRun?.let { t ->
             if (t.floor !in 1..20) return "爬塔层数无效"
             if (t.clearedFloors !in 0..19) return "爬塔通关层数无效"
@@ -157,6 +158,40 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
                 s.copy(progress = s.progress.copy(guardedSkills = s.progress.guardedSkills + instanceId))
             } else s.copy(progress = s.progress.copy(guardedSkills = s.progress.guardedSkills - instanceId))
         }
+        return checked(s, next)
+    }
+
+    /**
+     * 0.1.7 转生授予：把待授予魔晶授予英雄（一次性，授予后该英雄永久生效）。
+     * 重复奖励（该英雄已拥有魔晶）照常授予：只消耗待授予条目，解锁集合不叠加。
+     */
+    fun grantPendingShard(s: InventoryState, heroId: String): InventoryResult {
+        validate(s)?.let { return InventoryResult(s, it) }
+        if (s.phase != InventoryPhase.HOME) return InventoryResult(s, "仅营地可授予魔晶")
+        if (heroId !in s.progress.pendingShardHeroes) return InventoryResult(s, "没有待授予的魔晶")
+        val pending = s.progress.pendingShardHeroes.toMutableList()
+        pending.removeAt(pending.indexOf(heroId))
+        val next = s.copy(progress = s.progress.copy(
+            pendingShardHeroes = pending,
+            towerShard = s.progress.towerShard + heroId
+        ))
+        return checked(s, next)
+    }
+
+    /**
+     * 0.1.7 转生授予：把待授予神杖授予英雄（一次性，授予后该英雄永久生效）。
+     * 重复奖励（该英雄已拥有神杖）照常授予：只消耗待授予条目，解锁集合不叠加。
+     */
+    fun grantPendingAghanim(s: InventoryState, heroId: String): InventoryResult {
+        validate(s)?.let { return InventoryResult(s, it) }
+        if (s.phase != InventoryPhase.HOME) return InventoryResult(s, "仅营地可授予神杖")
+        if (heroId !in s.progress.pendingAghanimHeroes) return InventoryResult(s, "没有待授予的神杖")
+        val pending = s.progress.pendingAghanimHeroes.toMutableList()
+        pending.removeAt(pending.indexOf(heroId))
+        val next = s.copy(progress = s.progress.copy(
+            pendingAghanimHeroes = pending,
+            towerAghs = s.progress.towerAghs + heroId
+        ))
         return checked(s, next)
     }
 

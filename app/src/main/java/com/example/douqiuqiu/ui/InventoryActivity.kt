@@ -88,9 +88,9 @@ class InventoryActivity : AppCompatActivity() {
             state = loaded.state
             if (savedInstanceState == null && state.progress.run?.nodeLoot != null) preparationTab = 2
             render()
-            // 营地快捷入口直达：3=委托任务 4=英雄等级（与"更多"弹层索引一致）。
+            // 营地快捷入口直达：3=委托任务 4=英雄等级 5=转生授予（与"更多"弹层索引一致）。
             if (savedInstanceState == null) when (intent.getIntExtra("openSheet", -1)) {
-                3 -> quests(); 4 -> heroLevels()
+                3 -> quests(); 4 -> heroLevels(); 5 -> grants()
             }
             if (loaded.recoveredFromBackup) AlertDialog.Builder(this).setTitle("已恢复备份")
                 .setMessage("主存档读取失败，已恢复上一次有效存档。请检查物品，原文件仍保留。")
@@ -165,8 +165,8 @@ class InventoryActivity : AppCompatActivity() {
             }, LinearLayout.LayoutParams(0, dp(36), 1f).apply { setMargins(dp(1), 0, dp(1), 0) })
         }
         tabs.addView(compactButton("更多") {
-            GameUi.sheet(this, "整备工具", "${state.gold}金币", listOf("补给商店", "装备合成", "永久成长", "委托任务", "英雄等级", "补齐空装备与技能栏")) { index ->
-                when (index) { 0 -> shop(); 1 -> crafting(); 2 -> growth(); 3 -> quests(); 4 -> heroLevels(); 5 -> if (state.phase == InventoryPhase.HOME) autoEquip() else message("挑战中不能访问仓库") }
+            GameUi.sheet(this, "整备工具", "${state.gold}金币", listOf("补给商店", "装备合成", "永久成长", "委托任务", "英雄等级", "转生授予", "补齐空装备与技能栏")) { index ->
+                when (index) { 0 -> shop(); 1 -> crafting(); 2 -> growth(); 3 -> quests(); 4 -> heroLevels(); 5 -> grants(); 6 -> if (state.phase == InventoryPhase.HOME) autoEquip() else message("挑战中不能访问仓库") }
             }
         }, LinearLayout.LayoutParams(dp(48), dp(36)))
         fixed.addView(tabs)
@@ -963,6 +963,68 @@ class InventoryActivity : AppCompatActivity() {
                 }
             }.apply { isEnabled = !capped && state.gold >= cost })
             sheet.body.addView(tile)
+        }
+        sheet.show()
+    }
+
+    /** 0.1.7 转生授予面板：爬塔奖励的魔晶/神杖在此手动授予（一次性，授予后该英雄永久生效）。 */
+    private fun grants() {
+        if (state.phase != InventoryPhase.HOME) { message("挑战中不能授予奖励"); return }
+        val p = state.progress
+        val sheet = GameCatalogSheet(this, "转生授予",
+            "待授予：魔晶${p.pendingShardHeroes.size} · 神杖${p.pendingAghanimHeroes.size} · 转生道具${p.pendingRebirthItems.size} · ${state.gold}金币")
+        sheet.body.addView(GameUi.label(this, "魔晶与神杖为一次性授予：在此选择英雄授予后永久生效，不可重复授予；已拥有时的重复奖励只会被消耗。", 12))
+        sheet.body.addView(GameUi.label(this, "获取途径：转生爬塔第5层魔晶 · 第15层神杖 · 第11–20层每层转生道具。", 12, GameUi.gold))
+        if (p.pendingShardHeroes.isNotEmpty()) {
+            GameUi.section(sheet.body, "待授予魔晶")
+            p.pendingShardHeroes.groupBy { it }.forEach { (heroId, entries) ->
+                val hero = com.example.douqiuqiu.journey.FirstRunContent.hero(heroId)
+                val owned = heroId in p.towerShard
+                val tile = GameUi.panel(this)
+                tile.addView(GameUi.label(this, hero.name + if (entries.size > 1) " ×${entries.size}" else "", 16, GameUi.gold, true))
+                tile.addView(GameUi.label(this, if (owned) "该英雄已拥有魔晶，授予只会消耗这条奖励" else "授予后该英雄永久获得魔晶强化", 12, GameUi.muted))
+                tile.addView(GameUi.button(this, if (owned) "消耗重复奖励" else "授予魔晶") {
+                    val result = rules.grantPendingShard(state, heroId)
+                    if (!result.ok) message(result.error ?: "授予失败")
+                    else if (commit(result)) {
+                        message(if (owned) "${hero.name}已拥有魔晶，重复奖励已消耗" else "已授予${hero.name}魔晶")
+                        sheet.dialog.dismiss(); grants()
+                    }
+                })
+                sheet.body.addView(tile)
+            }
+        }
+        if (p.pendingAghanimHeroes.isNotEmpty()) {
+            GameUi.section(sheet.body, "待授予神杖")
+            p.pendingAghanimHeroes.groupBy { it }.forEach { (heroId, entries) ->
+                val hero = com.example.douqiuqiu.journey.FirstRunContent.hero(heroId)
+                val owned = heroId in p.towerAghs
+                val tile = GameUi.panel(this)
+                tile.addView(GameUi.label(this, hero.name + if (entries.size > 1) " ×${entries.size}" else "", 16, GameUi.gold, true))
+                tile.addView(GameUi.label(this, if (owned) "该英雄已拥有神杖，授予只会消耗这条奖励" else "授予后该英雄永久获得神杖主动技能", 12, GameUi.muted))
+                tile.addView(GameUi.button(this, if (owned) "消耗重复奖励" else "授予神杖") {
+                    val result = rules.grantPendingAghanim(state, heroId)
+                    if (!result.ok) message(result.error ?: "授予失败")
+                    else if (commit(result)) {
+                        message(if (owned) "${hero.name}已拥有神杖，重复奖励已消耗" else "已授予${hero.name}神杖")
+                        sheet.dialog.dismiss(); grants()
+                    }
+                })
+                sheet.body.addView(tile)
+            }
+        }
+        if (p.pendingShardHeroes.isEmpty() && p.pendingAghanimHeroes.isEmpty()) {
+            sheet.body.addView(GameUi.label(this, "暂无待授予的魔晶与神杖。", 14, GameUi.muted))
+        }
+        if (p.pendingRebirthItems.isNotEmpty()) {
+            GameUi.section(sheet.body, "转生道具")
+            sheet.body.addView(GameUi.label(this, "转生道具 ×${p.pendingRebirthItems.size}：使用后使一张技能卡星级直满（使用入口随技能卡升星功能开放）。", 12))
+        }
+        if (p.towerShard.isNotEmpty() || p.towerAghs.isNotEmpty() || p.towerRapier) {
+            GameUi.section(sheet.body, "已生效")
+            if (p.towerShard.isNotEmpty()) sheet.body.addView(GameUi.label(this, "魔晶：" + p.towerShard.map { com.example.douqiuqiu.journey.FirstRunContent.hero(it).name }.sorted().joinToString("、"), 12))
+            if (p.towerAghs.isNotEmpty()) sheet.body.addView(GameUi.label(this, "神杖：" + p.towerAghs.map { com.example.douqiuqiu.journey.FirstRunContent.hero(it).name }.sorted().joinToString("、"), 12))
+            if (p.towerRapier) sheet.body.addView(GameUi.label(this, "圣剑：已获得（纪念品装备，提高大量攻击力、法强与攻速）", 12, GameUi.gold))
         }
         sheet.show()
     }
