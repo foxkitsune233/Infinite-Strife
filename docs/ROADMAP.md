@@ -104,6 +104,6 @@ Godot 阶段 A–D 期间，Android 继续接受：阻断性崩溃修复、战�
 
 ## 当前下一步
 
-**优先级一：Android 0.1.6 设计稿已产出**（`docs/superpowers/plans/2026-10-21-016-quest-level-guard.md` + 40 条任务清单 `016-quest-list-issue.md`），下一步进入实现。实现顺序建议：M1 数据层（quest 包 + HeroLevel + 编解码 v15）→ M2 挂点（9 类事件钩子 + 经验发放）→ M3 UI（任务面板/等级条/保护标记）→ M4 收尾。
+**优先级一：Android 0.1.6 已发布**（构建 22E2-91EF-F38A，versionCode 1017；设计稿 `docs/superpowers/plans/2026-10-21-016-quest-level-guard.md` + 40 条任务清单 `016-quest-list-issue.md`）。下一步进入 **0.1.7**：核心为开放英雄等级上限（当前锁 10 级，`HeroLevelRules.LEVEL_CAP`），设计上限仍为 100（`MAX_LEVEL_DESIGN`）。实现仅改一个常量 + 曲线延续 + 测试对齐，规则在 `shared/hero/HeroLevel.kt`，Godot 可直接继承；新上限档位待维护者定稿（建议分档开放而非直接到 100，避免永久属性过强）。
 
 Godot 阶段 A（原创设定 1v1 垂直切片）在同一目录并行推进，不阻塞 Android 版本节奏；两条线共享同一份规则向量，Android 的改动要先记录向量再改实现。此阶段不复制旧 Dota 资源，不把网页试玩作为验收门槛，也不启动原生 iOS 导出。
