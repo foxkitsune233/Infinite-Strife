@@ -7,12 +7,14 @@ import com.example.douqiuqiu.inventory.InventoryRules
 import com.example.douqiuqiu.inventory.InventoryState
 
 /**
- * 英雄等级规则（0.1.6）。
+ * 英雄等级规则（0.1.6；0.1.7 重构）。
  *
  * 设计要点：
  * - 每英雄独立等级，**用营地金币升级**，不引入新货币、不加经验条；
- * - 设计上限 100 级（[MAX_LEVEL_DESIGN]），当前版本锁 10 级（[LEVEL_CAP]），
- *   下一版本提升锁时只改这一个常量；
+ * - 设计上限 100 级（[MAX_LEVEL_DESIGN]），[LEVEL_CAP] 作为**初始基准/默认值（10）**；
+ *   实际等级上限是**存档进度值**（`progress.levelCap`，0.1.7 起由「转生爬塔」模式通关累加提升），
+ *   不再仅由本常量决定（详见 0.1.7 设计稿）；
+ * - 升级金币 0.1.7 起由线性改为**指数增长**（[upgradeCost]），抑制后期堆级；
  * - 等级只提供**永久战斗属性**，与 [com.example.douqiuqiu.growth.GrowthContent] 的
  *   「不加永久战斗属性」承诺互补，两者不重叠；
  * - 属性在战斗初始化处一次性写入 [com.example.douqiuqiu.combat.Fighter]，
@@ -23,10 +25,19 @@ object HeroLevelRules {
     /** 设计上限；本版本不开放到此。 */
     const val MAX_LEVEL_DESIGN = 100
 
-    /** 当前版本锁：达到后仍可继续花费金币，但等级不再提升。 */
+    /**
+     * 初始等级上限基准/默认值（10）。
+     * 实际上限由存档字段 `progress.levelCap` 决定（0.1.7 起经「转生爬塔」模式通关提升）；
+     * 旧档缺省回退本值。
+     */
     const val LEVEL_CAP = 10
 
-    /** 升到下一级所需营地金币：100 × 当前等级。Lv1→2 = 100，Lv9→10 = 900，到 10 级共 4500。 */
+    /**
+     * 升到下一级所需营地金币。
+     * 0.1.6：线性 `100 × 当前等级`（Lv1→2=100，到 10 级共 4500）。
+     * 0.1.7 起改为**指数增长** `round(BASE × R^(level-1))`（BASE=100，R 待平衡定稿，推荐 1.20），
+     * 见 0.1.7 设计稿 §2.3。当前仍保留线性实现，待决策后替换。
+     */
     fun upgradeCost(level: Int): Int = 100 * level
 
     /** 当前英雄等级（缺省视为 1 级）。 */
