@@ -17,7 +17,7 @@ class CombatModuleIntegrationTest {
     }
 
     @Test fun aphoticShieldAddsToIndependentStartingCardShield() {
-        val abaddon = idle("abaddon").copy(mana = 100.0, ultIn = 0.0, shield = 60.0)
+        val abaddon = idle("abaddon").copy(mana = 140.0, ultIn = 0.0, shield = 60.0)
         val enemy = idle("phantom_assassin").copy(armor = 0.0, magicResist = 0.0)
         val result = DuelEngine.step(DuelState(abaddon, enemy, 1729))
         assertEquals(240.0, result.player.shield, 0.00001)
@@ -26,13 +26,13 @@ class CombatModuleIntegrationTest {
 
     @Test fun abaddonCastsWhileStunnedButNotWhileSilencedOrHexed() {
         val enemy = idle("phantom_assassin")
-        val player = idle("abaddon").copy(mana = 100.0, ultIn = 0.0)
+        val player = idle("abaddon").copy(mana = 140.0, ultIn = 0.0)
         val stunned = DuelEngine.step(DuelState(player.copy(control = ActionControlState(stunned = true)), enemy, 1729)).player
         assertEquals(180.0, stunned.shield, .00001)
         assertFalse(stunned.control.stunned)
         for (control in listOf(ActionControlState(silenced = true), ActionControlState(hexed = true))) {
             val blocked = DuelEngine.step(DuelState(player.copy(control = control), enemy, 1729)).player
-            assertEquals(100.0, blocked.mana, .00001)
+            assertEquals(140.0, blocked.mana, .00001)
             assertEquals(0.0, blocked.shield, .00001)
         }
     }

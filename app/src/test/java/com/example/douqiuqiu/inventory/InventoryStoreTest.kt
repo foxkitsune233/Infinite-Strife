@@ -111,8 +111,8 @@ class InventoryStoreTest {
         }
         val loaded = InventoryStore(file, rules, ::initial).load().state
         val fight = com.example.douqiuqiu.journey.DuelEngine.step(loaded.progress.run!!.fight!!)
-        assertEquals(180.0, fight.player.shield, .00001)
-        assertEquals(946.0, fight.enemy.hp, .00001)
+        assertEquals(120.0, fight.player.shield, .00001)
+        assertEquals(1000.0, fight.enemy.hp, .00001)
     }
 
     @Test fun legacyV1V2AndV3ProfilesMigrateWithoutGrantingStarterItemsAgain() {

@@ -125,11 +125,11 @@ class EquipmentProcAcceptanceTest {
         assertEquals(0.0, s.player.ultIn, 1e-9)
         assertEquals(0.0, s.player.invulnerable, 1e-9)
         assertTrue(s.player.equipment.activeGroups.containsKey("mask_madness"))
-        // tick 41 窗口结束，同 tick 大招立即放开（消耗 80、CD 10、无敌 1 秒）
+        // tick 41 窗口结束，同 tick 大招立即放开（消耗 80、CD 16、无敌 2 秒）
         s = DuelEngine.step(s)
         assertEquals(20.0, s.player.mana, 1e-9)
-        assertEquals(10.0, s.player.ultIn, 1e-9)
-        assertEquals(1.0, s.player.invulnerable, 1e-9)
+        assertEquals(16.0, s.player.ultIn, 1e-9)
+        assertEquals(2.0, s.player.invulnerable, 1e-9)
         assertFalse(s.player.equipment.activeGroups.containsKey("mask_madness"))
         // CD 仍在走（8000 - 40*100），窗口结束后不会立刻续上
         assertEquals(4000L, s.player.equipment.cooldowns.remainingByGroup["mask_madness"])
@@ -154,10 +154,10 @@ class EquipmentProcAcceptanceTest {
         assertEquals("开启后自我沉默仍在，大招继续被禁", 100.0, s.player.mana, 1e-9)
         s = advance(s, 34)
         assertTrue(s.player.equipment.activeGroups.containsKey("mask_madness"))
-        // tick 41 窗口结束，同 tick 大招立即放开（消耗 80、CD 10、无敌 1 秒）
+        // tick 41 窗口结束，同 tick 大招立即放开（消耗 80、CD 16、无敌 2 秒）
         s = DuelEngine.step(s.copy(player = s.player.copy(ultIn = 0.0)))
         assertEquals("到期后大招放开", 20.0, s.player.mana, 1e-9)
-        assertEquals(10.0, s.player.ultIn, 1e-9)
+        assertEquals(16.0, s.player.ultIn, 1e-9)
         // CD 仍在走（8000 - 40*100），窗口结束后不会立刻续上
         assertEquals(4000L, s.player.equipment.cooldowns.remainingByGroup["mask_madness"])
     }

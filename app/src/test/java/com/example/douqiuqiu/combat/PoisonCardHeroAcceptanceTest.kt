@@ -310,7 +310,7 @@ class PoisonCardHeroAcceptanceTest {
         s = attackTurn(s)
         val base = s.enemy.hp
         s = advance(s, 10)
-        assertEquals("同类增伤线性相加 1+10%+15%，无额外乘算", 3.75, base - s.enemy.hp, 1e-9)
+        assertEquals("同类增伤线性相加 1+10%，无额外乘算", 3.3, base - s.enemy.hp, 1e-9)
     }
 
     @Test fun virulentSpawnIsNeitherDamageNorHealing() {
