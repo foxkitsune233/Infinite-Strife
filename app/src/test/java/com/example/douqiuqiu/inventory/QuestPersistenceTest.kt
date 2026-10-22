@@ -2,6 +2,8 @@ package com.example.douqiuqiu.inventory
 
 import com.example.douqiuqiu.quest.*
 import com.example.douqiuqiu.journey.*
+import com.example.douqiuqiu.tower.TowerLoot
+import com.example.douqiuqiu.tower.TowerRunState
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.Rule
@@ -89,6 +91,20 @@ class QuestPersistenceTest {
         assertTrue(loaded.progress.towerAghs.isEmpty())
         assertFalse(loaded.progress.towerRapier)
         assertTrue(loaded.progress.pendingRebirthItems.isEmpty())
+        assertEquals(s.gold, loaded.gold)
+    }
+
+    @Test fun v17TowerRunRoundTripsAndV16SavesDropIt() {
+        val s = InventoryState(gold = 500, progress = CampaignProgress(
+            towerRun = TowerRunState(floor = 7, heroId = "viper", rng = 99, clearedFloors = 6,
+                loot = listOf(TowerLoot("tower_f1", 1, 140)))))
+        store().save(s)
+        val bytes = store().exportBackup()
+        assertEquals(s, store().readBackup(bytes))
+        // v16 旧档没有塔轮次字段 → 回退 null，其余字段保持。
+        val legacy = LegacyQuestSaveFixture.envelope(16, LegacyQuestSaveFixture.payloadThrough(bytes, 16))
+        val loaded = store().readBackup(legacy)
+        assertNull(loaded.progress.towerRun)
         assertEquals(s.gold, loaded.gold)
     }
 

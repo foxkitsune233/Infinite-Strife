@@ -89,6 +89,7 @@ class JourneyRules(val inventory: InventoryRules) {
 
     fun enter(s: InventoryState, chestId: String, heroId: String, carryGold: Int = 0): InventoryResult {
         if (s.phase != InventoryPhase.HOME || s.progress.run != null) return InventoryResult(s, "已有挑战")
+        if (s.progress.towerRun != null) return InventoryResult(s, "爬塔轮次进行中，先结算转生爬塔")
         if (heroId !in s.progress.unlockedHeroes) return InventoryResult(s, "英雄尚未解锁")
         val box = s.progress.chests.find { it.id == chestId } ?: return InventoryResult(s, "宝箱不存在")
         QuestProgression.lockedReason(s, box.difficulty)?.let { return InventoryResult(s, it) }

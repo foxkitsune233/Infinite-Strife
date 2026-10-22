@@ -2,6 +2,8 @@ package com.example.douqiuqiu.inventory
 
 import com.example.douqiuqiu.journey.*
 import com.example.douqiuqiu.combat.*
+import com.example.douqiuqiu.tower.TowerLoot
+import com.example.douqiuqiu.tower.TowerRunState
 import com.example.douqiuqiu.equipment.EquipmentBattleState
 import com.example.douqiuqiu.status.ActionControlState
 import com.example.douqiuqiu.status.PoisonCoreLayer
@@ -87,6 +89,12 @@ internal object CampaignBinaryCodec {
         out.writeInt(p.towerAghs.size); p.towerAghs.sorted().forEach(out::writeUTF)
         out.writeBoolean(p.towerRapier)
         out.writeInt(p.pendingRebirthItems.size); p.pendingRebirthItems.forEach(out::writeUTF)
+        // 0.1.7 爬塔轮次（v17 起）：null 写 false，旧档缺失即 null。
+        out.writeBoolean(p.towerRun != null)
+        p.towerRun?.let { t ->
+            out.writeUTF(t.heroId); out.writeInt(t.floor); out.writeLong(t.rng); out.writeInt(t.clearedFloors)
+            out.writeInt(t.loot.size); t.loot.forEach { out.writeUTF(it.definitionId); out.writeInt(it.star); out.writeInt(it.value) }
+        }
     }
     fun read(input: DataInputStream, version: Int): CampaignProgress {
         val seed = input.readLong(); val batch = input.readInt(); val clears = input.readInt(); val extracted = input.readBoolean()
@@ -190,10 +198,15 @@ internal object CampaignBinaryCodec {
         }.toSet() else emptySet()
         val towerRapier = if (version >= 16) input.readBoolean() else false
         val pendingRebirthItems = if (version >= 16) List(count(input, 10)) { input.readUTF() }.toList() else emptyList()
+        val towerRun = if (version >= 17 && input.readBoolean()) {
+            val hero = input.readUTF(); val floor = input.readInt(); val rng = input.readLong(); val cleared = input.readInt()
+            val loot = List(count(input, 64)) { TowerLoot(input.readUTF(), input.readInt(), input.readInt()) }
+            TowerRunState(floor, hero, rng, cleared, loot)
+        } else null
         return CampaignProgress(seed, batch, boxes, run, clears, extracted, ending, stock, cycle, seen, manual, economy, shop, heroes,
             MaterialPityState(pity), activeHero, loadouts, selections, locks, heroLevels, questCounters, claimedQuests,
             equipmentGuardLevel, skillGuardLevel, guardedEquipment, guardedSkills,
-            levelCap, towerHighestFloor, towerShard, towerAghs, towerRapier, pendingRebirthItems)
+            levelCap, towerHighestFloor, towerShard, towerAghs, towerRapier, pendingRebirthItems, towerRun)
     }
     private fun chest(out: DataOutputStream, c: TargetChest) {
         out.writeUTF(c.id); out.writeUTF(c.quality); out.writeInt(c.difficulty); out.writeInt(c.ticket); out.writeInt(c.appraisals)

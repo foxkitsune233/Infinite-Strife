@@ -1,5 +1,7 @@
 package com.example.douqiuqiu.journey
 
+import com.example.douqiuqiu.tower.TowerRunState
+
 /** 战斗日志保留上限；旧版按 10 上限读回，v14 起放宽到该值。 */
 const val LOG_CAP: Int = 200
 
@@ -69,7 +71,9 @@ data class CampaignProgress(
     /** 0.1.7 转生爬塔：是否已获得圣剑（第 20 层通关纪念品，不回收转生）。 */
     val towerRapier: Boolean = false,
     /** 0.1.7 转生爬塔：待使用的转生道具（第 11–20 层每层一个；使用后使一张技能卡星级直满）。 */
-    val pendingRebirthItems: List<String> = emptyList()
+    val pendingRebirthItems: List<String> = emptyList(),
+    /** 0.1.7 转生爬塔：进行中的塔轮次（null = 不在塔中）。随存档持久化。 */
+    val towerRun: TowerRunState? = null
 )
 
 /** Platform-neutral persisted counters. Recovery calculations use the supplied clock in the adapter. */

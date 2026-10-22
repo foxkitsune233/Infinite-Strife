@@ -122,6 +122,11 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
         val heroCount = com.example.douqiuqiu.journey.FirstRunContent.heroes.size
         if (p.towerShard.size > heroCount || p.towerAghs.size > heroCount) return "英雄强化解锁数量无效"
         if (p.pendingRebirthItems.size > 10) return "转生道具数量无效"
+        p.towerRun?.let { t ->
+            if (t.floor !in 1..20) return "爬塔层数无效"
+            if (t.clearedFloors !in 0..19) return "爬塔通关层数无效"
+            if (t.heroId.isBlank() || t.loot.size > 64) return "爬塔轮次数据无效"
+        }
         return null
     }
 
