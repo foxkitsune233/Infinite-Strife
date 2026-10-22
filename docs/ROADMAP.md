@@ -105,6 +105,6 @@ Godot 阶段 A–D 期间，Android 继续接受：阻断性崩溃修复、战�
 
 ## 当前下一步
 
-**优先级一：Android 0.1.6 已发布**（构建 22E2-91EF-F38A，versionCode 1017；设计稿 `docs/superpowers/plans/2026-10-21-016-quest-level-guard.md` + 40 条任务清单 `016-quest-list-issue.md`）。下一步进入 **0.1.7**：需求已重定义为「转生爬塔解锁等级上限」——等级上限不再由常量写死，而是**全任务完成后解锁的转生爬塔模式通关**累加提升；同时升级金币由线性改为**指数增长**。设计稿 `docs/superpowers/plans/2026-10-22-017-open-hero-level-cap.md` 已重构，规则在 `shared/hero/HeroLevel.kt` 与新增 `shared/tower/`，Godot 可直接继承；爬塔形态 / 每轮提升量 / 指数基数等五项决策待维护者拍板。
+**优先级一：Android 0.1.6 已发布**（构建 22E2-91EF-F38A，versionCode 1017；设计稿 `docs/superpowers/plans/2026-10-21-016-quest-level-guard.md` + 40 条任务清单 `016-quest-list-issue.md`）。下一步进入 **0.1.7**：需求已重定义为「转生爬塔解锁等级上限」——等级上限不再由常量写死，而是**全任务完成后解锁的转生爬塔模式通关**累加提升；同时升级金币由线性改为**指数增长**。设计稿 `docs/superpowers/plans/2026-10-22-017-open-hero-level-cap.md` 已重构，规则在 `shared/hero/HeroLevel.kt` 与新增 `shared/tower/`，Godot 可直接继承；20 层、每层（第 2 层起）+5 至 100 上限、死亡清产按层数比例卖金、第 5 层魔晶 / 第 11–20 层转生道具（技能卡星级满级）/ 第 15 层神杖 / 第 20 层圣剑等机制已确认；剩余待决：升级金币指数基数 R、敌人随层缩放、死亡清等级语义、魔晶/神杖/圣剑具体效果（见设计稿 §6）。
 
 Godot 阶段 A（原创设定 1v1 垂直切片）在同一目录并行推进，不阻塞 Android 版本节奏；两条线共享同一份规则向量，Android 的改动要先记录向量再改实现。此阶段不复制旧 Dota 资源，不把网页试玩作为验收门槛，也不启动原生 iOS 导出。
