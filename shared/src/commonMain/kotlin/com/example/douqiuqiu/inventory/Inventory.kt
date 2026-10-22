@@ -93,6 +93,7 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
         }
         validateLoadouts(state)?.let { return it }
         validateGuards(state)?.let { return it }
+        validateTower(state)?.let { return it }
         return com.example.douqiuqiu.journey.JourneyValidation.check(state.progress, definitions)
     }
 
@@ -107,6 +108,20 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
         if (p.skillGuardLevel !in 0..4) return "技能保护档位无效"
         if (p.guardedEquipment.size > p.equipmentGuardLevel) return "装备保护数量超过档位"
         if (p.guardedSkills.size > p.skillGuardLevel) return "技能保护数量超过档位"
+        return null
+    }
+
+    /**
+     * 0.1.7 转生爬塔进度校验：动态上限与历史最高层在合法区间，奖励集合不超英雄总数。
+     * 塔字段全部带默认值，旧档缺失即默认，零迁移。
+     */
+    private fun validateTower(state: InventoryState): String? {
+        val p = state.progress
+        if (p.levelCap !in 1..com.example.douqiuqiu.hero.HeroLevelRules.MAX_LEVEL_DESIGN) return "等级上限无效"
+        if (p.towerHighestFloor !in 0..20) return "爬塔历史层数无效"
+        val heroCount = com.example.douqiuqiu.journey.FirstRunContent.heroes.size
+        if (p.towerShard.size > heroCount || p.towerAghs.size > heroCount) return "英雄强化解锁数量无效"
+        if (p.pendingRebirthItems.size > 10) return "转生道具数量无效"
         return null
     }
 

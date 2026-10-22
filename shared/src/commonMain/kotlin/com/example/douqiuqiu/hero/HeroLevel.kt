@@ -1,5 +1,8 @@
 package com.example.douqiuqiu.hero
 
+import kotlin.math.pow
+import kotlin.math.roundToInt
+
 import com.example.douqiuqiu.quest.*
 
 import com.example.douqiuqiu.inventory.InventoryResult
@@ -32,19 +35,32 @@ object HeroLevelRules {
      */
     const val LEVEL_CAP = 10
 
+    /** 升级费用指数基数 R（0.1.7 设计稿 §6 #1 定稿：1.20 温和）。 */
+    const val COST_RATIO = 1.20
+
+    /** 升级费用基数：Lv1→2 保持 100，不破坏新手体验。 */
+    private const val COST_BASE = 100.0
+
     /**
      * 升到下一级所需营地金币。
-     * 0.1.6：线性 `100 × 当前等级`（Lv1→2=100，到 10 级共 4500）。
-     * 0.1.7 起改为**指数增长** `round(BASE × R^(level-1))`（BASE=100，R 待平衡定稿，推荐 1.20），
-     * 见 0.1.7 设计稿 §2.3。当前仍保留线性实现，待决策后替换。
+     * 0.1.6：线性 `100 × 当前等级`。
+     * 0.1.7 起改为**指数增长** `round(100 × 1.2^(level-1))`（0.1.7 设计稿 §2.4，R=1.20 定稿）：
+     * Lv1→2=100，Lv9→10=430，到 10 级共 2080；后期费用指数抬头抑制堆级。
      */
-    fun upgradeCost(level: Int): Int = 100 * level
+    fun upgradeCost(level: Int): Int =
+        (COST_BASE * COST_RATIO.pow((level.coerceAtLeast(1) - 1).toDouble())).roundToInt()
 
     /** 当前英雄等级（缺省视为 1 级）。 */
     fun level(state: InventoryState, heroId: String): Int = state.progress.heroLevels[heroId] ?: 1
 
-    /** 是否已达版本锁。 */
-    fun isCapped(level: Int): Boolean = level >= LEVEL_CAP
+    /**
+     * 当前存档的动态等级上限（0.1.7）：`progress.levelCap`（缺省回退 [LEVEL_CAP]），
+     * 由「转生爬塔」历史最高通关层驱动；旧档无该字段时取默认值 10。
+     */
+    fun levelCap(state: InventoryState): Int = state.progress.levelCap.coerceIn(1, MAX_LEVEL_DESIGN)
+
+    /** 是否已达当前存档的等级上限（0.1.7 起读动态上限，不再读常量锁）。 */
+    fun isCapped(state: InventoryState, level: Int): Boolean = level >= levelCap(state)
 
     /**
      * 攻击力系数：每级 +1.5%，每 5 级里程碑额外 +1%。
@@ -77,7 +93,7 @@ object HeroLevelRules {
         if (heroId !in s.progress.unlockedHeroes) return InventoryResult(s, "英雄尚未解锁")
         if (heroId.isBlank()) return InventoryResult(s, "英雄资料无效")
         val current = level(s, heroId)
-        if (isCapped(current)) return InventoryResult(s, "英雄等级已达当前版本上限（$LEVEL_CAP 级）")
+        if (isCapped(s, current)) return InventoryResult(s, "英雄等级已达当前版本上限（${levelCap(s)} 级）")
         val cost = upgradeCost(current)
         if (s.gold < cost) return InventoryResult(s, "金币不足，升级需要${cost}金币")
         val next = s.copy(

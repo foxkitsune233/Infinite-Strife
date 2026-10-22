@@ -14,11 +14,12 @@ class HeroLevelTest {
 
     private val inventory = InventoryRules(emptyMap())
 
-    @Test fun upgradeCostIsLinearFromLevel() {
-        // 100 × 当前等级：Lv1→2 = 100，Lv9→10 = 900，到 10 级共 4500。
+    @Test fun upgradeCostIsExponentialFromLevel() {
+        // round(100 × 1.2^(level-1))：Lv1→2 = 100，Lv2→3 = 120，Lv9→10 = 430，到 10 级共 2080。
         assertEquals(100, HeroLevelRules.upgradeCost(1))
-        assertEquals(900, HeroLevelRules.upgradeCost(9))
-        assertEquals(4500, (1..9).sumOf { HeroLevelRules.upgradeCost(it) })
+        assertEquals(120, HeroLevelRules.upgradeCost(2))
+        assertEquals(430, HeroLevelRules.upgradeCost(9))
+        assertEquals(2080, (1..9).sumOf { HeroLevelRules.upgradeCost(it) })
     }
 
     @Test fun missingHeroDefaultsToLevelOne() {
@@ -84,6 +85,29 @@ class HeroLevelTest {
     @Test fun blankHeroIsRejected() {
         val r = HeroLevelRules.upgrade(InventoryState(gold = 1000), "  ", inventory)
         assertFalse(r.ok)
+    }
+
+    @Test fun progressLevelCapOverridesDefaultLock() {
+        // 0.1.7：等级上限是存档进度值。levelCap=15 时可升过 10 级，到 15 再封顶。
+        var s = InventoryState(gold = 100000, progress = CampaignProgress(levelCap = 15))
+        repeat(14) { s = HeroLevelRules.upgrade(s, "juggernaut", inventory).state }
+        assertEquals(15, HeroLevelRules.level(s, "juggernaut"))
+        val blocked = HeroLevelRules.upgrade(s, "juggernaut", inventory)
+        assertFalse(blocked.ok)
+        assertTrue(blocked.error!!, blocked.error!!.contains("15"))
+        assertEquals(15, HeroLevelRules.level(s, "juggernaut"))
+    }
+
+    @Test fun legacySaveWithoutTowerFieldsDefaultsToTen() {
+        // 旧档无 0.1.7 塔字段：上限回退 10、历史最高层 0、奖励为空。
+        val p = CampaignProgress()
+        assertEquals(10, p.levelCap)
+        assertEquals(0, p.towerHighestFloor)
+        assertTrue(p.towerShard.isEmpty())
+        assertTrue(p.towerAghs.isEmpty())
+        assertFalse(p.towerRapier)
+        assertTrue(p.pendingRebirthItems.isEmpty())
+        assertEquals(10, HeroLevelRules.levelCap(InventoryState(gold = 0)))
     }
 
     @Test fun progressSurvivesSerializationDefaults() {

@@ -72,6 +72,26 @@ class QuestPersistenceTest {
         assertTrue(journey.extract(rest).ok)
     }
 
+    @Test fun v16TowerProgressRoundTripsAndV15SavesFallBackToDefaults() {
+        val s = InventoryState(gold = 500, progress = CampaignProgress(
+            levelCap = 25, towerHighestFloor = 4,
+            towerShard = setOf("juggernaut"), towerAghs = setOf("abaddon"),
+            towerRapier = false, pendingRebirthItems = listOf("rebirth:a", "rebirth:b")))
+        store().save(s)
+        val bytes = store().exportBackup()
+        assertEquals(s, store().readBackup(bytes))
+        // v15 旧档没有塔字段 → 默认值回退，其余字段保持。
+        val legacy = LegacyQuestSaveFixture.envelope(15, LegacyQuestSaveFixture.payloadThrough(bytes, 15))
+        val loaded = store().readBackup(legacy)
+        assertEquals(10, loaded.progress.levelCap)
+        assertEquals(0, loaded.progress.towerHighestFloor)
+        assertTrue(loaded.progress.towerShard.isEmpty())
+        assertTrue(loaded.progress.towerAghs.isEmpty())
+        assertFalse(loaded.progress.towerRapier)
+        assertTrue(loaded.progress.pendingRebirthItems.isEmpty())
+        assertEquals(s.gold, loaded.gold)
+    }
+
     @Test fun malformedCountersAndMultipleChoicesCannotReplaceSave() {
         val store = store()
         val good = InventoryState()

@@ -6,7 +6,7 @@ import java.util.zip.CRC32
 /** Read the legacy schema boundary instead of guessing how many bytes a current extension occupies. */
 internal object LegacyQuestSaveFixture {
     fun payloadThrough(current: ByteArray, version: Int): ByteArray {
-        require(version in 12..14)
+        require(version in 12..15)
         val payload = current.copyOfRange(20, current.size)
         val input = DataInputStream(ByteArrayInputStream(payload))
         repeat(7) { input.readInt() }

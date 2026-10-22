@@ -924,10 +924,10 @@ class InventoryActivity : AppCompatActivity() {
     /** 0.1.6 英雄等级面板：金币升级，每英雄独立；显示当前等级加成与下一级费用。 */
     private fun heroLevels() {
         if (state.phase != InventoryPhase.HOME) { message("挑战中不能升级英雄"); return }
-        val sheet = GameCatalogSheet(this, "英雄等级", "${state.gold}金币 · 上限${com.example.douqiuqiu.hero.HeroLevelRules.LEVEL_CAP}级 · 提升永久战斗属性")
+        val sheet = GameCatalogSheet(this, "英雄等级", "${state.gold}金币 · 上限${com.example.douqiuqiu.hero.HeroLevelRules.levelCap(state)}级 · 提升永久战斗属性")
         com.example.douqiuqiu.journey.FirstRunContent.heroes.filter { it.id in state.progress.unlockedHeroes }.forEach { hero ->
             val level = com.example.douqiuqiu.hero.HeroLevelRules.level(state, hero.id)
-            val capped = com.example.douqiuqiu.hero.HeroLevelRules.isCapped(level)
+            val capped = com.example.douqiuqiu.hero.HeroLevelRules.isCapped(state, level)
             val cost = com.example.douqiuqiu.hero.HeroLevelRules.upgradeCost(level)
             val tile = GameUi.panel(this)
             val row = LinearLayout(this).apply { gravity = android.view.Gravity.CENTER_VERTICAL }
@@ -937,7 +937,7 @@ class InventoryActivity : AppCompatActivity() {
             row.addView(LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 addView(GameUi.label(this@InventoryActivity, hero.name, 16, GameUi.gold, true))
-                addView(GameUi.label(this@InventoryActivity, "等级 $level / ${com.example.douqiuqiu.hero.HeroLevelRules.LEVEL_CAP}", 14))
+                addView(GameUi.label(this@InventoryActivity, "等级 $level / ${com.example.douqiuqiu.hero.HeroLevelRules.levelCap(state)}", 14))
             }, LinearLayout.LayoutParams(0, -2, 1f))
             tile.addView(row)
             val bonus = buildList {

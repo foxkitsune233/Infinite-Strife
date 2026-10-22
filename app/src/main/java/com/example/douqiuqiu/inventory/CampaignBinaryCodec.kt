@@ -81,6 +81,12 @@ internal object CampaignBinaryCodec {
         out.writeInt(p.equipmentGuardLevel); out.writeInt(p.skillGuardLevel)
         out.writeInt(p.guardedEquipment.size); p.guardedEquipment.sorted().forEach(out::writeUTF)
         out.writeInt(p.guardedSkills.size); p.guardedSkills.sorted().forEach(out::writeUTF)
+        // 0.1.7 新增字段（v16）：转生爬塔进度。全部带默认值，旧档缺失即默认。
+        out.writeInt(p.levelCap); out.writeInt(p.towerHighestFloor)
+        out.writeInt(p.towerShard.size); p.towerShard.sorted().forEach(out::writeUTF)
+        out.writeInt(p.towerAghs.size); p.towerAghs.sorted().forEach(out::writeUTF)
+        out.writeBoolean(p.towerRapier)
+        out.writeInt(p.pendingRebirthItems.size); p.pendingRebirthItems.forEach(out::writeUTF)
     }
     fun read(input: DataInputStream, version: Int): CampaignProgress {
         val seed = input.readLong(); val batch = input.readInt(); val clears = input.readInt(); val extracted = input.readBoolean()
@@ -173,9 +179,21 @@ internal object CampaignBinaryCodec {
         val guardedSkills = if (version >= 15) List(count(input, 4)) { input.readUTF() }.also {
             if (it.distinct().size != it.size) throw IOException("技能保护记录重复")
         }.toSet() else emptySet()
+        // 0.1.7 字段（v16 起）：缺失时取默认值，旧档零迁移。
+        val levelCap = if (version >= 16) input.readInt() else 10
+        val towerHighestFloor = if (version >= 16) input.readInt() else 0
+        val towerShard = if (version >= 16) List(count(input, FirstRunContent.heroes.size)) { input.readUTF() }.also {
+            if (it.distinct().size != it.size) throw IOException("魔晶解锁记录重复")
+        }.toSet() else emptySet()
+        val towerAghs = if (version >= 16) List(count(input, FirstRunContent.heroes.size)) { input.readUTF() }.also {
+            if (it.distinct().size != it.size) throw IOException("神杖解锁记录重复")
+        }.toSet() else emptySet()
+        val towerRapier = if (version >= 16) input.readBoolean() else false
+        val pendingRebirthItems = if (version >= 16) List(count(input, 10)) { input.readUTF() }.toList() else emptyList()
         return CampaignProgress(seed, batch, boxes, run, clears, extracted, ending, stock, cycle, seen, manual, economy, shop, heroes,
             MaterialPityState(pity), activeHero, loadouts, selections, locks, heroLevels, questCounters, claimedQuests,
-            equipmentGuardLevel, skillGuardLevel, guardedEquipment, guardedSkills)
+            equipmentGuardLevel, skillGuardLevel, guardedEquipment, guardedSkills,
+            levelCap, towerHighestFloor, towerShard, towerAghs, towerRapier, pendingRebirthItems)
     }
     private fun chest(out: DataOutputStream, c: TargetChest) {
         out.writeUTF(c.id); out.writeUTF(c.quality); out.writeInt(c.difficulty); out.writeInt(c.ticket); out.writeInt(c.appraisals)

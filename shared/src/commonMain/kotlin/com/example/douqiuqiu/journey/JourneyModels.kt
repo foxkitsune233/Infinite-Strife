@@ -57,7 +57,19 @@ data class CampaignProgress(
     /** Permanently protected equipment instance IDs until manually unguarded. Stale IDs are allowed. */
     val guardedEquipment: Set<String> = emptySet(),
     /** Permanently protected skill card instance IDs until manually unguarded. Stale IDs are allowed. */
-    val guardedSkills: Set<String> = emptySet()
+    val guardedSkills: Set<String> = emptySet(),
+    /** 0.1.7 转生爬塔：动态等级上限（缺省 10，旧档零迁移），由历史最高通关层驱动。 */
+    val levelCap: Int = 10,
+    /** 0.1.7 转生爬塔：历史最高通关层数（0..20），驱动 [levelCap]。 */
+    val towerHighestFloor: Int = 0,
+    /** 0.1.7 转生爬塔：已获得魔晶的英雄 id（第 5 层奖励，永久保留，不因死亡清除）。 */
+    val towerShard: Set<String> = emptySet(),
+    /** 0.1.7 转生爬塔：已获得神杖的英雄 id（第 15 层奖励，永久保留，不因死亡清除）。 */
+    val towerAghs: Set<String> = emptySet(),
+    /** 0.1.7 转生爬塔：是否已获得圣剑（第 20 层通关纪念品，不回收转生）。 */
+    val towerRapier: Boolean = false,
+    /** 0.1.7 转生爬塔：待使用的转生道具（第 11–20 层每层一个；使用后使一张技能卡星级直满）。 */
+    val pendingRebirthItems: List<String> = emptyList()
 )
 
 /** Platform-neutral persisted counters. Recovery calculations use the supplied clock in the adapter. */
