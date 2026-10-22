@@ -54,7 +54,7 @@ class JourneyRules(val inventory: InventoryRules) {
     /** Creates a genuinely new fixed-content box without touching the other offers. */
     fun replaceChest(s: InventoryState, id: String, rescue: Boolean = false): InventoryResult = ChestFactory(inventory).replace(s, id, rescue)
 
-    fun fighter(state: InventoryState, heroId: String): Fighter {
+    fun fighter(state: InventoryState, heroId: String, towerPrimaryBonus: Int = 0): Fighter {
         val hero = FirstRunContent.hero(heroId)
         // 0.1.6 英雄等级：局外提升的永久属性在此一次性写入，战斗内不再读等级（回放可复现）。
         val level = com.example.douqiuqiu.hero.HeroLevelRules.level(state, heroId)
@@ -67,9 +67,12 @@ class JourneyRules(val inventory: InventoryRules) {
         }
         val cardState = CardBattleState(combatCards, started = combatCards.isEmpty())
         fun stat(name: String) = CardCombat.passive(cardState, EffectKind.STAT_BONUS, name) + EquipmentCombat.passive(gear, EffectKind.STAT_BONUS, name)
-        val str = hero.strength + equipped.sumOf { it.strength } + stat("strength")
-        val agi = hero.agility + equipped.sumOf { it.agility } + stat("agility")
-        val int = hero.intelligence + equipped.sumOf { it.intelligence } + stat("intelligence")
+        val towerStr = if (heroId == "abaddon") towerPrimaryBonus else 0
+        val towerAgi = if (heroId !in setOf("abaddon", "skywrath", "necrophos")) towerPrimaryBonus else 0
+        val towerInt = if (heroId in setOf("abaddon", "skywrath", "necrophos")) towerPrimaryBonus else 0
+        val str = hero.strength + towerStr + equipped.sumOf { it.strength } + stat("strength")
+        val agi = hero.agility + towerAgi + equipped.sumOf { it.agility } + stat("agility")
+        val int = hero.intelligence + towerInt + equipped.sumOf { it.intelligence } + stat("intelligence")
         val hp = (500 + 22 * str + equipped.sumOf { it.health } + stat("health")) *
             com.example.douqiuqiu.hero.HeroLevelRules.healthMultiplier(level)
         val mana = (75 + 12 * int + stat("manaFlat")) * (1 + equipped.sumOf { it.manaPercent } / 100)

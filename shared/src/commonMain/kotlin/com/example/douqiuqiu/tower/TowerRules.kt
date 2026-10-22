@@ -172,7 +172,7 @@ class TowerFlow(val journey: JourneyRules) {
         val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
         if (s.phase != InventoryPhase.HOME) return fail(s, "仅营地可挑战爬塔楼层")
         if (t.pendingWaypoint) return fail(s, "请先选择道中节点")
-        val prepared = journey.fighter(s, t.heroId)
+        val prepared = journey.fighter(s, t.heroId, t.towerPrimaryBonus)
         // 塔内仅保留生命值；每层仍按正常流程重新初始化法力、冷却与战斗状态。
         val player = prepared.copy(hp = (t.currentHp ?: prepared.maxHp).coerceIn(0.0, prepared.maxHp))
         val enemy = buildEnemy(t.floor)
@@ -194,7 +194,7 @@ class TowerFlow(val journey: JourneyRules) {
     fun chooseWaypoint(s: InventoryState, choice: TowerWaypoint): InventoryResult {
         val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
         if (!t.pendingWaypoint) return fail(s, "当前没有待选择的道中节点")
-        val maxHp = journey.fighter(s, t.heroId).maxHp
+        val maxHp = journey.fighter(s, t.heroId, t.towerPrimaryBonus).maxHp
         val hp = t.currentHp ?: maxHp
         val next = when (choice) {
             TowerWaypoint.REST -> t.copy(
@@ -202,10 +202,15 @@ class TowerFlow(val journey: JourneyRules) {
                 pendingWaypoint = false
             )
             TowerWaypoint.SUPPLY -> t.copy(pendingSupplyRegen = true, pendingWaypoint = false)
-            TowerWaypoint.FORGE -> t.copy(
-                towerPrimaryBonus = (t.towerPrimaryBonus + 8).coerceAtMost(48),
-                pendingWaypoint = false
-            )
+            TowerWaypoint.FORGE -> {
+                val nextBonus = (t.towerPrimaryBonus + 8).coerceAtMost(48)
+                val nextMaxHp = journey.fighter(s, t.heroId, nextBonus).maxHp
+                t.copy(
+                    currentHp = hp / maxHp * nextMaxHp,
+                    towerPrimaryBonus = nextBonus,
+                    pendingWaypoint = false
+                )
+            }
         }
         return InventoryResult(QuestTracker.observe(s.copy(progress = s.progress.copy(towerRun = next))))
     }
@@ -246,7 +251,7 @@ class TowerFlow(val journey: JourneyRules) {
             else -> 0
         }
         if (won && !finalClear) {
-            val fullHp = maxHp ?: journey.fighter(s, t.heroId).maxHp
+            val fullHp = maxHp ?: journey.fighter(s, t.heroId, t.towerPrimaryBonus).maxHp
             val carriedHp = survivingHp ?: t.currentHp ?: fullHp
             val marchedHp = (carriedHp + fullHp * 0.04).coerceIn(0.0, fullHp)
             progress = progress.copy(towerRun = t.copy(

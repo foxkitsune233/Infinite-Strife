@@ -134,6 +134,15 @@ class TowerRulesTest {
             TowerRules.supplyRegenAtTick(fighter, 0, false), 1e-9)
     }
 
+    @Test fun forgeAddsTheHeroMainAttributeForThisTowerRun() {
+        val state = allQuestsDone()
+        val normal = journey.fighter(state, "juggernaut")
+        val forged = journey.fighter(state, "juggernaut", towerPrimaryBonus = 8)
+        assertEquals(normal.attack + 8.0, forged.attack, 1e-9)
+        assertEquals(normal.speed + 8.0, forged.speed, 1e-9)
+        assertEquals(normal.armor + 8.0 / 6.0, forged.armor, 1e-9)
+    }
+
     @Test fun deathSellsLootAtFloorRatioAndKeepsCapAndHighest() {
         val loot = listOf(TowerLoot("a", 1, 1000), TowerLoot("b", 1, 500))
         val s = inTower(floor = 8, cleared = 7, loot = loot, cap = 40, highest = 7)
