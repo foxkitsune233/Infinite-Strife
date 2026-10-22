@@ -24,8 +24,13 @@ data class TowerRunState(
     /** 应急补给只在下一场生效，战斗结束后清除。 */
     val pendingSupplyRegen: Boolean = false,
     /** 锻造遗迹的本轮主属性加成；死亡或通关后随 towerRun 清除。 */
-    val towerPrimaryBonus: Int = 0
+    val towerPrimaryBonus: Int = 0,
+    /** 通过节点后的下一战必须先选择道中收益。 */
+    val pendingWaypoint: Boolean = false
 )
+
+/** 塔内道中节点可选效果。 */
+enum class TowerWaypoint { REST, SUPPLY, FORGE }
 
 /** 塔内战利品：结算为金币的携带物（死亡卖 ratio、通关全价）。 */
 data class TowerLoot(

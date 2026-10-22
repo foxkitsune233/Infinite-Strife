@@ -104,6 +104,26 @@ class TowerRulesTest {
         assertEquals((hp + max * .04).coerceAtMost(max), next.currentHp!!, 1e-9)
     }
 
+    @Test fun waypointAfterFloorTwoRequiresChoiceBeforeTheNextFight() {
+        val base = allQuestsDone()
+        val max = journey.fighter(base, "juggernaut").maxHp
+        val s = base.copy(progress = base.progress.copy(towerRun = TowerRunState(
+            floor = 2, heroId = "juggernaut", rng = 1729, clearedFloors = 1, currentHp = 400.0)))
+        val waiting = ok(flow.resolve(s, won = true))
+        assertTrue(waiting.progress.towerRun!!.pendingWaypoint)
+        assertFalse(flow.fight(waiting).ok)
+
+        val rest = ok(flow.chooseWaypoint(waiting, TowerWaypoint.REST)).progress.towerRun!!
+        assertFalse(rest.pendingWaypoint)
+        assertEquals((400.0 + max * .04 + max * .30).coerceAtMost(max), rest.currentHp!!, 1e-9)
+
+        val supply = ok(flow.chooseWaypoint(waiting, TowerWaypoint.SUPPLY)).progress.towerRun!!
+        assertTrue(supply.pendingSupplyRegen)
+
+        val forge = ok(flow.chooseWaypoint(waiting, TowerWaypoint.FORGE)).progress.towerRun!!
+        assertEquals(8, forge.towerPrimaryBonus)
+    }
+
     @Test fun deathSellsLootAtFloorRatioAndKeepsCapAndHighest() {
         val loot = listOf(TowerLoot("a", 1, 1000), TowerLoot("b", 1, 500))
         val s = inTower(floor = 8, cleared = 7, loot = loot, cap = 40, highest = 7)

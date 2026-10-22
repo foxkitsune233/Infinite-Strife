@@ -30,6 +30,9 @@ import kotlin.math.roundToInt
  */
 object TowerRules {
 
+    /** 用户确认的六个道中节点：第 2、5、8、11、14、17 层胜利后出现。 */
+    fun hasWaypointAfterFloor(floor: Int): Boolean = floor in setOf(2, 5, 8, 11, 14, 17)
+
     const val TOWER_FLOORS = 20
 
     /** 每通关一层（从第 2 层起）提升的等级上限。 */
@@ -157,6 +160,7 @@ class TowerFlow(val journey: JourneyRules) {
     fun fight(s: InventoryState): InventoryResult {
         val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
         if (s.phase != InventoryPhase.HOME) return fail(s, "仅营地可挑战爬塔楼层")
+        if (t.pendingWaypoint) return fail(s, "请先选择道中节点")
         val prepared = journey.fighter(s, t.heroId)
         // 塔内仅保留生命值；每层仍按正常流程重新初始化法力、冷却与战斗状态。
         val player = prepared.copy(hp = (t.currentHp ?: prepared.maxHp).coerceIn(0.0, prepared.maxHp))
@@ -171,6 +175,26 @@ class TowerFlow(val journey: JourneyRules) {
             survivingHp = fight.player.hp,
             maxHp = fight.player.maxHp
         )
+    }
+
+    /** 选择当前道中节点；每个节点只可选择一次。 */
+    fun chooseWaypoint(s: InventoryState, choice: TowerWaypoint): InventoryResult {
+        val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
+        if (!t.pendingWaypoint) return fail(s, "当前没有待选择的道中节点")
+        val maxHp = journey.fighter(s, t.heroId).maxHp
+        val hp = t.currentHp ?: maxHp
+        val next = when (choice) {
+            TowerWaypoint.REST -> t.copy(
+                currentHp = (hp + maxHp * .30).coerceAtMost(maxHp),
+                pendingWaypoint = false
+            )
+            TowerWaypoint.SUPPLY -> t.copy(pendingSupplyRegen = true, pendingWaypoint = false)
+            TowerWaypoint.FORGE -> t.copy(
+                towerPrimaryBonus = (t.towerPrimaryBonus + 8).coerceAtMost(48),
+                pendingWaypoint = false
+            )
+        }
+        return InventoryResult(QuestTracker.observe(s.copy(progress = s.progress.copy(towerRun = next))))
     }
 
     /** 胜负结算：胜利进层/发奖/更新上限；死亡卖金清轮次；第 20 层通关为胜利态。 */
@@ -216,7 +240,8 @@ class TowerFlow(val journey: JourneyRules) {
                 floor = t.floor + 1,
                 clearedFloors = cleared,
                 loot = loot,
-                currentHp = marchedHp
+                currentHp = marchedHp,
+                pendingWaypoint = TowerRules.hasWaypointAfterFloor(t.floor)
             ))
         }
         val next = s.copy(gold = s.gold + goldGain, progress = progress)

@@ -102,6 +102,8 @@ internal object CampaignBinaryCodec {
         p.towerRun?.let { t ->
             out.writeBoolean(t.currentHp != null); t.currentHp?.let(out::writeDouble)
             out.writeBoolean(t.pendingSupplyRegen); out.writeInt(t.towerPrimaryBonus)
+            // v20：道中节点待选态。旧档在读取时回退为 false。
+            out.writeBoolean(t.pendingWaypoint)
         }
     }
     fun read(input: DataInputStream, version: Int): CampaignProgress {
@@ -215,10 +217,10 @@ internal object CampaignBinaryCodec {
         val pendingAghanimHeroes = if (version >= 18) List(count(input, FirstRunContent.heroes.size)) { input.readUTF() }.toList() else emptyList()
         val towerState = if (version >= 19 && towerRun != null) {
             val hp = if (input.readBoolean()) input.readDouble() else null
-            Triple(hp, input.readBoolean(), input.readInt())
-        } else Triple(null, false, 0)
+            TowerRunSaveState(hp, input.readBoolean(), input.readInt(), if (version >= 20) input.readBoolean() else false)
+        } else TowerRunSaveState(null, false, 0, false)
         val restoredTowerRun = towerRun?.copy(currentHp = towerState.first, pendingSupplyRegen = towerState.second,
-            towerPrimaryBonus = towerState.third)
+            towerPrimaryBonus = towerState.third, pendingWaypoint = towerState.pendingWaypoint)
         return CampaignProgress(seed, batch, boxes, run, clears, extracted, ending, stock, cycle, seen, manual, economy, shop, heroes,
             MaterialPityState(pity), activeHero, loadouts, selections, locks, heroLevels, questCounters, claimedQuests,
             equipmentGuardLevel, skillGuardLevel, guardedEquipment, guardedSkills,
@@ -370,4 +372,7 @@ internal object CampaignBinaryCodec {
     private fun count(input: DataInputStream, max: Int): Int = input.readInt().also {
         if (it !in 0..max) throw IOException("存档集合长度无效")
     }
+    private data class TowerRunSaveState(
+        val first: Double?, val second: Boolean, val third: Int, val pendingWaypoint: Boolean
+    )
 }
