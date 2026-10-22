@@ -954,7 +954,13 @@ class InventoryActivity : AppCompatActivity() {
             }) {
                 val result = com.example.douqiuqiu.hero.HeroLevelRules.upgrade(state, hero.id, rules)
                 if (!result.ok) message(result.error ?: "升级失败")
-                else { commit(result); message("${hero.name}升至${level + 1}级"); heroLevels() }
+                else {
+                    commit(result)
+                    message("${hero.name}升至${level + 1}级")
+                    // 必须先关掉当前弹层再重绘：否则新面板叠在旧面板上，返回时露出升级前的旧数据。
+                    sheet.dialog.dismiss()
+                    heroLevels()
+                }
             }.apply { isEnabled = !capped && state.gold >= cost })
             sheet.body.addView(tile)
         }

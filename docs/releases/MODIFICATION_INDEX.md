@@ -19,7 +19,8 @@
 | 发布日期 | 版本／构建号 | 修改索引 | 主要修改 | 安装包 | 验证与遗留 |
 |---|---|---|---|---|---|
 | 2026-10-22 | 0.1.6／1015 | 8FEC-D8D4-2DF2 | 70：任务系统启用（协作者分支合并，24节点/40任务、难度阈值、三选一、地下城解锁，复用v15存档不新增字段）；英雄等级（金币升级）；装备/技能栏强化与存档v15；整备面板重构；修复打开整备必现ANR（美术缓存12→64MB+图标256→160px）；营地直达委托任务/英雄等级；任务面板一次只显示当前节点 | `dist/0.1.6/DouQiuQiu-0.1.6-debug.apk` | 缺应用内版本日志条目（首次启动不弹版本更新），仅归档不对外发布；SHA256 `cfa310727e731dd1b8c72301ac08f47e700766e5deedbe82f2c2b146992dcc80` |
-| 2026-10-22 | **0.1.6／1016（当前）** | **C11F-D406-A89F** | 71：补应用内版本日志0.1.6条目（`VersionLog.kt`「任务系统启用」三条），首次启动弹「版本更新」；其余同1015 | `dist/0.1.6/DouQiuQiu-0.1.6-C11F-D406-A89F.apk` | assembleDebug成功（`_build-017-versionlog.log`，BUILD SUCCESSFUL in 37s，35项10执行25最新）、包内版本/v2签名核对；单测1021例、1014通过、7失败为0.1.5时代遗留红项（EquipmentProcAcceptanceTest/PoisonCardHeroAcceptanceTest/CombatModuleIntegrationTest/InventoryStoreTest/SingleRunIntegrationTest），0.1.6未引入新失败；SHA256 `2c013520d9311a69cabfd4de1bde2a44f780c520b3a70455b2a690d1701c42fc` |
+| 2026-10-22 | **0.1.6／1017（当前）** | **22E2-91EF-F38A** | 72：修复英雄等级升级后返回露出升级前面板（`heroLevels()` 升级成功后先 `commit` 再 `sheet.dialog.dismiss()` 再重绘，与 `quests()`/`growth()` 一致）；应用内版本日志补0.1.6四条；其余同1016 | `dist/0.1.6/DouQiuQiu-0.1.6-22E2-91EF-F38A.apk` | assembleDebug成功（`_build-018-herolevel-fix.log`，BUILD SUCCESSFUL in 43s，35项10执行25最新）、包内版本/v2签名核对；单测未重跑，沿用1021/1014通过/7遗留基线，0.1.6未引入新失败；SHA256 `e5cf98cf4b627311a815f0ef995bb9650ae950060e5cb5cd64ee2f28b4c0aaa5` |
+| 2026-10-22 | 0.1.6／1016 | C11F-D406-A89F | 71：补应用内版本日志0.1.6条目（`VersionLog.kt`「任务系统启用」四条），首次启动弹「版本更新」；其余同1015 | `dist/0.1.6/DouQiuQiu-0.1.6-C11F-D406-A89F.apk` | 含「英雄等级升级后返回露出升级前面板」bug，仅归档不对外发布；SHA256 `2c013520d9311a69cabfd4de1bde2a44f780c520b3a70455b2a690d1701c42fc` |
 | 2026-10-21 | 0.1.5／1014 | **F300-7A82-8B2F** | 69：15张GPT重绘卡图接入；怒火及相关双流派去刀剑，以拳势、兽魂、热血和冷热核心区分；测试内容不变 | `dist/0.1.5/DouQiuQiu-0.1.5-F300-7A82-8B2F.apk` | assembleDebug成功、包内版本/v2签名核对、15张资源与源文件逐字节一致；SHA256 `E26C29DA1EFFBC227E7076072922266F51CBDCBD0C0B47330DC3E934DDE77A98`；按用户要求未运行测试，外部沿用原清单 |
 | 2026-10-21 | 0.1.5／1013 | **43F5-2A26-0D22** | 68：六卡逐星收益、冰霜/毒伤隔离、无敌斩D2/D3、冰霜状态飘字、旧层兼容；重写66测试清单 | `dist/0.1.5/DouQiuQiu-0.1.5-43F5-2A26-0D22.apk` | 受影响专项102例通过、JS/APK构建通过、包内版本/v2签名核对；SHA256 `D1A81942D3EE30A9D2ED4D7EB02AD61E50FE09FFFB36B76D0186D5972DF56FDD`；设备待测、全量未重跑，新旧卡整体强度仍待平衡 |
 | 2026-10-21 | 0.1.5／1012 | 29BD-3008-6B37 | 65/66：军团同帧追加攻击存档拒绝、D11内部冷却、U4优先于自动装备、首帧恢复与失效配装引用；附67卡牌审计 | `dist/0.1.5/DouQiuQiu-0.1.5-29BD-3008-6B37.apk` | 针对性35例通过、JS/APK构建通过、包内版本/v2签名核对；SHA256 `89636195114565A5499DCBDE88F549B6044B2D6921CAE902E5458FAC03699EA1`；设备待测、全量未重跑，审计待议数值未调整 |
@@ -106,13 +107,24 @@
 - APK：155094299字节，SHA256 `D9C15E1EFFF365387BA218A1AF38BD1207FA9EEEED1507B423461B52495ECF4B`。aapt确认versionName=0.1.3-19A1-44B2-E23F、versionCode=1006；apksigner确认同Debug证书。
 - 构建日志：`docs/testing/results/_build-52-version-correction.log`，BUILD SUCCESSFUL in 7s，51 actionable tasks: 12 executed, 39 up-to-date。只修正版本配置与文档，未更改功能规则，未执行功能测试。
 
-## 当前0.1.6／C11F-D406-A89F 交付校验
+## 当前0.1.6／22E2-91EF-F38A 交付校验
+
+- 0.1.6 对外包在 1016 基础上修复英雄等级升级返回 bug，并补齐应用内版本日志。
+- APK：164,667,750 字节，SHA256 `e5cf98cf4b627311a815f0ef995bb9650ae950060e5cb5cd64ee2f28b4c0aaa5`。
+- aapt 读取：`versionName=0.1.6-22E2-91EF-F38A`、`versionCode=1017`、包名 `com.example.douqiuqiu`，与 `app/version.properties` 及文件名一致；apksigner 验证同 Debug 证书通过。
+- 应用内版本日志：`ui/VersionLog.kt` 新增「0.1.6 · 任务系统启用」四条；首次启动弹「版本更新」，设置页版本日志可见。
+- 修复内容：`heroLevels()` 升级成功路径原漏 `sheet.dialog.dismiss()`，新面板叠在旧面板之上，点「返回主页面」露出升级前旧数据；改为先 `commit(result)` 写新存档、再 `dismiss()` 关旧层、最后 `heroLevels()` 重绘，与 `quests()`/`growth()` 既有逻辑一致。
+- 构建日志：`docs/testing/results/sampling/_build-018-herolevel-fix.log`；BUILD SUCCESSFUL in 43s，35 actionable tasks: 10 executed, 25 up-to-date。
+- 单测未重跑，沿用 1021 例、1014 通过、7 失败基线（7 失败为 0.1.5 时代既有红项，与 0.1.6 任务/等级/ANR 改动无关）。
+- 发布说明：`docs/releases/v0.1.6-notes.md`、`docs/releases/v0.1.6-release.md`；修改索引见上表。
+
+## 历史0.1.6／C11F-D406-A89F 交付校验（含升级返回 bug，仅归档）
 
 - 首个启用任务系统的 0.1.6 对外包；合并协作者 TIP-SoNg 的 `fix/issue-1-quest-progression` 分支后构建，并在 1015 基础上补齐应用内版本日志。
 - APK：164,667,630 字节，SHA256 `2c013520d9311a69cabfd4de1bde2a44f780c520b3a70455b2a690d1701c42fc`。
 - aapt 读取：`versionName=0.1.6-C11F-D406-A89F`、`versionCode=1016`、包名 `com.example.douqiuqiu`，与 `app/version.properties` 及文件名一致；apksigner 验证同 Debug 证书通过。
-- 应用内版本日志：`ui/VersionLog.kt` 新增「0.1.6 · 任务系统启用」三条；首次启动弹「版本更新」，设置页版本日志可见。单测 `VersionLogTest` 不断言条目数量，新增条目无回归。
+- 应用内版本日志：`ui/VersionLog.kt` 新增「0.1.6 · 任务系统启用」四条；首次启动弹「版本更新」，设置页版本日志可见。单测 `VersionLogTest` 不断言条目数量，新增条目无回归。
+- 已知问题：英雄等级升级成功返回主页面时，会露出升级前的旧面板（已在本构建 1017 修复）。
 - 构建日志：`docs/testing/results/sampling/_build-017-versionlog.log`；BUILD SUCCESSFUL in 37s，35 actionable tasks: 10 executed, 25 up-to-date。
 - 单测 1021 例、1014 通过、7 失败；7 失败为 0.1.5 时代既有红项（战斗/库存验收类），与 0.1.6 任务/等级/ANR 改动无关，本轮不重跑全量。
 - 设备验收（Pixel36）：任务进度随战斗结算推进、`visibleQuests` 仅显示当前节点、营地直达按钮可打开对应面板、整备 ANR 修复后打开流畅；日志与截图见 `docs/testing/results/sampling/_run-016-*.log`、`docs/testing/results/shots/dqq_016_*.png`。
-- 发布说明：`docs/releases/v0.1.6-notes.md`；修改索引见上表。
