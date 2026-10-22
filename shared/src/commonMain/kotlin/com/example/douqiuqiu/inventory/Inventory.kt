@@ -127,6 +127,8 @@ class InventoryRules(val definitions: Map<String, ItemDefinition>) {
             if (t.floor !in 1..20) return "爬塔层数无效"
             if (t.clearedFloors !in 0..19) return "爬塔通关层数无效"
             if (t.heroId.isBlank() || t.loot.size > 64) return "爬塔轮次数据无效"
+            if (t.currentHp != null && (!t.currentHp.isFinite() || t.currentHp < 0.0)) return "爬塔生命值无效"
+            if (t.towerPrimaryBonus !in 0..48 || t.towerPrimaryBonus % 8 != 0) return "爬塔锻造强化无效"
         }
         return null
     }

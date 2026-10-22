@@ -98,6 +98,11 @@ internal object CampaignBinaryCodec {
         // 0.1.7 待授予奖励池（v18 起）：魔晶/神杖先进池，由营地「转生授予」面板手动授予（一次性）。
         out.writeInt(p.pendingShardHeroes.size); p.pendingShardHeroes.forEach(out::writeUTF)
         out.writeInt(p.pendingAghanimHeroes.size); p.pendingAghanimHeroes.forEach(out::writeUTF)
+        // 0.1.7 塔内连续健康度（v19 起）：旧档回退为未开战、无补给、无锻造强化。
+        p.towerRun?.let { t ->
+            out.writeBoolean(t.currentHp != null); t.currentHp?.let(out::writeDouble)
+            out.writeBoolean(t.pendingSupplyRegen); out.writeInt(t.towerPrimaryBonus)
+        }
     }
     fun read(input: DataInputStream, version: Int): CampaignProgress {
         val seed = input.readLong(); val batch = input.readInt(); val clears = input.readInt(); val extracted = input.readBoolean()
@@ -208,10 +213,16 @@ internal object CampaignBinaryCodec {
         } else null
         val pendingShardHeroes = if (version >= 18) List(count(input, FirstRunContent.heroes.size)) { input.readUTF() }.toList() else emptyList()
         val pendingAghanimHeroes = if (version >= 18) List(count(input, FirstRunContent.heroes.size)) { input.readUTF() }.toList() else emptyList()
+        val towerState = if (version >= 19 && towerRun != null) {
+            val hp = if (input.readBoolean()) input.readDouble() else null
+            Triple(hp, input.readBoolean(), input.readInt())
+        } else Triple(null, false, 0)
+        val restoredTowerRun = towerRun?.copy(currentHp = towerState.first, pendingSupplyRegen = towerState.second,
+            towerPrimaryBonus = towerState.third)
         return CampaignProgress(seed, batch, boxes, run, clears, extracted, ending, stock, cycle, seen, manual, economy, shop, heroes,
             MaterialPityState(pity), activeHero, loadouts, selections, locks, heroLevels, questCounters, claimedQuests,
             equipmentGuardLevel, skillGuardLevel, guardedEquipment, guardedSkills,
-            levelCap, towerHighestFloor, towerShard, towerAghs, towerRapier, pendingRebirthItems, pendingShardHeroes, pendingAghanimHeroes, towerRun)
+            levelCap, towerHighestFloor, towerShard, towerAghs, towerRapier, pendingRebirthItems, pendingShardHeroes, pendingAghanimHeroes, restoredTowerRun)
     }
     private fun chest(out: DataOutputStream, c: TargetChest) {
         out.writeUTF(c.id); out.writeUTF(c.quality); out.writeInt(c.difficulty); out.writeInt(c.ticket); out.writeInt(c.appraisals)
