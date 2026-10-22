@@ -30,6 +30,9 @@ import kotlin.math.roundToInt
  */
 object TowerRules {
 
+    /** 用户确认的六个道中节点：第 2、5、8、11、14、17 层胜利后出现。 */
+    fun hasWaypointAfterFloor(floor: Int): Boolean = floor in setOf(2, 5, 8, 11, 14, 17)
+
     const val TOWER_FLOORS = 20
 
     /** 每通关一层（从第 2 层起）提升的等级上限。 */
@@ -97,15 +100,26 @@ object TowerRules {
     /** 第 floor 层通关战利品的价值（死亡按比例卖、通关全价）。 */
     fun lootValue(floor: Int): Int = 80 + floor * 60
 
+    /** 应急补给：下一场前 60 秒（600 个 100ms tick）每秒回复 1% 最大生命。 */
+    fun supplyRegenAtTick(fighter: Fighter, tick: Int, active: Boolean): Double =
+        fighter.regen + if (active && tick in 0 until 600) fighter.maxHp * .01 else 0.0
+
     /** 无头模拟一场战斗：打完为止，超时判负。 */
     fun simulate(fight: DuelState): Boolean {
-        var f = fight
+        return simulateState(fight, false).won == true
+    }
+
+    /** 模拟塔战；补给只影响本场的前 60 秒，战斗结束后不会携带该回复。 */
+    fun simulateState(initial: DuelState, supplyActive: Boolean): DuelState {
+        var f = initial
+        val baseRegen = initial.player.regen
         var guard = 0
         while (f.won == null && guard < SIM_TICK_CAP) {
+            f = f.copy(player = f.player.copy(regen = supplyRegenAtTick(f.player.copy(regen = baseRegen), f.tick, supplyActive)))
             f = DuelEngine.step(f)
             guard++
         }
-        return f.won == true
+        return f.copy(player = f.player.copy(regen = baseRegen))
     }
 }
 
@@ -157,17 +171,57 @@ class TowerFlow(val journey: JourneyRules) {
     fun fight(s: InventoryState): InventoryResult {
         val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
         if (s.phase != InventoryPhase.HOME) return fail(s, "仅营地可挑战爬塔楼层")
-        val player = journey.fighter(s, t.heroId)
+        if (t.pendingWaypoint) return fail(s, "请先选择道中节点")
+        val prepared = journey.fighter(s, t.heroId, t.towerPrimaryBonus)
+        // 塔内仅保留生命值；每层仍按正常流程重新初始化法力、冷却与战斗状态。
+        val player = prepared.copy(hp = (t.currentHp ?: prepared.maxHp).coerceIn(0.0, prepared.maxHp))
         val enemy = buildEnemy(t.floor)
         val rng = FirstRunContent.next(t.rng)
         val hero = FirstRunContent.hero(TowerRules.enemyHeroId(t.floor))
-        val fight = DuelState(player, enemy, rng, log = listOf("转生爬塔 · 第${t.floor}层 · ${hero.name}"))
-        val won = TowerRules.simulate(fight)
-        return resolve(s.copy(progress = s.progress.copy(towerRun = t.copy(rng = rng))), won)
+        val fight = TowerRules.simulateState(
+            DuelState(player, enemy, rng, log = listOf("转生爬塔 · 第${t.floor}层 · ${hero.name}")),
+            t.pendingSupplyRegen
+        )
+        return resolve(
+            s.copy(progress = s.progress.copy(towerRun = t.copy(rng = rng, pendingSupplyRegen = false))),
+            fight.won == true,
+            survivingHp = fight.player.hp,
+            maxHp = fight.player.maxHp
+        )
+    }
+
+    /** 选择当前道中节点；每个节点只可选择一次。 */
+    fun chooseWaypoint(s: InventoryState, choice: TowerWaypoint): InventoryResult {
+        val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
+        if (!t.pendingWaypoint) return fail(s, "当前没有待选择的道中节点")
+        val maxHp = journey.fighter(s, t.heroId, t.towerPrimaryBonus).maxHp
+        val hp = t.currentHp ?: maxHp
+        val next = when (choice) {
+            TowerWaypoint.REST -> t.copy(
+                currentHp = (hp + maxHp * .30).coerceAtMost(maxHp),
+                pendingWaypoint = false
+            )
+            TowerWaypoint.SUPPLY -> t.copy(pendingSupplyRegen = true, pendingWaypoint = false)
+            TowerWaypoint.FORGE -> {
+                val nextBonus = (t.towerPrimaryBonus + 8).coerceAtMost(48)
+                val nextMaxHp = journey.fighter(s, t.heroId, nextBonus).maxHp
+                t.copy(
+                    currentHp = hp / maxHp * nextMaxHp,
+                    towerPrimaryBonus = nextBonus,
+                    pendingWaypoint = false
+                )
+            }
+        }
+        return InventoryResult(QuestTracker.observe(s.copy(progress = s.progress.copy(towerRun = next))))
     }
 
     /** 胜负结算：胜利进层/发奖/更新上限；死亡卖金清轮次；第 20 层通关为胜利态。 */
-    fun resolve(s: InventoryState, won: Boolean): InventoryResult {
+    fun resolve(
+        s: InventoryState,
+        won: Boolean,
+        survivingHp: Double? = null,
+        maxHp: Double? = null
+    ): InventoryResult {
         val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
         val cleared = t.clearedFloors + if (won) 1 else 0
         val loot = if (won) t.loot + TowerLoot("tower_f${t.floor}", 1, TowerRules.lootValue(t.floor)) else t.loot
@@ -197,7 +251,16 @@ class TowerFlow(val journey: JourneyRules) {
             else -> 0
         }
         if (won && !finalClear) {
-            progress = progress.copy(towerRun = t.copy(floor = t.floor + 1, clearedFloors = cleared, loot = loot))
+            val fullHp = maxHp ?: journey.fighter(s, t.heroId, t.towerPrimaryBonus).maxHp
+            val carriedHp = survivingHp ?: t.currentHp ?: fullHp
+            val marchedHp = (carriedHp + fullHp * 0.04).coerceIn(0.0, fullHp)
+            progress = progress.copy(towerRun = t.copy(
+                floor = t.floor + 1,
+                clearedFloors = cleared,
+                loot = loot,
+                currentHp = marchedHp,
+                pendingWaypoint = TowerRules.hasWaypointAfterFloor(t.floor)
+            ))
         }
         val next = s.copy(gold = s.gold + goldGain, progress = progress)
         return InventoryResult(QuestTracker.observe(next))

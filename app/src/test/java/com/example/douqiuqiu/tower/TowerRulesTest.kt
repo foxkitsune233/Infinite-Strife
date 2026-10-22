@@ -3,6 +3,7 @@ package com.example.douqiuqiu.tower
 import com.example.douqiuqiu.inventory.InventoryRules
 import com.example.douqiuqiu.inventory.InventoryState
 import com.example.douqiuqiu.journey.CampaignProgress
+import com.example.douqiuqiu.journey.ChallengeBalance
 import com.example.douqiuqiu.journey.JourneyRules
 import com.example.douqiuqiu.quest.QuestContent
 import org.junit.Assert.*
@@ -49,6 +50,11 @@ class TowerRulesTest {
         assertEquals(100, TowerRules.capAfterFloor(20))
     }
 
+    @Test fun infernoIsTheSeventhDifficultyAfterNightmare() {
+        assertEquals("炼狱", ChallengeBalance.name(6))
+        assertTrue(6 in ChallengeBalance.difficulties)
+    }
+
     @Test fun towerStaysLockedUntilEveryQuestNodeIsClaimed() {
         val fresh = InventoryState()
         assertFalse(TowerRules.isUnlocked(fresh))
@@ -86,6 +92,55 @@ class TowerRulesTest {
         assertEquals(15, r.state.progress.levelCap) // capAfterFloor(2)
         assertEquals(2, r.state.progress.towerHighestFloor)
         assertEquals(0, r.state.gold - s.gold) // 普通胜利不当场结算金币
+    }
+
+    @Test fun victoryCarriesHealthAndAppliesOnlyTheFourPercentMarchRecovery() {
+        val base = allQuestsDone()
+        val hp = 400.0
+        val s = base.copy(progress = base.progress.copy(towerRun = TowerRunState(
+            floor = 1, heroId = "juggernaut", rng = 1729, currentHp = hp)))
+        val max = journey.fighter(s, "juggernaut").maxHp
+        val next = ok(flow.resolve(s, won = true)).progress.towerRun!!
+        assertEquals((hp + max * .04).coerceAtMost(max), next.currentHp!!, 1e-9)
+    }
+
+    @Test fun waypointAfterFloorTwoRequiresChoiceBeforeTheNextFight() {
+        val base = allQuestsDone()
+        val max = journey.fighter(base, "juggernaut").maxHp
+        val s = base.copy(progress = base.progress.copy(towerRun = TowerRunState(
+            floor = 2, heroId = "juggernaut", rng = 1729, clearedFloors = 1, currentHp = 400.0)))
+        val waiting = ok(flow.resolve(s, won = true))
+        assertTrue(waiting.progress.towerRun!!.pendingWaypoint)
+        assertFalse(flow.fight(waiting).ok)
+
+        val rest = ok(flow.chooseWaypoint(waiting, TowerWaypoint.REST)).progress.towerRun!!
+        assertFalse(rest.pendingWaypoint)
+        assertEquals((400.0 + max * .04 + max * .30).coerceAtMost(max), rest.currentHp!!, 1e-9)
+
+        val supply = ok(flow.chooseWaypoint(waiting, TowerWaypoint.SUPPLY)).progress.towerRun!!
+        assertTrue(supply.pendingSupplyRegen)
+
+        val forge = ok(flow.chooseWaypoint(waiting, TowerWaypoint.FORGE)).progress.towerRun!!
+        assertEquals(8, forge.towerPrimaryBonus)
+    }
+
+    @Test fun supplyAddsOnePercentMaxHealthRegenForExactlySixtySeconds() {
+        val fighter = journey.fighter(allQuestsDone(), "juggernaut")
+        assertEquals(fighter.regen + fighter.maxHp * .01,
+            TowerRules.supplyRegenAtTick(fighter, 599, true), 1e-9)
+        assertEquals(fighter.regen,
+            TowerRules.supplyRegenAtTick(fighter, 600, true), 1e-9)
+        assertEquals(fighter.regen,
+            TowerRules.supplyRegenAtTick(fighter, 0, false), 1e-9)
+    }
+
+    @Test fun forgeAddsTheHeroMainAttributeForThisTowerRun() {
+        val state = allQuestsDone()
+        val normal = journey.fighter(state, "juggernaut")
+        val forged = journey.fighter(state, "juggernaut", towerPrimaryBonus = 8)
+        assertEquals(normal.attack + 8.0, forged.attack, 1e-9)
+        assertEquals(normal.speed + 8.0, forged.speed, 1e-9)
+        assertEquals(normal.armor + 8.0 / 6.0, forged.armor, 1e-9)
     }
 
     @Test fun deathSellsLootAtFloorRatioAndKeepsCapAndHighest() {

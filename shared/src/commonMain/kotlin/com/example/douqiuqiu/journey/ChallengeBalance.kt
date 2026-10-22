@@ -6,9 +6,9 @@ import com.example.douqiuqiu.inventory.ItemDefinition
 
 /** Versioned fixed progression. Never scales enemies to player equipment or HP. */
 object ChallengeBalance {
-    const val COUNT = 6
+    const val COUNT = 7
     val difficulties = 0 until COUNT
-    val names = listOf("简单", "普通", "困难", "精英", "大师", "噩梦")
+    val names = listOf("简单", "普通", "困难", "精英", "大师", "噩梦", "炼狱")
     fun name(difficulty: Int): String = names[difficulty]
     data class EnemyScale(val health: Double, val attack: Double, val attackSpeed: Double = 0.0, val armor: Double = 0.0)
     data class HardBudget(val cards: Int, val twoStars: Int, val goldCards: Int, val gear: Int, val gearValue: Int)
@@ -27,28 +27,30 @@ object ChallengeBalance {
         val base = hardBudget(run.round)
         if (run.rewardVersion < 4) return base
         val d = run.target.difficulty
-        val cards = listOf(0, 2, 3, 4, 5, 6)[d] + run.round - 1
+        val cards = listOf(0, 2, 3, 4, 5, 6, 7)[d] + run.round - 1
         val values = listOf(
             listOf(60, 100, 230, 360, 540),
             listOf(800, 1900, 3500, 5500, 8000),
             listOf(3000, 3800, 6500, 10000, 16000),
             listOf(4000, 6500, 10000, 15000, 21000),
             listOf(6500, 10000, 14500, 20500, 28000),
-            listOf(10000, 14500, 20000, 27500, 36000))
+            listOf(10000, 14500, 20000, 27500, 36000),
+            listOf(13000, 19000, 27000, 36000, 46000))
         return HardBudget(cards.coerceIn(1, 8), (run.round + d - 3).coerceIn(0, 8),
             (run.round + d - 4).coerceIn(0, 4), (1 + d + (run.round - 1) / 2).coerceAtMost(6), values[d][run.round - 1])
     }
     fun activeQuota(run: JourneyState): Int = if (run.rewardVersion < 4 || run.target.difficulty == 0) 0
-        else (listOf(0, 0, 1, 1, 2, 3)[run.target.difficulty] + (run.round - 1) / 2).coerceAtMost(4)
+        else (listOf(0, 0, 1, 1, 2, 3, 4)[run.target.difficulty] + (run.round - 1) / 2).coerceAtMost(4)
     fun hardBudget(round: Int) = hardBudgets[round.also { require(it in 1..5) } - 1]
     fun scale(run: JourneyState): EnemyScale {
         require(run.round in 1..5 && run.target.difficulty in difficulties)
         if (run.rewardVersion >= 4 && run.target.difficulty > 0) {
             val d = run.target.difficulty
             val r = run.round - 1
-            return EnemyScale(listOf(0.0, 1.00, 1.20, 1.45, 1.75, 2.10)[d] + r * listOf(0.0, .18, .30, .40, .52, .65)[d],
-                listOf(0.0, .95, 1.10, 1.25, 1.45, 1.65)[d] + r * listOf(0.0, .10, .16, .21, .27, .34)[d],
-                (d - 1) * 8.0 + r * (d + 1) * 2.0, (d - 1) * 1.5 + r * (d + 1) * .5)
+            return EnemyScale(listOf(0.0, 1.00, 1.20, 1.45, 1.75, 2.10, 2.42)[d] + r * listOf(0.0, .18, .30, .40, .52, .65, .78)[d],
+                listOf(0.0, .95, 1.10, 1.25, 1.45, 1.65, 1.85)[d] + r * listOf(0.0, .10, .16, .21, .27, .34, .40)[d],
+                if (d == 6) 40.0 + r * 14.0 else (d - 1) * 8.0 + r * (d + 1) * 2.0,
+                if (d == 6) 8.0 + r * 3.5 else (d - 1) * 1.5 + r * (d + 1) * .5)
         }
         if (enhanced(run)) return hardScales[run.round - 1]
         val original = .62 + run.round * .04 + run.target.difficulty * .16

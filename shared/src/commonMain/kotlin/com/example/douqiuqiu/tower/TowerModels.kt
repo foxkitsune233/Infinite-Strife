@@ -18,8 +18,19 @@ data class TowerRunState(
     /** 本轮已通关层数（死亡卖金比例与历史最高层都取此值）。 */
     val clearedFloors: Int = 0,
     /** 本轮拾取的战利品（死亡按比例卖出、通关按 100% 结算）。 */
-    val loot: List<TowerLoot> = emptyList()
+    val loot: List<TowerLoot> = emptyList(),
+    /** 连战生命；null 表示尚未进行第一场，下一战按常规满血开局。 */
+    val currentHp: Double? = null,
+    /** 应急补给只在下一场生效，战斗结束后清除。 */
+    val pendingSupplyRegen: Boolean = false,
+    /** 锻造遗迹的本轮主属性加成；死亡或通关后随 towerRun 清除。 */
+    val towerPrimaryBonus: Int = 0,
+    /** 通过节点后的下一战必须先选择道中收益。 */
+    val pendingWaypoint: Boolean = false
 )
+
+/** 塔内道中节点可选效果。 */
+enum class TowerWaypoint { REST, SUPPLY, FORGE }
 
 /** 塔内战利品：结算为金币的携带物（死亡卖 ratio、通关全价）。 */
 data class TowerLoot(

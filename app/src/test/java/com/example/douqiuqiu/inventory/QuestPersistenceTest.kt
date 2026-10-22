@@ -124,6 +124,15 @@ class QuestPersistenceTest {
         assertEquals(s.gold, loaded.gold)
     }
 
+    @Test fun v20TowerRunRoundTripsContinuousHealthSupplyForgeAndWaypoint() {
+        val s = InventoryState(gold = 500, progress = CampaignProgress(
+            towerRun = TowerRunState(floor = 8, heroId = "viper", rng = 99, clearedFloors = 7,
+                loot = listOf(TowerLoot("tower_f7", 1, 500)), currentHp = 412.0,
+                pendingSupplyRegen = true, towerPrimaryBonus = 16, pendingWaypoint = true)))
+        store().save(s)
+        assertEquals(s, store().readBackup(store().exportBackup()))
+    }
+
     @Test fun malformedCountersAndMultipleChoicesCannotReplaceSave() {
         val store = store()
         val good = InventoryState()
