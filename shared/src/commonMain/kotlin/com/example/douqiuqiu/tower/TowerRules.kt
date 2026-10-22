@@ -157,17 +157,29 @@ class TowerFlow(val journey: JourneyRules) {
     fun fight(s: InventoryState): InventoryResult {
         val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
         if (s.phase != InventoryPhase.HOME) return fail(s, "仅营地可挑战爬塔楼层")
-        val player = journey.fighter(s, t.heroId)
+        val prepared = journey.fighter(s, t.heroId)
+        // 塔内仅保留生命值；每层仍按正常流程重新初始化法力、冷却与战斗状态。
+        val player = prepared.copy(hp = (t.currentHp ?: prepared.maxHp).coerceIn(0.0, prepared.maxHp))
         val enemy = buildEnemy(t.floor)
         val rng = FirstRunContent.next(t.rng)
         val hero = FirstRunContent.hero(TowerRules.enemyHeroId(t.floor))
         val fight = DuelState(player, enemy, rng, log = listOf("转生爬塔 · 第${t.floor}层 · ${hero.name}"))
         val won = TowerRules.simulate(fight)
-        return resolve(s.copy(progress = s.progress.copy(towerRun = t.copy(rng = rng))), won)
+        return resolve(
+            s.copy(progress = s.progress.copy(towerRun = t.copy(rng = rng))),
+            won,
+            survivingHp = fight.player.hp,
+            maxHp = fight.player.maxHp
+        )
     }
 
     /** 胜负结算：胜利进层/发奖/更新上限；死亡卖金清轮次；第 20 层通关为胜利态。 */
-    fun resolve(s: InventoryState, won: Boolean): InventoryResult {
+    fun resolve(
+        s: InventoryState,
+        won: Boolean,
+        survivingHp: Double? = null,
+        maxHp: Double? = null
+    ): InventoryResult {
         val t = s.progress.towerRun ?: return fail(s, "没有进行中的爬塔轮次")
         val cleared = t.clearedFloors + if (won) 1 else 0
         val loot = if (won) t.loot + TowerLoot("tower_f${t.floor}", 1, TowerRules.lootValue(t.floor)) else t.loot
@@ -197,7 +209,15 @@ class TowerFlow(val journey: JourneyRules) {
             else -> 0
         }
         if (won && !finalClear) {
-            progress = progress.copy(towerRun = t.copy(floor = t.floor + 1, clearedFloors = cleared, loot = loot))
+            val fullHp = maxHp ?: journey.fighter(s, t.heroId).maxHp
+            val carriedHp = survivingHp ?: t.currentHp ?: fullHp
+            val marchedHp = (carriedHp + fullHp * 0.04).coerceIn(0.0, fullHp)
+            progress = progress.copy(towerRun = t.copy(
+                floor = t.floor + 1,
+                clearedFloors = cleared,
+                loot = loot,
+                currentHp = marchedHp
+            ))
         }
         val next = s.copy(gold = s.gold + goldGain, progress = progress)
         return InventoryResult(QuestTracker.observe(next))

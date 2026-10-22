@@ -94,6 +94,16 @@ class TowerRulesTest {
         assertEquals(0, r.state.gold - s.gold) // 普通胜利不当场结算金币
     }
 
+    @Test fun victoryCarriesHealthAndAppliesOnlyTheFourPercentMarchRecovery() {
+        val base = allQuestsDone()
+        val hp = 400.0
+        val s = base.copy(progress = base.progress.copy(towerRun = TowerRunState(
+            floor = 1, heroId = "juggernaut", rng = 1729, currentHp = hp)))
+        val max = journey.fighter(s, "juggernaut").maxHp
+        val next = ok(flow.resolve(s, won = true)).progress.towerRun!!
+        assertEquals((hp + max * .04).coerceAtMost(max), next.currentHp!!, 1e-9)
+    }
+
     @Test fun deathSellsLootAtFloorRatioAndKeepsCapAndHighest() {
         val loot = listOf(TowerLoot("a", 1, 1000), TowerLoot("b", 1, 500))
         val s = inTower(floor = 8, cleared = 7, loot = loot, cap = 40, highest = 7)
