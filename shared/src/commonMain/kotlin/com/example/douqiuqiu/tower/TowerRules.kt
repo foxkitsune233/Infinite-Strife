@@ -100,15 +100,26 @@ object TowerRules {
     /** 第 floor 层通关战利品的价值（死亡按比例卖、通关全价）。 */
     fun lootValue(floor: Int): Int = 80 + floor * 60
 
+    /** 应急补给：下一场前 60 秒（600 个 100ms tick）每秒回复 1% 最大生命。 */
+    fun supplyRegenAtTick(fighter: Fighter, tick: Int, active: Boolean): Double =
+        fighter.regen + if (active && tick in 0 until 600) fighter.maxHp * .01 else 0.0
+
     /** 无头模拟一场战斗：打完为止，超时判负。 */
     fun simulate(fight: DuelState): Boolean {
-        var f = fight
+        return simulateState(fight, false).won == true
+    }
+
+    /** 模拟塔战；补给只影响本场的前 60 秒，战斗结束后不会携带该回复。 */
+    fun simulateState(initial: DuelState, supplyActive: Boolean): DuelState {
+        var f = initial
+        val baseRegen = initial.player.regen
         var guard = 0
         while (f.won == null && guard < SIM_TICK_CAP) {
+            f = f.copy(player = f.player.copy(regen = supplyRegenAtTick(f.player.copy(regen = baseRegen), f.tick, supplyActive)))
             f = DuelEngine.step(f)
             guard++
         }
-        return f.won == true
+        return f.copy(player = f.player.copy(regen = baseRegen))
     }
 }
 
@@ -167,11 +178,13 @@ class TowerFlow(val journey: JourneyRules) {
         val enemy = buildEnemy(t.floor)
         val rng = FirstRunContent.next(t.rng)
         val hero = FirstRunContent.hero(TowerRules.enemyHeroId(t.floor))
-        val fight = DuelState(player, enemy, rng, log = listOf("转生爬塔 · 第${t.floor}层 · ${hero.name}"))
-        val won = TowerRules.simulate(fight)
+        val fight = TowerRules.simulateState(
+            DuelState(player, enemy, rng, log = listOf("转生爬塔 · 第${t.floor}层 · ${hero.name}")),
+            t.pendingSupplyRegen
+        )
         return resolve(
-            s.copy(progress = s.progress.copy(towerRun = t.copy(rng = rng))),
-            won,
+            s.copy(progress = s.progress.copy(towerRun = t.copy(rng = rng, pendingSupplyRegen = false))),
+            fight.won == true,
             survivingHp = fight.player.hp,
             maxHp = fight.player.maxHp
         )

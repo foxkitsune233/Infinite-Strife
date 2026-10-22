@@ -124,6 +124,16 @@ class TowerRulesTest {
         assertEquals(8, forge.towerPrimaryBonus)
     }
 
+    @Test fun supplyAddsOnePercentMaxHealthRegenForExactlySixtySeconds() {
+        val fighter = journey.fighter(allQuestsDone(), "juggernaut")
+        assertEquals(fighter.regen + fighter.maxHp * .01,
+            TowerRules.supplyRegenAtTick(fighter, 599, true), 1e-9)
+        assertEquals(fighter.regen,
+            TowerRules.supplyRegenAtTick(fighter, 600, true), 1e-9)
+        assertEquals(fighter.regen,
+            TowerRules.supplyRegenAtTick(fighter, 0, false), 1e-9)
+    }
+
     @Test fun deathSellsLootAtFloorRatioAndKeepsCapAndHighest() {
         val loot = listOf(TowerLoot("a", 1, 1000), TowerLoot("b", 1, 500))
         val s = inTower(floor = 8, cleared = 7, loot = loot, cap = 40, highest = 7)
