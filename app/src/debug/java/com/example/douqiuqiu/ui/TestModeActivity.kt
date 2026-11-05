@@ -41,6 +41,13 @@ class TestModeActivity : AppCompatActivity() {
         }
         body.addView(GameUi.button(this, "预览当前版本日志（不写已读）") { VersionLog.show(this) })
         body.addView(GameUi.button(this, "打开设置中的版本日志入口") { startActivity(Intent(this, SettingsActivity::class.java)) })
+        GameUi.section(body, "结局演出预览 · 不改存档")
+        body.addView(GameUi.label(this, "包含结局剧透。全黑背景、逐段浮现字幕；预览不会解锁英雄、发奖或改动正式／测试存档。", 12, GameUi.muted))
+        com.example.douqiuqiu.quest.HeroEndingCatalog.all.forEach { ending ->
+            body.addView(GameUi.button(this, "${ending.heroName} · ${ending.title}") {
+                startActivity(EndingActivity.intent(this, ending.heroId))
+            })
+        }
         GameUi.section(body, "41号专项夹具 · 一键载入")
         body.addView(GameUi.button(this, "T06 · 装备与卷轴彩绘／回退对照") { attempt { AcceptanceFixtures.showIcons(this) } })
         AcceptanceFixtures.presets.forEach { preset ->

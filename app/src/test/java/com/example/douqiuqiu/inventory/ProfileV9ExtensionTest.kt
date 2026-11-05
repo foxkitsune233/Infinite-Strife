@@ -28,7 +28,7 @@ class ProfileV9ExtensionTest {
         val items = listOf(StoredItem("bkb", "black_king_bar", ItemPlace(Container.EQUIPMENT)),
             StoredItem("crit", "daedalus", ItemPlace(Container.EQUIPMENT, 1)))
         var f = journey.fighter(InventoryState(items = items), "juggernaut")
-        f = f.copy(equipment = f.equipment.copy(immunityMs = 2000, cooldowns = EquipmentCooldownState(mapOf("bkb" to 11000L), 1),
+        f = f.copy(positiveBlock = 3.4, equipment = f.equipment.copy(immunityMs = 2000, cooldowns = EquipmentCooldownState(mapOf("bkb" to 11000L), 1),
             activeGroups = mapOf("bkb" to 2000L), started = true, manual = setOf("bkb"), criticalFailures = mapOf("gear:crit:daedalus.crit" to 2)))
         val enemy = journey.fighter(InventoryState(), "phantom_assassin")
         return InventoryState(items = items, phase = InventoryPhase.BATTLE, progress = CampaignProgress(run = JourneyState("run", f.heroId,

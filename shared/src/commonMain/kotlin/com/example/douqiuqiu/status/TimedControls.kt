@@ -7,7 +7,7 @@ import com.example.douqiuqiu.equipment.EquipmentCombat
 import com.example.douqiuqiu.journey.Fighter
 import kotlin.math.ceil
 
-enum class ControlKind { STUN, HEX, SILENCE, DISARM, TAUNT, TIME_STOP, FREEZE }
+enum class ControlKind { STUN, HEX, SILENCE, DISARM, TAUNT, TIME_STOP, FREEZE, BANISH }
 data class TimedControl(val sourceId: String, val caster: Int, val kind: ControlKind,
                         val remainingMs: Long, val dispelClass: DispelClass, val appliedAtTick: Int)
 data class ControlApplication(val fighter: Fighter, val reason: String, val durationMs: Long = 0) {
@@ -18,7 +18,8 @@ data class ControlApplication(val fighter: Fighter, val reason: String, val dura
 object TimedControls {
     fun current(f: Fighter): ActionControlState {
         val kinds = if (f.equipment.immunityMs > 0) emptySet() else f.timedControls.map { it.kind }.toSet()
-        return f.control.copy(stunned = f.control.stunned || ControlKind.STUN in kinds,
+        return f.control.copy(banished = f.control.banished || ControlKind.BANISH in kinds,
+            stunned = f.control.stunned || ControlKind.STUN in kinds,
             hexed = f.control.hexed || ControlKind.HEX in kinds,
             silenced = f.control.silenced || ControlKind.SILENCE in kinds,
             disarmed = f.control.disarmed || ControlKind.DISARM in kinds,

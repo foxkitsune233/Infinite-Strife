@@ -11,6 +11,7 @@
 
         <activity android:name=".ui.SettingsActivity" android:exported="false" />
         <activity android:name=".ui.IconGalleryActivity" android:exported="false" />
+        <activity android:name=".ui.EndingActivity" android:exported="false" android:theme="@style/Theme.DouQiuQiu.Ending" />
         <activity android:name=".ui.InventoryActivity" android:exported="false" />
         <activity android:name=".ui.JourneyActivity" android:exported="false" />
 

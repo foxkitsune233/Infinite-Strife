@@ -118,7 +118,7 @@ class Hero0_1_5Test {
         val run = JourneyState("run-1", "anti_mage", TargetChest("c", "白", 0, 0, emptyList()), 1729, 100.0, 100.0, 1,
             JourneyStage.BATTLE, fight = fight, equipmentCooldowns = EquipmentCooldownState())
         val progress = CampaignProgress(run = run)
-        val bytes = ByteArrayOutputStream().also { DataOutputStream(it).use { out -> CampaignBinaryCodec.write(out, progress) } }.toByteArray()
+        val bytes = ByteArrayOutputStream().also { DataOutputStream(it).use { out -> CampaignBinaryCodec.write(out, progress, 14) } }.toByteArray()
         val read = ByteArrayInputStream(bytes).use { DataInputStream(it).use { CampaignBinaryCodec.read(it, 14) } }
         val rf = read.run!!.fight!!
         assertEquals("英雄 id 应保留", "anti_mage", rf.player.heroId)
@@ -143,7 +143,7 @@ class Hero0_1_5Test {
         val fight = DuelState(journey.fighter(InventoryState(), "anti_mage"), enemy, 7, 3, null, listOf("x"))
         val run = JourneyState("run-2", "anti_mage", TargetChest("c", "白", 0, 0, emptyList()), 1729, 100.0, 100.0, 1,
             JourneyStage.BATTLE, fight = fight, equipmentCooldowns = EquipmentCooldownState())
-        val bytes = ByteArrayOutputStream().also { DataOutputStream(it).use { out -> CampaignBinaryCodec.write(out, CampaignProgress(run = run)) } }.toByteArray()
+        val bytes = ByteArrayOutputStream().also { DataOutputStream(it).use { out -> CampaignBinaryCodec.write(out, CampaignProgress(run = run), 14) } }.toByteArray()
         val read = ByteArrayInputStream(bytes).use { DataInputStream(it).use { CampaignBinaryCodec.read(it, 14) } }
         val rtc = read.run!!.fight!!.enemy.timedControls.associate { it.kind to it }
         assertEquals(DispelClass.UNDISPELLABLE, rtc[ControlKind.TIME_STOP]!!.dispelClass)

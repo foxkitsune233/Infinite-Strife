@@ -50,4 +50,18 @@ object FighterEffects {
             cardState = com.example.douqiuqiu.cards.CardCombat.dispelBuffs(f.cardState, DispelTarget.SELF_OR_ALLY),
             control = f.control.copy(stunned = false, hexed = false, silenced = false, muted = false, disarmed = false))
     }
+
+    /** Enemy dispel: remove positive protection without helping the target by clearing debuffs. */
+    fun purgePositive(f: Fighter): Fighter = withShields(f, ShieldPool()).copy(
+        ghost = 0.0,
+        armorBuff = 0.0,
+        armorBuffMs = 0.0,
+        speedBuff = 0.0,
+        speedBuffMs = 0.0,
+        cardState = com.example.douqiuqiu.cards.CardCombat.dispelBuffs(f.cardState, DispelTarget.ENEMY)
+    )
+
+    fun hasDispellablePositive(f: Fighter): Boolean =
+        ShieldLedger.total(shields(f)) > 0 || f.ghost > 0 || f.armorBuffMs > 0 || f.speedBuffMs > 0 ||
+            f.cardState.buffs.any { it.kind == com.example.douqiuqiu.cards.CardBuffKind.ATTACK_SPEED }
 }

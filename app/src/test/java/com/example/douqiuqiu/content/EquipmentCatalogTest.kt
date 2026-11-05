@@ -8,10 +8,10 @@ class EquipmentCatalogTest {
 
     // ---------------- 规模 ----------------
 
-    @Test fun e01_thirtyOneMainsAndFiveIntermediates() {
-        assertEquals(31, EquipmentCatalog.mains.size)
+    @Test fun e01_fortyThreeMainsAndSevenIntermediates() {
+        assertEquals(43, EquipmentCatalog.mains.size)
         assertTrue(EquipmentCatalog.mains.map { it.id }.containsAll(listOf("skull_basher", "orchid", "heavens_halberd")))
-        assertEquals(5, EquipmentCatalog.intermediates.size)
+        assertEquals(7, EquipmentCatalog.intermediates.size)
     }
 
     @Test fun e02_noDuplicateEquipmentIds() {

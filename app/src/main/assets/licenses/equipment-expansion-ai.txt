@@ -1,0 +1,27 @@
+Equipment expansion artwork
+
+The 17 PNG files listed below were created as original game assets for Infinite Strife
+with OpenAI's built-in image generation tool on 2026-11-05. They are not copied from
+or derived from the item artwork of Dota 2.
+
+blade_mail.png
+bloodthorn.png
+abyssal_blade.png
+scythe_of_vyse.png
+ethereal_blade.png
+shivas_guard.png
+dagon.png
+monkey_king_bar.png
+aeon_disk.png
+nullifier.png
+euls_scepter.png
+silver_edge.png
+ultimate_orb.png
+sacred_relic.png
+plate_mail.png
+ghost_scepter.png
+phantom_cloak.png
+
+Prompt direction: isolated dark-fantasy equipment, hand-painted mobile RPG inventory
+icon, strong silhouette, transparent background, no text, logo, watermark, or copied
+trademarked design.

@@ -63,7 +63,8 @@ class SettingsActivity : AppCompatActivity() {
         }
         body.addView(tabs)
         val packageInfo = packageManager.getPackageInfo(packageName, 0)
-        body.addView(GameUi.label(this, "测试版 ${packageInfo.versionName} · 构建 ${androidx.core.content.pm.PackageInfoCompat.getLongVersionCode(packageInfo)}", 12, GameUi.gold).apply {
+        val releaseChannel = if (packageInfo.versionName?.startsWith("0.") == true || packageInfo.versionName?.contains("-dev-") == true) "测试版" else "正式版"
+        body.addView(GameUi.label(this, "$releaseChannel ${packageInfo.versionName} · 构建 ${androidx.core.content.pm.PackageInfoCompat.getLongVersionCode(packageInfo)}", 12, GameUi.gold).apply {
             setTextIsSelectable(true)
         })
         if (tab == 0) {

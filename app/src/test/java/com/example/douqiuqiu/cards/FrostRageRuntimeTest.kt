@@ -204,7 +204,7 @@ class FrostRageRuntimeTest {
         val fight = DuelState(player, enemy, 7, 3, null, listOf("x"))
         val run = JourneyState("run-frost", "axe", chest(), 1729, 100.0, 100.0, 1, JourneyStage.BATTLE, fight = fight)
         val progress = CampaignProgress(run = run)
-        val bytes = ByteArrayOutputStream().also { DataOutputStream(it).use { out -> CampaignBinaryCodec.write(out, progress) } }.toByteArray()
+        val bytes = ByteArrayOutputStream().also { DataOutputStream(it).use { out -> CampaignBinaryCodec.write(out, progress, 14) } }.toByteArray()
         val read = ByteArrayInputStream(bytes).use { DataInputStream(it).use { CampaignBinaryCodec.read(it, 14) } }
         assertNull("英雄/卡牌来源的控制应通过存档校验", JourneyValidation.check(read, defs))
         val kinds = read.run!!.fight!!.enemy.timedControls.associate { it.kind to it.dispelClass }

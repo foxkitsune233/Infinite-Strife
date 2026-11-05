@@ -122,6 +122,9 @@ enum class EffectKind {
     /** 追加纯粹伤害 */
     ADD_PURE_DAMAGE,
 
+    /** 反射实际承受伤害；只允许装备主动窗口使用，反射段不可递归。 */
+    REFLECT_DAMAGE,
+
     /** 给予护盾；同来源按既定覆盖规则，天怒被动为明确例外 */
     GRANT_SHIELD,
 
@@ -421,7 +424,7 @@ object EffectContracts {
     val ALL: Map<EffectKind, EffectContract> = mapOf(
         EffectKind.APPLY_CONTROL to EffectContract(EffectKind.APPLY_CONTROL,
             required = setOf("control", "durationMs", "rangedDurationMs", "chance", "rangedChance"),
-            enumChoices = mapOf("control" to setOf("STUN", "HEX", "SILENCE", "DISARM", "FREEZE"))),
+            enumChoices = mapOf("control" to setOf("STUN", "HEX", "SILENCE", "DISARM", "FREEZE", "BANISH"))),
         EffectKind.STAT_BONUS to EffectContract(
             EffectKind.STAT_BONUS,
             required = emptySet(),
@@ -453,10 +456,13 @@ object EffectContracts {
             requiresDamageType = true,
             requiresAttackClass = true
         ),
+        EffectKind.REFLECT_DAMAGE to EffectContract(
+            EffectKind.REFLECT_DAMAGE, required = setOf("percent")
+        ),
         EffectKind.GRANT_SHIELD to EffectContract(
             EffectKind.GRANT_SHIELD,
             required = setOf("amount"),
-            optional = setOf("durationMs", "requiredHeal"),
+            optional = setOf("durationMs", "requiredHeal", "thresholdPercent"),
             requiresShieldKind = true
         ),
         // 治疗：固定量与比例量二选一（校验器保证至少存在一个），门槛与护盾折算是可选项

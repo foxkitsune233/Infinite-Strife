@@ -18,6 +18,8 @@ class VersionLogTest {
             VersionLog.semanticVersion("0.1.4-AAAA-BBBB-CCCC"),
             VersionLog.semanticVersion("0.1.4-DDDD-EEEE-FFFF"))
         assertEquals("0.1.5", VersionLog.semanticVersion("0.1.5"))
+        assertEquals("1.0.0", VersionLog.semanticVersion("1.0.0"))
+        assertEquals("1.0.0", VersionLog.semanticVersion("1.0.0-dev-AAAA-BBBB-CCCC"))
         assertEquals("空版本名应回退为 0.0.0", "0.0.0", VersionLog.semanticVersion(null))
     }
 
@@ -29,6 +31,7 @@ class VersionLogTest {
         assertTrue("0.1.3 应不晚于 0.1.4", VersionLog.notAfter("0.1.3", "0.1.4"))
         assertFalse("0.1.4 不应不晚于 0.1.3", VersionLog.notAfter("0.1.4", "0.1.3"))
         assertTrue("数值比较下 0.2 应不晚于 0.10", VersionLog.notAfter("0.2", "0.10"))
+        assertTrue("正式版应包含全部测试版记录", VersionLog.notAfter("0.1.7", "1.0.0"))
     }
 
     @Test fun visibleHistoryExcludesFutureVersions() {

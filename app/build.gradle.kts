@@ -8,10 +8,10 @@ plugins {
 val releaseIdentity = Properties().apply {
     load(providers.fileContents(layout.projectDirectory.file("version.properties")).asText.get().reader())
 }
-val testVersion = releaseIdentity.getProperty("versionName")
-val testBuildIndex = releaseIdentity.getProperty("buildIndex")
-require(testVersion.matches(Regex("0\\.\\d+\\.\\d+"))) { "测试版必须使用0开头的三段版本号" }
-require(testBuildIndex.matches(Regex("[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}"))) { "修改索引必须是三组16位十六进制数" }
+val baseVersion = releaseIdentity.getProperty("versionName")
+val buildIndex = releaseIdentity.getProperty("buildIndex")
+require(baseVersion.matches(Regex("\\d+\\.\\d+\\.\\d+"))) { "版本号必须是三段数字" }
+require(buildIndex.matches(Regex("[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}"))) { "修改索引必须是三组16位十六进制数" }
 
 android {
     namespace = "com.example.douqiuqiu"
@@ -22,10 +22,13 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = releaseIdentity.getProperty("versionCode").toInt()
-        versionName = "$testVersion-$testBuildIndex"
+        versionName = baseVersion
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix = "-dev-$buildIndex"
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(

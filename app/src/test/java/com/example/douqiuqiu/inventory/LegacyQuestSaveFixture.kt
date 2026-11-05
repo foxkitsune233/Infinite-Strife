@@ -16,9 +16,12 @@ internal object LegacyQuestSaveFixture {
             input.readInt(); input.readInt(); input.readBoolean()
             input.readInt(); input.readBoolean(); input.readInt()
         }
-        // v12/v13 fixtures have no active run; the v14 fixture covers active runs including loot/fights.
-        CampaignBinaryCodec.read(input, version)
-        return payload.copyOf(payload.size - input.available())
+        val campaignOffset = payload.size - input.available()
+        val progress = CampaignBinaryCodec.read(input, InventoryStore.VERSION)
+        val historicalCampaign = ByteArrayOutputStream().also { buffer ->
+            DataOutputStream(buffer).use { CampaignBinaryCodec.write(it, progress, version) }
+        }.toByteArray()
+        return payload.copyOfRange(0, campaignOffset) + historicalCampaign
     }
 
     fun envelope(version: Int, payload: ByteArray): ByteArray = ByteArrayOutputStream().also { buffer ->

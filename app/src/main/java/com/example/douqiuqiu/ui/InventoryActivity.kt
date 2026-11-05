@@ -33,6 +33,7 @@ import com.example.douqiuqiu.ui.components.ItemArtwork
 import com.example.douqiuqiu.ui.components.PaintedItemIcons
 import com.example.douqiuqiu.ui.components.IconListAdapter
 import com.example.douqiuqiu.ui.components.GameCatalogSheet
+import com.example.douqiuqiu.ui.components.QuestStorySheet
 
 /** Functional first preparation screen; all edits commit to disk before updating UI. */
 class InventoryActivity : AppCompatActivity() {
@@ -912,7 +913,14 @@ class InventoryActivity : AppCompatActivity() {
                 tile.addView(GameUi.button(this, if (ready) "领取奖励" else progress) {
                     val result = QuestTracker.claim(state, quest.id, rules)
                     if (!result.ok) message(result.error ?: "操作失败")
-                    else if (commit(result)) { sheet.dialog.dismiss(); message("已获得${quest.name}的奖励"); quests() }
+                    else if (commit(result)) {
+                        sheet.dialog.dismiss()
+                        val chapter = QuestStoryCatalog.chapterForNode(quest.node)
+                        if (chapter == null) {
+                            message("已获得${quest.name}的奖励")
+                            quests()
+                        } else QuestStorySheet(this, chapter, ::quests).show()
+                    }
                 }.apply { isEnabled = ready })
                 sheet.body.addView(tile)
             }

@@ -39,6 +39,8 @@ object EquipmentEffectRuntime {
         val main = effects.firstOrNull { it.effect.trigger == EffectTrigger.ACTIVE || it.effect.trigger == EffectTrigger.LOW_HP } ?: return false
         val group = main.group
         if (group == "armlet" && EquipmentCombat.active(f.equipment, group)) return false
+        if (group == "aeon_disk" && f.hp / f.maxHp >= main.number("thresholdPercent")) return false
+        if ((main.effect.kind == EffectKind.BREAK || group == "nullifier") && host.fighter(1 - actor).equipment.immunityMs > 0) return false
         val applied = if (main.effect.kind == EffectKind.APPLY_CONTROL) control(host, actor, main) else null
         if (applied != null && !applied.applied) {
             host.controlEvent(actor, 1 - actor, main.key, applied.reason, 0)
@@ -55,6 +57,8 @@ object EquipmentEffectRuntime {
         var duration = 0L
         when (group) {
             "mask_madness" -> duration = 4000
+            "blade_mail" -> duration = 4000
+            "aeon_disk" -> current = FighterEffects.strongDispel(current)
             "satanic" -> { current = FighterEffects.weakDispel(current); duration = 3000 }
             "bkb" -> {
                 current = FighterEffects.weakDispel(current)
@@ -68,11 +72,38 @@ object EquipmentEffectRuntime {
             }
         }
         if (duration > 0) current = current.copy(equipment = current.equipment.copy(activeGroups = current.equipment.activeGroups + (group to duration)))
-        for (effect in effects.filter { it.effect.trigger == EffectTrigger.ACTIVE && it.effect.kind == EffectKind.GRANT_SHIELD }) {
-            val kind = if (effect.effect.shieldKind == com.example.douqiuqiu.content.ShieldKind.PHYSICAL) ShieldKind.PHYSICAL else ShieldKind.MAGICAL
+        for (effect in effects.filter { it.effect.trigger in setOf(EffectTrigger.ACTIVE, EffectTrigger.LOW_HP) && it.effect.kind == EffectKind.GRANT_SHIELD }) {
+            val kind = when (effect.effect.shieldKind) {
+                com.example.douqiuqiu.content.ShieldKind.PHYSICAL -> ShieldKind.PHYSICAL
+                com.example.douqiuqiu.content.ShieldKind.MAGICAL -> ShieldKind.MAGICAL
+                else -> ShieldKind.UNIVERSAL
+            }
             val shield = ShieldEntry("gear:$group", kind, effect.number("amount") * com.example.douqiuqiu.cards.CardCombat.shieldMultiplier(current.cardState), effect.number("durationMs").toLong())
             current = FighterEffects.withShields(current, ShieldLedger.apply(FighterEffects.shields(current), shield))
         }
+        for (effect in effects.filter { it.effect.trigger == EffectTrigger.ACTIVE && it.effect.kind == EffectKind.BREAK }) {
+            val target = host.fighter(1 - actor)
+            val duration = EquipmentCombat.statusDuration(target, effect.number("durationMs") / 1000.0)
+            host.update(1 - actor, target.copy(broken = maxOf(target.broken, duration)))
+        }
+        for (effect in effects.filter { it.effect.trigger == EffectTrigger.ACTIVE }) when (effect.effect.kind) {
+            EffectKind.ADD_PHYSICAL_DAMAGE, EffectKind.ADD_SPELL_DAMAGE, EffectKind.ADD_PURE_DAMAGE ->
+                host.damageCard(actor, 1 - actor, effect.number("amount"), effect.effect.damageType!!,
+                    effect.effect.attackClass!!, effect.effect.flags, effect.key)
+            EffectKind.SLOW -> {
+                val target = host.fighter(1 - actor)
+                val seconds = EquipmentCombat.statusDuration(target, effect.number("durationMs") / 1000.0)
+                host.update(1 - actor, target.copy(slow = maxOf(target.slow, effect.number("slowPercent")),
+                    slowTime = maxOf(target.slowTime, seconds)))
+            }
+            else -> Unit
+        }
+        if (group == "ethereal_blade" && host.fighter(1 - actor).hp > 0) {
+            val target = host.fighter(1 - actor)
+            host.update(1 - actor, target.copy(ghost = maxOf(target.ghost, EquipmentCombat.statusDuration(target, 3.0))))
+        }
+        if (group == "nullifier") host.update(1 - actor,
+            FighterEffects.purgePositive(host.fighter(1 - actor)).copy(positiveBlock = 4.0))
         f.timedControls.filter { old -> current.timedControls.none { it.sourceId == old.sourceId && it.caster == old.caster && it.kind == old.kind } }
             .forEach { host.controlEvent(actor, actor, it.sourceId, "DISPELLED", 0) }
         if (f.equipment.immunityMs == 0L && current.equipment.immunityMs > 0) current.timedControls.forEach {
@@ -113,9 +144,17 @@ object EquipmentEffectRuntime {
             val shouldUse = when (item.definitionId) {
                 "black_king_bar" -> negative
                 "satanic" -> f.hp / f.maxHp < .4
-                "orchid" -> !targetControl.silenced && !targetControl.stunned && !targetControl.hexed && !targetControl.banished && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
+                "aeon_disk" -> f.hp / f.maxHp < .3
+                "orchid", "bloodthorn" -> !targetControl.silenced && !targetControl.stunned && !targetControl.hexed && !targetControl.banished && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
                 "heavens_halberd" -> !targetControl.disarmed && FighterEffects.permission(target, CombatAction.BASIC_ATTACK) && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
                 "glacier_plate" -> !targetControl.frozen && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
+                "abyssal_blade" -> !targetControl.stunned && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
+                "scythe_of_vyse" -> !targetControl.hexed && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
+                "euls_scepter" -> !targetControl.banished && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
+                "silver_edge" -> target.broken <= 0 && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
+                "nullifier" -> FighterEffects.hasDispellablePositive(target) && target.hp > 0 && target.invulnerable <= 0 && target.equipment.immunityMs <= 0
+                "shivas_guard" -> target.slowTime <= 0 && target.hp > 0 && target.invulnerable <= 0
+                "ethereal_blade" -> target.ghost <= 0 && target.hp > 0 && target.invulnerable <= 0
                 else -> true
             }
             if (shouldUse) use(host, actor, item.instanceId)

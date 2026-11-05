@@ -17,7 +17,10 @@ import com.example.douqiuqiu.inventory.StoredItem
 import com.example.douqiuqiu.journey.DuelEngine
 import com.example.douqiuqiu.journey.DuelState
 import com.example.douqiuqiu.journey.Fighter
+import com.example.douqiuqiu.journey.FighterEffects
+import com.example.douqiuqiu.journey.Poison
 import com.example.douqiuqiu.journey.JourneyRules
+import com.example.douqiuqiu.status.TimedControls
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -83,6 +86,154 @@ class EquipmentProcAcceptanceTest {
     private fun enemyAttackTurn(s: DuelState): DuelState {
         val stepped = DuelEngine.step(s.copy(enemy = s.enemy.copy(attackIn = 0.0)))
         return stepped.copy(enemy = stepped.enemy.copy(attackIn = 999.0))
+    }
+
+    @Test fun monkeyKingBarBypassesEvasionButStillRespectsAttackProtection() {
+        val target = gearFighter("juggernaut", "butterfly", hp = 100000.0, attackIn = 999.0)
+        var strike = duel(gearFighter("phantom_assassin", "monkey_king_bar", attackIn = 0.0), target, seed = 8)
+        strike = playerAttackTurn(strike)
+        assertEquals("金箍棒应跳过蝴蝶的闪避", 1, strike.player.cardState.attackCount)
+        val protected = strike.copy(enemy = strike.enemy.copy(equipment = strike.enemy.equipment.copy(protectionMs = 2000)))
+        val blocked = playerAttackTurn(protected)
+        assertEquals("普攻保护仍会阻断必中普攻", 1, blocked.player.cardState.attackCount)
+    }
+
+    @Test fun bladeMailReflectsActualDamageWithoutRecursing() {
+        val base = gearFighter("juggernaut", "blade_mail", hp = 5000.0)
+        val player = base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+        var s = duel(player, gearFighter("skywrath", hp = 5000.0, attackIn = 999.0))
+        s = DuelEngine.useItem(s, "g0")
+        assertEquals(4000L, s.player.equipment.activeGroups["blade_mail"])
+
+        val playerBefore = s.player.hp
+        val enemyBefore = s.enemy.hp
+        s = enemyAttackTurn(s)
+        val actualDamage = playerBefore - s.player.hp
+        assertTrue(actualDamage > 0.0)
+        assertEquals("只反射实际承受的伤害", actualDamage, enemyBefore - s.enemy.hp, 1e-9)
+        assertEquals("反伤不能再次伤害刃甲持有者", playerBefore - actualDamage, s.player.hp, 1e-9)
+    }
+
+    @Test fun silverEdgeBreaksHeroPassiveWithoutDisablingEquipment() {
+        val base = gearFighter("phantom_assassin", "silver_edge")
+        val player = base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+        val target = gearFighter("necrophos", "butterfly", hp = 5000.0)
+        val used = DuelEngine.useItem(duel(player, target), "g0")
+        assertEquals(4.0, used.enemy.broken, 1e-9)
+        assertTrue("破坏不应关闭装备闪避", EquipmentCombat.passive(used.enemy.equipment, EffectKind.EVASION, "percent") > 0.0)
+        assertEquals(12000L, used.player.equipment.cooldowns.remainingByGroup["silver_edge"])
+    }
+
+    @Test fun nullifierRemovesNecrophosProtectionWithoutRemovingDebuffs() {
+        val base = gearFighter("phantom_assassin", "nullifier")
+        val player = base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+        val protected = FighterEffects.withShields(
+            gearFighter("necrophos", hp = 5000.0).copy(
+                ghost = 3.0,
+                poisons = listOf(Poison(6.0, 3.0, "enemy-poison", dispellable = true))
+            ),
+            ShieldPool(listOf(ShieldEntry("hero:aphotic", ShieldKind.UNIVERSAL, 300.0)))
+        )
+        val used = DuelEngine.useItem(duel(player, protected), "g0")
+        assertEquals(0.0, used.enemy.ghost, 1e-9)
+        assertEquals(0.0, ShieldLedger.total(FighterEffects.shields(used.enemy)), 1e-9)
+        assertEquals("否决不能替目标清除负面状态", 1, used.enemy.poisons.size)
+        assertEquals(12000L, used.player.equipment.cooldowns.remainingByGroup["nullifier"])
+    }
+
+    @Test fun nullifierTemporarilyPreventsNecrophosFromReapplyingProtection() {
+        val base = gearFighter("phantom_assassin", "nullifier")
+        val player = base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+        val target = gearFighter("necrophos", hp = 5000.0).copy(ghost = 3.0, mana = 200.0, maxMana = 200.0, ultIn = 0.0)
+        var s = DuelEngine.useItem(duel(player, target), "g0")
+        assertEquals(0.0, s.enemy.ghost, 1e-9)
+        s = DuelEngine.step(s)
+        assertEquals("禁益期间 Nec 不能重新挂上幽魂保护", 0.0, s.enemy.ghost, 1e-9)
+        assertEquals("技能仍然正常消耗魔法并进入冷却", 115.0, s.enemy.mana, 1e-9)
+        assertTrue(s.enemy.ultIn > 0.0)
+    }
+
+    @Test fun eulsScepterBanishesTargetThenRestoresCombatOnExpiry() {
+        val base = gearFighter("phantom_assassin", "euls_scepter")
+        val player = base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+        var s = DuelEngine.useItem(duel(player, victim(hp = 5000.0)), "g0")
+        assertTrue(TimedControls.current(s.enemy).banished)
+        val hp = s.enemy.hp
+        s = playerAttackTurn(s)
+        assertEquals("禁锢目标不能被普攻伤害", hp, s.enemy.hp, 1e-9)
+        assertEquals(0, s.player.cardState.attackCount)
+        s = advance(s, 18)
+        assertFalse(TimedControls.current(s.enemy).banished)
+        s = playerAttackTurn(s)
+        assertTrue(s.enemy.hp < hp)
+        assertEquals(1, s.player.cardState.attackCount)
+    }
+
+    @Test fun aeonDiskTriggersOnlyAtLowHealthAndStrongDispelsBeforeShielding() {
+        val full = duel(gearFighter("juggernaut", "aeon_disk", hp = 5000.0), victim(hp = 5000.0))
+        val untouched = DuelEngine.step(full)
+        assertEquals(0.0, ShieldLedger.total(FighterEffects.shields(untouched.player)), 1e-9)
+        assertFalse(untouched.player.equipment.cooldowns.remainingByGroup.containsKey("aeon_disk"))
+
+        val low = gearFighter("juggernaut", "aeon_disk", hp = 1000.0, maxHp = 5000.0).copy(
+            poisons = listOf(Poison(6.0, 3.0, "enemy-poison", dispellable = true))
+        )
+        val triggered = DuelEngine.step(duel(low, victim(hp = 5000.0)))
+        assertTrue(triggered.player.poisons.isEmpty())
+        assertEquals(400.0, ShieldLedger.total(FighterEffects.shields(triggered.player)), 1e-9)
+        assertEquals(60000L, triggered.player.equipment.cooldowns.remainingByGroup["aeon_disk"])
+    }
+
+    @Test fun dagonAndEtherealBladeResolveTheirTypedActiveDamage() {
+        fun manual(id: String): Fighter {
+            val base = gearFighter("skywrath", id)
+            return base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+        }
+        val dagon = DuelEngine.useItem(duel(manual("dagon"), victim(hp = 1000.0)), "g0")
+        assertEquals(680.0, dagon.enemy.hp, 1e-9)
+        assertEquals(10000L, dagon.player.equipment.cooldowns.remainingByGroup["dagon"])
+
+        val ethereal = DuelEngine.useItem(duel(manual("ethereal_blade"), victim(hp = 1000.0)), "g0")
+        assertEquals(780.0, ethereal.enemy.hp, 1e-9)
+        assertEquals(3.0, ethereal.enemy.ghost, 1e-9)
+        assertEquals(12000L, ethereal.player.equipment.cooldowns.remainingByGroup["ethereal_blade"])
+    }
+
+    @Test fun shivasGuardAppliesSingleTargetSlow() {
+        val base = gearFighter("skywrath", "shivas_guard")
+        val player = base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+        val used = DuelEngine.useItem(duel(player, victim(hp = 5000.0)), "g0")
+        assertEquals(35.0, used.enemy.slow, 1e-9)
+        assertEquals(3.0, used.enemy.slowTime, 1e-9)
+        assertEquals(12000L, used.player.equipment.cooldowns.remainingByGroup["shivas_guard"])
+    }
+
+    @Test fun nullifierAutoUseWaitsForADispellablePositiveState() {
+        var s = duel(gearFighter("phantom_assassin", "nullifier"), victim(hp = 5000.0))
+        s = DuelEngine.step(s)
+        assertFalse(s.player.equipment.cooldowns.remainingByGroup.containsKey("nullifier"))
+        s = s.copy(enemy = FighterEffects.withShields(s.enemy,
+            ShieldPool(listOf(ShieldEntry("hero:aphotic", ShieldKind.UNIVERSAL, 200.0)))))
+        s = DuelEngine.step(s)
+        assertEquals(0.0, ShieldLedger.total(FighterEffects.shields(s.enemy)), 1e-9)
+        assertEquals(12000L, s.player.equipment.cooldowns.remainingByGroup["nullifier"])
+    }
+
+    @Test fun upgradedControlItemsApplyTheirDistinctControls() {
+        fun use(id: String): DuelState {
+            val base = gearFighter("phantom_assassin", id)
+            val player = base.copy(equipment = base.equipment.copy(manual = setOf("g0")))
+            return DuelEngine.useItem(duel(player, victim(hp = 5000.0)), "g0")
+        }
+        val bloodthorn = use("bloodthorn")
+        assertTrue(TimedControls.current(bloodthorn.enemy).silenced)
+        assertEquals(14000L, bloodthorn.player.equipment.cooldowns.remainingByGroup["bloodthorn"])
+        val abyssal = use("abyssal_blade")
+        assertTrue(TimedControls.current(abyssal.enemy).stunned)
+        assertEquals(12000L, abyssal.player.equipment.cooldowns.remainingByGroup["abyssal"])
+        val vyse = use("scythe_of_vyse")
+        assertTrue(TimedControls.current(vyse.enemy).hexed)
+        assertEquals(15000L, vyse.player.equipment.cooldowns.remainingByGroup["vyse"])
     }
 
     // ---------------- B01：疯狂面具 ----------------

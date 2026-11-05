@@ -109,6 +109,8 @@ object EquipmentCatalog {
     private val reaver = component("reaver", "掠夺者之斧", 3000, EquipmentStats(strength = 25.0, health = 250.0), w = 2, h = 2, quality = QualityTier.PURPLE)
     private val eaglesong = component("eaglesong", "鹰歌弓", 3200, EquipmentStats(agility = 25.0), w = 2, h = 2, quality = QualityTier.PURPLE)
     private val mysticStaff = component("mystic_staff", "神秘法杖", 3200, EquipmentStats(intelligence = 25.0), w = 2, h = 2, quality = QualityTier.PURPLE)
+    private val ultimateOrb = component("ultimate_orb", "终极法球", 2050, EquipmentStats(strength = 10.0, agility = 10.0, intelligence = 10.0), h = 2, quality = QualityTier.BLUE)
+    private val sacredRelic = component("sacred_relic", "圣者遗物", 3400, EquipmentStats(attack = 55.0), w = 2, h = 2, quality = QualityTier.PURPLE)
 
     // ---- 输出组件 ----
     private val bladesOfAttack = component("blades_of_attack", "攻击之爪", 450, EquipmentStats(attack = 9.0))
@@ -123,6 +125,7 @@ object EquipmentCatalog {
 
     // ---- 防守 / 恢复组件 ----
     private val chainmail = component("chainmail", "锁子甲", 550, EquipmentStats(armor = 5.0))
+    private val plateMail = component("plate_mail", "板甲", 1400, EquipmentStats(armor = 10.0), h = 2, quality = QualityTier.BLUE)
     private val helmOfIronWill = component("helm_of_iron_will", "铁意头盔", 950, EquipmentStats(armor = 5.0, healthRegen = 3.0), h = 2, quality = QualityTier.BLUE)
     private val cloak = component("cloak", "抗魔斗篷", 550, null, desc = "提供独立魔抗（经 effect 表达）")
     private val shawl = component("shawl", "披巾", 800, null, desc = "魔抗/恢复向组件（首轮配置值）")
@@ -194,6 +197,20 @@ object EquipmentCatalog {
         scroll("recipe_force_staff", "原力法杖卷轴", 600, QualityTier.WHITE),
         scroll("recipe_hurricane_pike", "飓风长戟卷轴", 1000, QualityTier.BLUE),
         scroll("recipe_black_king_bar", "黑皇杖卷轴", 1200, QualityTier.BLUE)
+        , scroll("recipe_blade_mail", "刃甲卷轴", 450, QualityTier.WHITE)
+        , scroll("recipe_bloodthorn", "血棘卷轴", 1200, QualityTier.BLUE)
+        , scroll("recipe_abyssal_blade", "深渊之刃卷轴", 1100, QualityTier.BLUE)
+        , scroll("recipe_scythe_of_vyse", "邪恶镰刀卷轴", 1200, QualityTier.BLUE)
+        , scroll("recipe_ghost_scepter", "幽魂权杖卷轴", 450, QualityTier.WHITE)
+        , scroll("recipe_ethereal_blade", "虚灵之刃卷轴", 1200, QualityTier.BLUE)
+        , scroll("recipe_shivas_guard", "希瓦的守护卷轴", 1000, QualityTier.BLUE)
+        , scroll("recipe_dagon", "达贡之神力卷轴", 800, QualityTier.BLUE)
+        , scroll("recipe_monkey_king_bar", "金箍棒卷轴", 900, QualityTier.BLUE)
+        , scroll("recipe_aeon_disk", "永恒之盘卷轴", 1000, QualityTier.BLUE)
+        , scroll("recipe_nullifier", "否决坠饰卷轴", 1000, QualityTier.BLUE)
+        , scroll("recipe_euls_scepter", "风之杖卷轴", 550, QualityTier.WHITE)
+        , scroll("recipe_phantom_cloak", "幻影斗篷卷轴", 500, QualityTier.WHITE)
+        , scroll("recipe_silver_edge", "大隐刀卷轴", 1100, QualityTier.BLUE)
     ) + ControlEquipmentContent.scrolls + SchoolEquipmentContent.scrolls
 
     // ================================================================
@@ -278,6 +295,24 @@ object EquipmentCatalog {
             mapOf("blade_of_alacrity" to 1, "broadsword" to 1, "recipe_expert_array" to 1)),
         minimumShopClears = 1,
         description = "敏捷/攻击；单挑概率追加物理伤害，不暴击/不吸血/不触发命中效果"
+    )
+
+    private val ghostScepter = EquipmentDefinition(
+        id = "ghost_scepter", name = "幽魂权杖", category = EquipmentCategory.INTERMEDIATE,
+        quality = QualityTier.BLUE, width = 1, height = 2, price = 1900,
+        stats = EquipmentStats(intelligence = 12.0, health = 100.0),
+        recipe = CraftingRecipe("ghost_scepter", "ghost_scepter", mapOf("staff_of_wizardry" to 1, "diadem" to 1, "recipe_ghost_scepter" to 1)),
+        minimumShopClears = 1, description = "智力与生命；为虚灵之刃提供稳定的法系下级路线"
+    )
+
+    private val phantomCloak = EquipmentDefinition(
+        id = "phantom_cloak", name = "幻影斗篷", category = EquipmentCategory.INTERMEDIATE,
+        quality = QualityTier.BLUE, width = 1, height = 2, price = 2200,
+        stats = EquipmentStats(attack = 14.0),
+        effects = listOf(EffectDefinition("phantom_cloak.evasion", EffectKind.EVASION, EffectTrigger.PASSIVE,
+            mapOf("percent" to EffectValue.n(.20)), uniqueGroup = "phantom_cloak_evasion")),
+        recipe = CraftingRecipe("phantom_cloak", "phantom_cloak", mapOf("talisman_of_evasion" to 1, "blades_of_attack" to 1, "recipe_phantom_cloak" to 1)),
+        minimumShopClears = 1, description = "攻击与闪避；替代单挑中没有实际用途的隐身下级件"
     )
 
     // ================================================================
@@ -829,6 +864,76 @@ object EquipmentCatalog {
         description = "力量、攻击；手动/自动，弱驱散+减益免疫+魔抗；眩晕/妖术/禁用物品时不可使用"
     )
 
+    // Android 1.0 expansion. Effects that need a new runtime primitive are declared here
+    // through the existing typed model; their dispatch is added in EquipmentEffectRuntime.
+    private val bladeMail = EquipmentDefinition("blade_mail", "刃甲", EquipmentCategory.MAIN, QualityTier.PURPLE, 2, 2, 2600,
+        stats = EquipmentStats(attack = 18.0, armor = 6.0), effects = listOf(
+            EffectDefinition("blade_mail.reflect", EffectKind.REFLECT_DAMAGE, EffectTrigger.ACTIVE,
+                mapOf("percent" to EffectValue.n(1.0)), internalCooldownMs = 12000L, uniqueGroup = "blade_mail")
+        ),
+        recipe = CraftingRecipe("blade_mail", "blade_mail", mapOf("chainmail" to 1, "broadsword" to 1, "recipe_blade_mail" to 1)),
+        minimumShopClears = 2, description = "攻击与护甲；受伤时反射实际承受伤害，反伤不递归、不吸血")
+    private val bloodthorn = EquipmentDefinition("bloodthorn", "血棘", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 3, 5000,
+        stats = EquipmentStats(intelligence = 20.0, attackSpeed = 30.0, manaRegen = 2.0), effects = listOf(
+            EffectDefinition("bloodthorn.silence", EffectKind.APPLY_CONTROL, EffectTrigger.ACTIVE,
+                mapOf("control" to EffectValue.e("SILENCE"), "durationMs" to EffectValue.c(4000), "rangedDurationMs" to EffectValue.c(4000), "chance" to EffectValue.n(1.0), "rangedChance" to EffectValue.n(1.0)), internalCooldownMs = 14000L, uniqueGroup = "bloodthorn"),
+            EffectDefinition("bloodthorn.crit", EffectKind.CRIT_SOURCE, EffectTrigger.PASSIVE, mapOf("chance" to EffectValue.n(.20), "multiplier" to EffectValue.n(1.75)), uniqueGroup = "bloodthorn")),
+        recipe = CraftingRecipe("bloodthorn", "bloodthorn", mapOf("orchid" to 1, "crystalys" to 1, "recipe_bloodthorn" to 1)), minimumShopClears = 3,
+        description = "主动沉默并提升暴击；单挑版只作用当前敌人")
+    private val abyssalBlade = EquipmentDefinition("abyssal_blade", "深渊之刃", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 3, 4800,
+        stats = EquipmentStats(attack = 28.0, strength = 10.0, health = 250.0), effects = listOf(
+            EffectDefinition("abyssal.stun", EffectKind.APPLY_CONTROL, EffectTrigger.ATTACK_LAND,
+                mapOf("control" to EffectValue.e("STUN"), "durationMs" to EffectValue.c(900), "rangedDurationMs" to EffectValue.c(900), "chance" to EffectValue.n(.25), "rangedChance" to EffectValue.n(.10)), internalCooldownMs = 3000L, uniqueGroup = "basher", dispelClass = DispelClass.STRONG_ONLY),
+            EffectDefinition("abyssal.active", EffectKind.APPLY_CONTROL, EffectTrigger.ACTIVE,
+                mapOf("control" to EffectValue.e("STUN"), "durationMs" to EffectValue.c(1200), "rangedDurationMs" to EffectValue.c(1200), "chance" to EffectValue.n(1.0), "rangedChance" to EffectValue.n(1.0)), internalCooldownMs = 12000L, uniqueGroup = "abyssal", dispelClass = DispelClass.STRONG_ONLY)),
+        recipe = CraftingRecipe("abyssal_blade", "abyssal_blade", mapOf("skull_basher" to 1, "vanguard_shield" to 1, "recipe_abyssal_blade" to 1)), minimumShopClears = 3,
+        description = "碎颅锤升级；保留命中眩晕并获得主动眩晕")
+    private val scytheOfVyse = EquipmentDefinition("scythe_of_vyse", "邪恶镰刀", EquipmentCategory.MAIN, QualityTier.GOLD, 1, 3, 5200,
+        stats = EquipmentStats(intelligence = 30.0, manaRegen = 3.0), effects = listOf(EffectDefinition("vyse.hex", EffectKind.APPLY_CONTROL, EffectTrigger.ACTIVE,
+            mapOf("control" to EffectValue.e("HEX"), "durationMs" to EffectValue.c(2200), "rangedDurationMs" to EffectValue.c(2200), "chance" to EffectValue.n(1.0), "rangedChance" to EffectValue.n(1.0)), internalCooldownMs = 15000L, uniqueGroup = "vyse", dispelClass = DispelClass.STRONG_ONLY)),
+        recipe = CraftingRecipe("scythe_of_vyse", "scythe_of_vyse", mapOf("mystic_staff" to 1, "void_stone" to 1, "ultimate_orb" to 1, "recipe_scythe_of_vyse" to 1)), minimumShopClears = 3,
+        description = "主动妖术当前敌人；受减益免疫阻挡")
+    private val etherealBlade = EquipmentDefinition("ethereal_blade", "虚灵之刃", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 3, 5200,
+        stats = EquipmentStats(agility = 20.0, intelligence = 20.0), effects = listOf(EffectDefinition("ethereal.blast", EffectKind.ADD_PURE_DAMAGE, EffectTrigger.ACTIVE,
+            mapOf("amount" to EffectValue.n(220)), damageType = DamageType.PURE, attackClass = AttackClass.SPELL, internalCooldownMs = 12000L, uniqueGroup = "ethereal_blade")),
+        recipe = CraftingRecipe("ethereal_blade", "ethereal_blade", mapOf("ghost_scepter" to 1, "eaglesong" to 1, "recipe_ethereal_blade" to 1)), minimumShopClears = 3,
+        description = "主动纯粹伤害并施加短时法术易伤")
+    private val shivasGuard = EquipmentDefinition("shivas_guard", "希瓦的守护", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 3, 4800,
+        stats = EquipmentStats(intelligence = 25.0, armor = 15.0), effects = listOf(EffectDefinition("shiva.slow", EffectKind.SLOW, EffectTrigger.ACTIVE,
+            mapOf("slowPercent" to EffectValue.n(35), "durationMs" to EffectValue.c(3000)), internalCooldownMs = 12000L, uniqueGroup = "shivas_guard", dispelClass = DispelClass.BASIC)),
+        recipe = CraftingRecipe("shivas_guard", "shivas_guard", mapOf("plate_mail" to 1, "mystic_staff" to 1, "recipe_shivas_guard" to 1)), minimumShopClears = 3,
+        description = "护甲与智力；单挑版主动波纹只减速当前敌人")
+    private val dagon = EquipmentDefinition("dagon", "达贡之神力", EquipmentCategory.MAIN, QualityTier.PURPLE, 1, 2, 3200,
+        stats = EquipmentStats(intelligence = 18.0, manaRegen = 1.0), effects = listOf(EffectDefinition("dagon.blast", EffectKind.ADD_SPELL_DAMAGE, EffectTrigger.ACTIVE,
+            mapOf("amount" to EffectValue.n(320)), damageType = DamageType.MAGICAL, attackClass = AttackClass.SPELL, internalCooldownMs = 10000L, uniqueGroup = "dagon")),
+        recipe = CraftingRecipe("dagon", "dagon", mapOf("staff_of_wizardry" to 1, "crown" to 1, "recipe_dagon" to 1)), minimumShopClears = 2,
+        description = "主动对当前敌人造成魔法伤害；本批仅制作一级")
+    private val monkeyKingBar = EquipmentDefinition("monkey_king_bar", "金箍棒", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 3, 4600,
+        stats = EquipmentStats(attack = 45.0, attackSpeed = 20.0), effects = listOf(EffectDefinition("mkb.proc", EffectKind.ADD_SPELL_DAMAGE, EffectTrigger.ATTACK_LAND,
+            mapOf("amount" to EffectValue.n(70), "chance" to EffectValue.n(.70), "maxTargets" to EffectValue.c(1)), damageType = DamageType.MAGICAL, attackClass = AttackClass.SPELL, uniqueGroup = "monkey_king_bar")),
+        recipe = CraftingRecipe("monkey_king_bar", "monkey_king_bar", mapOf("demon_edge" to 1, "javelin" to 1, "recipe_monkey_king_bar" to 1)), minimumShopClears = 3,
+        description = "攻击、攻速与高概率额外魔法伤害；普攻获得必中但不穿透普攻保护")
+    private val aeonDisk = EquipmentDefinition("aeon_disk", "永恒之盘", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 2, 4000,
+        stats = EquipmentStats(health = 250.0, manaRegen = 1.0), effects = listOf(EffectDefinition("aeon.save", EffectKind.GRANT_SHIELD, EffectTrigger.LOW_HP,
+            mapOf("amount" to EffectValue.n(400), "durationMs" to EffectValue.c(2500), "thresholdPercent" to EffectValue.n(.30)), shieldKind = ShieldKind.GENERAL, internalCooldownMs = 60000L, uniqueGroup = "aeon_disk")),
+        recipe = CraftingRecipe("aeon_disk", "aeon_disk", mapOf("vitality_booster" to 1, "energy_booster" to 1, "recipe_aeon_disk" to 1)), minimumShopClears = 3,
+        description = "低血自动强驱散并获得保命窗口；每场每件只触发一次")
+    private val nullifier = EquipmentDefinition("nullifier", "否决坠饰", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 3, 5000,
+        stats = EquipmentStats(attack = 55.0, armor = 4.0), effects = listOf(EffectDefinition("nullifier.dispel", EffectKind.DISPEL, EffectTrigger.ACTIVE,
+            mapOf("level" to EffectValue.e("STRONG")), internalCooldownMs = 12000L, uniqueGroup = "nullifier")),
+        recipe = CraftingRecipe("nullifier", "nullifier", mapOf("sacred_relic" to 1, "helm_of_iron_will" to 1, "recipe_nullifier" to 1)), minimumShopClears = 3,
+        description = "清除敌方可驱散正面强化并施加禁益；专门反制护盾与续航，不施加破坏")
+    private val eulsScepter = EquipmentDefinition("euls_scepter", "风之杖", EquipmentCategory.MAIN, QualityTier.PURPLE, 1, 3, 2900,
+        stats = EquipmentStats(intelligence = 18.0, manaRegen = 2.0), effects = listOf(EffectDefinition("euls.cyclone", EffectKind.APPLY_CONTROL, EffectTrigger.ACTIVE,
+            mapOf("control" to EffectValue.e("BANISH"), "durationMs" to EffectValue.c(1800), "rangedDurationMs" to EffectValue.c(1800), "chance" to EffectValue.n(1.0), "rangedChance" to EffectValue.n(1.0)), internalCooldownMs = 12000L, uniqueGroup = "euls_scepter", dispelClass = DispelClass.NOT_DISPELLABLE)),
+        recipe = CraftingRecipe("euls_scepter", "euls_scepter", mapOf("staff_of_wizardry" to 1, "void_stone" to 1, "recipe_euls_scepter" to 1)), minimumShopClears = 2,
+        description = "单挑版旋风禁锢当前敌人；禁锢期间双方不能行动、目标不能受伤")
+    private val silverEdge = EquipmentDefinition("silver_edge", "大隐刀", EquipmentCategory.MAIN, QualityTier.GOLD, 2, 3, 4900,
+        stats = EquipmentStats(attack = 45.0), effects = listOf(EffectDefinition("silver_edge.break", EffectKind.BREAK, EffectTrigger.ACTIVE,
+            mapOf("durationMs" to EffectValue.c(4000)), internalCooldownMs = 12000L, uniqueGroup = "silver_edge")),
+        recipe = CraftingRecipe("silver_edge", "silver_edge", mapOf("phantom_cloak" to 1, "demon_edge" to 1, "recipe_silver_edge" to 1)), minimumShopClears = 3,
+        description = "攻击与闪避升级；不做隐身，主动破坏当前敌人的英雄被动")
+
     // ================================================================
     // 汇总
     // ================================================================
@@ -836,17 +941,17 @@ object EquipmentCatalog {
     /** 全部组件（不含已在 inventory.json 存在的六件）。 */
     val components: List<EquipmentDefinition> = listOf(
         crown, diadem, beltOfStrength, bandOfElvenskin, robeOfMagi,
-        ogreAxe, bladeOfAlacrity, staffOfWizardry, reaver, eaglesong, mysticStaff,
+        ogreAxe, bladeOfAlacrity, staffOfWizardry, reaver, eaglesong, mysticStaff, ultimateOrb, sacredRelic,
         bladesOfAttack, claymore, mithrilHammer, demonEdge, javelin,
         glovesOfHaste, quarterstaff, hyperstone, orbOfVenom,
-        chainmail, helmOfIronWill, cloak, shawl, fluffyHat, talismanOfEvasion,
+        chainmail, plateMail, helmOfIronWill, cloak, shawl, fluffyHat, talismanOfEvasion,
         ringOfHealth, ringOfRegen, vitalityBooster, energyBooster, pointBooster,
         voodooMask, morbidMask, sageMask, voidStone, perseverance
     )
 
     /** 中间装备。 */
     val intermediates: List<EquipmentDefinition> = listOf(
-        vanguardShield, oblivionStaff, soulBooster, dragonLance, expertArray
+        vanguardShield, oblivionStaff, soulBooster, dragonLance, expertArray, ghostScepter, phantomCloak
     )
 
     /** 原24件主要装备及首批3件控制装备。 */
@@ -855,7 +960,9 @@ object EquipmentCatalog {
         sangeAndYasha, kayaAndSange, yashaAndKaya, octarineCore,
         crystalys, daedalus, crimsonGuard, pipeOfInsight,
         armlet, heartOfTarrasque, satanic, butterfly,
-        witchBlade, rodOfAtos, viperBite, forceStaff, hurricanePike, blackKingBar
+        witchBlade, rodOfAtos, viperBite, forceStaff, hurricanePike, blackKingBar,
+        bladeMail, bloodthorn, abyssalBlade, scytheOfVyse, etherealBlade, shivasGuard, dagon,
+        monkeyKingBar, aeonDisk, nullifier, eulsScepter, silverEdge
     ) + ControlEquipmentContent.mains + SchoolEquipmentContent.mains
 
     /** 本文件定义的全部条目（组件 + 卷轴 + 中间 + 主要）。 */

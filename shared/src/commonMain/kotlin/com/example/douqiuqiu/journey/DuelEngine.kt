@@ -10,6 +10,7 @@ import com.example.douqiuqiu.content.HeroContent
 import com.example.douqiuqiu.cards.*
 import com.example.douqiuqiu.equipment.*
 import com.example.douqiuqiu.status.CombatAction
+import com.example.douqiuqiu.status.TimedControls
 import kotlin.math.max
 import kotlin.math.min
 
@@ -89,7 +90,8 @@ object DuelEngine {
                     cardState = c.cardState.copy(started = true, buffs = c.cardState.buffs.filter { it.expiresAtTick > cardTick }),
                     amBurnReady = max(0.0, c.amBurnReady - .1),
                     armorBuff = if (max(0.0, c.armorBuffMs - .1) <= 0) 0.0 else c.armorBuff, armorBuffMs = max(0.0, c.armorBuffMs - .1),
-                    speedBuff = if (max(0.0, c.speedBuffMs - .1) <= 0) 0.0 else c.speedBuff, speedBuffMs = max(0.0, c.speedBuffMs - .1))
+                    speedBuff = if (max(0.0, c.speedBuffMs - .1) <= 0) 0.0 else c.speedBuff, speedBuffMs = max(0.0, c.speedBuffMs - .1),
+                    positiveBlock = max(0.0, c.positiveBlock - .1))
                 c.timedControls.filter { it.remainingMs <= 100 }.forEach { log("控制[${it.sourceId}] EXPIRED") }
                 if (c.equipment.immunityMs > 0 && f[i].equipment.immunityMs == 0L) f[i].timedControls.forEach {
                     log("控制[${it.sourceId}] IMMUNITY_ENDED ${it.remainingMs}ms")
@@ -179,7 +181,7 @@ object DuelEngine {
             val c = f[target]
             // 仅「英雄基础普攻命中」才计入斧王的反击螺旋触发（技能/装备/自伤/反弹/反射均不算）。
             val isBasic = attackClass == null && !spell && !flags.isSelfDamage && !flags.isReflect && source != target && effectId.startsWith("hero:")
-            if (raw <= 0 || c.hp <= 0 || c.invulnerable > 0 || (!spell && c.ghost > 0)) return null
+            if (raw <= 0 || c.hp <= 0 || c.invulnerable > 0 || TimedControls.current(c).banished || (!spell && c.ghost > 0)) return null
             val ordinary = !removal && !flags.isReflect && !flags.isSelfDamage
             var amp = if (isUltimate && ordinary) CardCombat.effects(f[source].cardState).filter { it.effect.trigger == EffectTrigger.ULT_DAMAGE }.sumOf { it.number("percent") } else 0.0
             if (ordinary && (spell || attackClass == AttackClass.PHYSICAL_SKILL)) amp += EquipmentCombat.passive(f[source].equipment, EffectKind.DAMAGE_AMP, "percent")
@@ -202,6 +204,14 @@ object DuelEngine {
                     magicVulnerability = if (c.ghost > 0) .2 else 0.0))
             val lifeDamage = hit.lifeDamage
             f[target] = FighterEffects.withShields(c, hit.shields).copy(hp = hit.hp)
+            val reflected = hit.lifeDamage + hit.shieldDamage
+            val reflectPercent = if (!flags.isReflect && !flags.isSelfDamage && source != target)
+                EquipmentCombat.reflectPercent(f[target].equipment) else 0.0
+            if (reflected > 0 && reflectPercent > 0) {
+                damage(source, reflected * reflectPercent, spell = true, source = target,
+                    damageType = DamageType.PURE, attackClass = AttackClass.REFLECT,
+                    flags = EffectFlags(isReflect = true), effectId = "gear:blade_mail:reflect")
+            }
             if (!removal && !flags.isSelfDamage && source != target && (hit.lifeDamage > 0 || hit.shieldDamage > 0)) {
                 val visual = DuelVisualCue(cardTick, source, target, f[source].heroId,
                     when { effectId.startsWith("frostcore:") -> DuelCueKind.FROST_HIT
@@ -246,7 +256,7 @@ object DuelEngine {
             }
             cue(i, if (slash) DuelCueKind.OMNI_SLASH else DuelCueKind.ATTACK)
             val evasion = EquipmentCombat.passiveValues(f[1 - i].equipment, EffectKind.EVASION, "percent").fold(1.0) { remain, v -> remain * (1 - v) }
-            if (evasion < 1 && roll() >= evasion) { cue(i, DuelCueKind.EVADED); return }
+            if (!EquipmentCombat.trueStrike(f[i].equipment) && evasion < 1 && roll() >= evasion) { cue(i, DuelCueKind.EVADED); return }
             val c = f[i]
             val sources = mutableListOf<CriticalStrikeSource>()
             if (c.heroId == "juggernaut" && c.broken <= 0) sources += CriticalStrikeSource("hero:blade-dance", 1.8, .25, 0.0)
@@ -352,11 +362,12 @@ object DuelEngine {
                 "phantom_assassin" -> f[i] = f[i].copy(criticalReady = 4.0)
                 "abaddon" -> {
                     val cleansed = FighterEffects.strongDispel(f[i])
-                    f[i] = FighterEffects.withShields(cleansed, ShieldLedger.apply(FighterEffects.shields(cleansed),
-                        ShieldEntry("hero:aphotic", ShieldKind.UNIVERSAL, HeroContent.legacy("abaddon").shield * CardCombat.shieldMultiplier(f[i].cardState))))
+                    f[i] = if (cleansed.positiveBlock > 0) cleansed else FighterEffects.withShields(cleansed,
+                        ShieldLedger.apply(FighterEffects.shields(cleansed), ShieldEntry("hero:aphotic", ShieldKind.UNIVERSAL,
+                            HeroContent.legacy("abaddon").shield * CardCombat.shieldMultiplier(f[i].cardState))))
                     damage(1 - i, ShieldLedger.total(FighterEffects.shields(f[i])) * .3, true, i, isUltimate = true)
                 }
-                "necrophos" -> f[i] = f[i].copy(ghost = 3.0)
+                "necrophos" -> if (f[i].positiveBlock <= 0) f[i] = f[i].copy(ghost = 3.0)
                 "viper" -> {
                     poisonCard(i, 1 - i, "hero:viper:ultimate", true, 1, 3.0)
                     val target = f[1 - i]

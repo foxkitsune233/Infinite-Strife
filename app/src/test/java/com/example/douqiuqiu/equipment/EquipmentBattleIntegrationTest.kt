@@ -24,10 +24,20 @@ class EquipmentBattleIntegrationTest {
     private fun idle(f: Fighter) = f.copy(mana = 0.0, manaRegen = 0.0, regen = 0.0, attackIn = 999.0, ultIn = 999.0)
     private fun duel(f: Fighter) = DuelState(f, idle(actor()).copy(hp = 100000.0, maxHp = 100000.0, armor = 0.0, magicResist = 0.0), 1729)
 
-    @Test fun allThirtySixRecipesHaveLiveDefinitions() {
-        assertEquals(36, EquipmentCatalog.recipes.size)
+    @Test fun allFiftyRecipesHaveLiveDefinitions() {
+        assertEquals(50, EquipmentCatalog.recipes.size)
         assertTrue(RecipeGraphValidator.validate(defs.keys, EquipmentCatalog.recipes).valid)
         assertEquals(setOf("ring_of_health", "vitality_booster"), EquipmentCatalog.recipes.single { it.outputId == "vanguard_shield" }.ingredients.keys)
+    }
+    @Test fun selectedExpansionItemsHaveCraftableDefinitions() {
+        val ids = setOf(
+            "blade_mail", "bloodthorn", "abyssal_blade", "scythe_of_vyse", "ethereal_blade",
+            "shivas_guard", "dagon", "monkey_king_bar", "aeon_disk", "nullifier", "euls_scepter",
+            "phantom_cloak", "silver_edge"
+        )
+        val selected = EquipmentCatalog.all.filter { it.id in ids }
+        assertEquals(ids, selected.map { it.id }.toSet())
+        assertTrue(selected.all { it.recipe != null })
     }
     @Test fun reserveSeventhSlotContributesNoStatsOrEffects() {
         val first = inventory("sange")

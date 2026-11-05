@@ -43,9 +43,10 @@ object JourneyValidation {
         fun validFighter(f: Fighter): Boolean = FirstRunContent.heroes.any { it.id == f.heroId } &&
             listOf(f.hp, f.maxHp, f.mana, f.maxMana, f.attack, f.speed, f.bat, f.armor, f.magicResist, f.regen, f.manaRegen,
                 f.shield, f.magicShield, f.skyShield, f.attackIn, f.ultIn, f.invulnerable, f.ghost, f.slashIn,
-                f.criticalReady, f.broken, f.slowTime, f.slow, f.skinIn, f.flareIn, f.skinSlowTime, f.physicalShield).all { it.isFinite() } &&
+                f.criticalReady, f.broken, f.slowTime, f.slow, f.skinIn, f.flareIn, f.skinSlowTime, f.physicalShield,
+                f.positiveBlock).all { it.isFinite() } &&
             f.hp in 0.0..f.maxHp && f.maxHp > 0 && f.mana in 0.0..f.maxMana && f.maxMana > 0 && f.bat > 0 &&
-            listOf(f.shield, f.physicalShield, f.magicShield, f.skyShield).all { it >= 0 } &&
+            listOf(f.shield, f.physicalShield, f.magicShield, f.skyShield, f.positiveBlock).all { it >= 0 } &&
             runCatching { com.example.douqiuqiu.combat.ShieldLedger.total(FighterEffects.shields(f));
                 FighterEffects.withShields(f, FighterEffects.shields(f)).let { it.shield == f.shield && it.physicalShield == f.physicalShield && it.magicShield == f.magicShield && it.skyShield == f.skyShield }
             }.getOrDefault(false) && runCatching { com.example.douqiuqiu.cards.CardCombat.validate(f.cardState); true }.getOrDefault(false) &&

@@ -57,6 +57,13 @@ object EquipmentCombat {
         (if (active(state, "force_staff")) 40.0 else 0.0)
     fun lifesteal(state: EquipmentBattleState): Double = passive(state, EffectKind.LIFESTEAL, "percent") +
         if (active(state, "satanic")) 1.0 else 0.0
+    /** MKB bypasses evasion only; DuelEngine still rejects protected or ethereal attacks first. */
+    fun trueStrike(state: EquipmentBattleState): Boolean = state.items.any { it.definitionId == "monkey_king_bar" }
+    fun reflectPercent(state: EquipmentBattleState): Double = if (active(state, "blade_mail"))
+        passiveValuesForActive(state, EffectKind.REFLECT_DAMAGE, "percent").maxOrNull() ?: 0.0 else 0.0
+    private fun passiveValuesForActive(state: EquipmentBattleState, kind: EffectKind, param: String): List<Double> =
+        effects(state).filter { it.effect.trigger == EffectTrigger.ACTIVE && it.effect.kind == kind && param in it.effect.params }
+            .map { it.number(param) }
     fun armletAttack(f: Fighter): Double = if (active(f.equipment, "armlet")) 25.0 + if (f.heroId == "abaddon") 11.25 else 0.0 else 0.0
     fun activeItems(state: EquipmentBattleState): List<EquippedGear> = state.items.filter { item -> effects(state).any {
         it.item == item && (it.effect.trigger == EffectTrigger.ACTIVE || it.effect.trigger == EffectTrigger.LOW_HP)

@@ -121,7 +121,9 @@ data class Fighter(
     /** 军团：临时攻速增益数值（生效于 interval 速度计算）。 */
     val speedBuff: Double = 0.0,
     /** 攻速增益剩余时间（秒），归零即清除。 */
-    val speedBuffMs: Double = 0.0
+    val speedBuffMs: Double = 0.0,
+    /** 否决坠饰：禁止重新获得可驱散正面保护的剩余秒数。 */
+    val positiveBlock: Double = 0.0
 )
 data class DuelState(val player: Fighter, val enemy: Fighter, val rng: Long, val tick: Int = 0,
                      val won: Boolean? = null, val log: List<String> = emptyList())

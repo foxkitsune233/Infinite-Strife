@@ -18,7 +18,11 @@ import java.io.IOException
 
 /** Versioned platform adapter; no file or Android API enters the shared core. */
 internal object CampaignBinaryCodec {
-    fun write(out: DataOutputStream, p: CampaignProgress) {
+    fun write(out: DataOutputStream, p: CampaignProgress) = write(out, p, InventoryStore.VERSION)
+
+    /** Test fixtures use this to emit a truthful historical payload instead of relabelling current bytes. */
+    internal fun write(out: DataOutputStream, p: CampaignProgress, version: Int) {
+        require(version in 12..InventoryStore.VERSION)
         out.writeLong(p.seed); out.writeInt(p.batch); out.writeInt(p.clears); out.writeBoolean(p.extracted)
         out.writeUTF(p.lastEnding); out.writeLong(p.shopCycle); out.writeLong(p.shopSeen)
         out.writeInt(p.shopStock.size); p.shopStock.forEach { (id, n) -> out.writeUTF(id); out.writeInt(n) }
@@ -30,13 +34,15 @@ internal object CampaignBinaryCodec {
             out.writeDouble(r.hp); out.writeDouble(r.maxHp); out.writeInt(r.round); out.writeUTF(r.stage.name)
             out.writeUTF(r.pendingItem); out.writeInt(r.eventRoll); out.writeBoolean(r.fight != null)
             r.fight?.let { fight ->
-                fighter(out, fight.player); fighter(out, fight.enemy); out.writeLong(fight.rng); out.writeInt(fight.tick)
+                fighter(out, fight.player, version); fighter(out, fight.enemy, version); out.writeLong(fight.rng); out.writeInt(fight.tick)
                 out.writeInt(if (fight.won == null) -1 else if (fight.won == true) 1 else 0)
                 out.writeInt(fight.log.size); fight.log.forEach { out.writeUTF(it) }
             }
             CombatExtensionCodec.cooldown(out, r.equipmentCooldowns)
             CombatExtensionCodec.node(out, r.nodeEvent)
-            out.writeInt(r.recentEventKinds.size); r.recentEventKinds.forEach { out.writeUTF(it.name) }
+            if (version >= 14) {
+                out.writeInt(r.recentEventKinds.size); r.recentEventKinds.forEach { out.writeUTF(it.name) }
+            }
             out.writeInt(r.rewardVersion)
             out.writeBoolean(r.nodeLoot != null)
             r.nodeLoot?.let { loot ->
@@ -73,37 +79,46 @@ internal object CampaignBinaryCodec {
         }
         out.writeInt(p.loadoutSelections.size)
         p.loadoutSelections.toSortedMap().forEach { (hero, slot) -> out.writeUTF(hero); out.writeInt(slot) }
-        out.writeInt(p.lockedItems.size); p.lockedItems.sorted().forEach(out::writeUTF)
+        if (version >= 13) {
+            out.writeInt(p.lockedItems.size); p.lockedItems.sorted().forEach(out::writeUTF)
+        }
         // 0.1.6 新增字段（v15）：英雄等级、任务进度、栏位强化。全部带默认值，旧档缺失即默认。
-        out.writeInt(p.heroLevels.size)
-        p.heroLevels.toSortedMap().forEach { (hero, level) -> out.writeUTF(hero); out.writeInt(level) }
-        out.writeInt(p.questCounters.size)
-        p.questCounters.toSortedMap().forEach { (id, value) -> out.writeUTF(id); out.writeInt(value) }
-        out.writeInt(p.claimedQuests.size); p.claimedQuests.sorted().forEach(out::writeUTF)
-        out.writeInt(p.equipmentGuardLevel); out.writeInt(p.skillGuardLevel)
-        out.writeInt(p.guardedEquipment.size); p.guardedEquipment.sorted().forEach(out::writeUTF)
-        out.writeInt(p.guardedSkills.size); p.guardedSkills.sorted().forEach(out::writeUTF)
+        if (version >= 15) {
+            out.writeInt(p.heroLevels.size)
+            p.heroLevels.toSortedMap().forEach { (hero, level) -> out.writeUTF(hero); out.writeInt(level) }
+            out.writeInt(p.questCounters.size)
+            p.questCounters.toSortedMap().forEach { (id, value) -> out.writeUTF(id); out.writeInt(value) }
+            out.writeInt(p.claimedQuests.size); p.claimedQuests.sorted().forEach(out::writeUTF)
+            out.writeInt(p.equipmentGuardLevel); out.writeInt(p.skillGuardLevel)
+            out.writeInt(p.guardedEquipment.size); p.guardedEquipment.sorted().forEach(out::writeUTF)
+            out.writeInt(p.guardedSkills.size); p.guardedSkills.sorted().forEach(out::writeUTF)
+        }
         // 0.1.7 新增字段（v16）：转生爬塔进度。全部带默认值，旧档缺失即默认。
-        out.writeInt(p.levelCap); out.writeInt(p.towerHighestFloor)
-        out.writeInt(p.towerShard.size); p.towerShard.sorted().forEach(out::writeUTF)
-        out.writeInt(p.towerAghs.size); p.towerAghs.sorted().forEach(out::writeUTF)
-        out.writeBoolean(p.towerRapier)
-        out.writeInt(p.pendingRebirthItems.size); p.pendingRebirthItems.forEach(out::writeUTF)
+        if (version >= 16) {
+            out.writeInt(p.levelCap); out.writeInt(p.towerHighestFloor)
+            out.writeInt(p.towerShard.size); p.towerShard.sorted().forEach(out::writeUTF)
+            out.writeInt(p.towerAghs.size); p.towerAghs.sorted().forEach(out::writeUTF)
+            out.writeBoolean(p.towerRapier)
+            out.writeInt(p.pendingRebirthItems.size); p.pendingRebirthItems.forEach(out::writeUTF)
+        }
         // 0.1.7 爬塔轮次（v17 起）：null 写 false，旧档缺失即 null。
-        out.writeBoolean(p.towerRun != null)
-        p.towerRun?.let { t ->
-            out.writeUTF(t.heroId); out.writeInt(t.floor); out.writeLong(t.rng); out.writeInt(t.clearedFloors)
-            out.writeInt(t.loot.size); t.loot.forEach { out.writeUTF(it.definitionId); out.writeInt(it.star); out.writeInt(it.value) }
+        if (version >= 17) {
+            out.writeBoolean(p.towerRun != null)
+            p.towerRun?.let { t ->
+                out.writeUTF(t.heroId); out.writeInt(t.floor); out.writeLong(t.rng); out.writeInt(t.clearedFloors)
+                out.writeInt(t.loot.size); t.loot.forEach { out.writeUTF(it.definitionId); out.writeInt(it.star); out.writeInt(it.value) }
+            }
         }
         // 0.1.7 待授予奖励池（v18 起）：魔晶/神杖先进池，由营地「转生授予」面板手动授予（一次性）。
-        out.writeInt(p.pendingShardHeroes.size); p.pendingShardHeroes.forEach(out::writeUTF)
-        out.writeInt(p.pendingAghanimHeroes.size); p.pendingAghanimHeroes.forEach(out::writeUTF)
+        if (version >= 18) {
+            out.writeInt(p.pendingShardHeroes.size); p.pendingShardHeroes.forEach(out::writeUTF)
+            out.writeInt(p.pendingAghanimHeroes.size); p.pendingAghanimHeroes.forEach(out::writeUTF)
+        }
         // 0.1.7 塔内连续健康度（v19 起）：旧档回退为未开战、无补给、无锻造强化。
-        p.towerRun?.let { t ->
+        if (version >= 19) p.towerRun?.let { t ->
             out.writeBoolean(t.currentHp != null); t.currentHp?.let(out::writeDouble)
             out.writeBoolean(t.pendingSupplyRegen); out.writeInt(t.towerPrimaryBonus)
-            // v20：道中节点待选态。旧档在读取时回退为 false。
-            out.writeBoolean(t.pendingWaypoint)
+            if (version >= 20) out.writeBoolean(t.pendingWaypoint)
         }
     }
     fun read(input: DataInputStream, version: Int): CampaignProgress {
@@ -250,7 +265,7 @@ internal object CampaignBinaryCodec {
         val guaranteed = if (version >= 6) List(count(input, 1)) { input.readUTF() }.toSet() else emptySet()
         return TargetChest(id, quality, difficulty, ticket, items, appraisals, theme, guaranteed)
     }
-    private fun fighter(out: DataOutputStream, f: Fighter) {
+    private fun fighter(out: DataOutputStream, f: Fighter, version: Int) {
         out.writeUTF(f.heroId)
         listOf(f.hp, f.maxHp, f.mana, f.maxMana, f.attack, f.speed, f.bat, f.armor, f.magicResist, f.regen, f.manaRegen,
             f.shield, f.magicShield, f.skyShield, f.attackIn, f.ultIn, f.invulnerable, f.ghost, f.slashIn,
@@ -291,8 +306,11 @@ internal object CampaignBinaryCodec {
             out.writeUTF(it.sourceId); out.writeInt(it.caster); out.writeUTF(it.kind.name)
             out.writeLong(it.remainingMs); out.writeUTF(it.dispelClass.name); out.writeInt(it.appliedAtTick)
         }
-        out.writeDouble(f.amManaBurn); out.writeDouble(f.amBurnReady); out.writeInt(f.axeHitsSinceSpin)
-        out.writeDouble(f.armorBuff); out.writeDouble(f.armorBuffMs); out.writeDouble(f.speedBuff); out.writeDouble(f.speedBuffMs)
+        if (version >= 14) {
+            out.writeDouble(f.amManaBurn); out.writeDouble(f.amBurnReady); out.writeInt(f.axeHitsSinceSpin)
+            out.writeDouble(f.armorBuff); out.writeDouble(f.armorBuffMs); out.writeDouble(f.speedBuff); out.writeDouble(f.speedBuffMs)
+        }
+        if (version >= 21) out.writeDouble(f.positiveBlock)
     }
     private fun poisonLayer(out: DataOutputStream, layer: PoisonCoreLayer) {
         out.writeUTF(layer.instanceId); out.writeUTF(layer.kind.name); out.writeUTF(layer.sourceId); out.writeUTF(layer.casterUnitId)
@@ -354,9 +372,11 @@ internal object CampaignBinaryCodec {
                 val armorBuffMs = if (version >= 14) input.readDouble() else 0.0
                 val speedBuff = if (version >= 14) input.readDouble() else 0.0
                 val speedBuffMs = if (version >= 14) input.readDouble() else 0.0
+                val positiveBlock = if (version >= 21) input.readDouble() else 0.0
                 return base.copy(poisonSerial = serial, poisonPool = pool, equipment = gear, timedControls = controls,
                     amManaBurn = amManaBurn, amBurnReady = amBurnReady, axeHitsSinceSpin = axeHitsSinceSpin,
-                    armorBuff = armorBuff, armorBuffMs = armorBuffMs, speedBuff = speedBuff, speedBuffMs = speedBuffMs)
+                    armorBuff = armorBuff, armorBuffMs = armorBuffMs, speedBuff = speedBuff, speedBuffMs = speedBuffMs,
+                    positiveBlock = positiveBlock)
             }
             return base
         }
