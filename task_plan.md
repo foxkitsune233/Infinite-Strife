@@ -6,7 +6,7 @@
 - [x] 修正全量验证入口和README引擎说明。
 - [x] 最终全量回归：2026-11-22共100项退出0，失败0；既有间歇退出未宣称根治。
 - [x] 发布候选说明：docs/releases/2026-11-22-godot-preview.md，含真机/导出/仓库缺口。
-- [ ] 接入用户指定的新分支codex/godot-migration并推送源码；尚不创建Release或导出安装包。
+- [x] 接入用户指定的新分支codex/godot-migration并推送源码；尚不创建Release或导出安装包。
 
 以下Goal和阶段状态为历史，不代表当前仍有活动Goal。Windows导出仍按用户此前要求暂缓；本次先准备源码候选，不能宣称正式版已验收。
 
