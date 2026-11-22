@@ -1,0 +1,1610 @@
+{
+  "metadata": {
+    "schema_version": 1,
+    "sources": [
+      {
+        "path": "docs/design/2026-11-04-endless-strife-story-script.md",
+        "sha256": "15d9e663a128bcf3f011b7d4db2c5a1cc40959cdedda7f28b646add9eb84fe1b"
+      },
+      {
+        "path": "shared/src/commonMain/kotlin/com/example/douqiuqiu/quest/HeroEndings.kt",
+        "sha256": "2fed8c6a2fc718db8160bb783ed9a3df45e289b5332aa2ffdbc99a766148640e"
+      }
+    ]
+  },
+  "chapters": [
+    {
+      "id": "P00",
+      "title": "所有人都想回去",
+      "portraits": [
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "有人想救回一座城。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "有人只想再见一个人。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "他们都听说，塔顶的圣剑能斩开已经发生的命运。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "新来的领队？装备、卡组、走哪条路，先由你安排。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "记住营地的规矩。这里可以谈合作，出了门，别人接的也许是与你相反的委托。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "至于塔顶那把剑……先证明你能带人走到那里。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "你会听见很多必须回去的理由。别急着答应替每个人完成。"
+        }
+      ]
+    },
+    {
+      "id": "H01",
+      "title": "主宰：最后一艘船",
+      "portraits": [
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "你每次回营地，都要去看一眼码头。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "我离开故乡时，坐的是最后一艘船。等海面亮起来，已经看不见岸上的人了。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "你回去又能改变什么？"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "我可以杀光他们。"
+        }
+      ]
+    },
+    {
+      "id": "H02",
+      "title": "亚巴顿：迟归的骑士",
+      "portraits": [
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "left"
+        },
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "在外征战了那么多年，你没回去看看？"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "等我解甲归乡，城门已经烧塌了。活下来的人说，那群教徒把不肯归顺的人，都赶进了火里。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "你要回去找他们？"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "我要回到他们出现以前。那时城门还开着，我认得的人也还在。"
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "title": "敌法师：借来的力量",
+      "portraits": [
+        {
+          "hero_id": "anti_mage",
+          "display_name": "敌法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "你排斥法术，却在找一把充满了魔法力量的剑。"
+        },
+        {
+          "speaker_id": "anti_mage",
+          "speaker_name": "敌法师",
+          "text": "我的故乡烧在法阵里。要是必须借它的力量，那么我会不惜一切代价。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "到时候，先看清你要斩断的是什么。"
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "title": "斧王：记得名字的人",
+      "portraits": [
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "left"
+        },
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "领队，挑最硬的对手！斧王这回有准备。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "上回也是这句话。军团呢？"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "还在那座山谷里。一个都没跟出来。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "把物资备足。等我打回去，得让那帮家伙有力气跟上。"
+        }
+      ]
+    },
+    {
+      "id": "H05",
+      "title": "虚空假面：想不起的姓名",
+      "portraits": [
+        {
+          "hero_id": "faceless_void",
+          "display_name": "虚空假面",
+          "side": "left"
+        },
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "faceless_void",
+          "speaker_name": "虚空假面",
+          "text": "有人抓住过我的手。我回头时，绳子已经断了。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "你记得那个人是谁？"
+        },
+        {
+          "speaker_id": "faceless_void",
+          "speaker_name": "虚空假面",
+          "text": "声音、脸、名字，都没了。只有松手的那一下还在。"
+        },
+        {
+          "speaker_id": "faceless_void",
+          "speaker_name": "虚空假面",
+          "text": "只要能停住那个瞬间，我就有时间把一切想起来。"
+        }
+      ]
+    },
+    {
+      "id": "H06",
+      "title": "军团指挥官：最后一道命令",
+      "portraits": [
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "left"
+        },
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "队伍撤退时，最后一人回来以前，不准封路。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "这是规矩，还是你的旧账？"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "我看见追兵，以为桥那头已经没人，便下令断桥。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "后来有人把后卫的名册交给我。那一页，我一直带着。"
+        }
+      ]
+    },
+    {
+      "id": "J01",
+      "title": "整装出发：先把兵器带上",
+      "portraits": [
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "这件先带上。对手不会因为你装备还在仓库，就少砍一刀。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "也别拿营地里谈过生意，当作战场上的交情。"
+        }
+      ]
+    },
+    {
+      "id": "J02",
+      "title": "技能入阵：别人的招式",
+      "portraits": [
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "left"
+        },
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "卡里记着招式，什么时候用，由你选的构筑决定。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "对手也会带。别以为认得那张脸，就知道他下一刀怎么出。"
+        }
+      ]
+    },
+    {
+      "id": "J03",
+      "title": "留好退路：能带回什么",
+      "portraits": [
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "left"
+        },
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "把东西放进保险箱，就算远征失败，也还有保障。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "哈哈！斧王不会失败！"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "失败之前每个人都这么想。"
+        }
+      ]
+    },
+    {
+      "id": "J04",
+      "title": "初次远征：门外的规矩",
+      "portraits": [
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "left"
+        },
+        {
+          "hero_id": "anti_mage",
+          "display_name": "敌法师",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "anti_mage",
+          "speaker_name": "敌法师",
+          "text": "下次再出发，记得准备得更充分些。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "营地不准动手。门外谁挡路，就看各自的本事。"
+        }
+      ]
+    },
+    {
+      "id": "J05",
+      "title": "初试锋芒：对手的理由",
+      "portraits": [
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "赢了一场。领队，记住这套配装奏效的地方。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "也记住对手怎么打的。他一样为这次出发准备过。"
+        }
+      ]
+    },
+    {
+      "id": "J06",
+      "title": "战地拾取：留下的东西",
+      "portraits": [
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "left"
+        },
+        {
+          "hero_id": "faceless_void",
+          "display_name": "虚空假面",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "鉴定完了，能用的收好。遗迹里丢下的东西，未必都属于最早倒下的人。"
+        },
+        {
+          "speaker_id": "faceless_void",
+          "speaker_name": "虚空假面",
+          "text": "我见过一处旧战场。同一道裂痕，在不同的刀上出现过。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "先把位置记下来。下次经过，再看一眼。"
+        }
+      ]
+    },
+    {
+      "id": "J07",
+      "title": "稳妥撤离：计算之外的人",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "知道何时撤退，至少说明你不会把性命全押在运气上。下一趟，可以把我列进名单。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "你找领队，就是为了算出一条最安全的登塔路线？"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "我曾经算得很清楚。王命、胜算、该舍弃的人……每一项都有理由。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "那你还来这里做什么？"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "她被留在了城里。而我带着一份无可指摘的命令，活了下来。"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "我需要一条回去的路。领队，你负责替我找到它。"
+        }
+      ]
+    },
+    {
+      "id": "J08",
+      "title": "扩充行囊：两个人的分量",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "多出的地方，留些补给。深入以后，东西的价值会变。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "你打算带多少？"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "够两个人离开一座城的分量。"
+        }
+      ]
+    },
+    {
+      "id": "J09",
+      "title": "工坊入门：裂开的护腕",
+      "portraits": [
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "left"
+        },
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "第一件成品出来了。把接缝检查一遍，别只看它比原来结实多少。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "真打起来，坏了就换。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "得先撑到能换的时候。"
+        }
+      ]
+    },
+    {
+      "id": "J10",
+      "title": "完整归航：笼门之前",
+      "portraits": [
+        {
+          "hero_id": "viper",
+          "display_name": "冥界亚龙",
+          "side": "left"
+        },
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "viper",
+          "speaker_name": "冥界亚龙",
+          "text": "你的队伍能走到终点。我替你清路，你带我接近高塔。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "拿到圣剑之后呢？回去把关过你的家伙全宰了？"
+        },
+        {
+          "speaker_id": "viper",
+          "speaker_name": "冥界亚龙",
+          "text": "我要回到他们第一次关上笼门之前。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "那你现在这一身本事，可就未必还有了。"
+        },
+        {
+          "speaker_id": "viper",
+          "speaker_name": "冥界亚龙",
+          "text": "我要自己选。要不要毒牙，要不要这身鳞，都轮不到别人决定。"
+        },
+        {
+          "speaker_id": "viper",
+          "speaker_name": "冥界亚龙",
+          "text": "领队，合作到路口。门那边的事，归我。"
+        }
+      ]
+    },
+    {
+      "id": "J11",
+      "title": "加固安全箱：带着走的东西",
+      "portraits": [
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "left"
+        },
+        {
+          "hero_id": "viper",
+          "display_name": "冥界亚龙",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "箱子加固了。最怕丢的东西，可以再多放几件。"
+        },
+        {
+          "speaker_id": "viper",
+          "speaker_name": "冥界亚龙",
+          "text": "倒是方便。"
+        },
+        {
+          "speaker_id": "viper",
+          "speaker_name": "冥界亚龙",
+          "text": "要是身上不想要的东西，也能锁进箱子就好了。"
+        }
+      ]
+    },
+    {
+      "id": "J12",
+      "title": "英雄成长：今非昔比",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "anti_mage",
+          "display_name": "敌法师",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "操练已经有成效。若能把现在的力量带回去，有些结果本可以不同。"
+        },
+        {
+          "speaker_id": "anti_mage",
+          "speaker_name": "敌法师",
+          "text": "我只需要赶在法阵点燃之前。"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "前提是，你认准了它为何被点燃。"
+        }
+      ]
+    },
+    {
+      "id": "J13",
+      "title": "各有其道：一次成功的错误",
+      "portraits": [
+        {
+          "hero_id": "phantom_assassin",
+          "display_name": "幻影刺客",
+          "side": "left"
+        },
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "我看过你的远征记录。可以合作，只有一条：最后那一刀该不该落下，我自己判断。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "到了战场上才怀疑命令，会害死同行的人。"
+        },
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "不怀疑，也会。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "你违抗过谁的命令？"
+        },
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "没有。那个替两国送停战信的人，正是因为我从未违抗，才死了。"
+        },
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "领队，替我备好兵器。也请记住，我可能会把它收回去。"
+        }
+      ]
+    },
+    {
+      "id": "J14",
+      "title": "丰富技能：留一手",
+      "portraits": [
+        {
+          "hero_id": "phantom_assassin",
+          "display_name": "幻影刺客",
+          "side": "left"
+        },
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "多一张卡，就多一种应对。别把整套打法押在一次出手上。"
+        },
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "也别把全部打算告诉临时同行的人。"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "这句话，我会同样记在你的名字下面。"
+        }
+      ]
+    },
+    {
+      "id": "J15",
+      "title": "留下底牌：下一次",
+      "portraits": [
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "left"
+        },
+        {
+          "hero_id": "faceless_void",
+          "display_name": "虚空假面",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "护芯收好。东西保住，下次出发就能少些顾虑。"
+        },
+        {
+          "speaker_id": "faceless_void",
+          "speaker_name": "虚空假面",
+          "text": "我以前也说过“下次”。只是想不起，说给了谁。"
+        }
+      ]
+    },
+    {
+      "id": "J16",
+      "title": "远行准备：跟上的人",
+      "portraits": [
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "left"
+        },
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "再多带点！省得打到一半，又有人喊该回头。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "你说该冲时，也记得看一眼后面。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "……这回我会看。"
+        }
+      ]
+    },
+    {
+      "id": "J17",
+      "title": "同行者：谁值得回去",
+      "portraits": [
+        {
+          "hero_id": "necrophos",
+          "display_name": "瘟疫法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "necrophos",
+          "speaker_name": "瘟疫法师",
+          "text": "你们缺一个能让伤者继续走的人。我缺一条通向圣剑的路，交易很公平。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "你想用它救谁？"
+        },
+        {
+          "speaker_id": "necrophos",
+          "speaker_name": "瘟疫法师",
+          "text": "我自己。刽子手落斧之前的那个我。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "那些指控呢？"
+        },
+        {
+          "speaker_id": "necrophos",
+          "speaker_name": "瘟疫法师",
+          "text": "我说过想活下去，什么时候说过想认罪？"
+        },
+        {
+          "speaker_id": "necrophos",
+          "speaker_name": "瘟疫法师",
+          "text": "领队，你可以不喜欢我。真要出发时，记得告诉我对手是谁。"
+        }
+      ]
+    },
+    {
+      "id": "J18",
+      "title": "远征常客：第二遍",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "faceless_void",
+          "display_name": "虚空假面",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "又走完一趟。同样的路，换套构筑，结果就能不同。"
+        },
+        {
+          "speaker_id": "faceless_void",
+          "speaker_name": "虚空假面",
+          "text": "可要是每次换的，都恰好是错的那一处呢？"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "那就得找到证据。凭恐惧，什么也判断不了。"
+        }
+      ]
+    },
+    {
+      "id": "J19",
+      "title": "筑起根基：石上的誓言",
+      "portraits": [
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "left"
+        },
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "框架到了，箱子还能继续加固。东西放在这里，总算有些保障。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "家乡的废墟里，也有块誓约石。徽记已经熏得认不清，只剩一句“受庇护者，当守护此地”。"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "他们却用这句话，把不肯归顺的人送上了火刑架。"
+        }
+      ]
+    },
+    {
+      "id": "J20",
+      "title": "稳固后方：回来的地方",
+      "portraits": [
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "left"
+        },
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "后方安顿好了。接下来即使深入，也有地方退回来。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "我想回去的地方，也曾有人这么说。"
+        }
+      ]
+    },
+    {
+      "id": "J21",
+      "title": "百战之备：够不够强",
+      "portraits": [
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "left"
+        },
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "兵器、护芯、远征记录……现在总该够了！"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "够对付下一场。至于你一直记着的那一战，谁也没替你打过。"
+        },
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "那就等我自己去打。"
+        }
+      ]
+    },
+    {
+      "id": "J22",
+      "title": "磨合成阵：带得走的",
+      "portraits": [
+        {
+          "hero_id": "phantom_assassin",
+          "display_name": "幻影刺客",
+          "side": "left"
+        },
+        {
+          "hero_id": "viper",
+          "display_name": "冥界亚龙",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "领队，这些准备，我会记在心里。"
+        },
+        {
+          "speaker_id": "viper",
+          "speaker_name": "冥界亚龙",
+          "text": "你还想带什么回去？"
+        },
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "足够快的身手。救下他以后，还得赶在追踪者前面。"
+        }
+      ]
+    },
+    {
+      "id": "J23",
+      "title": "噩梦门前：谁先伸手",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "anti_mage",
+          "display_name": "敌法师",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "路已经探得够深。别人的准备，大概也快完成了。"
+        },
+        {
+          "speaker_id": "anti_mage",
+          "speaker_name": "敌法师",
+          "text": "那就别再劝我等。"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "我没有劝你。我也不打算让。"
+        }
+      ]
+    },
+    {
+      "id": "J24",
+      "title": "无尽纷争：各自的归途",
+      "portraits": [
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "委托结清，登塔的准备也齐了。领队，下一轮派谁，由你安排。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "其余的人不会都在营地等着。有人会另找队伍，有人会站到我们前面。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "知道。谁也没答应，把回去的机会让给别人。"
+        }
+      ]
+    },
+    {
+      "id": "T00",
+      "title": "塔入口：这次轮到谁",
+      "portraits": [
+        {
+          "hero_id": "current",
+          "display_name": "当前英雄",
+          "side": "left"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "current",
+          "speaker_name": "当前英雄",
+          "text": "领队，这一路按你的安排走。圣剑前的那一步，让我自己来。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "塔门打开。门后，没有人留下登顶归来的记录。"
+        }
+      ]
+    },
+    {
+      "id": "T05",
+      "title": "第五层：带回去的力量",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "魔晶送到了。等回营地授予，力量就能留下。"
+        },
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "记忆也留着。别只记哪一招比从前更强。"
+        }
+      ]
+    },
+    {
+      "id": "T10",
+      "title": "第十层：旧伤",
+      "portraits": [
+        {
+          "hero_id": "faceless_void",
+          "display_name": "虚空假面",
+          "side": "left"
+        },
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "faceless_void",
+          "speaker_name": "虚空假面",
+          "text": "越往上，我越清楚绳子断开的声音。可是那个人的脸，还是空的。"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "先把眼前这段路走完。你还没抓到那只手。"
+        }
+      ]
+    },
+    {
+      "id": "T11",
+      "title": "第十一层：重写的诱惑",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "phantom_assassin",
+          "display_name": "幻影刺客",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "这件东西可以让一张卡的技艺直接臻于完整。回营地后，再选要用在哪张上。"
+        },
+        {
+          "speaker_id": "phantom_assassin",
+          "speaker_name": "幻影刺客",
+          "text": "要是人的一生，也能这样补齐就好了。"
+        }
+      ]
+    },
+    {
+      "id": "T15",
+      "title": "第十五层：再次施放",
+      "portraits": [
+        {
+          "hero_id": "skywrath",
+          "display_name": "天怒法师",
+          "side": "left"
+        },
+        {
+          "hero_id": "anti_mage",
+          "display_name": "敌法师",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "神杖也带回来了。正式授予以后，那些从前用不出的力量，终于可以试一试。"
+        },
+        {
+          "speaker_id": "anti_mage",
+          "speaker_name": "敌法师",
+          "text": "你准备拿它试什么？"
+        },
+        {
+          "speaker_id": "skywrath",
+          "speaker_name": "天怒法师",
+          "text": "我以前打不开的一道门。"
+        }
+      ]
+    },
+    {
+      "id": "T20",
+      "title": "第二十层：剑前",
+      "portraits": [],
+      "lines": [
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "最后一场争夺结束。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "圣剑的光照进旧日。有人看见故乡的海，有人听见城门落锁，还有人终于听见了那个被遗忘的声音。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "他们伸出手。这一次，所有人都相信自己来得及。"
+        }
+      ]
+    },
+    {
+      "id": "R01",
+      "title": "远征失败：账还在",
+      "portraits": [
+        {
+          "hero_id": "abaddon",
+          "display_name": "亚巴顿",
+          "side": "left"
+        },
+        {
+          "hero_id": "juggernaut",
+          "display_name": "主宰",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "abaddon",
+          "speaker_name": "亚巴顿",
+          "text": "先清点留下的东西。少了什么，重新备。"
+        },
+        {
+          "speaker_id": "juggernaut",
+          "speaker_name": "主宰",
+          "text": "领队，败的是这一趟。下次出门之前，别把这次怎么输的忘了。"
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "title": "塔内失败：未到剑前",
+      "portraits": [
+        {
+          "hero_id": "current",
+          "display_name": "当前英雄",
+          "side": "left"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "current",
+          "speaker_name": "当前英雄",
+          "text": "还没走到剑前。先回去，把这一层的对手记下来。"
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "title": "主动撤离：一次取舍",
+      "portraits": [
+        {
+          "hero_id": "legion_commander",
+          "display_name": "军团指挥官",
+          "side": "left"
+        },
+        {
+          "hero_id": "axe",
+          "display_name": "斧王",
+          "side": "right"
+        }
+      ],
+      "lines": [
+        {
+          "speaker_id": "axe",
+          "speaker_name": "斧王",
+          "text": "就到这儿？"
+        },
+        {
+          "speaker_id": "legion_commander",
+          "speaker_name": "军团指挥官",
+          "text": "到这儿。带回去的物资，能让下一趟多些把握。"
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "title": "登顶归返：无尽纷争",
+      "portraits": [],
+      "lines": [
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "营地里又多了一位从塔中归来的挑战者。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "圣剑仍在。没有人能再声称，那只是一个虚假的传说。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "有人开始查找旧地图，有人重新磨利兵器，也有人悄悄把名单又数了一遍。"
+        },
+        {
+          "speaker_id": "",
+          "speaker_name": "",
+          "text": "塔门外，新来的英雄正在问路。他说，只要拿到那把剑，一切就还能挽回。"
+        }
+      ]
+    }
+  ],
+  "endings": [
+    {
+      "id": "E01",
+      "hero_id": "juggernaut",
+      "hero_name": "主宰",
+      "title": "海上的光",
+      "pages": [
+        "最后一场争夺结束。圣剑划开黑暗，海风里有故乡的气味。",
+        "他回到了舰队抵达以前。港湾里，运送平民的船还在等潮，城头尚未燃起烽火。",
+        "当年他坐上离乡的船，看见海岸骤然亮起，随后只剩下沉入水中的屋顶。那道光，他记了很多年。",
+        "这一次，他站在了岸上。圣剑在手，追来的舰队还远，石堤却已近在脚下。",
+        "只要先毁掉敌船，故乡就能留下。他没有再等。",
+        "剑光贯穿石堤。汹涌的海水卷向敌舰，桅杆接连折断，没有一艘能再靠岸。",
+        "他听见身后的欢呼，随即听见了钟声。海水没有停在敌船旁，而是从断堤涌入了港湾。",
+        "尚未起航的船撞在一起，系船绳扯倒了木架。刚才还在岸边挥手的人，转眼便被浪头遮住。",
+        "他转身去拉近处的一只手。更远处，还有人在喊他的名字。",
+        "海面被圣剑照亮。他终于认出了自己曾在离乡船上见过的光。",
+        "营地里，他放下仍在滴水的兵器，很久才开口。\n“领队，把潮汐的记录给我。”",
+        "“下一次……我得先看清水会流到哪里。”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E02",
+      "hero_id": "abaddon",
+      "hero_name": "亚巴顿",
+      "title": "救主",
+      "pages": [
+        "圣剑将他送回了家乡。此时，年轻的骑士仍在远方征战，城门完好，也没有人听说过那个教团。",
+        "他沿着记忆中的街道寻找。卖面包的人还活着，井边有人争论天气，孩童追着他的战马跑过。",
+        "劫掠者来时，他拔剑守住城门。伤者在光中重新站起，跪下的人越来越多。",
+        "他让他们起身，分发兵器，教乡民轮流守夜。他想留下足以保护家乡的办法。",
+        "临别前，人们请他留一份誓约，又问石上应刻什么标记。他将剑放在石边，让石匠照着刻。",
+        "“受庇护者，当守护此地。”\n他念完誓言，看着乡民将它刻进石头。",
+        "归途正在收拢。他离开时，城门依然开着，送别的人说，会替他守住这里。",
+        "他离开后的数年里，归来的骑士被称为救主。剑形徽记挂上祭坛，守夜的誓约变成了必须服从的教义。",
+        "不肯跪拜的人被赶出家门，提出疑问的人被称为不洁。清洗的火烧过街道，也烧塌了那座被他守住的城门。",
+        "烟熏黑了徽记，却没有毁掉石上的那句话。多年征战后归乡的骑士，正是在这块石前听说了教团的暴行。",
+        "回到营地，他的手仍停在剑柄上。\n“那句话……原来是我留下的。”",
+        "“领队，我一直在找教团的起点。\n他们最初等来的那个人，原来就是我。”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E03",
+      "hero_id": "anti_mage",
+      "hero_name": "敌法师",
+      "title": "斩开的封印",
+      "pages": [
+        "她回到了故乡起火之前。熟悉的街道还在，法阵的光从城市中央升起。",
+        "那些长袍与当年一模一样。施法者围着阵眼，高举双手，脸上已经没有血色。",
+        "她曾在远处看着故乡被烈火吞没。赶回去时，只剩烧毁的法阵与无从追问的尸体。",
+        "她记得这一切，也早已决定回来后第一剑该斩向哪里。",
+        "看守阵眼的人挡住她的路，催她退后。他们喊得越急，她便越确信自己来得及时。",
+        "圣剑触及光壁。旧日挡住她的法术，在此刻轻易裂开。",
+        "直到第二剑落下，她才听清那句被轰鸣盖住的喊声。\n“别让封印断开！”",
+        "火焰从裂缝里喷出。它先吞掉施法者，继而沿着她斩开的缺口，越过整条街。",
+        "她挥剑驱散眼前的火，却有更多火从阵下涌来。那些倒在阵边的人，再也无法补上缺口。",
+        "她终于看清，曾让自己憎恨至今的最后一道光，是有人用尽力气维持的屏障。",
+        "营地里，一份法阵图被推到她面前。这次，她没有将它扔开。",
+        "“领队，把能找到的图都留下。\n我要知道，他们当时究竟在挡什么。”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E04",
+      "hero_id": "axe",
+      "hero_name": "斧王",
+      "title": "来不及跟上",
+      "pages": [
+        "他一眼认出了山谷。旗帜还完整，士兵正在生火，那个传令兵尚未从斜坡上滚下来。",
+        "旧日的败仗有太多种解释。他只记得，敌将最后站着，自己的军团没能走出这里。",
+        "这一次，他带着圣剑。敌军阵线在山口展开，敌将的位置清清楚楚。",
+        "他没有等斥候回来。兵刃上的光划开前阵，他径直冲向那张记了多年的脸。",
+        "敌将倒下时，他笑了，转身朝谷口高喊进攻。那句话，他曾经喊过许多次。",
+        "谷外的士兵看见光，也看见冲开的阵线。他们举旗前进，以为将军已经替所有人打开道路。",
+        "弓弩从两侧山坡响起。尚未探明的伏兵等到队伍挤入狭口，才一齐拉动绊索。",
+        "他杀回谷中，呼喊几个熟悉的名字。有人应了一声，随即被后面的人流挤散。",
+        "圣剑足以劈开面前的盾，却无法让他同时站在山谷的每一个角落。",
+        "他终于听见旧日记忆里那句进攻令。声音是自己的，连最后的笑声都没有变。",
+        "回到营地后，他没有再问下一场的对手有多强，只要来了那份军团名册。",
+        "“先点名字。”他把手按在纸上。\n“点完，再说谁走前面。”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E05",
+      "hero_id": "faceless_void",
+      "hero_name": "虚空假面",
+      "title": "停住的那一刻",
+      "pages": [
+        "时间的裂口在眼前展开。他终于看清了坠落者的脸，也听见那个被自己遗忘的声音。",
+        "绳索绷到极限，那个人抓住他的手，用最后的力气将他推向安全的一边。",
+        "这些年里，他只记得自己松过手，以为只要多出一瞬，就能够把人拉回来。",
+        "圣剑回应了他的愿望。在绳子断开的前一刻，时间停下了。",
+        "碎石悬在空中，衣角不再飘动，睫毛间的泪也没有落下。他赶到了那只伸出的手旁。",
+        "他握住它，用力，随后再次用力。静止的身体仍停在原处，连一寸也无法向前。",
+        "他暂停了坠落，也暂停了绳索的收紧、手指的弯曲，以及那个人尚未说完的话。",
+        "只要时间重新流动，断裂便会继续。可只要它不流动，他也永远无法完成这次救援。",
+        "他站在那张终于记起的脸前，第一次不知道，自己该让下一瞬到来，还是继续把它关在外面。",
+        "归途合拢时，那只手仍停在那里。他回到了营地，掌心里什么也没有。",
+        "“我终于记起，那时是你在推我回去。”\n他没有告诉任何人，那个人的名字。",
+        "很久以后，他问领队。\n“放手以后还往前走的人，算不算背叛？”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E06",
+      "hero_id": "legion_commander",
+      "hero_name": "军团指挥官",
+      "title": "桥的另一边",
+      "pages": [
+        "旧日的桥横在面前。她记得这场撤退，也记得自己签在命令上的名字。",
+        "当年她看见追兵，以为最后一队已经通过，便命人断桥。后卫的名册，是后来才送到她手里的。",
+        "这一次，她决定亲手站在桥边，不让任何部下再替自己承担那道命令。",
+        "队伍接连经过。有人扶着伤者，有人回头找旗，报告混在马蹄和喊声里，听不真切。",
+        "远处出现了敌军。她看向身后，大多数熟悉的面孔都在，桥面上暂时没有人。",
+        "圣剑抬起。她来不及再等，认定只要这一剑更快，追兵就碰不到已经撤回的人。",
+        "桥身断开时，对岸响起呼喊。最后一队护着担架的人，刚刚走出坡后的树林。",
+        "他们看见指挥官，也看见她手中的剑。中间的桥面已经坠入河水，没有人能听清她随后喊了什么。",
+        "她终于明白，亲手挥剑并没有替自己核对名单。那份判断，仍和从前一样仓促。",
+        "营地里，她重新摊开那张纸，把每一个名字念到最后，才抬起头。",
+        "“以后我说人齐了，你再替我核对一遍。\n哪怕我催你，也得核对。”",
+        "她又将名册折好。那道旧折痕，仍落在最后一队人的名字中间。",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E07",
+      "hero_id": "skywrath",
+      "hero_name": "天怒法师",
+      "title": "打开的门",
+      "pages": [
+        "封城之夜重新降临。他带着圣剑，回到了自己接受撤离命令以前。",
+        "这些年里，他能说出那道命令的每一个理由，却不敢再想，她当时为什么没有跟上来。",
+        "如今他记熟了宫城的门、结界的薄弱处，以及从她所在的街道通向出口的距离。",
+        "所有准备都足够充分。至少，他在动手之前是这样相信的。",
+        "被圣剑增强的法术击穿结界。门后的光暗下去，他终于看见她从人群中抬头。",
+        "她认出了他，提起衣角，朝这边走来。那几步路，他曾在梦里见过无数次。",
+        "她忽然停下，伸手指向他的身后。他以为她在叫自己快走，便再次向她伸出手。",
+        "城外的攻城火力越过破碎的结界。原本被阻挡的第一道火光，正落在新打开的通道上。",
+        "他撑起护盾，却挡不住沿街倾倒的石墙。她刚才站过的位置，再也看不见了。",
+        "他算过如何打破结界，如何带一个人离开。唯独没有把仍在结界之外的战争重新算进去。",
+        "回到营地，他让领队取来整座城的地图。摊开时，手指仍停在那个街口。",
+        "“这次，别只找她住的那一条街。”\n他说完，才慢慢移开了手。",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E08",
+      "hero_id": "viper",
+      "hero_name": "冥界亚龙",
+      "title": "带回故乡的毒",
+      "pages": [
+        "他回到了笼门关闭以前。捕猎者还守着陷阱，不知道自己等待的猎物，已经带着圣剑站在身后。",
+        "锁链被咬断，兵器落在泥里。他认得那些惊恐的脸，终于没有再被他们拖进黑暗。",
+        "族群仍在旧日的栖地。他们围上来，试探着碰触他陌生的鳞甲，随后认出了熟悉的气息。",
+        "他带他们远离捕猎者。沿途有清水，山谷也足够隐蔽，比记忆里的逃亡顺利得多。",
+        "第一名同族倒下时，他立即回头寻找追兵。可树后没有弓弩，空中也没有捕网。",
+        "更多同族开始发抖。他们刚才都饮过水，而自己受伤的身体，曾在上游停留。",
+        "曾让敌人不敢靠近的毒，顺着鳞片滴进溪流。他带回了逃离牢笼的力量，也把它带到了没有抵抗能力的族群身边。",
+        "他离开水边，身后的同族却仍想跟过来。越是认得他的人，越不肯相信那声驱赶。",
+        "他终于将他们吼退，独自盘在没有水的岩地上。远处断断续续的呼吸，直到归途闭合也没有平稳下来。",
+        "营地里，他盯着洗净兵器的水盆，一直没有靠近。",
+        "“下次给我找条不靠近水的路。”\n领队没有立刻回答。",
+        "他露出毒牙，却没有再抬起头。\n“先别说能不能成。给我找。”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E09",
+      "hero_id": "phantom_assassin",
+      "hero_name": "幻影刺客",
+      "title": "找到他的路",
+      "pages": [
+        "她回到了那条街。停战使者正按时走来，怀里仍藏着那封没能送到的信。",
+        "过去，她知道在哪一盏灯下出手，如何避开守卫，以及任务完成后该往哪里消失。",
+        "这一次，她没有挥向使者。圣剑出鞘，将另一个潜伏者逼出了阴影。",
+        "使者活了下来，紧紧抓着信，问她究竟是哪一边的人。她只让他跟上，别回头。",
+        "她选了自己最熟悉的藏身处。那里没有登记的名字，也不在护送路线里，过去从未有人跟上她。",
+        "追踪者接连出现。她握着圣剑守住街口，确信只要再杀退这一批，就能争到足够的时间。",
+        "可他们没有都来街口。剑光、倒下的人，以及被迫绕开的路，拼出了她一路护送使者的方向。",
+        "当她发现正面的进攻已经停下，屋后的火先亮了。熟悉的藏身处，终于第一次被找到了。",
+        "她冲回房里，只看见烧焦的信。她曾经杀过的人，又一次死在自己的安排之中。",
+        "回营地时，她没有走惯常的门，也没有让任何人替自己拿兵器。",
+        "“下次有人问起我去了哪里，就说不知道。”\n她看着领队，像在等一句明确的回答。",
+        "“哪怕问的人是我。”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    },
+    {
+      "id": "E10",
+      "hero_id": "necrophos",
+      "hero_name": "瘟疫法师",
+      "title": "不止一名审判者",
+      "pages": [
+        "刑台重新出现在眼前。绳索、斧刃与法官的袍角，都和他记得的一样。",
+        "他有足够的时间逃走。但看到主审者举起判词，他还是停下，握紧了圣剑。",
+        "当年无法反驳的声音，在剑锋下戛然而止。判词落进血里，刽子手退到了台阶边。",
+        "他笑着弯腰捡起那张纸，几乎想把它带回营地，证明这件事原来如此简单。",
+        "台下却没有散去。有人认出剑下的人，也有人认出了持剑者，旧日的罪名再次被喊出来。",
+        "没有人再敲法槌。受害者与家属拿起木棍、石头和身边能握住的一切，重新围住刑台。",
+        "他挥剑迫退近处的人，远处却有更多声音接上来。有些名字，甚至没有写在他手中的判词上。",
+        "他开始寻找出口，才发现自己杀死的那个人，原先一直站在暴怒的人群与刑台之间。",
+        "他能再杀一个，也能再杀许多个。但每一次出手，都让愿意放他离开的人更少。",
+        "归途合拢前，他终于扔掉那张纸。纸落在哪里，他没有再看。",
+        "“一个法官，倒是很好解决。”\n营地里，他擦着手，语气仍像在谈一笔失败的买卖。",
+        "“领队，下次先找一条离城的路。\n圣剑的事，等出去了再说。”",
+        "塔门合拢。营地的火还在燃烧，圣剑也依旧握在归来者的手中。",
+        "有人开始寻找旧地图，有人重新磨利兵器，也有人一遍遍检查自己的记忆。",
+        "塔外，又有一名挑战者正在问路。\n他说，只要拿到那把剑，一切就还能挽回。"
+      ]
+    }
+  ]
+}

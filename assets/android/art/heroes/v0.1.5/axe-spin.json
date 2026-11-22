@@ -1,0 +1,18 @@
+{
+  "file": "axe-spin-attack-atlas-v3.png",
+  "frameWidth": 512,
+  "frameHeight": 512,
+  "rootX": 256,
+  "rootY": 464,
+  "bodyHeight": 316.0,
+  "contentWidth": 450,
+  "attackOriginX": 360,
+  "attackOriginY": 270,
+  "runtimeReady": true,
+  "order": [
+    "right",
+    "front",
+    "back",
+    "left"
+  ]
+}

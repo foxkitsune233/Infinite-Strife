@@ -1,0 +1,360 @@
+{
+  "version": 3,
+  "facing": "right",
+  "order": [
+    "ready",
+    "windup",
+    "strike",
+    "recovery"
+  ],
+  "heroes": {
+    "juggernaut": {
+      "file": "juggernaut-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 316.0,
+      "contentWidth": 422,
+      "attackOriginX": 255.802,
+      "attackOriginY": 463.785,
+      "weaponGrips": [
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.4355458464514627,
+            "grip": [
+              174.407,
+              319.1
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.44735391187008794,
+            "grip": [
+              322.182,
+              319.1
+            ]
+          }
+        ],
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.47579016356032544,
+            "grip": [
+              190.192,
+              180.436
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.38529483193196146,
+            "grip": [
+              327.411,
+              278.073
+            ]
+          }
+        ],
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.44712002678962287,
+            "grip": [
+              311.217,
+              242.783
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.40637481914425894,
+            "grip": [
+              341.564,
+              278.407
+            ]
+          }
+        ],
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.3515746878500356,
+            "grip": [
+              346.05,
+              306.157
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.42441618297256434,
+            "grip": [
+              317.683,
+              327.927
+            ]
+          }
+        ]
+      ],
+      "alternateFile": "juggernaut-offhand-atlas-v4.png"
+    },
+    "phantom_assassin": {
+      "file": "phantom-assassin-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 316.0,
+      "contentWidth": 391,
+      "attackOriginX": 256.235,
+      "attackOriginY": 464.008,
+      "weaponGrips": [
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.21404866994159277,
+            "grip": [
+              143.712,
+              308.379
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.19672369544816032,
+            "grip": [
+              335.227,
+              308.977
+            ]
+          }
+        ],
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.2429563289518875,
+            "grip": [
+              155.689,
+              195.652
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.20080223917127604,
+            "grip": [
+              368.75,
+              247.72
+            ]
+          }
+        ],
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.24505116732987356,
+            "grip": [
+              347.803,
+              234.189
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.19735175650170106,
+            "grip": [
+              386.705,
+              304.212
+            ]
+          }
+        ],
+        [
+          {
+            "name": "right",
+            "bladeToBody": 0.2285083205731603,
+            "grip": [
+              295.727,
+              327.955
+            ]
+          },
+          {
+            "name": "left",
+            "bladeToBody": 0.19063984139638818,
+            "grip": [
+              315.477,
+              290.848
+            ]
+          }
+        ]
+      ],
+      "alternateFile": "phantom-assassin-offhand-atlas-v4.png"
+    },
+    "skywrath": {
+      "file": "skywrath-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 316.0,
+      "contentWidth": 344,
+      "attackOriginX": 414.073,
+      "attackOriginY": 207.472,
+      "weaponGrips": [
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.9045994245945547,
+            "grip": [
+              357.927,
+              218.106
+            ]
+          }
+        ],
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.9109705307085513,
+            "grip": [
+              368.634,
+              218.106
+            ]
+          }
+        ],
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.9201841549245214,
+            "grip": [
+              362.049,
+              210.683
+            ]
+          }
+        ],
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.9201841549245214,
+            "grip": [
+              359.634,
+              216.463
+            ]
+          }
+        ]
+      ]
+    },
+    "abaddon": {
+      "file": "abaddon-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 316.0,
+      "contentWidth": 440,
+      "attackOriginX": 256.432,
+      "attackOriginY": 464.346,
+      "weaponGrips": [
+        [
+          {
+            "name": "sword-right",
+            "bladeToBody": 0.5330487921810093,
+            "grip": [
+              175.222,
+              299.035
+            ]
+          }
+        ],
+        [
+          {
+            "name": "sword-right",
+            "bladeToBody": 0.5764143257875725,
+            "grip": [
+              154.943,
+              187.538
+            ]
+          }
+        ],
+        [
+          {
+            "name": "sword-right",
+            "bladeToBody": 0.481018362707582,
+            "grip": [
+              323.365,
+              286.717
+            ]
+          }
+        ],
+        [
+          {
+            "name": "sword-right",
+            "bladeToBody": 0.5121420095927703,
+            "grip": [
+              297.026,
+              314.035
+            ]
+          }
+        ]
+      ]
+    },
+    "necrophos": {
+      "file": "necrophos-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 316.0,
+      "contentWidth": 367,
+      "attackOriginX": 427.862,
+      "attackOriginY": 236.034,
+      "weaponGrips": [
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.7641214661889977,
+            "grip": [
+              346.115,
+              278.344
+            ]
+          }
+        ],
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.7806881305399102,
+            "grip": [
+              352.665,
+              276.069
+            ]
+          }
+        ],
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.7451584312061595,
+            "grip": [
+              384.801,
+              262.532
+            ]
+          }
+        ],
+        [
+          {
+            "name": "staff-left",
+            "bladeToBody": 0.766189302246867,
+            "grip": [
+              349.79,
+              285.681
+            ]
+          }
+        ]
+      ]
+    },
+    "viper": {
+      "file": "viper-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 290.9091,
+      "contentWidth": 408,
+      "attackOriginX": 405.05,
+      "attackOriginY": 264.62,
+      "weaponGrips": [
+        [],
+        [],
+        [],
+        []
+      ]
+    }
+  }
+}

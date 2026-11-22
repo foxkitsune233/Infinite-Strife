@@ -1,0 +1,292 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/PreparationScreen.gd" id="1_prepare"]
+[ext_resource type="Texture2D" path="res://assets/android/art/scenes/ruins-menu-v2.jpg" id="2_camp"]
+[ext_resource type="Script" path="res://scripts/ui/InventoryShelf.gd" id="3_shelf"]
+
+[node name="Preparation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_prepare")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.055, 0.09, 1)
+mouse_filter = 2
+
+[node name="CampBackdrop" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_camp")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 26.0
+offset_right = -26.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Layout/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.78, 0.24, 1)
+theme_override_font_sizes/font_size = 32
+text = "整备"
+
+[node name="HeroButton" type="Button" parent="Layout/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 50)
+layout_mode = 2
+text = "英雄：主宰"
+
+[node name="ModeBar" type="HBoxContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Loadout" type="Button" parent="Layout/ModeBar"]
+toggle_mode = true
+button_pressed = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "配装"
+
+[node name="Skills" type="Button" parent="Layout/ModeBar"]
+toggle_mode = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "技能"
+
+[node name="Supplies" type="Button" parent="Layout/ModeBar"]
+toggle_mode = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "物资"
+
+[node name="Save" type="Button" parent="Layout/ModeBar"]
+custom_minimum_size = Vector2(110, 50)
+layout_mode = 2
+text = "保存"
+
+[node name="PresetRow" type="HBoxContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LoadoutRow" type="HBoxContainer" parent="Layout"]
+layout_mode = 2
+
+[node name="EquipmentPanel" type="VBoxContainer" parent="Layout/LoadoutRow"]
+size_flags_horizontal = 3
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Caption" type="Label" parent="Layout/LoadoutRow/EquipmentPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.34, 1)
+theme_override_font_sizes/font_size = 21
+text = "战斗装备 · 9 格"
+
+[node name="EquipmentSlots" type="GridContainer" parent="Layout/LoadoutRow/EquipmentPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+alignment = 1
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 9
+
+[node name="CardPanel" type="VBoxContainer" parent="Layout"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Caption" type="Label" parent="Layout/CardPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.55, 1, 1)
+theme_override_font_sizes/font_size = 21
+text = "技能卡 · 8 格"
+
+[node name="CardSlots" type="GridContainer" parent="Layout/CardPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 4
+alignment = 1
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 9
+
+[node name="SuppliesPanel" type="VBoxContainer" parent="Layout"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="FilterRow" type="HBoxContainer" parent="Layout/SuppliesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FilterCycle" type="Button" parent="Layout/SuppliesPanel/FilterRow"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "全部物资 · 点击切换"
+
+[node name="CampToggle" type="Button" parent="Layout/SuppliesPanel/FilterRow"]
+custom_minimum_size = Vector2(142, 46)
+layout_mode = 2
+text = "营地服务"
+
+[node name="Scroll" type="ScrollContainer" parent="Layout/SuppliesPanel"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="WarehouseContent" type="VBoxContainer" parent="Layout/SuppliesPanel/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="WarehouseCaption" type="Label" parent="Layout/SuppliesPanel/Scroll/WarehouseContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56, 0.92, 0.65, 1)
+theme_override_font_sizes/font_size = 22
+text = "局外仓库"
+
+[node name="WarehouseItems" type="Control" parent="Layout/SuppliesPanel/Scroll/WarehouseContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_shelf")
+
+[node name="BackpackCaption" type="Label" parent="Layout/SuppliesPanel/Scroll/WarehouseContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56, 0.92, 0.65, 1)
+theme_override_font_sizes/font_size = 22
+text = "随身背包 · 4×3"
+
+[node name="BackpackGrid" type="Control" parent="Layout/SuppliesPanel/Scroll/WarehouseContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SafeCaption" type="Label" parent="Layout/SuppliesPanel/Scroll/WarehouseContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.39, 0.82, 0.98, 1)
+theme_override_font_sizes/font_size = 22
+text = "安全箱 · 2×2"
+
+[node name="SafeGrid" type="Control" parent="Layout/SuppliesPanel/Scroll/WarehouseContent"]
+layout_mode = 2
+
+[node name="InventoryActions" type="HBoxContainer" parent="Layout/SuppliesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Organize" type="Button" parent="Layout/SuppliesPanel/InventoryActions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "一键整理"
+
+[node name="BatchSell" type="Button" parent="Layout/SuppliesPanel/InventoryActions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "批量出售"
+
+[node name="ItemMore" type="Button" parent="Layout/SuppliesPanel/InventoryActions"]
+custom_minimum_size = Vector2(112, 52)
+layout_mode = 2
+text = "单件工具"
+
+[node name="InventoryMorePanel" type="HBoxContainer" parent="Layout/SuppliesPanel"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Rotate" type="Button" parent="Layout/SuppliesPanel/InventoryMorePanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "旋转"
+
+[node name="Lock" type="Button" parent="Layout/SuppliesPanel/InventoryMorePanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "锁定／解锁"
+
+[node name="QuickSell" type="Button" parent="Layout/SuppliesPanel/InventoryMorePanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "出售选中"
+
+[node name="CampPanel" type="HBoxContainer" parent="Layout"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Crafting" type="Button" parent="Layout/CampPanel"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "合成工坊"
+
+[node name="Shop" type="Button" parent="Layout/CampPanel"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "营地补给"
+
+[node name="Status" type="Label" parent="Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 2
+
+[node name="Back" type="Button" parent="Layout"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+text = "返回主页"
+
+[connection signal="pressed" from="Layout/Header/HeroButton" to="." method="_on_hero_pressed"]
+[connection signal="pressed" from="Layout/ModeBar/Loadout" to="." method="_on_mode_pressed" binds=["loadout"]]
+[connection signal="pressed" from="Layout/ModeBar/Skills" to="." method="_on_mode_pressed" binds=["skills"]]
+[connection signal="pressed" from="Layout/ModeBar/Supplies" to="." method="_on_mode_pressed" binds=["supplies"]]
+[connection signal="pressed" from="Layout/ModeBar/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/FilterRow/FilterCycle" to="." method="_on_filter_cycle_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/FilterRow/CampToggle" to="." method="_on_camp_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/InventoryActions/Organize" to="." method="_on_organize_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/InventoryActions/BatchSell" to="." method="_on_batch_sell_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/InventoryActions/ItemMore" to="." method="_on_inventory_more_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/InventoryMorePanel/Rotate" to="." method="_on_rotate_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/InventoryMorePanel/Lock" to="." method="_on_lock_pressed"]
+[connection signal="pressed" from="Layout/SuppliesPanel/InventoryMorePanel/QuickSell" to="." method="_on_quick_sell_pressed"]
+[connection signal="pressed" from="Layout/CampPanel/Crafting" to="." method="_on_crafting_pressed"]
+[connection signal="pressed" from="Layout/CampPanel/Shop" to="." method="_on_shop_pressed"]
+[connection signal="pressed" from="Layout/Back" to="." method="_on_back_pressed"]

@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "art": [
+    {
+      "id": "D7",
+      "artKey": "dual_01_blood_combo",
+      "name": "沸血连斩",
+      "tags": [
+        "basic",
+        "rage"
+      ],
+      "file": "v0.1.5/D7.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/D7.png",
+      "sourceSha256": "925c7050b9207da8dca78e2a471cc7abe6866eb8decf59f77d8ab760f5975483",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\dual_01_blood_combo\\dual_01_blood_combo.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "D8",
+      "artKey": "dual_02_frost_cast",
+      "name": "霜影咏唱",
+      "tags": [
+        "ultimate",
+        "frost"
+      ],
+      "file": "v0.1.5/D8.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/D8.png",
+      "sourceSha256": "c25dca985861864d09f75882b6b4cbc5a63fd222ed5feb2c2b798551f2280b7e",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\dual_02_frost_cast\\dual_02_frost_cast.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "D9",
+      "artKey": "dual_03_critical_boil",
+      "name": "致命沸点",
+      "tags": [
+        "crit",
+        "rage"
+      ],
+      "file": "v0.1.5/D9.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/D9.png",
+      "sourceSha256": "38b62d5879ec23152d3cfaf2b9c2fcef1cec05547bc94f721ef7851d88e7384a",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\dual_03_critical_boil\\dual_03_critical_boil.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "D10",
+      "artKey": "dual_04_ice_recoil",
+      "name": "冰甲反噬",
+      "tags": [
+        "shield",
+        "frost"
+      ],
+      "file": "v0.1.5/D10.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/D10.png",
+      "sourceSha256": "e086a11ddb5ea0762a10afadb0586855cef75222b8302ff505a3050a2949e27e",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\dual_04_ice_recoil\\dual_04_ice_recoil.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "D11",
+      "artKey": "dual_05_hot_recovery",
+      "name": "逆境热血",
+      "tags": [
+        "restore",
+        "rage"
+      ],
+      "file": "v0.1.5/D11.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/D11.png",
+      "sourceSha256": "3376cdf4ed76801f4a999ceb0420937b6644ca0e365bc6b37489ab12f0174a24",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\dual_05_hot_recovery_flat\\dual_05_hot_recovery_flat.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "D12",
+      "artKey": "dual_06_frozen_venom",
+      "name": "冻毒蔓延",
+      "tags": [
+        "poison",
+        "frost"
+      ],
+      "file": "v0.1.5/D12.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/D12.png",
+      "sourceSha256": "accfa751a434b487d9bcc1e142fddf55895e8f71b814325679036a6e20d543fa",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\dual_06_frozen_venom\\dual_06_frozen_venom.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "D13",
+      "artKey": "dual_07_thermal_shatter",
+      "name": "极温崩解",
+      "tags": [
+        "rage",
+        "frost"
+      ],
+      "file": "v0.1.5/D13.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/D13.png",
+      "sourceSha256": "b29b595e05c326fffa29e35f6c0614f29058978e088cc4baeb750b52b38ee6a2",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\dual_07_thermal_shatter\\dual_07_thermal_shatter.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "F1",
+      "artKey": "frost_01_rime_mark",
+      "name": "霜痕",
+      "tags": [
+        "frost"
+      ],
+      "file": "v0.1.5/F1.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/F1.png",
+      "sourceSha256": "ed757310b4ca828a2585bec0ab0b39c71f69b8dc8e5b9b21c436381f74246e9f",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\frost_01_rime_mark\\frost_01_rime_mark.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "F2",
+      "artKey": "frost_02_winter_armor",
+      "name": "凛冬甲壳",
+      "tags": [
+        "frost"
+      ],
+      "file": "v0.1.5/F2.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/F2.png",
+      "sourceSha256": "bc906488982663102fd6c009f571d48bc15cfe434da0b2b78586089d363c8d14",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\frost_02_winter_armor\\frost_02_winter_armor.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "F3",
+      "artKey": "frost_03_pulse",
+      "name": "冰封脉冲",
+      "tags": [
+        "frost"
+      ],
+      "file": "v0.1.5/F3.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/F3.png",
+      "sourceSha256": "2d1edebaae0dd7a4d30d0d9939406b3eead854637d0d797f352a3e238e7238d9",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\frost_03_pulse\\frost_03_pulse.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "F4",
+      "artKey": "frost_04_absolute_zero",
+      "name": "绝对零度",
+      "tags": [
+        "frost"
+      ],
+      "file": "v0.1.5/F4.webp",
+      "source": "art-source/cards-v015-gpt-v4-expansion/F4.png",
+      "sourceSha256": "b00fe7fd4663e7d45d6fb29c0ed2e0c62986da9d5bcc999d1533bb40a607f261",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\frost_04_absolute_zero\\frost_04_absolute_zero.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "RG1",
+      "artKey": "rage_01_fury",
+      "name": "怒意沸腾",
+      "tags": [
+        "rage"
+      ],
+      "file": "v0.1.5/RG1.webp",
+      "source": "art-source/cards-v015-gpt-v3-rage/RG1.png",
+      "sourceSha256": "c3538b60a342c09879ac2566fc4472efb7aaa607cb3e333649f4e5c6b310591b",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\rage_01_fury\\rage_01_fury.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "RG2",
+      "artKey": "rage_02_wound",
+      "name": "连战激怒",
+      "tags": [
+        "rage"
+      ],
+      "file": "v0.1.5/RG2.webp",
+      "source": "art-source/cards-v015-gpt-v3-rage/RG2.png",
+      "sourceSha256": "c47b4f4798f6cf938c01183174129f2e1bfd120e43c9355236fad4155ac110d5",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\rage_02_wound_flat\\rage_02_wound_flat.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "RG3",
+      "artKey": "rage_03_warcry",
+      "name": "狂战回响",
+      "tags": [
+        "rage"
+      ],
+      "file": "v0.1.5/RG3.webp",
+      "source": "art-source/cards-v015-gpt-v3-rage/RG3.png",
+      "sourceSha256": "0a88309a4b46737f0f769baa0b81668af3906419e15dab58a48273df03157dd3",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\rage_03_warcry\\rage_03_warcry.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    },
+    {
+      "id": "RG4",
+      "artKey": "rage_04_unbroken",
+      "name": "不屈战魂",
+      "tags": [
+        "rage"
+      ],
+      "file": "v0.1.5/RG4.webp",
+      "source": "art-source/cards-v015-gpt-v3-rage/RG4.png",
+      "sourceSha256": "129d0d64a53e67b02e8e3ae527967157d27456df7f78863926c57e7887f7d6aa",
+      "repaired": true,
+      "previousSource": "art-generation\\v0.1.5-repaired\\rage_04_unbroken\\rage_04_unbroken.png",
+      "provider": "GPT built-in image_gen",
+      "redrawnAt": "2026-10-21",
+      "style": "angular-flat-paper-cut-dark-fantasy"
+    }
+  ]
+}

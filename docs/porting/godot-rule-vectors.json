@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "purpose": "Godot T3 deterministic combat rule vectors. These values define original-project behavior and are not imported from the Android implementation.",
+  "time_limit_ms": 60000,
+  "physical_damage": {
+    "formula": "round(raw_damage / (1 + 0.06 * armor))",
+    "vector": {"raw_damage": 100, "armor": 12, "applied_damage": 58}
+  },
+  "magic_damage": {
+    "formula": "round(raw_damage * (1 - magic_resistance))",
+    "vector": {"raw_damage": 50, "magic_resistance": 0.0, "applied_damage": 50}
+  },
+  "shield": {
+    "priority": "shield absorbs post-mitigation damage before health",
+    "vector": {"health": 500, "shield": 80, "incoming_damage": 100, "remaining_health": 480, "remaining_shield": 0}
+  },
+  "skill_cast": {
+    "requirements": ["not_stunned", "not_silenced", "enough_mana", "cooldown_ready"],
+    "vector": {"mana": 100, "mana_cost": 30, "cooldown_ms": 1200, "remaining_mana": 70}
+  },
+  "critical_and_lifesteal": {
+    "critical_multiplier": 2.0,
+    "vector": {"base_damage": 100, "critical_chance_percent": 100, "applied_damage": 200, "lifesteal_percent": 20, "healing": 40}
+  },
+  "damage_over_time": {
+    "vector": {"damage": 15, "interval_ms": 1000, "duration_ms": 2500, "damage_after_2000_ms": 30},
+    "resolution": "DOT is magic damage and ticks through the normal shield and magic-resistance path."
+  },
+  "active_equipment": {
+    "requirements": ["source_not_stunned", "item_cooldown_ready"],
+    "supported_kinds": ["shield", "heal", "mana", "poison", "slow", "haste", "cleanse", "evasion"]
+  },
+  "status": {
+    "tick_rule": "durations count down on each deterministic engine step and are removed at zero",
+    "stun": "prevents automatic attacks and skill casts",
+    "silence": "prevents skill casts but does not alter mana",
+    "slow": "multiplies the next attack interval by 1.30",
+    "haste": "multiplies the next attack interval by 0.70"
+  }
+}

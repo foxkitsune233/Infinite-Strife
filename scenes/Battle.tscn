@@ -1,0 +1,271 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/BattleScreen.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/android/art/scenes/camp-v2.jpg" id="2_android_ruins"]
+[ext_resource type="Script" path="res://scripts/ui/BattleEffectView.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/ui/BattleActorView.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/ui/BattleAudioBus.gd" id="7"]
+
+[sub_resource type="StyleBoxFlat" id="hud"]
+bg_color = Color(0.018, 0.045, 0.09, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.66, 0.76, 0.72)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="arena_frame"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.77, 0.59, 0.31, 1)
+
+[node name="Battle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.012, 0.025, 0.055, 1)
+
+[node name="BattleStage" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_top = 0.05
+anchor_bottom = 0.46
+offset_left = 14.0
+offset_right = -14.0
+clip_contents = true
+mouse_filter = 2
+
+[node name="BattleAudio" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7")
+
+[node name="BackgroundArt" type="TextureRect" parent="BattleStage"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_android_ruins")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="LeftActor" type="TextureRect" parent="BattleStage"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.06
+anchor_top = 0.2
+anchor_right = 0.47
+anchor_bottom = 0.88
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("6")
+
+[node name="RightActor" type="TextureRect" parent="BattleStage"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.53
+anchor_top = 0.2
+anchor_right = 0.94
+anchor_bottom = 0.88
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+script = ExtResource("6")
+
+[node name="EffectsLayer" type="Control" parent="BattleStage"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("5")
+
+[node name="ArenaFrame" type="Panel" parent="BattleStage"]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("arena_frame")
+
+[node name="TopHud" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_top = 0.47
+anchor_right = 1.0
+anchor_bottom = 0.47
+offset_left = 14.0
+offset_top = 12.0
+offset_right = -14.0
+offset_bottom = 12.0
+theme_override_constants/separation = 10
+
+[node name="LeftHud" type="PanelContainer" parent="TopHud"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("hud")
+
+[node name="Content" type="VBoxContainer" parent="TopHud/LeftHud"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LeftName" type="Label" parent="TopHud/LeftHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.84, 0.5, 1)
+theme_override_font_sizes/font_size = 17
+text = "我方"
+
+[node name="LeftHpBar" type="ProgressBar" parent="TopHud/LeftHud/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+show_percentage = false
+
+[node name="LeftHpLabel" type="Label" parent="TopHud/LeftHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+
+[node name="LeftMpLabel" type="Label" parent="TopHud/LeftHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.79, 1, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="LeftStatusIcons" type="HBoxContainer" parent="TopHud/LeftHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LeftStatusLabel" type="Label" parent="TopHud/LeftHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+
+[node name="TimerLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.58, 0.88, 0.92, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="RightHud" type="PanelContainer" parent="TopHud"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("hud")
+
+[node name="Content" type="VBoxContainer" parent="TopHud/RightHud"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="RightName" type="Label" parent="TopHud/RightHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.84, 0.5, 1)
+theme_override_font_sizes/font_size = 17
+text = "对手"
+horizontal_alignment = 2
+
+[node name="RightHpBar" type="ProgressBar" parent="TopHud/RightHud/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+show_percentage = false
+
+[node name="RightHpLabel" type="Label" parent="TopHud/RightHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 2
+
+[node name="RightMpLabel" type="Label" parent="TopHud/RightHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.79, 1, 1)
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+
+[node name="RightStatusIcons" type="HBoxContainer" parent="TopHud/RightHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="RightStatusLabel" type="Label" parent="TopHud/RightHud/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+
+[node name="Bottom" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 0.73
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = -18.0
+offset_bottom = -18.0
+theme_override_constants/separation = 8
+
+[node name="ManualControls" type="VBoxContainer" parent="Bottom"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="ManualSkillButton" type="Button" parent="Bottom/ManualControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "技能"
+
+[node name="ManualItems" type="HBoxContainer" parent="Bottom/ManualControls"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 6
+
+[node name="ResultLabel" type="Label" parent="Bottom"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.32, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="ResultButton" type="Button" parent="Bottom"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "返回主页"
+
+[connection signal="pressed" from="Bottom/ResultButton" to="." method="_on_result_button_pressed"]
+[connection signal="pressed" from="Bottom/ManualControls/ManualSkillButton" to="." method="_on_manual_skill_pressed"]

@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "heroes": {
+    "antimage": {
+      "file": "antimage-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 316.0,
+      "contentWidth": 389,
+      "attackOriginX": 360,
+      "attackOriginY": 270,
+      "runtimeReady": true
+    },
+    "axe": {
+      "file": "axe-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 312.3,
+      "contentWidth": 421,
+      "attackOriginX": 360,
+      "attackOriginY": 270,
+      "runtimeReady": true
+    },
+    "faceless_void": {
+      "file": "faceless-void-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 288.13,
+      "contentWidth": 426,
+      "attackOriginX": 360,
+      "attackOriginY": 270,
+      "runtimeReady": true
+    },
+    "legion_commander": {
+      "file": "legion-commander-attack-atlas-v3.png",
+      "frameWidth": 512,
+      "frameHeight": 512,
+      "rootX": 256,
+      "rootY": 464,
+      "bodyHeight": 233.547,
+      "contentWidth": 417,
+      "attackOriginX": 360,
+      "attackOriginY": 270,
+      "runtimeReady": true
+    }
+  }
+}

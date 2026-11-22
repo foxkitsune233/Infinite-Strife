@@ -1,0 +1,497 @@
+[
+  {
+    "test": "test_android_actor_animation.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_effect_catalog.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_equipment_catalog.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_growth.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_hero_catalog.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_hero_runtime.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_journey_route.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_loadout_parity.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_loadout_stats.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_android_shield_damage.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_asset_register.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_augment_battle_ui.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_augment_engine_edges.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_augment_ownership.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_actor_view.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_audio_bus.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_consumables.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_effect_catalog.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_effect_view.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_engine.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_loadout_builder.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_presentation_controller.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_presentation.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_battle_time_limit.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_blade_mail.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_bloodthorn_and_abyssal.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_button_adaptation.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_campaign_session.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_card_preparation_ui.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_card_preparation.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_carry_gold.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_chest_appraisal.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_chest_batch_atomic.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_chest_refresh.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_combat_effect_runtime.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_combat_effects.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_combat_rules.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_content_catalog.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_control_equipment.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_core_navigation.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_crafting_rules.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_crafting_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_ethereal_and_shiva.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_event_dedup_rng.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_event_delivery_parity.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_expedition_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_hero_aghanim.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_hero_level_ui.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_hero_levels.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_hero_shards.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_initial_unlocks_reserves.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_item_detail.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_journey_battle_bridge.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_journey_inventory_limits.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_journey_loot_rules.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_material_pity.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_material_settlement.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_mkb_and_aeon.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_nullifier.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_packing_rules.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_portrait_shell.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_preparation_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_progression_integration.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_progression_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_project_boot.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_quest_rules.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_relief_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_relief.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_retired_materials.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_run_drop_identity.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_save_codec.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_save_repository.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_save_safety.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_settings_backup.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_settings_effects.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_settings_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_settlement_atomic.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_shop_layout.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_shop_parity.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_shop_rules.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_shop_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_shop_shared_clock.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_shop_transactions.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_silver_edge.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_skill_runtime.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_story_bad_save.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_story_boot.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_story_claim.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_story_journal.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_story_player.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_story.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_task_hero_unlocks.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_tower_combat.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_tower_primary.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_tower_rules.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_tower_screen.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_tower_session.gd",
+    "exit": 0,
+    "errors": false
+  },
+  {
+    "test": "test_visual_acceptance.gd",
+    "exit": 0,
+    "errors": false
+  }
+]

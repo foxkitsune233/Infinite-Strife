@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "coordinateSystem": "rightFacing",
+  "notes": "Action poses are full-body overlays. Mirroring the final render supports left-facing combatants without a second asset set.",
+  "defaultAttack": {
+    "durationMs": 420,
+    "hitAtMs": 170,
+    "phases": [
+      { "name": "anticipation", "startMs": 0, "endMs": 90, "asset": "idle", "scale": 0.97, "forwardPercent": -2 },
+      { "name": "strike", "startMs": 90, "endMs": 230, "asset": "attack", "scale": 1.04, "forwardPercent": 9 },
+      { "name": "recover", "startMs": 230, "endMs": 420, "asset": "idle", "scale": 1.0, "forwardPercent": 0 }
+    ]
+  },
+  "heroes": {
+    "juggernaut": {
+      "idle": "juggernaut-idle-v1.png",
+      "attack": "juggernaut-attack-v1.png",
+      "attackKind": "melee",
+      "hitAtMs": 155
+    },
+    "skywrath": {
+      "idle": "skywrath-idle-v1.png",
+      "attack": "skywrath-attack-v1.png",
+      "attackKind": "ranged",
+      "hitAtMs": 180,
+      "projectileAtMs": 180
+    },
+    "phantom_assassin": {
+      "idle": "phantom-assassin-idle-v1.png",
+      "attack": "phantom-assassin-attack-v1.png",
+      "attackKind": "melee",
+      "hitAtMs": 150
+    },
+    "abaddon": {
+      "idle": "abaddon-idle-v1.png",
+      "attack": "abaddon-attack-v1.png",
+      "attackKind": "melee",
+      "hitAtMs": 180
+    },
+    "necrophos": {
+      "idle": "necrophos-idle-v1.png",
+      "attack": "necrophos-attack-v1.png",
+      "attackKind": "ranged",
+      "hitAtMs": 190,
+      "projectileAtMs": 190
+    },
+    "viper": {
+      "idle": "viper-idle-v1.png",
+      "attack": "viper-attack-v1.png",
+      "attackKind": "ranged",
+      "hitAtMs": 170,
+      "projectileAtMs": 170
+    }
+  }
+}

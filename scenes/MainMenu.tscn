@@ -1,0 +1,126 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/app.gd" id="1_app"]
+
+[sub_resource type="StyleBoxFlat" id="StylePanel"]
+bg_color = Color(0.035, 0.09, 0.15, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.93, 0.68, 0.2, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_app")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.035, 0.065, 1)
+mouse_filter = 2
+
+[node name="CampBackdrop" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Center" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20
+offset_top = 90
+offset_right = -20
+offset_bottom = -132
+horizontal_scroll_mode = 0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(640, 560)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StylePanel")
+
+[node name="Content" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="Center/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.32, 1)
+theme_override_font_sizes/font_size = 46
+text = "INFINITE STRIFE"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Center/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 20
+text = "无尽纷争 · Godot迁移开发版"
+horizontal_alignment = 1
+
+[node name="BeginSkirmish" type="Button" parent="Center/Panel/Content"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "开始演练"
+
+[node name="Preparation" type="Button" parent="Center/Panel/Content"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "整备与仓库"
+
+[node name="Expedition" type="Button" parent="Center/Panel/Content"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "进入远征"
+
+[node name="Continue" type="Button" parent="Center/Panel/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "继续上次远征"
+
+[node name="Progression" type="Button" parent="Center/Panel/Content"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "委托任务与英雄等级"
+
+[node name="StatusLabel" type="Label" parent="Center/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2
+text = "整备构筑、挑战远征，在营地领取委托奖励并升级英雄。"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Center/Panel/Content/BeginSkirmish" to="." method="_on_begin_skirmish_pressed"]
+[connection signal="pressed" from="Center/Panel/Content/Preparation" to="." method="_on_preparation_pressed"]
+[connection signal="pressed" from="Center/Panel/Content/Expedition" to="." method="_on_expedition_pressed"]
+[connection signal="pressed" from="Center/Panel/Content/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Center/Panel/Content/Progression" to="." method="_on_progression_pressed"]

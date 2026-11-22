@@ -1,0 +1,2011 @@
+{
+  "schema": 1,
+  "sourceBase": "Android repository",
+  "hashAlgorithm": "SHA256",
+  "files": [
+    {
+      "source": "app/src/main/assets/art/branding/juggernaut-launcher-portrait-v1.png",
+      "destination": "assets/android/art/branding/juggernaut-launcher-portrait-v1.png",
+      "bytes": 2502105,
+      "sha256": "05ea85f57bba982435d9dee641672182a5a385e9c6d022c528f367c7b6ce2316"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/A1-v1.png",
+      "destination": "assets/android/art/cards/A1-v1.png",
+      "bytes": 2990185,
+      "sha256": "9b93499b99f0d9c06d587a8cad1ccbc35b36efeaf084f567f5491225e65fe2f1"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/A2-v1.png",
+      "destination": "assets/android/art/cards/A2-v1.png",
+      "bytes": 2818592,
+      "sha256": "8c3a5980c223d980521c7a0ee76ee91faadeb63d5545ed26fa42f6362ec8807d"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/A3-v1.png",
+      "destination": "assets/android/art/cards/A3-v1.png",
+      "bytes": 2842502,
+      "sha256": "7622fc5cbbac5623e89b00d5048b9ada74bd011d9b871dbc49a8849154f99bfb"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/A4-v1.png",
+      "destination": "assets/android/art/cards/A4-v1.png",
+      "bytes": 2863383,
+      "sha256": "1e2e3947d79934eb78216bbedab7e5dbe932acecde8615ae0b78ac0ec539b489"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/C1-v1.png",
+      "destination": "assets/android/art/cards/C1-v1.png",
+      "bytes": 2714327,
+      "sha256": "34cf6b402d4ec2dd831dc8770224456799e7f58a2e54503297f8c25ea0a57699"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/C2-v1.png",
+      "destination": "assets/android/art/cards/C2-v1.png",
+      "bytes": 3031556,
+      "sha256": "040c870cfeaf73d92d806688a684ea11540b274d900753064e7e21d2ad6ea1d9"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/C3-v1.png",
+      "destination": "assets/android/art/cards/C3-v1.png",
+      "bytes": 2842828,
+      "sha256": "65674753219b37a972730992cc3533a811b7f178375c8bc02952131bf22645e8"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/C4-v1.png",
+      "destination": "assets/android/art/cards/C4-v1.png",
+      "bytes": 2742076,
+      "sha256": "94b7737407d3a15021313fd8b082494b1204b74a03d80d0726a5aa3c7192ed9b"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/card-art-manifest.json",
+      "destination": "assets/android/art/cards/card-art-manifest.json",
+      "bytes": 2916,
+      "sha256": "a27a207b13062cf66775554b001ec4af0185e1d84b71503d67b88f20e725db47"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/D1-v1.png",
+      "destination": "assets/android/art/cards/D1-v1.png",
+      "bytes": 2737710,
+      "sha256": "91b47223787da30ccbb85ac54e0f082bbdd7cd70a89c26ac61c643ff550e5643"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/D2-v1.png",
+      "destination": "assets/android/art/cards/D2-v1.png",
+      "bytes": 2777882,
+      "sha256": "ad71d7ccfb83cda4de6933f32db77385942a83b6243e78c3c9d289a7532c02fd"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/D3-v1.png",
+      "destination": "assets/android/art/cards/D3-v1.png",
+      "bytes": 2914956,
+      "sha256": "43b10f698d63c7930098c211653e2a83f6e357e27e5c56c7793b2610f1ce8c6d"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/D4-v1.png",
+      "destination": "assets/android/art/cards/D4-v1.png",
+      "bytes": 3053089,
+      "sha256": "67dd85f29175744bf98cbb0a8f92e1eb19341d557140406d556a5a6efa0710b9"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/D5-v1.png",
+      "destination": "assets/android/art/cards/D5-v1.png",
+      "bytes": 2841841,
+      "sha256": "1a096627d7c25218d98c935ebac1987271c24f0d8451a724511127a23aa32499"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/D6-v1.png",
+      "destination": "assets/android/art/cards/D6-v1.png",
+      "bytes": 3000095,
+      "sha256": "ac356147e25675d2ab187eff2eed0e3f0f33bb7f82d4f673daaec436e9d306ef"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/P1-v1.png",
+      "destination": "assets/android/art/cards/P1-v1.png",
+      "bytes": 2667611,
+      "sha256": "ee1551512a29dddf6dc0c680b4698a5d0b2866f37c8c3b246dfa8de278f19ca7"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/P2-v1.png",
+      "destination": "assets/android/art/cards/P2-v1.png",
+      "bytes": 2783631,
+      "sha256": "7965ac8560e699ac33b7e3b3b3e7d58550fc7365a626eba6ec34282c0a49ef88"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/P3-v1.png",
+      "destination": "assets/android/art/cards/P3-v1.png",
+      "bytes": 3007972,
+      "sha256": "d62cfe0d7ef7083b0214c06826094f3f27b5b4b173e4c7e1fcec01b6cdc9fd1f"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/P4-v1.png",
+      "destination": "assets/android/art/cards/P4-v1.png",
+      "bytes": 2891263,
+      "sha256": "96b6bd07e35da8f658d40e49be8268ceb056515a180c3273ddeb03208721fbec"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/R1-v1.png",
+      "destination": "assets/android/art/cards/R1-v1.png",
+      "bytes": 2950259,
+      "sha256": "0ea474d5e978777a4d71cdf5acf74988883a9a9db24c04dab472766761f836a1"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/R2-v1.png",
+      "destination": "assets/android/art/cards/R2-v1.png",
+      "bytes": 2673031,
+      "sha256": "fae6b117c98741eb32ce22c5d501dd36040252429be112b2877c270ae6f963c4"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/R3-v1.png",
+      "destination": "assets/android/art/cards/R3-v1.png",
+      "bytes": 2855131,
+      "sha256": "611b1a41dccc6c7f0f9ea3f833ad2fc439f29968be10c06fd88fa64aa06a8e7a"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/R4-v1.png",
+      "destination": "assets/android/art/cards/R4-v1.png",
+      "bytes": 3046602,
+      "sha256": "b3b672b6e91cdbc28d6c594eef3f8b37996ea48edabd809814958a910640592b"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/S1-v1.png",
+      "destination": "assets/android/art/cards/S1-v1.png",
+      "bytes": 2996210,
+      "sha256": "4682c3819df19ea770430f07de302074f1ac4df4f0cded57dfaada0dd5c1c4c7"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/S2-v1.png",
+      "destination": "assets/android/art/cards/S2-v1.png",
+      "bytes": 3032263,
+      "sha256": "69a5a0c097c60557e659687de3c4d5edf49131c907d1cf4b08e4806245541b0e"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/S3-v1.png",
+      "destination": "assets/android/art/cards/S3-v1.png",
+      "bytes": 3096592,
+      "sha256": "cbfc24c8ac5fcd2c8279b8f1e3c0ed4d5cd1057878f5d5b8ccb50b8e0f805e84"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/S4-v1.png",
+      "destination": "assets/android/art/cards/S4-v1.png",
+      "bytes": 3051054,
+      "sha256": "616e5991c5321cee91a4b78df7fe18408bf62528c9d63e97c0f5e1a0f1f195b7"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/U1-v1.png",
+      "destination": "assets/android/art/cards/U1-v1.png",
+      "bytes": 3048103,
+      "sha256": "a0d7d6a1394fc085725d3e3c95af3a276d09d16f1442a2a97b6f815118530bf5"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/U2-v1.png",
+      "destination": "assets/android/art/cards/U2-v1.png",
+      "bytes": 2866255,
+      "sha256": "fbeceb8a47b94cc5184d899e6b4ee3110a5d6646746cf23e511b6bc8f6f724b0"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/U3-v1.png",
+      "destination": "assets/android/art/cards/U3-v1.png",
+      "bytes": 2899826,
+      "sha256": "3a209cd6c68ce5750cc0215756ed8110941ed6efecd1eae4b12413f4a5fc1261"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/U4-v1.png",
+      "destination": "assets/android/art/cards/U4-v1.png",
+      "bytes": 3174722,
+      "sha256": "af00381097fe8453db6724c9159128ebbd66bb5672a7359138030a67e9d8e45d"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/D10.webp",
+      "destination": "assets/android/art/cards/v0.1.5/D10.webp",
+      "bytes": 203762,
+      "sha256": "d159f5abef9d49d76656083877fa3509be84f44f311a2d6a35c2fd671bd03d95"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/D11.webp",
+      "destination": "assets/android/art/cards/v0.1.5/D11.webp",
+      "bytes": 183250,
+      "sha256": "e7c6a9b0dd1c618bbf4ae42a04c1a2db9b0938eae76b798867268f94df045c44"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/D12.webp",
+      "destination": "assets/android/art/cards/v0.1.5/D12.webp",
+      "bytes": 207432,
+      "sha256": "c5fc7b05446870af45d0cce58c200c28c3cd6335f04ee1cced2725fa24407d32"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/D13.webp",
+      "destination": "assets/android/art/cards/v0.1.5/D13.webp",
+      "bytes": 223000,
+      "sha256": "c7fab2c41609a42c5db5897e175d889cb1361dd15b963fb4bc2324444208fb0b"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/D7.webp",
+      "destination": "assets/android/art/cards/v0.1.5/D7.webp",
+      "bytes": 199716,
+      "sha256": "01ef80006c910fd2a79ac51d0a3e3a155761cfe4290ce8e36fbdea79674cb2cd"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/D8.webp",
+      "destination": "assets/android/art/cards/v0.1.5/D8.webp",
+      "bytes": 212910,
+      "sha256": "994425d9268837c78cb46376c975130b013c5e097926ff9012deffa764efcc6f"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/D9.webp",
+      "destination": "assets/android/art/cards/v0.1.5/D9.webp",
+      "bytes": 182728,
+      "sha256": "cc93dfe244e0312d966f98e3d3d6a3d3056a2c0f32dc40c64d3fa7c62235c0c4"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/F1.webp",
+      "destination": "assets/android/art/cards/v0.1.5/F1.webp",
+      "bytes": 216410,
+      "sha256": "ffb19bdaca8f42911894804ed2bd801742532780d85153c633ddfd9c7a838219"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/F2.webp",
+      "destination": "assets/android/art/cards/v0.1.5/F2.webp",
+      "bytes": 206032,
+      "sha256": "7f87e3208bacac665681e820d576a2b4dc1f95fbf02c22685f5a800292151d4d"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/F3.webp",
+      "destination": "assets/android/art/cards/v0.1.5/F3.webp",
+      "bytes": 222818,
+      "sha256": "db88d8099b99c095d37a1bb361ac9d6a9e2fb956dea03c9fada935ca63690c34"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/F4.webp",
+      "destination": "assets/android/art/cards/v0.1.5/F4.webp",
+      "bytes": 194070,
+      "sha256": "8d864f490d9b5b048a4e5648fb762db9916a632fee234fd7ffa53440d386ec35"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/manifest.json",
+      "destination": "assets/android/art/cards/v0.1.5/manifest.json",
+      "bytes": 9178,
+      "sha256": "7f80db70e57068027e3a1feb6e7da45af68238b4e11ad2b98f26ad4242118eac"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/RG1.webp",
+      "destination": "assets/android/art/cards/v0.1.5/RG1.webp",
+      "bytes": 199040,
+      "sha256": "554e029a1ad69f811c2af713ea8df08f2ec9c7de03d2fe9985fa4479ccef38af"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/RG2.webp",
+      "destination": "assets/android/art/cards/v0.1.5/RG2.webp",
+      "bytes": 206122,
+      "sha256": "eea5f373b6c459625a804ec64b650bb692f6f6f3fa52270e653dbdeadf37c6c1"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/RG3.webp",
+      "destination": "assets/android/art/cards/v0.1.5/RG3.webp",
+      "bytes": 209110,
+      "sha256": "50bdc3921282b4fed66b7f6cc491c4c8b77fea88429f9ba3c4128b19b0d84930"
+    },
+    {
+      "source": "app/src/main/assets/art/cards/v0.1.5/RG4.webp",
+      "destination": "assets/android/art/cards/v0.1.5/RG4.webp",
+      "bytes": 207152,
+      "sha256": "ffe6723479405e800fff673e8a1204a9d533724f06af8e1baababe5b6da51f79"
+    },
+    {
+      "source": "app/src/main/assets/art/chests/closed-v1.png",
+      "destination": "assets/android/art/chests/closed-v1.png",
+      "bytes": 176641,
+      "sha256": "99e69ded229f1ed25e098dfd9491a8c0696c7f4ffe09396036a3cf6d326c1b6a"
+    },
+    {
+      "source": "app/src/main/assets/art/chests/open-v1.png",
+      "destination": "assets/android/art/chests/open-v1.png",
+      "bytes": 204898,
+      "sha256": "b1cfe969d82658849cf389abd72c7639e0b1b3180c5186661cbea4e61835c9db"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/alchemy_lab.break_seal.webp",
+      "destination": "assets/android/art/events/v0.1.5/alchemy_lab.break_seal.webp",
+      "bytes": 97824,
+      "sha256": "0b15e1c586f212edbc3db3063636a866d61529f31c39f11859b6e79d7cad6d43"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/alchemy_lab.distill.webp",
+      "destination": "assets/android/art/events/v0.1.5/alchemy_lab.distill.webp",
+      "bytes": 108590,
+      "sha256": "31330a51af48dbbddee3809486280d820455c1e1926e3ee87f428fd769fe643b"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/alchemy_lab.leave.webp",
+      "destination": "assets/android/art/events/v0.1.5/alchemy_lab.leave.webp",
+      "bytes": 94722,
+      "sha256": "4632ae8f9fd27b94fe9658bb9822e4918b673d968290c0fb0ace467d14dcd32b"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/frozen_shrine.attune.webp",
+      "destination": "assets/android/art/events/v0.1.5/frozen_shrine.attune.webp",
+      "bytes": 114842,
+      "sha256": "fec2ce64ec88545c2e7e15dc6f5b614a5cce1677aa89a141f9527901818aca05"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/frozen_shrine.leave.webp",
+      "destination": "assets/android/art/events/v0.1.5/frozen_shrine.leave.webp",
+      "bytes": 107150,
+      "sha256": "5ce62153b5ad2f6aae416765fb849a5a410ebe7a2fcd97e0bb84edf7b1d5a104"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/frozen_shrine.pray.webp",
+      "destination": "assets/android/art/events/v0.1.5/frozen_shrine.pray.webp",
+      "bytes": 93822,
+      "sha256": "2e661ba8a3dcf271b01f4ba460d37f99f84c80e72eb6ace452a90bdb1db70f41"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/hunter_camp.barter.webp",
+      "destination": "assets/android/art/events/v0.1.5/hunter_camp.barter.webp",
+      "bytes": 86686,
+      "sha256": "e87fe3f5311e5aa5356e74e538368d2e298faead736889a31c6e586fbe4803fd"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/hunter_camp.leave.webp",
+      "destination": "assets/android/art/events/v0.1.5/hunter_camp.leave.webp",
+      "bytes": 75698,
+      "sha256": "0df810b2e1ca43259e330f5211fa0d19067800c856d8bfccec8e6ff7f7e61709"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/hunter_camp.share_rations.webp",
+      "destination": "assets/android/art/events/v0.1.5/hunter_camp.share_rations.webp",
+      "bytes": 103220,
+      "sha256": "5dc7c5f8dccc47ddfc82dc88a048e9cb155dbbe61821a0e763e7c9b320aad212"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/manifest.json",
+      "destination": "assets/android/art/events/v0.1.5/manifest.json",
+      "bytes": 7362,
+      "sha256": "a66120bbf462ceebdde35da7b95a2e65e70a5ffb46c405219165b0f489e16b02"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/moonwell_echo.draw_echo.webp",
+      "destination": "assets/android/art/events/v0.1.5/moonwell_echo.draw_echo.webp",
+      "bytes": 115302,
+      "sha256": "b7a7ee7ecd74aa2154a463f2a90d013b2dfa917aeb6f06e248bb8c599dc50485"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/moonwell_echo.leave.webp",
+      "destination": "assets/android/art/events/v0.1.5/moonwell_echo.leave.webp",
+      "bytes": 97016,
+      "sha256": "584a0046123736b534f3fd508899c2b105a99009f16fa21db797ebf00ed164b2"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/moonwell_echo.resonate.webp",
+      "destination": "assets/android/art/events/v0.1.5/moonwell_echo.resonate.webp",
+      "bytes": 115600,
+      "sha256": "48982e35e4b254edf39b689e98af307adf1161ab5c482a03b366b4f30edca5c3"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/pact_altar.offer_blood.webp",
+      "destination": "assets/android/art/events/v0.1.5/pact_altar.offer_blood.webp",
+      "bytes": 96528,
+      "sha256": "9629f77043f50fd5d4c295978b117148f196854d580b6d993ba380f91a6adcd6"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/pact_altar.offer_medicine.webp",
+      "destination": "assets/android/art/events/v0.1.5/pact_altar.offer_medicine.webp",
+      "bytes": 93752,
+      "sha256": "92f654ce667273b125248d173d46b310d36af1d56fc950c0c56e40ebbb17eb4e"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/pact_altar.refuse.webp",
+      "destination": "assets/android/art/events/v0.1.5/pact_altar.refuse.webp",
+      "bytes": 99204,
+      "sha256": "057fbf4209fe76f713cd30ddf0167e8b9915a6fcb7eb45428d8fafbef6b948b4"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/ropeway_bridge.cross.webp",
+      "destination": "assets/android/art/events/v0.1.5/ropeway_bridge.cross.webp",
+      "bytes": 110734,
+      "sha256": "992f488e3765236279b2b60450ce17de63c318d2f778a3db9596a37369fe82e7"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/ropeway_bridge.leave.webp",
+      "destination": "assets/android/art/events/v0.1.5/ropeway_bridge.leave.webp",
+      "bytes": 114532,
+      "sha256": "fb3fce324129552ccb75e338ff736324d152bd1ebac2df06e4f22e2cddaabf74"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/ropeway_bridge.repair.webp",
+      "destination": "assets/android/art/events/v0.1.5/ropeway_bridge.repair.webp",
+      "bytes": 103618,
+      "sha256": "94651ff3b719a54d93a1bd1eaa7ea3c1fc7b2615cf4e0b4220a0cc0ff1c5cca8"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/roving_caravan.buy.webp",
+      "destination": "assets/android/art/events/v0.1.5/roving_caravan.buy.webp",
+      "bytes": 97304,
+      "sha256": "b024e7f4f684dad23ef1da0f8fb3f466fb5b29eb7a8af26de93d8f9ab3e2c085"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/roving_caravan.depart.webp",
+      "destination": "assets/android/art/events/v0.1.5/roving_caravan.depart.webp",
+      "bytes": 112976,
+      "sha256": "168fd38502174bf9ee591c2edd6fe7725d63d1e3dba6493e92d8e1effa3976d1"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/roving_caravan.sell.webp",
+      "destination": "assets/android/art/events/v0.1.5/roving_caravan.sell.webp",
+      "bytes": 115110,
+      "sha256": "e65febf0e4d5466c361debc5d53ebdd82af1b5d3dfabcb6e14607e7896a5bb63"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/war_banner.blood_rite.webp",
+      "destination": "assets/android/art/events/v0.1.5/war_banner.blood_rite.webp",
+      "bytes": 103644,
+      "sha256": "258fec7c9139b22c373ce5394acc6dce6bd2be710fc9769e4e9033272fc84d49"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/war_banner.claim.webp",
+      "destination": "assets/android/art/events/v0.1.5/war_banner.claim.webp",
+      "bytes": 86884,
+      "sha256": "d802ec1d6bffb94b145ac60b54651a61e7cee8cbddd207e50b695d71091d67ec"
+    },
+    {
+      "source": "app/src/main/assets/art/events/v0.1.5/war_banner.leave.webp",
+      "destination": "assets/android/art/events/v0.1.5/war_banner.leave.webp",
+      "bytes": 110938,
+      "sha256": "46a1ed21bf7b9ed086f5fa86b6164e591f17b6c2d753edca8a68ce8f4197395b"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/abaddon-attack-sequence-v2-review.png",
+      "destination": "assets/android/art/heroes/abaddon-attack-sequence-v2-review.png",
+      "bytes": 2050477,
+      "sha256": "9975f30642b2767e43b31de7f4f4f0c8f0948871f3ee97eff023351098afd474"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/abaddon-attack-v1.png",
+      "destination": "assets/android/art/heroes/abaddon-attack-v1.png",
+      "bytes": 1776958,
+      "sha256": "b88ab7eab55e080e282b7bd55ccf7220a2561e41cf4e6f0216bcb08bdd5b1c18"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/abaddon-cast-v1.png",
+      "destination": "assets/android/art/heroes/abaddon-cast-v1.png",
+      "bytes": 1174234,
+      "sha256": "8309d7dab44b699667b8d14a1bc2e718cfc2419b429605b28acaa2a73f922a83"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/abaddon-idle-v1.png",
+      "destination": "assets/android/art/heroes/abaddon-idle-v1.png",
+      "bytes": 1950555,
+      "sha256": "fe1242d164c8a4fbdf7a3ff3bdb7dd5388cef503a6ec5bd6261020bd52de9070"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/abaddon-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/abaddon-attack-atlas-v3.png",
+      "bytes": 749583,
+      "sha256": "1bea596cc678f750a08f956dc0f51de0bbb632fefe9637e6dec574987e23a7d1"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/antimage-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/antimage-attack-atlas-v3.png",
+      "bytes": 446582,
+      "sha256": "5a8b6975b90db6d749e556c9bda0d176bcf7a104029e228e9f12173950e9e0c8"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/axe-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/axe-attack-atlas-v3.png",
+      "bytes": 616543,
+      "sha256": "7a50f1b80bb6e6f17901e338cb019a16f4732e9496017c3c3619bfb3a4531702"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/axe-spin-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/axe-spin-attack-atlas-v3.png",
+      "bytes": 648660,
+      "sha256": "1cb240b78018cabd8d1bef08d19b8b92041170269fe01f4d929d4cd2aad65803"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/faceless-void-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/faceless-void-attack-atlas-v3.png",
+      "bytes": 406578,
+      "sha256": "fb630bf4657450fa603acdc90f5a47eebe591a7e706ba771ba6db4994494a091"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/juggernaut-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/juggernaut-attack-atlas-v3.png",
+      "bytes": 574587,
+      "sha256": "d3af461088264926b204087362cacadf4f90d668cbabe4b6971d6e99279e4d19"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/juggernaut-offhand-atlas-v4.png",
+      "destination": "assets/android/art/heroes/atlases/juggernaut-offhand-atlas-v4.png",
+      "bytes": 299227,
+      "sha256": "22c4e44c56a2ef11da5e90fd32dffe59ea7f34a757634e6be8903a429d4524b4"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/legion-commander-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/legion-commander-attack-atlas-v3.png",
+      "bytes": 305948,
+      "sha256": "6ccd0172e0810c41c1594dd2448760cf751f482c50c3c325c3f9ebc4b53c1eee"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/necrophos-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/necrophos-attack-atlas-v3.png",
+      "bytes": 751858,
+      "sha256": "42268a77c500531f4fb933f8dfafc44e824b76e6a39a329be781c0a6b9b17da3"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/phantom-assassin-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/phantom-assassin-attack-atlas-v3.png",
+      "bytes": 553708,
+      "sha256": "834c88450979ff934142d3d637332ace1ddf186924a2d4dc37a8ade73d780d1a"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/phantom-assassin-offhand-atlas-v4.png",
+      "destination": "assets/android/art/heroes/atlases/phantom-assassin-offhand-atlas-v4.png",
+      "bytes": 318546,
+      "sha256": "0665299731568b597a2197fd3cbb288adc760b2b27d7de337d0efb95a638004a"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/skywrath-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/skywrath-attack-atlas-v3.png",
+      "bytes": 802252,
+      "sha256": "dbd35ce4b933fa1ca6a7c77c2ad064d96a18d4743c97bc4bf9020ddea358b347"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/atlases/viper-attack-atlas-v3.png",
+      "destination": "assets/android/art/heroes/atlases/viper-attack-atlas-v3.png",
+      "bytes": 775098,
+      "sha256": "d2e014b26eb0bf4218030577e963dfa1094be5404b07951805301f9c085bdc21"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/attack-atlas-v3.json",
+      "destination": "assets/android/art/heroes/attack-atlas-v3.json",
+      "bytes": 8091,
+      "sha256": "123300af5da0b36357f869ef51204858160bf19c7e6cb71b386b90d0bd1b8ad6"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/attack-sequence-v2-review.md",
+      "destination": "assets/android/art/heroes/attack-sequence-v2-review.md",
+      "bytes": 5447,
+      "sha256": "70426a4271b762b9b6905d5527710f7344ad0a40386a04c4d08bf73831690764"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/hero-animation-manifest.json",
+      "destination": "assets/android/art/heroes/hero-animation-manifest.json",
+      "bytes": 1681,
+      "sha256": "26cb92130bca8b078baec2443a743ea5aa98f6859bcca48c1fff1b6ee4798653"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/juggernaut-attack-sequence-v2-review.png",
+      "destination": "assets/android/art/heroes/juggernaut-attack-sequence-v2-review.png",
+      "bytes": 1276140,
+      "sha256": "1ccb81e68da8b1cd947553aa5cb7b3eca0a40e33ac378940b0cc2f2b395df888"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/juggernaut-attack-v1.png",
+      "destination": "assets/android/art/heroes/juggernaut-attack-v1.png",
+      "bytes": 1553536,
+      "sha256": "d5e1390fc56c39e41b3a266767783e188a2a5c2eb853ce0752f6dc7f75e59e6f"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/juggernaut-idle-v1.png",
+      "destination": "assets/android/art/heroes/juggernaut-idle-v1.png",
+      "bytes": 1503052,
+      "sha256": "661939cc60266265d8f897a7117fb17571e1a389d987db2140301fbacab46139"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/necrophos-attack-sequence-v2-review.png",
+      "destination": "assets/android/art/heroes/necrophos-attack-sequence-v2-review.png",
+      "bytes": 1915056,
+      "sha256": "3a61261a0a6d16250b296239b01bc82614b2be796bce6526c325b563914d427f"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/necrophos-attack-v1.png",
+      "destination": "assets/android/art/heroes/necrophos-attack-v1.png",
+      "bytes": 2142739,
+      "sha256": "e2b405fc01034631c1cc938ad323a3344a3b1b3c526def44163f46fe6a0c26f8"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/necrophos-idle-v1.png",
+      "destination": "assets/android/art/heroes/necrophos-idle-v1.png",
+      "bytes": 1597016,
+      "sha256": "6cace5ba91e8edd14d0cc890c935261855a33e3ba9491a92d193e09e6bcd0dde"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/phantom-assassin-attack-sequence-v2-review.png",
+      "destination": "assets/android/art/heroes/phantom-assassin-attack-sequence-v2-review.png",
+      "bytes": 1817917,
+      "sha256": "084cea40177246d2d7d636a4c9a825497f8d22f916d1c1d55f7c49ed6f651ff0"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/phantom-assassin-attack-v1.png",
+      "destination": "assets/android/art/heroes/phantom-assassin-attack-v1.png",
+      "bytes": 2007477,
+      "sha256": "fb20db95926a51fc1f9e667f524d43144e8869127bb53a54bed049b026229bae"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/phantom-assassin-idle-v1.png",
+      "destination": "assets/android/art/heroes/phantom-assassin-idle-v1.png",
+      "bytes": 2046010,
+      "sha256": "5f75c6982563a0c2560f0640ff7b2bc99fa408a2a84a501565d7a19aeb0de6e3"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/skywrath-attack-sequence-v2-review.png",
+      "destination": "assets/android/art/heroes/skywrath-attack-sequence-v2-review.png",
+      "bytes": 2170666,
+      "sha256": "0f83d08f2e955e9851f2e0598f54c5d6c8c17fbf1f10c9399b304465991d95aa"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/skywrath-attack-v1.png",
+      "destination": "assets/android/art/heroes/skywrath-attack-v1.png",
+      "bytes": 2306185,
+      "sha256": "c3dfd3b3fb138405092afd7b761e2c75bebd0d3d07747147facff21b5c5475cb"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/skywrath-cast-v1.png",
+      "destination": "assets/android/art/heroes/skywrath-cast-v1.png",
+      "bytes": 2024956,
+      "sha256": "0e87c2428f7fc5b8315496d5cd77b2123ca7f0e3c058246008cb06d73e8e82af"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/skywrath-idle-v1.png",
+      "destination": "assets/android/art/heroes/skywrath-idle-v1.png",
+      "bytes": 2057025,
+      "sha256": "0aea6f009aa4e50d43b396ad9dfbf92eb5d8d738ba2a77e2ca8dbf44c5a6ba91"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/antimage-idle.png",
+      "destination": "assets/android/art/heroes/v0.1.5/antimage-idle.png",
+      "bytes": 85265,
+      "sha256": "90a31e0369be421962cc4e49783396e44d5523e5142470a1712caca6161e9f24"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/antimage-portrait.png",
+      "destination": "assets/android/art/heroes/v0.1.5/antimage-portrait.png",
+      "bytes": 106176,
+      "sha256": "6a762425cbb677c592cb0a86ae9e0a7924ab462c4ac90164fe1a27111b0d726f"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/attack-manifest.json",
+      "destination": "assets/android/art/heroes/v0.1.5/attack-manifest.json",
+      "bytes": 1305,
+      "sha256": "a99bef778b7f32c2053011b94ead5114a3cd0322b65eb91c8aad7bf06fbac830"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/axe-idle.png",
+      "destination": "assets/android/art/heroes/v0.1.5/axe-idle.png",
+      "bytes": 129303,
+      "sha256": "640fa98e04612c61af4348a58aba658e6f0c690b8b71ab0fdef99dcdc9260cef"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/axe-portrait.png",
+      "destination": "assets/android/art/heroes/v0.1.5/axe-portrait.png",
+      "bytes": 117730,
+      "sha256": "dbd7fa5f6f3231dc9d06efc3dc161b9cf4bec15aeb5eb84405e11acac400fae1"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/axe-spin.json",
+      "destination": "assets/android/art/heroes/v0.1.5/axe-spin.json",
+      "bytes": 323,
+      "sha256": "f40fafc12787ab05132e44138e8b53d758cc3c26eecf9f2c02573e1b8f3f5b6c"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/faceless_void-idle.png",
+      "destination": "assets/android/art/heroes/v0.1.5/faceless_void-idle.png",
+      "bytes": 76365,
+      "sha256": "544fd13a31a621c278aa3f4ec25e34e60dd3cf1c6d5e9e48b7771e6e17b7885b"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/faceless_void-portrait.png",
+      "destination": "assets/android/art/heroes/v0.1.5/faceless_void-portrait.png",
+      "bytes": 99984,
+      "sha256": "7231a2095c9c7e51401dd5cec4d831ac17af91de168599b7dc64b6b7597a6706"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/legion_commander-idle.png",
+      "destination": "assets/android/art/heroes/v0.1.5/legion_commander-idle.png",
+      "bytes": 58710,
+      "sha256": "1143354e3805fa653e0b7f5ccd32fa11082a0bc916579af3c2d5116107fd6097"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/v0.1.5/legion_commander-portrait.png",
+      "destination": "assets/android/art/heroes/v0.1.5/legion_commander-portrait.png",
+      "bytes": 116087,
+      "sha256": "fbd4f7cb1798ce2c2e0f641e0846016b07fcc288d2e7abb09c96e6ea4d671bb1"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/viper-attack-sequence-v2-review.png",
+      "destination": "assets/android/art/heroes/viper-attack-sequence-v2-review.png",
+      "bytes": 2029073,
+      "sha256": "5215764b9fd399f4c99b29752bcf69d89b735d731300bf66fe778290aaf5815e"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/viper-attack-v1.png",
+      "destination": "assets/android/art/heroes/viper-attack-v1.png",
+      "bytes": 2164485,
+      "sha256": "2ff36a017df9defdcaf8f53f20624f97d80f2250f9fc4e417b37656a7949a5b6"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/viper-charge-v1.png",
+      "destination": "assets/android/art/heroes/viper-charge-v1.png",
+      "bytes": 1680915,
+      "sha256": "a16031060cecbe40a116262fa82b49895af3a8f5c82eef540d054c16723f31f3"
+    },
+    {
+      "source": "app/src/main/assets/art/heroes/viper-idle-v1.png",
+      "destination": "assets/android/art/heroes/viper-idle-v1.png",
+      "bytes": 1771414,
+      "sha256": "1eff7b353409eaac9441136b1b3f8e82b4b6040857ab58f1ea6e91182986b175"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/abyssal_blade.png",
+      "destination": "assets/android/art/items/illustrated-v1/abyssal_blade.png",
+      "bytes": 323823,
+      "sha256": "748db509198d8a1ad01367e746ffcb7b0790df3ad5a3f9860c927fc4f63df514"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/aeon_disk.png",
+      "destination": "assets/android/art/items/illustrated-v1/aeon_disk.png",
+      "bytes": 498453,
+      "sha256": "ecf3a8b30bb22543a0d345547c5df9b24fb8fde4d1d8ce326be5ee2650df31ed"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/AMULET.png",
+      "destination": "assets/android/art/items/illustrated-v1/AMULET.png",
+      "bytes": 62627,
+      "sha256": "ee086a1d6740b6de79882de062299ad720a62b56d93358c093850436a4a51c27"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/armlet_of_mordiggian.png",
+      "destination": "assets/android/art/items/illustrated-v1/armlet_of_mordiggian.png",
+      "bytes": 74621,
+      "sha256": "6acbbcafe3556eeb68db8637183fcdde08dc0fd3a3545c8fa3fdad9bd26537c1"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ARMLET.png",
+      "destination": "assets/android/art/items/illustrated-v1/ARMLET.png",
+      "bytes": 71858,
+      "sha256": "2c80bb9df838cf1dbe51eddddfd869b5b12cc1b28109fa118abe0383b0905bf6"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/AXE.png",
+      "destination": "assets/android/art/items/illustrated-v1/AXE.png",
+      "bytes": 56104,
+      "sha256": "7634faa66a7c127a2ccffa32a21ed1e3cb86f057a57fcd81569dce19aae862be"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/backpack_fabric.png",
+      "destination": "assets/android/art/items/illustrated-v1/backpack_fabric.png",
+      "bytes": 86319,
+      "sha256": "03d594541d7c48d83f093a20511a9a3909327ffefe01f32c6f4fcb63eed25ea5"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/band_of_elvenskin.png",
+      "destination": "assets/android/art/items/illustrated-v1/band_of_elvenskin.png",
+      "bytes": 63360,
+      "sha256": "bd285169e0a227914cdb9b44dd4a9860ee6357a4971a8c97821251562752884a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/belt_of_strength.png",
+      "destination": "assets/android/art/items/illustrated-v1/belt_of_strength.png",
+      "bytes": 73739,
+      "sha256": "0cbb5ff32a5b070556db084ed3a71aaed756284abd70858ea27005a00d25980f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/black_king_bar.png",
+      "destination": "assets/android/art/items/illustrated-v1/black_king_bar.png",
+      "bytes": 47776,
+      "sha256": "9d4872fa6f006c7443dd208a718584d7999b34f2997d6f9e7a40b4fefb2cc664"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/blade_mail.png",
+      "destination": "assets/android/art/items/illustrated-v1/blade_mail.png",
+      "bytes": 449501,
+      "sha256": "b2cec376274c02c98eb40451040bfc2a86e6f629140f982866b71dbe5f01a85d"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/blade_of_alacrity.png",
+      "destination": "assets/android/art/items/illustrated-v1/blade_of_alacrity.png",
+      "bytes": 41428,
+      "sha256": "39453a0a1ac56e53d0d1be1ba6adccad88b7f6ee0d9bc72ec20bc4ba04cd48b5"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/blades_of_attack.png",
+      "destination": "assets/android/art/items/illustrated-v1/blades_of_attack.png",
+      "bytes": 78572,
+      "sha256": "75cddce35db9d14e8e235f78c8f545bfc71312b852678c7f279b52327427d7d5"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/bloodthorn.png",
+      "destination": "assets/android/art/items/illustrated-v1/bloodthorn.png",
+      "bytes": 174850,
+      "sha256": "4e19f6beb26f1546c39c35845adba59e6679687c859cdda25139a6c9cbb64a7c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/BOOT.png",
+      "destination": "assets/android/art/items/illustrated-v1/BOOT.png",
+      "bytes": 69800,
+      "sha256": "94271a26f085360f0ef7e7a71e48708c29aadbc62b9b87e68166cbbe6ba785f3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/BOW.png",
+      "destination": "assets/android/art/items/illustrated-v1/BOW.png",
+      "bytes": 39812,
+      "sha256": "2d2a41184bce3ff266c21ace66e0242b8ea8d88e6d0fa33e810bda6fe5c5fd09"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/BOX.png",
+      "destination": "assets/android/art/items/illustrated-v1/BOX.png",
+      "bytes": 77440,
+      "sha256": "7c90157b7adf337d6870d82fc50707654888f215b40795f2750bac71b3465c64"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/bracer.png",
+      "destination": "assets/android/art/items/illustrated-v1/bracer.png",
+      "bytes": 62509,
+      "sha256": "8e04edbef652ba463345f8a1a9c5877dbf1adb49d72628d2b074d53cee510909"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/broadsword.png",
+      "destination": "assets/android/art/items/illustrated-v1/broadsword.png",
+      "bytes": 37895,
+      "sha256": "4c9476ee7ee56d398a8fcdc8d40da6faeae4f6d9a0fada7e45517bb94cba5e4d"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/BUTTERFLY.png",
+      "destination": "assets/android/art/items/illustrated-v1/BUTTERFLY.png",
+      "bytes": 91996,
+      "sha256": "5d65ba9a16e305df65dbbdd813fa8a6b421f7090b639fc7d149400fdc2400239"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/chainmail.png",
+      "destination": "assets/android/art/items/illustrated-v1/chainmail.png",
+      "bytes": 116026,
+      "sha256": "7c84069b0f550ed3963d8c5a40b4f25557811c9d92815150faa5b7340cdd7153"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/CHEESE.png",
+      "destination": "assets/android/art/items/illustrated-v1/CHEESE.png",
+      "bytes": 68156,
+      "sha256": "0759096dd26540cf0280eea12d311fe069fedf1eb17b4f8fde01f744c105447e"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/circlet.png",
+      "destination": "assets/android/art/items/illustrated-v1/circlet.png",
+      "bytes": 39910,
+      "sha256": "3491733e69b48d2470f76e3d02e2526842402a2cc051870f4334752ec0781ac2"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/CLAW.png",
+      "destination": "assets/android/art/items/illustrated-v1/CLAW.png",
+      "bytes": 62561,
+      "sha256": "717cc7106ccee2b1dbca952dd13a206ace19c0804b6525278590b17f89b8619a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/claymore.png",
+      "destination": "assets/android/art/items/illustrated-v1/claymore.png",
+      "bytes": 30325,
+      "sha256": "e8d2032d5cd11ac7e457d55d02c7007fc6d14e06143876e57e32b8b855cb4afc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/CLOAK.png",
+      "destination": "assets/android/art/items/illustrated-v1/CLOAK.png",
+      "bytes": 97303,
+      "sha256": "1538af16a33c30df262146548b1634b783170c2fc0ec89bacd650921468a5a93"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/CLOCK.png",
+      "destination": "assets/android/art/items/illustrated-v1/CLOCK.png",
+      "bytes": 79648,
+      "sha256": "de63d4b6cb5370f77a54c5bfd15127188e10c9fef9e5a8816b6cbbd034bf10bc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/COIN.png",
+      "destination": "assets/android/art/items/illustrated-v1/COIN.png",
+      "bytes": 90747,
+      "sha256": "8016d3a48347b588a97ba7de209d74f280ebef34eb5aea8ef919f47829058b5c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/crimson_guard.png",
+      "destination": "assets/android/art/items/illustrated-v1/crimson_guard.png",
+      "bytes": 78636,
+      "sha256": "e03d850fef2c12e86f99d9211b9b5dd1ed6a216414ba56077913dbe8abdaa7ab"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/CROWN.png",
+      "destination": "assets/android/art/items/illustrated-v1/CROWN.png",
+      "bytes": 62461,
+      "sha256": "556c560bdd254c93d0a1a9d4c4205021e56364448925b212e6e7a7c72187a5b7"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/crystalys.png",
+      "destination": "assets/android/art/items/illustrated-v1/crystalys.png",
+      "bytes": 56506,
+      "sha256": "ced2e9b01cc75f489a3274c207b5d0d8b4df0e8d5389a87e73dee4af5a92d1e0"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/CUP.png",
+      "destination": "assets/android/art/items/illustrated-v1/CUP.png",
+      "bytes": 100775,
+      "sha256": "a995af7bef14ebed341732ae9562dd1dff4a975ee53ef9224b2c53acfc23e40c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/daedalus.png",
+      "destination": "assets/android/art/items/illustrated-v1/daedalus.png",
+      "bytes": 77604,
+      "sha256": "38183e63738e50e65a50698b800127a60a4523370fdf2f8698473175aa13249b"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/dagon.png",
+      "destination": "assets/android/art/items/illustrated-v1/dagon.png",
+      "bytes": 194861,
+      "sha256": "a46520a547f2f8204217cd6d77a2a813bb46093ed9d28f92446b69a7c45b5a3c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/demon_edge.png",
+      "destination": "assets/android/art/items/illustrated-v1/demon_edge.png",
+      "bytes": 62302,
+      "sha256": "a60968ccef869afcde664dd3fdf4a4ad466dc11461011290357f0526fb1bafe9"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/diadem.png",
+      "destination": "assets/android/art/items/illustrated-v1/diadem.png",
+      "bytes": 50641,
+      "sha256": "b3fee327baa060b8485b4fbc76ad59a479b0e6e3ffbcadd2099075594d7ee7ad"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/dragon_lance.png",
+      "destination": "assets/android/art/items/illustrated-v1/dragon_lance.png",
+      "bytes": 57036,
+      "sha256": "63e6cb9ec2f4ca11c681262fa658938cb4f0edd4e2219bfca0be87eac43d7af5"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/DUAL_SWORDS.png",
+      "destination": "assets/android/art/items/illustrated-v1/DUAL_SWORDS.png",
+      "bytes": 70840,
+      "sha256": "ee82653f569d270f7b9f2db2d18d8da9ca42a888534cf23b4ccb64b6c8eda4f1"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/eaglesong.png",
+      "destination": "assets/android/art/items/illustrated-v1/eaglesong.png",
+      "bytes": 68782,
+      "sha256": "086e2742b29a4517548934bc983b41513e37d3e06b2004b16ecdc3587959466d"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/energy_booster.png",
+      "destination": "assets/android/art/items/illustrated-v1/energy_booster.png",
+      "bytes": 82817,
+      "sha256": "96e13f1a4ec74fb8bd87d03027b7deebb4778bfe7210ed83a76c658c7ab77f54"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/essence.png",
+      "destination": "assets/android/art/items/illustrated-v1/essence.png",
+      "bytes": 69582,
+      "sha256": "9467c369c8146ebd7931b60593446474cb8042e48dd383b4b38644b77d3d8324"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ethereal_blade.png",
+      "destination": "assets/android/art/items/illustrated-v1/ethereal_blade.png",
+      "bytes": 145571,
+      "sha256": "9d8449342b65bcee73b3561376a5d24c10767b6aa8429f51b3160c99c098d563"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/euls_scepter.png",
+      "destination": "assets/android/art/items/illustrated-v1/euls_scepter.png",
+      "bytes": 226646,
+      "sha256": "c0bbe91394264c383812221e82a693ff89981db7c1ee2c0286d5654b9363a10b"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/expert_array.png",
+      "destination": "assets/android/art/items/illustrated-v1/expert_array.png",
+      "bytes": 74438,
+      "sha256": "52b4b4722daabcbb2c48547e25c945613536915077d69c515d4737868657d65a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/FABRIC.png",
+      "destination": "assets/android/art/items/illustrated-v1/FABRIC.png",
+      "bytes": 97483,
+      "sha256": "911f2a0cf205faef1d150c5f0bf6ec6b35e929e429df711dfed8a6b597c8ccfc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/faerie_fire.png",
+      "destination": "assets/android/art/items/illustrated-v1/faerie_fire.png",
+      "bytes": 63836,
+      "sha256": "3d05de8a7167fc00ce1b16e7ead73f75ec52eb76ca958364cddc5b76d227b83a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/FLAME.png",
+      "destination": "assets/android/art/items/illustrated-v1/FLAME.png",
+      "bytes": 68670,
+      "sha256": "25361c57e619fc7f0d5f7cc0688ecf12774d21bf51b7a84bac46bc3c3a4f8865"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/fluffy_hat.png",
+      "destination": "assets/android/art/items/illustrated-v1/fluffy_hat.png",
+      "bytes": 70583,
+      "sha256": "7446960272b2298e80512e1dbefda6352adae5ed8cae6531939fe1a5505b371f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/force_staff.png",
+      "destination": "assets/android/art/items/illustrated-v1/force_staff.png",
+      "bytes": 41246,
+      "sha256": "3fc85ce8694417df566876b3f7ece8c1594c91246d365ed287f48423751afb1f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/FRAME.png",
+      "destination": "assets/android/art/items/illustrated-v1/FRAME.png",
+      "bytes": 96075,
+      "sha256": "4e4caa56a0b6f5315392ffe285479ebbbf1170183d90cd2009e939800d613aaf"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/gauntlets.png",
+      "destination": "assets/android/art/items/illustrated-v1/gauntlets.png",
+      "bytes": 79458,
+      "sha256": "2176e1d91ac010853a938bebb4e880f4379ce77b1cdf8046b131e9b7fb2966af"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/GEM.png",
+      "destination": "assets/android/art/items/illustrated-v1/GEM.png",
+      "bytes": 90250,
+      "sha256": "67d0dd1e90d900aed192935e82d5bc20d1115d66cf2fae9e909371cb2d26ab3f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ghost_scepter.png",
+      "destination": "assets/android/art/items/illustrated-v1/ghost_scepter.png",
+      "bytes": 165904,
+      "sha256": "b90a4b7d70e3840f252222418078a19104c16d5d694820c3bfd39e73e602d85b"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/GLOVE.png",
+      "destination": "assets/android/art/items/illustrated-v1/GLOVE.png",
+      "bytes": 94241,
+      "sha256": "12a513748b6f20f0189d46c6476f0e2ff714fc9d254fe6d4226286d76f0d83ed"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/gloves_of_haste.png",
+      "destination": "assets/android/art/items/illustrated-v1/gloves_of_haste.png",
+      "bytes": 59926,
+      "sha256": "e9ae2a873c83fb1afd9debb6acfefba38d7c4e6f56a0b4f10144958a101289c7"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/HAMMER.png",
+      "destination": "assets/android/art/items/illustrated-v1/HAMMER.png",
+      "bytes": 62634,
+      "sha256": "05c05bf68b35f2b003040bc7633f717bb63d3855b74249dbfb5983a5d04e44da"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/heart_of_tarrasque.png",
+      "destination": "assets/android/art/items/illustrated-v1/heart_of_tarrasque.png",
+      "bytes": 86255,
+      "sha256": "b2241b82afb14b2228af2e739e2d8075c883082253500c4a3255224ce9407d97"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/HEART.png",
+      "destination": "assets/android/art/items/illustrated-v1/HEART.png",
+      "bytes": 91729,
+      "sha256": "ee666b9ec45eb270a39c99dff58fc1d471563dd13bd7943bdc0b4b76e3dbb694"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/heavens_halberd.png",
+      "destination": "assets/android/art/items/illustrated-v1/heavens_halberd.png",
+      "bytes": 56576,
+      "sha256": "d2c2d758ed2682bc1d4291c90d3a9ef602e838e7ae9e3e8c31075f016b990777"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/helm_of_iron_will.png",
+      "destination": "assets/android/art/items/illustrated-v1/helm_of_iron_will.png",
+      "bytes": 74061,
+      "sha256": "0e3c89014ca052fc17c45f65d75f504e2ddbc2506775ac4e7cad3eb1300f97af"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/HELMET.png",
+      "destination": "assets/android/art/items/illustrated-v1/HELMET.png",
+      "bytes": 93520,
+      "sha256": "d99439fc59fd0bbf8326a8b859bb4148e61ed7f9a5c66f8583e260ba1260d1e8"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/hurricane_pike.png",
+      "destination": "assets/android/art/items/illustrated-v1/hurricane_pike.png",
+      "bytes": 29251,
+      "sha256": "1930d0aa43d29b825d7ff5b87566ac0445eb485e5f0fa15460c1d4ab510e3c82"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/hyperstone.png",
+      "destination": "assets/android/art/items/illustrated-v1/hyperstone.png",
+      "bytes": 70513,
+      "sha256": "3d6a4e33af82dd0fb02129555114cb50bc2d827be154bc2a20fed6e1946100d1"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/iron_branch.png",
+      "destination": "assets/android/art/items/illustrated-v1/iron_branch.png",
+      "bytes": 64625,
+      "sha256": "e3df7702c810bfded1513e36746385f5b0f41866f5755d1431fa96b479b9d984"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/javelin.png",
+      "destination": "assets/android/art/items/illustrated-v1/javelin.png",
+      "bytes": 21621,
+      "sha256": "628a51e542f21f9f6abd9d57a91686e92c9e05e6b3c5ee93a0dc4c66a2bf82c6"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/kaya_and_sange.png",
+      "destination": "assets/android/art/items/illustrated-v1/kaya_and_sange.png",
+      "bytes": 75870,
+      "sha256": "8a04c5408f66f0297e7f0a76ce90baa6508fcee767290326c46c9aacceb7ee11"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/kaya.png",
+      "destination": "assets/android/art/items/illustrated-v1/kaya.png",
+      "bytes": 45219,
+      "sha256": "6091e4ea667a1f7da09161cd06b3582b09bf34b646def46e30344819b548d40a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/LEAF.png",
+      "destination": "assets/android/art/items/illustrated-v1/LEAF.png",
+      "bytes": 85018,
+      "sha256": "44482400d4c3946f2339a7e5af2d707b272f17a11f5aaab06d4902209e879b8c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/LOCK.png",
+      "destination": "assets/android/art/items/illustrated-v1/LOCK.png",
+      "bytes": 87252,
+      "sha256": "f8e4ee5cbe9ae3994e86974069cf2a070b3780911292a743820c2b1e898455bc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_bronze_clock.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_bronze_clock.png",
+      "bytes": 78698,
+      "sha256": "f66bbd245a65a17ad942e142bff5f70fe020b0853a3f75c428137b93d7086d61"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_copper_coin.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_copper_coin.png",
+      "bytes": 81384,
+      "sha256": "de720f16b494040a57c5cd03b7675ff4345e9cd941336a4d1594eb015b78de97"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_faded_painting.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_faded_painting.png",
+      "bytes": 66624,
+      "sha256": "2de331d6f540d1abccec77996af8e972bb2481c179816da449fded1fcec64b79"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_gold_seal.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_gold_seal.png",
+      "bytes": 99522,
+      "sha256": "ec911c40a03816ec20e5db3d0e6886de7f6396bc688d57ac402efefb5056e0ea"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_golden_statue.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_golden_statue.png",
+      "bytes": 86085,
+      "sha256": "f853c85978eff3a58f8f55bea4e092a52ba7a928ff1a1df5963cf840d0b49c00"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_jade_statue.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_jade_statue.png",
+      "bytes": 88152,
+      "sha256": "e4f122a79b5979a708fbb9e6d326334c29cd516cdfc428fef495c75000fab744"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_jeweled_egg.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_jeweled_egg.png",
+      "bytes": 84987,
+      "sha256": "1bd4309ebe18c2087d544b6e0d26879d0a6fc887284ab1e8fcbd5d31c53f3963"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_oil_painting.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_oil_painting.png",
+      "bytes": 107478,
+      "sha256": "1c80bb6f8576678965df569ffd97e00cf121ebbbf395a2580b3dac69418a9739"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_old_carpet.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_old_carpet.png",
+      "bytes": 84478,
+      "sha256": "1246d7ec76fc9879972e627f08c64df63bbf11d9997de70eab6a07cf3febea7a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_pocket_watch.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_pocket_watch.png",
+      "bytes": 92827,
+      "sha256": "e1eec1ca7be2a7286eac17782b174a851f82dcdc2e522b4a66593b180083d6d2"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_porcelain_vase.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_porcelain_vase.png",
+      "bytes": 71440,
+      "sha256": "47226e29b1b23991e31239d391fad8680629ba8644bd4598c475ffda150c7759"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_royal_pendant.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_royal_pendant.png",
+      "bytes": 77726,
+      "sha256": "91ee060b625e872ba7660fed0e550f690ffe1013137732865b61eb209ecc8294"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_royal_screen.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_royal_screen.png",
+      "bytes": 100335,
+      "sha256": "ef9febd6791a589004f6e1014ce06c2ebdef3f220cb97283be7fb4d0c6c721e5"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_ruby.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_ruby.png",
+      "bytes": 91893,
+      "sha256": "3c2733f7b1618b1917b543fc066c8d60f115f56b683fd6aafb17316e2c3decc4"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_silver_coin.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_silver_coin.png",
+      "bytes": 122036,
+      "sha256": "45eff039d75303b78906309d3fb16e5d46ac1ca2cc72a8642e7e83105c676c86"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_silver_cups.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_silver_cups.png",
+      "bytes": 97028,
+      "sha256": "5b7c46513a5a006541529f07f3bf538f906d9f0d10a0b9608019b4346ddeee65"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_star_diamond.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_star_diamond.png",
+      "bytes": 78916,
+      "sha256": "0881635baa2989f0213b06026174c1ef88e462c4e49dd7b55632eb8b59048ad3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_tapestry.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_tapestry.png",
+      "bytes": 93098,
+      "sha256": "96e593af79be3f5cf86ffdb687e4c76c2bd37fa39b9994803dd51e0ee9d3d72c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_tin_cup.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_tin_cup.png",
+      "bytes": 69410,
+      "sha256": "d042d4e3109d91e38ac23b0caacf9a0f2ab8ac5932f0bfd17494e500e764e615"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/loot_wood_box.png",
+      "destination": "assets/android/art/items/illustrated-v1/loot_wood_box.png",
+      "bytes": 76188,
+      "sha256": "8febbdf58177efcab3bffbc2946d982b66561691ae66cbaeec01360de20cd774"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/maelstrom.png",
+      "destination": "assets/android/art/items/illustrated-v1/maelstrom.png",
+      "bytes": 62242,
+      "sha256": "8c0889af7e30ffcc7526b3e9dc51c44a491d2fc16c7a91c7468c36432baafe95"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/mantle.png",
+      "destination": "assets/android/art/items/illustrated-v1/mantle.png",
+      "bytes": 77544,
+      "sha256": "a0db6e505d73fdf411b444b2ea4e17f6de08516dc47526b15e3c916156412ec7"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/mask_of_madness.png",
+      "destination": "assets/android/art/items/illustrated-v1/mask_of_madness.png",
+      "bytes": 90393,
+      "sha256": "28cda467e10f175b3053b00394be22b7dcfd0e935600d24c50bcf8c12e6649c6"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/MASK.png",
+      "destination": "assets/android/art/items/illustrated-v1/MASK.png",
+      "bytes": 96900,
+      "sha256": "b6f2b331078cc174ce9a02a041c1c9addcb5421f1dfdcd2fd01c59b92c4e8de9"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/mithril_hammer.png",
+      "destination": "assets/android/art/items/illustrated-v1/mithril_hammer.png",
+      "bytes": 49378,
+      "sha256": "670c9fa830e948f2974f825a42f830f303809212e9de66fa708aa1b0ee622a63"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/mjollnir.png",
+      "destination": "assets/android/art/items/illustrated-v1/mjollnir.png",
+      "bytes": 74228,
+      "sha256": "a430edb0600c579ea5e56caf1d859e0766b437c1e1e8042575e1617661e06ef1"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/monkey_king_bar.png",
+      "destination": "assets/android/art/items/illustrated-v1/monkey_king_bar.png",
+      "bytes": 173801,
+      "sha256": "5e0d0bc8ebf3ee5a9eda120ee0c8098262e9930075db59dd3cc4fc982b7d2b35"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/morbid_mask.png",
+      "destination": "assets/android/art/items/illustrated-v1/morbid_mask.png",
+      "bytes": 62458,
+      "sha256": "e007c73a85f9dc5301651ba02b0c482ebe620a91bbca32a08e25d54328488cdc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/mystic_staff.png",
+      "destination": "assets/android/art/items/illustrated-v1/mystic_staff.png",
+      "bytes": 57090,
+      "sha256": "47d3456a8deb46977317a439b9cb87ac2a289b85b616ce1d4f962da3001207f9"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/null_talisman.png",
+      "destination": "assets/android/art/items/illustrated-v1/null_talisman.png",
+      "bytes": 69338,
+      "sha256": "46fc514146a31db22ddb7a28920a17a9dd5c1acf64c521d181c727a8eb6dafee"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/nullifier.png",
+      "destination": "assets/android/art/items/illustrated-v1/nullifier.png",
+      "bytes": 328987,
+      "sha256": "1ac1c903c1544bd88343742fdf7ad2167d22f9806cdd78cff7359a6186844ed4"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/oblivion_staff.png",
+      "destination": "assets/android/art/items/illustrated-v1/oblivion_staff.png",
+      "bytes": 59557,
+      "sha256": "1c971072599839ddb00a4471841cecc1271b2e7e2dabcd595555cba226e7dbbb"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/octarine_core.png",
+      "destination": "assets/android/art/items/illustrated-v1/octarine_core.png",
+      "bytes": 85949,
+      "sha256": "531265ba7967021d15468d4f07d87f7d67d95e4a28bfd011cf5fb8a71ded8fa8"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ogre_axe.png",
+      "destination": "assets/android/art/items/illustrated-v1/ogre_axe.png",
+      "bytes": 58863,
+      "sha256": "ee33fd03740c3cd224ed566d03d0114f7f0603bf87ffa52fe0e7e1ec57201e72"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/orb_of_venom.png",
+      "destination": "assets/android/art/items/illustrated-v1/orb_of_venom.png",
+      "bytes": 64194,
+      "sha256": "09aa2fcaf202a74e6463c404c23be5af6dae987d4a9e111850281d24d59d6a78"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ORB.png",
+      "destination": "assets/android/art/items/illustrated-v1/ORB.png",
+      "bytes": 85693,
+      "sha256": "1145c0ed037b880341a2764d60488c5b66213f8517a860d6bc7484333a1913e0"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/orchid.png",
+      "destination": "assets/android/art/items/illustrated-v1/orchid.png",
+      "bytes": 62340,
+      "sha256": "8c3fd969b518021a40dce29fa44bfee7cc9f0d07e3bf6dd4e403ea4d7486b077"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/PAINTING.png",
+      "destination": "assets/android/art/items/illustrated-v1/PAINTING.png",
+      "bytes": 118294,
+      "sha256": "55e9bd7b39e3852a5bcb74e393d64fd52736ff8828a0623e6f44420a7bdda1ad"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/perseverance.png",
+      "destination": "assets/android/art/items/illustrated-v1/perseverance.png",
+      "bytes": 79382,
+      "sha256": "8402c7db544d0e762d1c4bfddd933e37aaaa12598690b634fab1da81655824b3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/phantom_cloak.png",
+      "destination": "assets/android/art/items/illustrated-v1/phantom_cloak.png",
+      "bytes": 398102,
+      "sha256": "e323381f531b9c2887f3fe24b8c4efcfe7127691223263a86d66f9a5ba25a9d3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/pipe_of_insight.png",
+      "destination": "assets/android/art/items/illustrated-v1/pipe_of_insight.png",
+      "bytes": 61950,
+      "sha256": "fdb467697660da394b358b34d3b45dcc80440ace3ccef9a78da1f65152eb5ba7"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/PIPE.png",
+      "destination": "assets/android/art/items/illustrated-v1/PIPE.png",
+      "bytes": 55298,
+      "sha256": "6962b050b1c7e80caaa98c1b3b8a1937698a68afa704cfec6110fafa8ddf92d2"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/plate_mail.png",
+      "destination": "assets/android/art/items/illustrated-v1/plate_mail.png",
+      "bytes": 483769,
+      "sha256": "ae554674895525ca1b6529d30075d46e107abb8e792f89708953c4fe2da52773"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/point_booster.png",
+      "destination": "assets/android/art/items/illustrated-v1/point_booster.png",
+      "bytes": 81961,
+      "sha256": "8b39060f53be3cbba3b56d0b556bd80a67fb1f4301ac76aef2a47fb104fe51a3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/POTION.png",
+      "destination": "assets/android/art/items/illustrated-v1/POTION.png",
+      "bytes": 77053,
+      "sha256": "430ee87be9e50fe9361c7e927f68c8f4d7dc66cf93edfcab9a9a1bcee7129407"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/quarterstaff.png",
+      "destination": "assets/android/art/items/illustrated-v1/quarterstaff.png",
+      "bytes": 25105,
+      "sha256": "8b652ced0a5c03546e09479e565b14dd5bbaa54f50c3dde668015b35589a148c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/reaver.png",
+      "destination": "assets/android/art/items/illustrated-v1/reaver.png",
+      "bytes": 71181,
+      "sha256": "f1c2e8baac965084447ec2b0f78bb98e74b816b3a9adaf5365862f25095f9e57"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_armlet.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_armlet.png",
+      "bytes": 88366,
+      "sha256": "6acdf980acc90d6fc37af561ce78a9f3898bc8ce068de64e65b9aaf28948608b"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_black_king_bar.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_black_king_bar.png",
+      "bytes": 86742,
+      "sha256": "033803b1e2d903b1bf652c4868477cab2d13f6e5ad8ff3e5aab47edee290a9ee"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_bracer.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_bracer.png",
+      "bytes": 87491,
+      "sha256": "c92bd475a67f2f3b7a8ee5e6607b5b4930bdccaacd70fac8b412669712fa120f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_crimson_guard.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_crimson_guard.png",
+      "bytes": 87581,
+      "sha256": "665473310ea57c00e3370940551e90346556afd716ec5f2b49c3e47a0cf23b84"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_crystalys.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_crystalys.png",
+      "bytes": 86054,
+      "sha256": "6cfda3074598a7b7b19c5dc08f5f0f976c095f6c86610e228deba0d0cc2d6d9e"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_daedalus.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_daedalus.png",
+      "bytes": 84979,
+      "sha256": "cfac522d08b9701a75d6de59bb69519682b6a15281e18d79a8603f82e8fffd0c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_dragon_lance.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_dragon_lance.png",
+      "bytes": 85255,
+      "sha256": "307e36f425b1b8ee318ba7d126708bcecb63109af44536d73cbc6593f7f563bc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_expert_array.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_expert_array.png",
+      "bytes": 88857,
+      "sha256": "02cfca8a92ed27e22572a8ec87cc7222e442935948f2a8dfe951b5997e931cce"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_force_staff.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_force_staff.png",
+      "bytes": 85594,
+      "sha256": "029fc17c57fb149b059273393e4c2c71ee70a9491b3db54d111fe452693cba58"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_heart.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_heart.png",
+      "bytes": 81658,
+      "sha256": "1673024eb4c1b2c8535650d8dee979c0823732e7627fe0609c28362b76c5f683"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_heavens_halberd.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_heavens_halberd.png",
+      "bytes": 78162,
+      "sha256": "87aab23a0234492827c9275f4cb25c07281a691d786dfad50ff011cc117145ef"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_hurricane_pike.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_hurricane_pike.png",
+      "bytes": 76667,
+      "sha256": "f1b8f5ca03e75aa3cd305cf5ff277f7f101331b544d8456518d2c1c1f504993a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_kaya.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_kaya.png",
+      "bytes": 79412,
+      "sha256": "29f144bf6cca9fb5cb6bf4e1aa66d6f1b9a1fbd1506e130e8772f4a6ad9ac1b1"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_mjollnir.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_mjollnir.png",
+      "bytes": 80850,
+      "sha256": "9c8637a7e6a18f3a9cadb58d2cd0429edc788c9aaa77ed67c3f45af6f955a0fe"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_null_talisman.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_null_talisman.png",
+      "bytes": 80799,
+      "sha256": "eceb36e362f36e38ee14486987ba3ef9efa9b31bd4fb41710dfed26ed96087b0"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_octarine_core.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_octarine_core.png",
+      "bytes": 81236,
+      "sha256": "afbdde3634d4cadb947e6a28989ae18e68008b3e9ab972312570b92ae5d58522"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_orchid.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_orchid.png",
+      "bytes": 80427,
+      "sha256": "83ad26cfb235b591633243da229a707b10ee2880c7ce1fe9a65953c417ee4673"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_pipe_of_insight.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_pipe_of_insight.png",
+      "bytes": 79950,
+      "sha256": "0ee90befd06611941ee1d6d92f6a45dfbcc10c746e792dfdb047d279cb2cb817"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_rod_of_atos.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_rod_of_atos.png",
+      "bytes": 89518,
+      "sha256": "3176132bcd06a7a6b73883d67dc89aaac345fe4f5b9671751ea13e8d79fc8b41"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_sange.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_sange.png",
+      "bytes": 79893,
+      "sha256": "696c02eef81352a795bb77f3e8d79821f1c9adda475234fa48cfc31f338c7584"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_skull_basher.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_skull_basher.png",
+      "bytes": 81733,
+      "sha256": "95a845c7159b139996d3ed9de07ccff450400de1dd756704de33f56dc0a20a9e"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_viper_bite.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_viper_bite.png",
+      "bytes": 89011,
+      "sha256": "db01c3ca701b576d98b13b0e571baf7fe5fc0367a9bc2fa37237d112dfe8f011"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_witch_blade.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_witch_blade.png",
+      "bytes": 85781,
+      "sha256": "4c1dabddd88439b931e638e986b3ba97156b1cafa32a2e1b916cb10b29b20517"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_wraith_band.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_wraith_band.png",
+      "bytes": 87601,
+      "sha256": "443965469d0bf9ac82d5ab65080d68acb543255dc6d7e3b51449d7dd23e0c3b9"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/recipe_yasha.png",
+      "destination": "assets/android/art/items/illustrated-v1/recipe_yasha.png",
+      "bytes": 91103,
+      "sha256": "9536129797a03ec2dbc5f6a93096738a73fafa5b832cdfa4b70a79c7b8eeaa28"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ring_of_health.png",
+      "destination": "assets/android/art/items/illustrated-v1/ring_of_health.png",
+      "bytes": 87535,
+      "sha256": "4a44193e9d2b744ad1846a9f84c37744a2e899de4977330f5be753282e31703a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ring_of_regen.png",
+      "destination": "assets/android/art/items/illustrated-v1/ring_of_regen.png",
+      "bytes": 67922,
+      "sha256": "a46bc92b79a8bb4bbaa28be1d37b929cb4ca3adbdde8ccff362e0896440a782e"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/RING.png",
+      "destination": "assets/android/art/items/illustrated-v1/RING.png",
+      "bytes": 99798,
+      "sha256": "db7865c81116a71422b8d309999a61b310a727374e54efbbe1f065000b95b600"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/robe_of_magi.png",
+      "destination": "assets/android/art/items/illustrated-v1/robe_of_magi.png",
+      "bytes": 97788,
+      "sha256": "4b5a6622533fb5c4c1af2cd7c0d5de62aeea58c8549be0cd844d99f364401c9a"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/rod_of_atos.png",
+      "destination": "assets/android/art/items/illustrated-v1/rod_of_atos.png",
+      "bytes": 58892,
+      "sha256": "94404ad326f29ea78589ae5c3ed13f9d356b71ce24d554923c22eb9d6959fe63"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/sacred_relic.png",
+      "destination": "assets/android/art/items/illustrated-v1/sacred_relic.png",
+      "bytes": 236716,
+      "sha256": "77b30d7db75793ebfe724576d8d3477a36fe3d6f075b59ff34f71e804f131fda"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/safe_frame.png",
+      "destination": "assets/android/art/items/illustrated-v1/safe_frame.png",
+      "bytes": 77442,
+      "sha256": "9dcdd6d1df9048e85c055814d93e606edb0a676b11174e357e30d2b20a1e3e2c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/safe_lock.png",
+      "destination": "assets/android/art/items/illustrated-v1/safe_lock.png",
+      "bytes": 89909,
+      "sha256": "9fd12da2aab5a0772afd4da2cc7601ea5607e19f7943f8e76e87482ed2b1ceba"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/sage_mask.png",
+      "destination": "assets/android/art/items/illustrated-v1/sage_mask.png",
+      "bytes": 92522,
+      "sha256": "4ad9fd50353cfcebf21ad0f3f57c0453353f079b797dce4966a82b0df7d93149"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/salve.png",
+      "destination": "assets/android/art/items/illustrated-v1/salve.png",
+      "bytes": 70622,
+      "sha256": "b1dda5b78a85f67a5a4581c77e1119b771a05d32fad0d340861779a24681ab92"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/sange_and_yasha.png",
+      "destination": "assets/android/art/items/illustrated-v1/sange_and_yasha.png",
+      "bytes": 76787,
+      "sha256": "382176add71ca965bec767656193ce72601d79df7d073e2983c722ec092f2cfe"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/sange.png",
+      "destination": "assets/android/art/items/illustrated-v1/sange.png",
+      "bytes": 41529,
+      "sha256": "fc7deda4d2de190906f535c7ebd1e86a58d89313be9555498cf715c2f81d67cc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/satanic.png",
+      "destination": "assets/android/art/items/illustrated-v1/satanic.png",
+      "bytes": 77662,
+      "sha256": "3430ef6d94af2168279484166970ba42ed2a96784f67e8ca8e4a9b761cb2dcf7"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/SCROLL.png",
+      "destination": "assets/android/art/items/illustrated-v1/SCROLL.png",
+      "bytes": 73588,
+      "sha256": "ecd5cd0f0577afe32be6b112a5bdcf9ce3338a17d873b901250316fb7b532a13"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/scythe_of_vyse.png",
+      "destination": "assets/android/art/items/illustrated-v1/scythe_of_vyse.png",
+      "bytes": 183926,
+      "sha256": "a7a7da980b17e9cede617df014b71d89201c97d86bb9d695b2eb16dbc8f8eb2e"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/SHARD.png",
+      "destination": "assets/android/art/items/illustrated-v1/SHARD.png",
+      "bytes": 55835,
+      "sha256": "97dee4abe12b2f4cb31f61c7f7fcf19c511f24f96bb293eff8cc45ded28929af"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/shawl.png",
+      "destination": "assets/android/art/items/illustrated-v1/shawl.png",
+      "bytes": 81654,
+      "sha256": "319bf9b5553d00694a2f5cf418e33bc4382b19d83ff99958dba49ef0e01d3d29"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/SHIELD.png",
+      "destination": "assets/android/art/items/illustrated-v1/SHIELD.png",
+      "bytes": 112036,
+      "sha256": "f2b3bb84a725e0006307dfc89d6793efb6f180187d89bfc00d6b78fe157268b3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/shivas_guard.png",
+      "destination": "assets/android/art/items/illustrated-v1/shivas_guard.png",
+      "bytes": 438201,
+      "sha256": "fd9b35bee25826d19969a7d474153dfad97e23b9993239982c8c2e00d8dde74f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/silver_edge.png",
+      "destination": "assets/android/art/items/illustrated-v1/silver_edge.png",
+      "bytes": 192742,
+      "sha256": "e414341f1a82e8531687bb74b15477acfa9cfd672bb7d11c414b27b581a86df3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/skill_shard.png",
+      "destination": "assets/android/art/items/illustrated-v1/skill_shard.png",
+      "bytes": 86978,
+      "sha256": "a8625b56ceb1f229b2099c691ebd5b2f23106d759b9d06da8bd1f1543c44ee4d"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/skull_basher.png",
+      "destination": "assets/android/art/items/illustrated-v1/skull_basher.png",
+      "bytes": 76723,
+      "sha256": "283b5f592d6f702cdd15fb622bd05a2a52f59b3996b63c845948f544fb2978b9"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/slippers.png",
+      "destination": "assets/android/art/items/illustrated-v1/slippers.png",
+      "bytes": 72911,
+      "sha256": "baa14a64cb7b0f3a726226a9bb771b872eb4a7f8b98eaf885875741a98192bf2"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/soul_booster.png",
+      "destination": "assets/android/art/items/illustrated-v1/soul_booster.png",
+      "bytes": 75907,
+      "sha256": "77f95c722dddcecded2424da73524ba8056bde42a4d39a5ebd7687df2d11d1eb"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/SPEAR.png",
+      "destination": "assets/android/art/items/illustrated-v1/SPEAR.png",
+      "bytes": 32965,
+      "sha256": "04f3e660504e8ff2691bd1977bcf6fd40dfcb3e141e1349f3ef1b59868b575a7"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/SPIRAL.png",
+      "destination": "assets/android/art/items/illustrated-v1/SPIRAL.png",
+      "bytes": 61691,
+      "sha256": "f73a7cdfd8e797b4a4ab6fda91eb32b5446573d215d3cbb5334f87621a63a145"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/staff_of_wizardry.png",
+      "destination": "assets/android/art/items/illustrated-v1/staff_of_wizardry.png",
+      "bytes": 59460,
+      "sha256": "8d048c0a61b09725c83785237fd043258f7a5828ec51e9f22ecea831699a70b3"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/STAFF.png",
+      "destination": "assets/android/art/items/illustrated-v1/STAFF.png",
+      "bytes": 37906,
+      "sha256": "39eb480a0ec41844a4761b173a8e44c78934a64d4b641e5cd8697050945cfe46"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/STATUE.png",
+      "destination": "assets/android/art/items/illustrated-v1/STATUE.png",
+      "bytes": 86666,
+      "sha256": "3e1ee860826e3ec710ced0025dcd0a1b1ad1b144a7322a8c5755966bd159276e"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/SWORD.png",
+      "destination": "assets/android/art/items/illustrated-v1/SWORD.png",
+      "bytes": 39650,
+      "sha256": "e8fcd23dec769b313d583c618cdfb741f79d263e1c86c0c3e2c316bc0fd2796f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/talisman_of_evasion.png",
+      "destination": "assets/android/art/items/illustrated-v1/talisman_of_evasion.png",
+      "bytes": 87496,
+      "sha256": "766a03603b7c149e11f55e6630e89ebeb4a55910ef99ea66eacc8ccd859e8b9e"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/tango.png",
+      "destination": "assets/android/art/items/illustrated-v1/tango.png",
+      "bytes": 69186,
+      "sha256": "d9f1e47d83e764b0c448d7c6386ca22ebd305f590415c6545ee98b2cd55e6f20"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/ultimate_orb.png",
+      "destination": "assets/android/art/items/illustrated-v1/ultimate_orb.png",
+      "bytes": 416261,
+      "sha256": "a40fba26a35e77822885b905bd33d57473aafacfbc6061a2fc111aa440bf9ce7"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/vanguard_shield.png",
+      "destination": "assets/android/art/items/illustrated-v1/vanguard_shield.png",
+      "bytes": 76663,
+      "sha256": "b1c4f58a4778ebada178a3c03d162081e157e16dd36fee5936262390e8709659"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/VASE.png",
+      "destination": "assets/android/art/items/illustrated-v1/VASE.png",
+      "bytes": 77737,
+      "sha256": "2fdd60bff0dc8bd6d933f7bed27ae0936edf260590e347ce539207a007a8732c"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/viper_bite.png",
+      "destination": "assets/android/art/items/illustrated-v1/viper_bite.png",
+      "bytes": 47326,
+      "sha256": "9b06bd500069c8276a4674afaa33615445c8c5e5d88db8977fef60f4c5ce851b"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/vitality_booster.png",
+      "destination": "assets/android/art/items/illustrated-v1/vitality_booster.png",
+      "bytes": 73301,
+      "sha256": "330e7512d43f74bd1e89e01cf4d07368cb919b7ebc9541aa158a1f4a9933c80b"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/void_stone.png",
+      "destination": "assets/android/art/items/illustrated-v1/void_stone.png",
+      "bytes": 65854,
+      "sha256": "7828abbdbd7e74aac99e65a626bc434feecf7008c61aa2c13973b01fb963fb4f"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/voodoo_mask.png",
+      "destination": "assets/android/art/items/illustrated-v1/voodoo_mask.png",
+      "bytes": 79660,
+      "sha256": "c95b91d480d2a7b2b4e31b0200501c617b56dbf83951069c2dbe3e8f3f2203dc"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/witch_blade.png",
+      "destination": "assets/android/art/items/illustrated-v1/witch_blade.png",
+      "bytes": 52747,
+      "sha256": "464dc901cb4ee5825c3bddf1a68282bfcf00cf42f5d0ecd6ec554499b5748157"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/wraith_band.png",
+      "destination": "assets/android/art/items/illustrated-v1/wraith_band.png",
+      "bytes": 70143,
+      "sha256": "322ce1f31daf7b9bd63fc82e5dcabac605623d41897c9b6c574bfa2a3670eaf8"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/yasha_and_kaya.png",
+      "destination": "assets/android/art/items/illustrated-v1/yasha_and_kaya.png",
+      "bytes": 76067,
+      "sha256": "de7508eecd63d05fd11f4db1c0ebf4ec6da08dcfe127b0de0488b1c0944a40cd"
+    },
+    {
+      "source": "app/src/main/assets/art/items/illustrated-v1/yasha.png",
+      "destination": "assets/android/art/items/illustrated-v1/yasha.png",
+      "bytes": 34119,
+      "sha256": "547b307d28ab046cac1a1dc3c53c701dce81062545ef9f7d109b864ddce20570"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/arena-v1.jpg",
+      "destination": "assets/android/art/scenes/arena-v1.jpg",
+      "bytes": 467014,
+      "sha256": "c4ed7f4d39fe537aa9e269b3e3808d61c98ea52b07ac98615ff803f0d6282d34"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/blocker-v1.jpg",
+      "destination": "assets/android/art/scenes/blocker-v1.jpg",
+      "bytes": 74705,
+      "sha256": "5c7499ab8a48dcc20437b361dc02dc32658fd3133ee6d9d5ce28317dd1d63f3f"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/camp-v1.jpg",
+      "destination": "assets/android/art/scenes/camp-v1.jpg",
+      "bytes": 467014,
+      "sha256": "c4ed7f4d39fe537aa9e269b3e3808d61c98ea52b07ac98615ff803f0d6282d34"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/camp-v2.jpg",
+      "destination": "assets/android/art/scenes/camp-v2.jpg",
+      "bytes": 195454,
+      "sha256": "aff6d5bbfd71e799dfd60ddc201d239e2503becad519595ade1e84ed9a1ca331"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/clinic-v1.jpg",
+      "destination": "assets/android/art/scenes/clinic-v1.jpg",
+      "bytes": 80844,
+      "sha256": "0d78c5be09cfbe0f93a62f80ca589087207170aaf6bccd8ebde520763b46fb04"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/depot-v1.jpg",
+      "destination": "assets/android/art/scenes/depot-v1.jpg",
+      "bytes": 81583,
+      "sha256": "78d4f4f2a2c2a418bfa5fa2c93f77b6263128a2a6c8b842b0119282f5fc97bea"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/library-v1.jpg",
+      "destination": "assets/android/art/scenes/library-v1.jpg",
+      "bytes": 82747,
+      "sha256": "ad725ef0dda3acb6075f6b9bf55162f42b95cf441e2903c643d1b9fb47adee28"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/rest-v1.jpg",
+      "destination": "assets/android/art/scenes/rest-v1.jpg",
+      "bytes": 467014,
+      "sha256": "c4ed7f4d39fe537aa9e269b3e3808d61c98ea52b07ac98615ff803f0d6282d34"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/ruins-menu-v1.jpg",
+      "destination": "assets/android/art/scenes/ruins-menu-v1.jpg",
+      "bytes": 467014,
+      "sha256": "c4ed7f4d39fe537aa9e269b3e3808d61c98ea52b07ac98615ff803f0d6282d34"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/ruins-menu-v2.jpg",
+      "destination": "assets/android/art/scenes/ruins-menu-v2.jpg",
+      "bytes": 505215,
+      "sha256": "66faad1e121bd8a1978923e0c38e4572c1beac258e0e9ea491cd2fd3c5a7c8c5"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/storage-v1.jpg",
+      "destination": "assets/android/art/scenes/storage-v1.jpg",
+      "bytes": 83017,
+      "sha256": "b5b3d2a66e7d773f26fa44dd122532f2ff16214af4d77255e6751e0de60b6507"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/terminal-v1.jpg",
+      "destination": "assets/android/art/scenes/terminal-v1.jpg",
+      "bytes": 83991,
+      "sha256": "6a0105bad7cd8b233f1841821890bc7dc9314626b6bb3b12da6a5ffa46f586fb"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/vault-v1.jpg",
+      "destination": "assets/android/art/scenes/vault-v1.jpg",
+      "bytes": 97336,
+      "sha256": "ef8f09c1e79ba4d77569bda93d17d98818f224b1e49bb759491ed6f5262b9d08"
+    },
+    {
+      "source": "app/src/main/assets/art/scenes/workshop-v1.jpg",
+      "destination": "assets/android/art/scenes/workshop-v1.jpg",
+      "bytes": 79543,
+      "sha256": "c82d122a515600272388c7db577d72853ae298bf3fb9baf4a9c226a94439017b"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/aghanim-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/aghanim-v1.png",
+      "bytes": 645134,
+      "sha256": "3444eef706a5976b86bee11016ff461ef11e2b9969ddb3f9f17e2604ee0b413f"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/enter-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/enter-v1.png",
+      "bytes": 1736244,
+      "sha256": "fb50924708f66ae3e248614ba58b52b51e81b22c26adc312e5df4a219e619111"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/floor-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/floor-v1.png",
+      "bytes": 1188961,
+      "sha256": "50d10acaadf98a4c93e079c485587e0c8e2042ae1166bae8bbc0c9a564b0ba0f"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/forge-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/forge-v1.png",
+      "bytes": 1636153,
+      "sha256": "eb89d0ac62897f4b907412e53499753dd2fe70d5374787823e17551fcc0c4f16"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/rapier-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/rapier-v1.png",
+      "bytes": 709611,
+      "sha256": "0659e1323d37ee455c8dcc329c14305e9250831f15df95ff9109b3e4f44b39d4"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/rebirth-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/rebirth-v1.png",
+      "bytes": 1826532,
+      "sha256": "774d5dc9a8e99f2899de09d01e0cb9942cb02952b64ce4099a939e21d9474f05"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/rest-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/rest-v1.png",
+      "bytes": 1610594,
+      "sha256": "93c34579dd6a8f6a14e96e93f2bae6e499691cfa9fe78e23580e5c05002163a1"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/shard-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/shard-v1.png",
+      "bytes": 970545,
+      "sha256": "2d926be6452d3aa912c937d5a63376814df51f4b529948c9d673636592a52904"
+    },
+    {
+      "source": "app/src/main/assets/art/tower/v0.1.7/supply-v1.png",
+      "destination": "assets/android/art/tower/v0.1.7/supply-v1.png",
+      "bytes": 1928670,
+      "sha256": "c0370654067fd1cd6f06d83a7b165f54dbe0a07f6c6e182a2386f1b33c9e2ba6"
+    },
+    {
+      "source": "app/src/main/assets/licenses/control-items-ai.txt",
+      "destination": "assets/android/licenses/control-items-ai.txt",
+      "bytes": 502,
+      "sha256": "72c4787382f6af2146cf25d435c86bccfa2d05e0846d317e61846141bb08eefd"
+    },
+    {
+      "source": "app/src/main/assets/licenses/equipment-expansion-ai.txt",
+      "destination": "assets/android/licenses/equipment-expansion-ai.txt",
+      "bytes": 716,
+      "sha256": "0f0fc2c8279841eafbf75aea35bb961f367beaf903071c3a9188b1514e3a0130"
+    },
+    {
+      "source": "app/src/main/assets/licenses/game-icons-cc-by-3.0.txt",
+      "destination": "assets/android/licenses/game-icons-cc-by-3.0.txt",
+      "bytes": 19467,
+      "sha256": "e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76"
+    },
+    {
+      "source": "app/src/main/assets/licenses/game-icons-credits.txt",
+      "destination": "assets/android/licenses/game-icons-credits.txt",
+      "bytes": 5354,
+      "sha256": "45c45106f5176a9ad8ca771bde18360bd0e073bcc0e1d24cdf4396ff7bd891b5"
+    },
+    {
+      "source": "app/src/main/assets/licenses/game-icons-upstream-license.txt",
+      "destination": "assets/android/licenses/game-icons-upstream-license.txt",
+      "bytes": 1421,
+      "sha256": "fac95252798668fab5ea2cb08338f2ebc6bf894a72b19a15af1ca62f0a6d2e79"
+    }
+  ]
+}

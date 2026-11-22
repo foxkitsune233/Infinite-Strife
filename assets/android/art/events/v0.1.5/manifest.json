@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "assets": {
+    "frozen_shrine.attune": {
+      "file": "v0.1.5/frozen_shrine.attune.webp",
+      "source": "art-generation\\v0.1.5-repaired\\frozen_shrine.attune\\frozen_shrine.attune.png",
+      "sourceSha256": "5e42cfa5e30b8c9c11bd3fc820499ce4bf6775ff9177add3f135075b466cc148",
+      "repaired": true
+    },
+    "frozen_shrine.pray": {
+      "file": "v0.1.5/frozen_shrine.pray.webp",
+      "source": "art-generation\\v0.1.5-repaired\\frozen_shrine.pray\\frozen_shrine.pray.png",
+      "sourceSha256": "b4e200fa61cdde77688c64ed654bbdb9b4c26d7b405bb0b78cc6a91d2097aa96",
+      "repaired": true
+    },
+    "frozen_shrine.leave": {
+      "file": "v0.1.5/frozen_shrine.leave.webp",
+      "source": "art-generation\\v0.1.5-repaired\\frozen_shrine.leave\\frozen_shrine.leave.png",
+      "sourceSha256": "dd6188e404f13d0b0232e4c453ff39ea8771cbbde78dccbc8f53c18f3d4d80a9",
+      "repaired": true
+    },
+    "war_banner.claim": {
+      "file": "v0.1.5/war_banner.claim.webp",
+      "source": "art-generation\\v0.1.5-repaired\\war_banner.claim\\war_banner.claim.png",
+      "sourceSha256": "1774c78f7c30269f314a552c857837436aad967db315d5ac5e3813b4533a7b21",
+      "repaired": true
+    },
+    "war_banner.blood_rite": {
+      "file": "v0.1.5/war_banner.blood_rite.webp",
+      "source": "art-generation\\v0.1.5-repaired\\war_banner.blood_rite\\war_banner.blood_rite.png",
+      "sourceSha256": "9ace290596f058145fcfadb8caedc833ca8261c3ea0017ff2892e39a9283ef5e",
+      "repaired": true
+    },
+    "war_banner.leave": {
+      "file": "v0.1.5/war_banner.leave.webp",
+      "source": "art-generation\\v0.1.5-repaired\\war_banner.leave\\war_banner.leave.png",
+      "sourceSha256": "4fa4865db86a702030dadfa1149b59af8a590fbd866179086ada0edd4b00e26d",
+      "repaired": true
+    },
+    "roving_caravan.buy": {
+      "file": "v0.1.5/roving_caravan.buy.webp",
+      "source": "art-generation\\v0.1.5-repaired\\roving_caravan.buy\\roving_caravan.buy.png",
+      "sourceSha256": "936b9bc5154c9514697da1a630ec75fa321c3ab3806f957fbfd134930092bba9",
+      "repaired": true
+    },
+    "roving_caravan.sell": {
+      "file": "v0.1.5/roving_caravan.sell.webp",
+      "source": "art-generation\\v0.1.5-repaired\\roving_caravan.sell\\roving_caravan.sell.png",
+      "sourceSha256": "efa056c243e4a989e31a3bc5a0ebf392aa965d62734ca4c02e4a5680c9bf9c66",
+      "repaired": true
+    },
+    "roving_caravan.depart": {
+      "file": "v0.1.5/roving_caravan.depart.webp",
+      "source": "art-generation\\v0.1.5-repaired\\roving_caravan.depart\\roving_caravan.depart.png",
+      "sourceSha256": "dfb89dd77cb788700607f6b6d5d3c526c63617e7e5b3eba18271e717ca7c76cf",
+      "repaired": true
+    },
+    "ropeway_bridge.cross": {
+      "file": "v0.1.5/ropeway_bridge.cross.webp",
+      "source": "art-generation\\v0.1.5-repaired\\ropeway_bridge.cross\\ropeway_bridge.cross.png",
+      "sourceSha256": "d9bfa827dfbfcdd741db2c2970e9770b44e83d02c70cf1f9054c9a23d867240b",
+      "repaired": true
+    },
+    "ropeway_bridge.repair": {
+      "file": "v0.1.5/ropeway_bridge.repair.webp",
+      "source": "art-generation\\v0.1.5-repaired\\ropeway_bridge.repair\\ropeway_bridge.repair.png",
+      "sourceSha256": "83eea3e308433a11bc5b65671eefe516725c0c2f5cf39fa5c988b11e14c71a7a",
+      "repaired": true
+    },
+    "ropeway_bridge.leave": {
+      "file": "v0.1.5/ropeway_bridge.leave.webp",
+      "source": "art-generation\\v0.1.5-repaired\\ropeway_bridge.leave\\ropeway_bridge.leave.png",
+      "sourceSha256": "4f33c07c513365e8d71d407d2e6c1a39cf9f7e62a9204b2bb21a63a05f010985",
+      "repaired": true
+    },
+    "pact_altar.offer_medicine": {
+      "file": "v0.1.5/pact_altar.offer_medicine.webp",
+      "source": "art-generation\\v0.1.5-repaired\\pact_altar.offer_medicine\\pact_altar.offer_medicine.png",
+      "sourceSha256": "8cd098be18a78d72a30148a1d7883e396246dbc68b66bd5a42496f1875c9e38a",
+      "repaired": true
+    },
+    "pact_altar.offer_blood": {
+      "file": "v0.1.5/pact_altar.offer_blood.webp",
+      "source": "art-generation\\v0.1.5-repaired\\pact_altar.offer_blood\\pact_altar.offer_blood.png",
+      "sourceSha256": "00aa83c1291960cdec98d900eccc22a57ac82de47f886436b10a193fd568c214",
+      "repaired": true
+    },
+    "pact_altar.refuse": {
+      "file": "v0.1.5/pact_altar.refuse.webp",
+      "source": "art-generation\\v0.1.5-repaired\\pact_altar.refuse\\pact_altar.refuse.png",
+      "sourceSha256": "154faccbaea5775baac5b3f8313c662234748f871c2e6afaefabf18ceedcf061",
+      "repaired": true
+    },
+    "alchemy_lab.distill": {
+      "file": "v0.1.5/alchemy_lab.distill.webp",
+      "source": "art-generation\\v0.1.5-repaired\\alchemy_lab.distill\\alchemy_lab.distill.png",
+      "sourceSha256": "370c1489541f64cbcc2d728f3d5d6edea35385fe9e94fd7b7ea162a8bb7df303",
+      "repaired": true
+    },
+    "alchemy_lab.break_seal": {
+      "file": "v0.1.5/alchemy_lab.break_seal.webp",
+      "source": "art-generation\\v0.1.5-repaired\\alchemy_lab.break_seal\\alchemy_lab.break_seal.png",
+      "sourceSha256": "4e240d502dd4df738cceac8246b0ec9a892ba7d5db5faf7c4d80e80bcf688a43",
+      "repaired": true
+    },
+    "alchemy_lab.leave": {
+      "file": "v0.1.5/alchemy_lab.leave.webp",
+      "source": "art-generation\\v0.1.5-repaired\\alchemy_lab.leave\\alchemy_lab.leave.png",
+      "sourceSha256": "9fae67a323def6e547f3eee5d361ae4bd1533aeec14019e1c5280c1c8173140d",
+      "repaired": true
+    },
+    "hunter_camp.barter": {
+      "file": "v0.1.5/hunter_camp.barter.webp",
+      "source": "art-generation\\v0.1.5-repaired\\hunter_camp.barter_flat\\hunter_camp.barter_flat.png",
+      "sourceSha256": "0a8a608be1b1993067fa3d57ffae1c785bd0601bbe22c394751b1454fc3fd03d",
+      "repaired": true
+    },
+    "hunter_camp.share_rations": {
+      "file": "v0.1.5/hunter_camp.share_rations.webp",
+      "source": "art-generation\\v0.1.5-repaired\\hunter_camp.share_rations\\hunter_camp.share_rations.png",
+      "sourceSha256": "984610849733257c4d044c174461dcdf6536011e38e175c73c757eb23b467779",
+      "repaired": true
+    },
+    "hunter_camp.leave": {
+      "file": "v0.1.5/hunter_camp.leave.webp",
+      "source": "art-generation\\v0.1.5-repaired\\hunter_camp.leave_flat\\hunter_camp.leave_flat.png",
+      "sourceSha256": "abfc561e8bdbb2df4f4b4f382c33934f89b0be7fcfbfbda91bf3a3b6978ce927",
+      "repaired": true
+    },
+    "moonwell_echo.resonate": {
+      "file": "v0.1.5/moonwell_echo.resonate.webp",
+      "source": "art-generation\\v0.1.5-repaired\\moonwell_echo.resonate\\moonwell_echo.resonate.png",
+      "sourceSha256": "27a23ee2411cbef71ba833f45169665c5b422800a29926a721ea8773b84e4bce",
+      "repaired": true
+    },
+    "moonwell_echo.draw_echo": {
+      "file": "v0.1.5/moonwell_echo.draw_echo.webp",
+      "source": "art-generation\\v0.1.5-repaired\\moonwell_echo.draw_echo\\moonwell_echo.draw_echo.png",
+      "sourceSha256": "28bdb8a619c53691c3c9236e9ec9499299cfcba555e3a948aeff80a517eda009",
+      "repaired": true
+    },
+    "moonwell_echo.leave": {
+      "file": "v0.1.5/moonwell_echo.leave.webp",
+      "source": "art-generation\\v0.1.5-repaired\\moonwell_echo.leave\\moonwell_echo.leave.png",
+      "sourceSha256": "51200bda379dac5ee7749a36807eda271b9ec85f53a7a2a81cace58a3b84527b",
+      "repaired": true
+    }
+  }
+}

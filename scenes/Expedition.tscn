@@ -1,0 +1,141 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/ExpeditionScreen.gd" id="1_expedition"]
+[ext_resource type="Texture2D" path="res://assets/android/art/scenes/ruins-menu-v2.jpg" id="2_ruins"]
+[ext_resource type="Script" path="res://scripts/ui/InventoryShelf.gd" id="3_shelf"]
+
+[node name="Expedition" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_expedition")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.018, 0.045, 0.075, 1)
+mouse_filter = 2
+
+[node name="ExpeditionBackdrop" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_ruins")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_scroll_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="Layout" type="VBoxContainer" parent="Scroll"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Header" type="HBoxContainer" parent="Scroll/Layout"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Scroll/Layout/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.78, 0.24, 1)
+theme_override_font_sizes/font_size = 32
+text = "远征路线"
+
+[node name="Back" type="Button" parent="Scroll/Layout/Header"]
+custom_minimum_size = Vector2(170, 54)
+layout_mode = 2
+text = "返回整备"
+
+[node name="RouteHint" type="Label" parent="Scroll/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 18
+text = "战斗与事件掉落可直接手动放入背包；离开会丢弃地面物品。"
+
+[node name="NodeList" type="HBoxContainer" parent="Scroll/Layout"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="Current" type="Label" parent="Scroll/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.4, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Resolve" type="Button" parent="Scroll/Layout"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "结算当前节点"
+
+[node name="EventChoices" type="VBoxContainer" parent="Scroll/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LootCaption" type="Label" parent="Scroll/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.9, 0.65, 1)
+theme_override_font_sizes/font_size = 21
+text = "地面掉落"
+
+[node name="LootItems" type="Control" parent="Scroll/Layout"]
+layout_mode = 2
+script = ExtResource("3_shelf")
+
+[node name="LootActions" type="HBoxContainer" parent="Scroll/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CollectAll" type="Button" parent="Scroll/Layout/LootActions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "一键放入"
+
+[node name="Leave" type="Button" parent="Scroll/Layout"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+text = "返回路线（未拾取掉落将丢弃）"
+
+[node name="Status" type="Label" parent="Scroll/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 2
+
+[connection signal="pressed" from="Scroll/Layout/Header/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Scroll/Layout/Resolve" to="." method="_on_resolve_pressed"]
+[connection signal="pressed" from="Scroll/Layout/LootActions/CollectAll" to="." method="_on_collect_all_pressed"]
+[connection signal="pressed" from="Scroll/Layout/Leave" to="." method="_on_leave_pressed"]

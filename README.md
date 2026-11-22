@@ -1,29 +1,33 @@
-# Infinite Strife
+# Infinite Strife — Godot
 
-Android 单人远征与卡牌构筑游戏。
+这是 **Infinite Strife / 无尽纷争** 的 Godot 迁移工程。与 Android 原生版本并行开发，对齐 Android 1.0；英雄任务改版按用户确认的历史提交 `255a1b2` 恢复。验收追平后由 Godot 接替。Godot 使用独立新存档，当前复用 Android 美术。
 
-仓库：https://github.com/foxkitsune233/Infinite-Strife
+## 当前开发入口
 
-## 项目方向
+- Godot 开发分支：`codex/godot-migration`，该分支根目录为Godot工程；仓库`main`继续保留Android版本。两端存档独立，暂不合并Godot分支到Android主线。
 
-当前 Android 版是可提交的课程设计版本，后续仍会继续修复问题、平衡数值和补充内容。
+- Android 参考仓库：[foxkitsune233/Infinite-Strife](https://github.com/foxkitsune233/Infinite-Strife)。迁移基线见 `docs/migration/android-baseline.json`。
+- 功能迁移状态与剩余项见 `docs/migration/parity-ledger.md`。
+- `./tools/capture_android_baseline.ps1` 更新源文件哈希及本地开发变更。
+- `./tools/export_android_content.ps1` 导出真实物品、配方、卡牌及羁绊；`-Check` 核对快照。
+- `./tools/sync_android_art.ps1` 增量同步美术。
+- `./tools/verify_migration.ps1` 等待实际 Godot 进程完成，检查退出码及错误日志，输出 `tools/build/migration-verification.json`。
 
-项目将并行推进一个 Godot 原创设定版本：先完成 Windows 与 Android 原生运行的战斗闭环，再逐步替代 Android 专属界面与运行时。Godot 版不会直接搬运第三方角色、美术或名称；它以原创角色、世界观、卡图和音画资产为前提。完整范围、阶段门槛和迁移条件见 [Godot 过渡路线图](docs/ROADMAP.md)。
+旧阶段 A 的四项检查和“原创资源”边界为历史记录；当前范围以 2026-10-22 完整迁移计划和迁移账本为准。
 
-原生 iOS 包不在当前承诺范围内。未来只有在具备合规 macOS/Xcode 环境与真实 iPhone 验收设备后才启动。网页导出属于 Godot 版完成后的可选分发渠道，不是迁移前置条件。
+## 阶段 A
 
-## 开发
+- 原创占位菜单与战斗原型；
+- 固定随机种子的一对一战斗日志；
+- Windows 与 Android Debug 导出；
+- 每个导入资源必须先登记来源、授权和替换状态。
 
-- 工程模块：`app`（Android）与 `shared`（共享规则）。
-- 环境：JDK 17或更高版本、Android SDK；SDK路径配置在本地 `local.properties`。
-- 构建：Windows运行 `./gradlew.bat :app:assembleDebug`。
-- 测试由外部执行，验收清单位于 `docs/testing/`；构建成功不表示测试已通过。
-- 美术资源不随源码分发，获取及补齐说明见 [ART-ASSETS](docs/ART-ASSETS.md)。
+当前复用的 Android 资源通过 `assets/android/manifest.json` 及 `assets/ASSET_REGISTER.md` 记录，后续逐步替换。
 
-## 命名与版本
+## 本地验证
 
-应用显示名 `Infinite Strife`，工程及仓库名 `Infinite-Strife`。Android包名沿用 `com.example.douqiuqiu`，保持覆盖安装与存档兼容。
+当前验证使用 Godot 4.7.1 Stable。运行全量验证，可显式传入引擎路径，或设置 `GODOT_BIN`：
 
-新安装包使用 `Infinite-Strife-0.1.5-XXXX-XXXX-XXXX.apk` 格式；版本从 `app/version.properties` 读取。具体约定见 [命名规范](docs/releases/NAMING.md) 和 [修改索引](docs/releases/MODIFICATION_INDEX.md)。
-
-当前工作副本目录可以保留旧名 `DouQiuQiu`；新克隆推荐目录名 `Infinite-Strife`。历史包和测试记录保留原名以便追溯。
+```powershell
+./tools/verify_migration.ps1 -GodotPath '你的Godot控制台程序绝对路径'
+```

@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/CraftingScreen.gd" id="1_crafting"]
+
+[node name="Crafting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_crafting")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.018, 0.045, 0.075, 1)
+mouse_filter = 2
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 26.0
+offset_right = -26.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Header" type="HBoxContainer" parent="Layout"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Layout/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.78, 0.24, 1)
+theme_override_font_sizes/font_size = 32
+text = "合成工坊"
+
+[node name="Back" type="Button" parent="Layout/Header"]
+custom_minimum_size = Vector2(170, 54)
+layout_mode = 2
+text = "返回整备"
+
+[node name="Hint" type="Label" parent="Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 18
+text = "可合成项目优先显示；锁定材料不会被消耗。"
+
+[node name="Scroll" type="ScrollContainer" parent="Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Recipes" type="GridContainer" parent="Layout/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+alignment = 1
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="Status" type="Label" parent="Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 2
+
+[connection signal="pressed" from="Layout/Header/Back" to="." method="_on_back_pressed"]
