@@ -11,6 +11,8 @@ config_version=5
 [application]
 
 config/name="Infinite Strife"
+config/version="0.1.0-preview.1"
+config/icon="res://assets/android/art/branding/juggernaut-launcher-portrait-v1.png"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
@@ -31,6 +33,8 @@ window/stretch/mode="canvas_items"
 project/assembly_name="Infinite Strife"
 
 [rendering]
+
+textures/vram_compression/import_etc2_astc=true
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
