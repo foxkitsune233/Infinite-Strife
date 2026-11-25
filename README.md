@@ -4,6 +4,8 @@
 
 ## 当前开发入口
 
+- 双端预览版下载：[Godot 0.1.0-preview.1（Windows / Android）](https://github.com/foxkitsune233/Infinite-Strife/releases/tag/godot-v0.1.0-preview.1)。含Windows ZIP、Android APK和SHA256校验值；Android尚未完成真机验收，详见发行说明。
+
 - Godot 开发分支：`codex/godot-migration`，该分支根目录为Godot工程；仓库`main`继续保留Android版本。两端存档独立，暂不合并Godot分支到Android主线。
 
 - Android 参考仓库：[foxkitsune233/Infinite-Strife](https://github.com/foxkitsune233/Infinite-Strife)。迁移基线见 `docs/migration/android-baseline.json`。

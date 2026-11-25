@@ -83,3 +83,8 @@
 ## 2026-11-22 Git接入
 - 用户授权新分支接入；Godot工程初始化Git并关联foxkitsune233/Infinite-Strife，分支codex/godot-migration，根目录为Godot项目；Android main不改。
 - 提交包含源码、原版美术、数据、测试和文档；排除缓存、导出包、日志、模板和签名文件。验证基线100项通过，尚未发布安装包或Release。
+
+## 2026-11-25 双端预览版发布
+- 已发布godot-v0.1.0-preview.1，Windows x64独立EXE ZIP、Android API24+ arm64/x86_64发布签名APK及SHA256SUMS。
+- Godot4.7.1匹配模板构建，100项回归通过，Windows独立目录实际OpenGL启动退出0，APK签名/包名/版本/架构/非调试检查通过，远端附件摘要匹配。
+- 包名org.infinitestrife.godot，与原生Android并存；签名仅在本机用户目录，需安全备份。模拟器缺少加速驱动，未完成Android安装启动或真机验收，已在发布说明披露。
