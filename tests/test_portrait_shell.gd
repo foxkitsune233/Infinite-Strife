@@ -5,6 +5,7 @@ const ScreenRouterScript = preload("res://scripts/ui/ScreenRouter.gd")
 var _failed := false
 
 func _init() -> void:
+	_assert_equal(ProjectSettings.get_setting("display/window/handheld/orientation"), 1, "Android must lock portrait, not only use a portrait canvas")
 	_assert_equal(ProjectSettings.get_setting("display/window/size/viewport_width"), 720, "portrait viewport width")
 	_assert_equal(ProjectSettings.get_setting("display/window/size/viewport_height"), 1280, "portrait viewport height")
 	_assert_equal(ProjectSettings.get_setting("display/window/stretch/mode"), "canvas_items", "mobile UI stretch mode")

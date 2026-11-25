@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Infinite Strife"
-config/version="0.1.0-preview.1"
+config/version="0.1.0-preview.2"
 config/icon="res://assets/android/art/branding/juggernaut-launcher-portrait-v1.png"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
@@ -27,6 +27,7 @@ window/size/viewport_height=1280
 window/size/window_width_override=360
 window/size/window_height_override=640
 window/stretch/mode="canvas_items"
+window/handheld/orientation=1
 
 [dotnet]
 
