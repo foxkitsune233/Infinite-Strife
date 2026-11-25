@@ -88,3 +88,8 @@
 - 已发布godot-v0.1.0-preview.1，Windows x64独立EXE ZIP、Android API24+ arm64/x86_64发布签名APK及SHA256SUMS。
 - Godot4.7.1匹配模板构建，100项回归通过，Windows独立目录实际OpenGL启动退出0，APK签名/包名/版本/架构/非调试检查通过，远端附件摘要匹配。
 - 包名org.infinitestrife.godot，与原生Android并存；签名仅在本机用户目录，需安全备份。模拟器缺少加速驱动，未完成Android安装启动或真机验收，已在发布说明披露。
+
+## 2026-11-25 Android方向热修复
+- 用户报告横屏容器中呈现竖屏画面；检查旧APK清单确认screenOrientation=0，项目只设竖屏画布。
+- 设置handheld/orientation=1，新APK最终清单验证竖屏；versionCode102、原包名与证书不变，可覆盖更新保留存档。竖屏回归、294项按键和438项成长展示检查通过。
+- 已发布godot-v0.1.0-preview.2（Android热修复），旧版页面提示升级；Windows继续preview.1。构建脚本新增APK方向与签名硬检查，真机验收限制仍保留。
