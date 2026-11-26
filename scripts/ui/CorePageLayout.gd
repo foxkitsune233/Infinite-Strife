@@ -123,6 +123,9 @@ static func install(page: Control, active_page: String, title: String, subtitle:
 	for destination in ["expedition", "preparation", "home"]:
 		var button := Button.new()
 		button.text = {"expedition": "远征", "preparation": "整备", "home": "营地"}[destination]
+		var session := page.get_tree().root.get_node_or_null("AppSession")
+		if session != null and session.ensure_preparation_state().phase != PreparationState.Phase.HOME:
+			button.text = {"expedition": "当前路线", "preparation": "随身整备", "home": "暂离远征"}[destination]
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.custom_minimum_size.y = TOUCH_HEIGHT
 		button.add_theme_font_size_override("font_size", preload("res://scripts/app/AppSettings.gd").scaled_font_size(28))
@@ -134,6 +137,11 @@ static func install(page: Control, active_page: String, title: String, subtitle:
 
 static func _navigate(page: Control, destination: String) -> void:
 	var session := page.get_tree().root.get_node("AppSession")
+	if destination == "expedition" and session.ensure_preparation_state().phase == PreparationState.Phase.JOURNEY:
+		if page.has_method("show_route_overview"):
+			page.call("show_route_overview", true)
+			return
+		session.set_meta("journey_route_overview", true)
 	if not page.has_method("_on_expedition_pressed"):
 		session.call("save_progress")
 	ScreenRouter.open(page.get_tree(), destination)

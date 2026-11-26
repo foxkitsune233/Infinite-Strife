@@ -52,6 +52,9 @@ var _just_revealed := {}
 var packing_panel: VBoxContainer
 var selected_loot := ""
 var selected_rotation := false
+var _packing_mode := "equipment"
+var _route_overview := false
+var _route_button: Button
 var target_scroll: ScrollContainer
 var target_content: VBoxContainer
 var choosing_target := false
@@ -68,6 +71,15 @@ func _ready() -> void:
 	session = _session()
 	preparation = session.call("ensure_preparation_state") as PreparationState
 	journey = session.call("ensure_journey_state") as JourneyState
+	_route_overview = bool(session.get_meta("journey_route_overview", false))
+	session.remove_meta("journey_route_overview")
+	_route_button = Button.new()
+	_route_button.custom_minimum_size.y = CorePageLayout.TOUCH_HEIGHT
+	_route_button.add_theme_font_size_override("font_size", 26)
+	CorePageLayout.paint_button(_route_button)
+	_route_button.pressed.connect(func() -> void: show_route_overview(not _route_overview))
+	$Scroll/Layout.add_child(_route_button)
+	$Scroll/Layout.move_child(_route_button, 0)
 	CorePageLayout.install(self, "expedition", "远征", "挑战进度与本局物资")
 	$Scroll.offset_top = 90
 	$Scroll.offset_bottom = -CorePageLayout.NAV_RESERVE
@@ -94,8 +106,11 @@ func _ready() -> void:
 	$Scroll/Layout.add_child(appraisal_art)
 	$Scroll/Layout.move_child(appraisal_art, loot_items.get_index())
 	packing_panel = VBoxContainer.new()
-	$Scroll/Layout.add_child(packing_panel)
-	$Scroll/Layout.move_child(packing_panel, appraisal_art.get_index())
+	var packing_surface := PanelContainer.new()
+	packing_surface.add_theme_stylebox_override("panel", CorePageLayout.frame(Color("09394c"), Color("30a7c7")))
+	packing_surface.add_child(packing_panel)
+	$Scroll/Layout.add_child(packing_surface)
+	$Scroll/Layout.move_child(packing_surface, appraisal_art.get_index())
 	scouting_button = Button.new()
 	scouting_button.text = "查看敌情"
 	scouting_button.custom_minimum_size.y = 54
@@ -136,6 +151,7 @@ func _refresh() -> void:
 	$Scroll/Layout/LootActions.visible = not journey.loot.is_empty()
 	extract_button.visible = not journey.finished() and int(journey.current().type) == JourneyState.NodeType.REST
 	scouting_button.visible = _can_scout()
+	_route_button.visible = not choosing_target and not journey.finished()
 	if journey.finished():
 		current.text = {"death": "挑战失败，返回营地重新整备", "extracted": "已安全撤离"}.get(journey.ending, "远征完成")
 		resolve_button.disabled = true
@@ -151,6 +167,17 @@ func _refresh() -> void:
 	leave_button.disabled = not journey.resolved or not journey.reveal_at.is_empty()
 	if status.text.is_empty():
 		status.text = "进入节点后先完成结算；背包放不下的物品会保留在地面。"
+	_route_button.visible = not choosing_target
+	_route_button.text = "查看当前节点物品" if _route_overview else "返回路线总览 · 保留地面物品"
+	for control in [loot_items, $Scroll/Layout/LootCaption, $Scroll/Layout/LootActions, appraisal_art, packing_panel.get_parent()]:
+		if _route_overview: control.hide()
+	if int(node.type) != JourneyState.NodeType.REST:
+		leave_button.text = "前往下一节点" if journey.loot.is_empty() else "前往下一节点 · 丢弃未拾取物品"
+
+func show_route_overview(value: bool = true) -> void:
+	_route_overview = value
+	_refresh()
+	($Scroll as ScrollContainer).scroll_vertical = 0
 
 func _show_target_list() -> void:
 	var previous_progress := preparation.quest_progress.duplicate(true)
@@ -726,12 +753,33 @@ func _on_loot_pressed(item_id: String) -> void:
 	selected_rotation = false
 	status.text = "已选中物品，点击格子放置。"
 	_rebuild_packing()
+	_focus_packing.call_deferred()
+
+func _focus_packing() -> void:
+	await get_tree().process_frame
+	var selection := packing_panel.get_node_or_null("SelectedItem") as Control
+	if selection != null: ($Scroll as ScrollContainer).ensure_control_visible(selection)
 
 func _rebuild_packing() -> void:
 	_clear(packing_panel)
 	packing_panel.visible = journey.resolved and not journey.finished() and (not journey.loot.is_empty() or journey.drop_serial > 0 and int(journey.current().type) != JourneyState.NodeType.REST)
+	packing_panel.get_parent().visible = packing_panel.visible
 	if not packing_panel.visible:
 		return
+	var tabs := HBoxContainer.new()
+	packing_panel.add_child(tabs)
+	for mode in ["equipment", "bags"]:
+		var tab := Button.new()
+		tab.text = "即时换装" if mode == "equipment" else "背包与安全箱"
+		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		tab.custom_minimum_size.y = CorePageLayout.TOUCH_HEIGHT
+		tab.add_theme_font_size_override("font_size", 26)
+		CorePageLayout.paint_button(tab, mode == _packing_mode)
+		tab.pressed.connect(func() -> void:
+			_packing_mode = mode
+			_rebuild_packing()
+		)
+		tabs.add_child(tab)
 	var tools := HBoxContainer.new()
 	packing_panel.add_child(tools)
 	var selected := preparation.item(selected_loot)
@@ -742,12 +790,21 @@ func _rebuild_packing() -> void:
 				break
 	if selected == null:
 		selected_loot = ""
+	var selection := Label.new()
+	selection.name = "SelectedItem"
+	selection.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	selection.add_theme_font_size_override("font_size", 26)
+	selection.text = "先点选地面或背包中的物品" if selected == null else "已选择：" + ContentCatalog.item(selected.definition_id).display_name
+	packing_panel.add_child(selection)
 	var rotate := Button.new()
 	var dimensions := Vector2i.ZERO if selected == null else selected.footprint
 	if selected_rotation:
 		dimensions = Vector2i(dimensions.y, dimensions.x)
 	rotate.text = "旋转 90°"
 	rotate.disabled = selected == null or dimensions.x == dimensions.y
+	rotate.custom_minimum_size.y = 80
+	rotate.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rotate.add_theme_font_size_override("font_size", 24)
 	rotate.pressed.connect(func() -> void:
 		selected_rotation = not selected_rotation
 		_rebuild_packing()
@@ -756,11 +813,48 @@ func _rebuild_packing() -> void:
 	var cancel := Button.new()
 	cancel.text = "取消选择"
 	cancel.disabled = selected == null
+	cancel.custom_minimum_size.y = 80
+	cancel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cancel.add_theme_font_size_override("font_size", 24)
 	cancel.pressed.connect(func() -> void:
 		selected_loot = ""
 		_rebuild_packing()
 	)
 	tools.add_child(cancel)
+	var equipment_title := Label.new()
+	equipment_title.text = "选择物品后点装备槽：上6格生效，下3格备用"
+	equipment_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	equipment_title.add_theme_font_size_override("font_size", 24)
+	packing_panel.add_child(equipment_title)
+	equipment_title.visible = _packing_mode == "equipment"
+	var equipment := GridContainer.new()
+	equipment.name = "JourneyEquipment"
+	equipment.columns = 3
+	equipment.add_theme_constant_override("h_separation", 8)
+	equipment.add_theme_constant_override("v_separation", 8)
+	packing_panel.add_child(equipment)
+	equipment.visible = _packing_mode == "equipment"
+	for slot in preparation.equipment_slots.size():
+		var equipped := preparation.item(preparation.equipment_slots[slot])
+		var button := Button.new()
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.custom_minimum_size.y = CorePageLayout.TOUCH_HEIGHT
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		button.add_theme_font_size_override("font_size", 22)
+		button.text = ("生效%d" % (slot + 1) if slot < 6 else "备用%d" % (slot - 5)) + (" · 空位" if equipped == null else " · " + ContentCatalog.item(equipped.definition_id).display_name)
+		if equipped != null:
+			button.icon = ItemIconFactory.icon_for(equipped.definition_id, equipped.kind)
+			button.expand_icon = true
+			button.add_theme_constant_override("icon_max_width", 40)
+		CorePageLayout.paint_button(button)
+		button.disabled = selected == null or (selected.kind != ItemInstance.Kind.EQUIPMENT and selected.definition_id not in ["faerie_fire", "cheese"])
+		button.pressed.connect(func() -> void:
+			var result: Dictionary = session.equip_journey_item(selected_loot, slot)
+			status.text = str(result.reason)
+			if result.accepted: selected_loot = ""
+			_refresh()
+		)
+		equipment.add_child(button)
 	if selected != null and selected.definition_id in ["salve", "tango", "faerie_fire", "cheese"] and preparation.item(selected.id) != null:
 		var use := Button.new()
 		use.text = "使用恢复品"
@@ -773,8 +867,9 @@ func _rebuild_packing() -> void:
 				_refresh()
 		)
 		tools.add_child(use)
-	_build_packing_grid("随身背包", ItemInstance.Location.BACKPACK, preparation.backpack_size)
-	_build_packing_grid("安全箱", ItemInstance.Location.SAFE, preparation.safe_size)
+	if _packing_mode == "bags":
+		_build_packing_grid("随身背包", ItemInstance.Location.BACKPACK, preparation.backpack_size)
+		_build_packing_grid("安全箱", ItemInstance.Location.SAFE, preparation.safe_size)
 
 func _build_packing_grid(title: String, location: ItemInstance.Location, dimensions: Vector2i) -> void:
 	var caption := Label.new()
@@ -842,6 +937,22 @@ func _on_collect_all_pressed() -> void:
 	_refresh()
 
 func _on_leave_pressed() -> void:
+	if not journey.loot.is_empty():
+		var dialog := ConfirmationDialog.new()
+		dialog.title = "确认前往下一节点"
+		dialog.dialog_text = "还有%d件地面物品未拾取。继续前进会丢弃它们；仅返回路线总览不会丢弃。" % journey.loot.size()
+		dialog.ok_button_text = "丢弃并继续"
+		dialog.confirmed.connect(func() -> void:
+			dialog.queue_free()
+			_advance_from_node()
+		)
+		dialog.canceled.connect(dialog.queue_free)
+		add_child(dialog)
+		dialog.popup_centered()
+		return
+	_advance_from_node()
+
+func _advance_from_node() -> void:
 	var result: Dictionary = session.call("leave_journey_node")
 	if not result.accepted:
 		status.text = str(result.reason)

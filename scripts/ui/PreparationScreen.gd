@@ -220,16 +220,17 @@ func _rebuild_slots(container: GridContainer, kind: ItemInstance.Kind, slots: Ar
 func _rebuild_warehouse() -> void:
 	_clear_children(warehouse_items)
 	warehouse_items.reset()
+	$Layout/SuppliesPanel/Scroll/WarehouseContent/WarehouseCaption.text = "局外仓库" if state.phase == PreparationState.Phase.HOME else "随身可用物品 · 选中后点上方栏位装备"
 	var return_target := _item_button("", Vector2.ZERO, null, "", {"area": "warehouse"})
 	return_target.flat = true
 	return_target.tooltip_text = "移回仓库"
+	return_target.visible = state.phase == PreparationState.Phase.HOME
 	return_target.pressed.connect(_on_return_to_warehouse)
 	warehouse_items.add_child(return_target)
 	return_target.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for instance in state.items.values():
-		if instance.location != ItemInstance.Location.WAREHOUSE:
-			continue
-		if state.phase != PreparationState.Phase.HOME:
+		var available: bool = instance.location == ItemInstance.Location.WAREHOUSE if state.phase == PreparationState.Phase.HOME else instance.location in [ItemInstance.Location.BACKPACK, ItemInstance.Location.SAFE]
+		if not available:
 			continue
 		if inventory_filter == "equipment" and instance.kind != ItemInstance.Kind.EQUIPMENT:
 			continue
@@ -469,7 +470,9 @@ func _on_batch_sell_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	get_tree().root.get_node("AppSession").call("save_progress")
-	ScreenRouter.open(get_tree(), "home")
+	if state.phase == PreparationState.Phase.JOURNEY:
+		get_tree().root.get_node("AppSession").set_meta("journey_route_overview", true)
+	ScreenRouter.open(get_tree(), "expedition" if state.phase == PreparationState.Phase.JOURNEY else "home")
 
 func _on_crafting_pressed() -> void:
 	ScreenRouter.open(get_tree(), "crafting")

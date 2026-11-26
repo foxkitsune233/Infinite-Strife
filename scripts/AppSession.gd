@@ -35,6 +35,40 @@ func ensure_journey_state() -> JourneyState:
 		journey_state = JourneyState.new(7001)
 	return journey_state
 
+func equip_journey_item(item_id: String, slot: int) -> Dictionary:
+	var state := ensure_preparation_state()
+	var journey := ensure_journey_state()
+	if state.phase != PreparationState.Phase.JOURNEY or journey.battle_started or journey.finished():
+		return {"accepted": false, "reason": "仅远征非战斗阶段可换装"}
+	var item := state.item(item_id)
+	var ground := false
+	if item == null:
+		for drop in journey.loot:
+			if drop.id == item_id:
+				item = drop
+				ground = true
+	if item == null or not item.identified:
+		return {"accepted": false, "reason": "请先选择已鉴定的装备"}
+	if ground and not journey.resolved:
+		return {"accepted": false, "reason": "请先完成当前节点"}
+	var checkpoint := _campaign_checkpoint()
+	if ground:
+		item.location = ItemInstance.Location.BACKPACK
+		item.grid_position = Vector2i.ZERO
+		state.add_item(item)
+	var result := LoadoutRules.place(state, item_id, ItemInstance.Kind.EQUIPMENT, slot)
+	if not result.accepted:
+		_restore_campaign(checkpoint)
+		return result
+	if ground:
+		journey.loot.erase(item)
+		Progression.record(state, {"type": "LootPicked"})
+	var saved := save_progress()
+	if not saved.accepted:
+		_restore_campaign(checkpoint)
+		return saved
+	return {"accepted": true, "reason": "已装备，下一场战斗生效" if slot < PreparationState.ACTIVE_EQUIPMENT_SLOT_COUNT else "已放入备用栏，移至生效栏后可用"}
+
 func begin_journey_battle() -> Dictionary:
 	var checkpoint := _campaign_checkpoint()
 	var result := JourneyRules.begin_battle(ensure_journey_state())
